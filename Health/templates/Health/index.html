@@ -1,0 +1,134 @@
+{% load static %}
+{% include  "Health/base.html" %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Smart Health</title>
+</head>
+
+
+<body style="background-image: url('/static/image/bg.jpg');">
+
+<style>
+  /* Make the image fully responsive */
+  .carousel-inner img {
+    width: 100%;
+    height: 90%;
+  }
+  </style>
+  <div class="container mt-0 width=100% ">
+    <div id="myCarousel" class="carousel slide">
+      <!-- Indicators -->
+      <ul class="carousel-indicators">
+        <li class="item1 active"></li>
+        <li class="item2"></li>
+        <li class="item3"></li>
+      </ul>
+      
+      <!-- The slideshow -->
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="/static/image/bg4.jpg" alt="Los Angeles" >
+        </div>
+        <div class="carousel-item">
+          <img src="/static/image/bg1.jpg" alt="Chicago" >
+        </div>
+        <div class="carousel-item">
+          <img src="/static/image/bg3.jpg" alt="New York">
+        </div>
+      </div>
+      
+      <!-- Left and right controls -->
+      <a class="carousel-control-prev" href="#myCarousel">
+        <span class="carousel-control-prev-icon"></span>
+      </a>
+      <a class="carousel-control-next" href="#myCarousel">
+        <span class="carousel-control-next-icon"></span>
+      </a>
+    </div>
+<br>
+     <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;"> 
+                <div class="card-body">
+                  <h5 class="card-title" style="text-align: center;">Patient</h5>
+                  <a class="nav-link" href="#"><i class="fa fa-users"></i>&nbsp;Sign In <span class="sr-only">(current)</span></a>
+                  <a class="nav-link" href="#">Sign Up <span class="sr-only">(current)</span></a>
+                </div>
+                
+              </div>
+        
+          </div>
+          <div class="col-sm">
+            <div class="card text-white bg-dark mb-4" style="max-width: 15rem;" style="text-align: center;"> 
+                <div class="card-body" style="text-align: center;">
+                  <h5 class="card-title">  Doctor</h5>
+                  
+                    <a class="nav-link" href="/doctor/doctor_login"><i class="fa fa-user-md"></i>&nbsp;Sign In <span class="sr-only">(current)</span></a>
+                
+                </div>
+              </div>
+          </div>
+          <div class="col-sm">
+            <div class="card text-white bg-dark mb-3" style="max-width: 18rem;" > 
+                <div class="card-body" style="text-align: center;">
+                <h5>
+              
+                    <a class="nav-link" href="/admin"><i class="fa fa-user-secret"></i>&nbsp;Admin <span class="sr-only">(current)</span></a>
+              
+                </h5>
+                </div>
+              </div>
+          </div>
+        </div>
+      </div> 
+ 
+
+    <div class="container p-3 my-3 bg-dark text-white">
+        {% include "Health/footer.html"%}
+    </div>
+   
+
+</div>
+    
+<script>
+    $(document).ready(function(){
+      // Activate Carousel
+      $("#myCarousel").carousel();
+        
+      // Enable Carousel Indicators
+      $(".item1").click(function(){
+        $("#myCarousel").carousel(0);
+      });
+      $(".item2").click(function(){
+        $("#myCarousel").carousel(1);
+      });
+      $(".item3").click(function(){
+        $("#myCarousel").carousel(2);
+      });
+        
+      // Enable Carousel Controls
+      $(".carousel-control-prev").click(function(){
+        $("#myCarousel").carousel("prev");
+      });
+      $(".carousel-control-next").click(function(){
+        $("#myCarousel").carousel("next");
+      });
+    });
+    </script>
+  
+  
+
+</body>
+</html>
+
+
+
+
+
+

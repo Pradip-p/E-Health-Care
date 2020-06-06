@@ -1,0 +1,52 @@
+{% extends 'Health/base.html'%}
+
+{% block content %}
+<div class="container-fluid">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<div class="full-width" style="background:#eaeaea;">
+  <div class="container" style="padding:100px 0;">
+    <div class="business-container">
+      
+        <!--<a href="contacts.php" class="" style="color: #000; font-size: 14px; font-weight: bold;"></a>-->
+      <div class="business">
+        <h3>Doctor Login</h3>
+        
+        <!-- Form -->
+        <form method="POST" action="" >
+            {% csrf_token %}
+          <div class="row">
+            <div class="col-xs-12 col-md-4" style="margin: 12px 0;">
+              <input type="text" class="form-control" name="username" placeholder="Username">
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="col-xs-12 col-md-4" style="margin: 12px 0;">
+              <input type="password" class="form-control" name="password" placeholder="Password"><br><br>
+            </div>
+
+            </div>
+            <div class="col-xs-12 col-md-5">
+              <button type="submit" class="btn btn-primary mb-2" style="margin:0px 0 0; width:100px;">Submit</button>
+            </div>
+         
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+  </div>
+
+  <div class="container p-3 my-3 bg-dark text-white">
+    {% include "Health/footer.html"%}
+    </div>
+    {% if message %}
+    <div class="alert  alert-dark alert-dismissible fade show" role="alert">
+        <strong>{{message}}</strong>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    {% endif %}
+  {% endblock %}

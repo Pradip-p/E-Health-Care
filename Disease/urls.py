@@ -21,6 +21,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/',include('api.urls')),
     path('doctor/',include('doctor.urls')),
+    path('patient/',include('patient.urls')),
     path('health/',include('Health.urls')),
     path('', RedirectView.as_view(url="health/")),
 ]

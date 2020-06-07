@@ -4,6 +4,19 @@ from django.contrib.auth import authenticate, login as dj_login
 from doctor.models import DoctorInfo
 
 # Create your views here.
+def dashboard(request):
+    name = request.session.get('username')
+    user_id = request.session.get('user_id')
+    if user_id:
+        contex={
+            'username':name
+        }
+        return render(request,'doctor/dashboard.html', contex)
+
+
+
+
+
 def doctor_login(request):
     doctor_form=DoctorInfoForm()
     contex={
@@ -15,10 +28,11 @@ def doctor_login(request):
         password = request.POST.get('password') 
         user = DoctorInfo.objects.filter(username=username,password=password).first()
         if user:
-    		# request.session['username'] = username
-            return redirect('/')
+            request.session['username']=user.username
+            request.session['user_id']=user.id
+            # return render(request,'doctor/dashboard.html')
+            return redirect('dashboard')
         else:
-            print("invlid")
             doctor_form=DoctorInfoForm()
             contex={
                 'message':"Invalid Username and Password",
@@ -26,3 +40,8 @@ def doctor_login(request):
             }
             return render(request,'doctor/login.html', contex)
     return render(request,'doctor/login.html', contex)
+
+def logout(request):
+    user = request.session.get('user_id')
+    del user
+    return redirect('/')

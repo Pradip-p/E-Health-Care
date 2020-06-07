@@ -26,11 +26,12 @@ SECRET_KEY = '6=lw8ok^dacjf*$i-3mldpziz06s70i!p(m3$=!l^avkw7^d4i'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+# AUTH_USER_MODEL = 'core.User'
 
 # Application definition
 
 INSTALLED_APPS = [
+    'patient',
     'doctor',
     'Health',
     'rest_framework',
@@ -122,4 +123,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
 STATIC_URL = '/static/'
+STATICFILES_DIRS =[
+    os.path.join(BASE_DIR, 'patient/static')
+]
 

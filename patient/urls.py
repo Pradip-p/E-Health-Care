@@ -7,6 +7,7 @@ urlpatterns = [
 path('patient/',RedirectView.as_view(url='patient_login/')),
 path('patient_login/', views.patient_login,name='patient_login'),
 path('patient_register/', views.patient_register,name='patient_register'),
+path('patient_profile/',views.patient_profile,name='patient_profile'),
 path('dashboard/', views.dashboard, name="dashboard"),
 path('logoutpatient/', views.logoutpatient, name="logoutpatient")
 ]

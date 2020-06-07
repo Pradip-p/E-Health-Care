@@ -1,16 +1,15 @@
 from django.shortcuts import render, redirect
-from patient.forms import PatientInfoForm, UserForm
+from patient.forms import PatientInfoForm, UserForm,ProfileForm
 from django.contrib.auth import authenticate, logout,login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 # from django.contrib.auth.forms import UserCreationForm
-
+from patient.models import *
 # Create your views here.
 @login_required(login_url='patient_login')
 def dashboard(request):
     contex={}
     return render(request, 'patient/dashboard.html', contex)
-
 
 def patient_register(request):
     patient_register=UserForm()
@@ -33,9 +32,31 @@ def patient_register(request):
             'patient_register':patient_register,
         }
         return render(request, 'patient/register.html', contex)
-    
 
 
+@login_required(login_url='patient_login')    
+def patient_profile(request):
+    if request.method=='POST':
+        patient=request.user
+        print(patient)
+        patient_profile=ProfileForm(request.POST ,request.FILES ,instance=patient)
+        print(patient_profile)
+        if patient_profile.is_valid():
+            patient_profile.save()
+            return redirect("patient_profile")
+        else:
+            context={
+                'patient_profile':patient_profile
+            }
+            print('invalid inputs')
+            return render(request,'patient/profile.html',context)
+
+    else:
+        patient_profile=ProfileForm()
+        context={
+            'patient_profile':patient_profile,
+        }
+        return render(request,'patient/profile.html',context)
 
 def patient_login(request):
     if request.method=="POST":
@@ -51,6 +72,7 @@ def patient_login(request):
             return render(request, 'patient/login.html')
     else:
         return render(request, 'patient/login.html')
+
 def logoutpatient(request):
     print("logout user")
     logout(request)

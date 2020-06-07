@@ -1,4 +1,4 @@
 from django.contrib import admin
-from patient.models import PatientInfo
+from patient.models import Profile
 # Register your models here.
-admin.site.register(PatientInfo)
+admin.site.register(Profile)

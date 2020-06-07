@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from patient.models import PatientInfo
+from patient.models import Profile
 from django.contrib.auth.forms import UserCreationForm
 
 class PatientInfoForm(forms.ModelForm):
@@ -17,8 +17,10 @@ class UserForm(UserCreationForm):
 
 
 class ProfileForm(forms.ModelForm):
+
 	class Meta:
-		model=PatientInfo
+		model=Profile
+
 		fields=('name','phone_number','address','gender','age','status','profile_pic')
 		#exclude=['username','password']
 		label={
@@ -32,4 +34,7 @@ class ProfileForm(forms.ModelForm):
 
 		}
 
-	
+class UpdateForm(forms.ModelForm):
+	class Meta:
+		model=User
+		fields=('email',)	

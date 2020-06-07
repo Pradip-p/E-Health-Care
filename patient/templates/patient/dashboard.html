@@ -100,11 +100,13 @@
 
 
   </body>
+
     <section>
 
       <div class="container-fluid">
 
             <div class="container-fluid">
+
 
         <div class="row">
 
@@ -114,24 +116,10 @@
               <div class="col-xl-12 col-6 mb-4 mb-xl-0">
 
                 <div class="bg-dark text-white p-4 rounded">
-                  <h4 class="mb-5">My Profile</h4>
-                  <div align="center">
-                    {% if user.image %}
-                    <img src="{{user.image.url}}" height="200" width="200" />
-                    {% else %}
-                    <i class="fas fa-10x fa-user-circle"></i>
-                    {% endif %}
-               
-                  </div>
-                   <div class="card-body">
-                  
-              </div> 
+
                     {% block body_content %}
                     {% endblock %}
-
                   </div>
-
-
              
                   </div>
                 </div>

@@ -8,10 +8,35 @@ from patient.models import Profile
 from django.db import transaction
 # Create your views here.
 
+# Create your views here.
+from django.shortcuts import render, HttpResponse
+import requests
+from Health.forms import DiseaseForm
+from api.models import Disease
+from api import diseaseml
+
+# @login_required(login_url='patient_login')
+# def dashboard(request):
+#     contex={}
+#     return render(request, 'patient/dashboard.html', contex)
+
+
 @login_required(login_url='patient_login')
 def dashboard(request):
-    contex={}
-    return render(request, 'patient/dashboard.html', contex)
+    if request.method=="POST":
+        disease_form=DiseaseForm(request.POST)
+        if disease_form.is_valid:
+            disease_form.save()
+            ob=Disease.objects.latest('id')
+            sur=diseaseml.pred(ob)
+            contex={"Disease":sur}
+            return render(request,'patient/dashboard.html', contex)
+    else:
+        disease_form=DiseaseForm()
+        contex={
+            'disease_form':disease_form
+        }
+        return render(request, 'patient/dashboard.html', contex)
 
 def patient_register(request):
     patient_register=UserForm()

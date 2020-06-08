@@ -3,11 +3,13 @@
 {% block body_content %}
                   <h4 class="mb-5">My Profile</h4>
                   <div align="center">
-                    {% if request.user.profile.profile_pic.url %}
-                    <img src="{{request.user.profile.profile_pic.url}}" height="200" width="200" />
-                    {% else %}
+                    {#% if request.user.profile.profile_pic.url %#}
+                     
+                    <img src="" height="200" width="200" />
+                    
+                    {#% else %#}
                     <i class="fas fa-10x fa-user-circle"></i>
-                    {% endif %}
+                    {#% endif %#}
                   </div>
                    <div class="card-body">
                   
@@ -19,7 +21,7 @@
     <input  class="form-control"  value={{request.user.email}} style="width: 300px;"  type="email" name="email" maxlength="254" id="id_email">
   </div>
   <br />
-<div class="form-inline"><label for="id_name">Name</label>&nbsp &nbsp <input type="text"  value={{request.user.profile.name}} name="name" maxlength="20" required id="id_name"  class="form-control"></div>
+<div class="form-inline"><label for="id_name">Name</label>&nbsp &nbsp <input type="text"  value="" name="name" maxlength="20" required id="id_name"  class="form-control"></div>
 
 <br />
 <div class="form-inline"><label for="id_phone_number">Phone number</label> &nbsp &nbsp<input type="text"  class="form-control" value={{request.user.profile.phone_number}} name="phone_number" maxlength="17" id="id_phone_number"></div>

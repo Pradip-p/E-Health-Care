@@ -69,7 +69,6 @@ def patient_profile(request):
         print(patient)"""
         user_form=UpdateForm(request.POST,instance=request.user)
         patient_profile=ProfileForm(request.POST ,request.FILES ,instance=request.user.profile)
-        print(patient_profile)
         if user_form.is_valid() and patient_profile.is_valid():
             user_form.save()
             patient_profile.save()

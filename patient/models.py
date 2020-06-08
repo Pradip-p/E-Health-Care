@@ -15,7 +15,7 @@ class Profile(models.Model):
     gender=models.CharField( max_length=50,default='Male',choices=(('Female','Female'),('Male','Male'),('Other','Other')))
     age=models.CharField(default=18, max_length=20)
     status=models.CharField(max_length=20,default='Single',choices=(('Single','Single'),('Married','Married')))
-    profile_pic=models.ImageField(blank=True,null=True)
+    profile_pic=models.ImageField(blank=True,null=True,upload_to='media')
 
 @receiver(post_save,sender=User)
 def create_user_profile(sender,instance,created,**kwargs):
@@ -26,6 +26,6 @@ def create_user_profile(sender,instance,created,**kwargs):
 @receiver(post_save,sender=User)
 def save_user_profile(sender,instance,**kwargs):
 	instance.profile.save()
-
+ 
 
 

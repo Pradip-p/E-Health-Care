@@ -25,7 +25,7 @@
             <div class="col-xl-2 col-lg-3 col-md-4 sidebar fixed-top">
               <a href="#" class="navbar-brand text-white d-block mx-auto text-center py-3 mb-4 bottom-border">Smart Health</a>
               <div class="bottom-border pb-3">
-                <img src="{% static 'images/admin.jpeg' %}" width="50" class="rounded-circle mr-3">
+                <img src="{{request.user.profile.profile_pic.url}}" width="50" class="rounded-circle mr-3">
                 <a href="#" class="text-white"> {{request.user}}</a>
               </div>
               <ul class="navbar-nav flex-column mt-4">
@@ -56,9 +56,7 @@
                 </div>
                 <div class="col-md-3">
                   <ul class="navbar-nav">
-                    <li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-comments text-muted fa-lg"></i></a></li>
-                    <li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li>
-                    <li class="nav-item icon-parent"><a href="#" class="nav-link icon-bullet"><i class="fas fa-bell text-muted fa-lg"></i></a></li>
+    
                     <li class="nav-item ml-md-auto"><a href="#" class="nav-link" data-toggle="modal" data-target="#sign-out"><i class="fas fa-sign-out-alt text-danger fa-lg"></i></a></li>
                     
                   </ul>

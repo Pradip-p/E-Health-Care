@@ -25,3 +25,9 @@ urlpatterns = [
     path('health/',include('Health.urls')),
     path('', RedirectView.as_view(url="health/")),
 ]
+
+
+
+admin.site.site_header = 'Smart Health'                    # default: "Django Administration"
+admin.site.index_title = 'Features area'                 # default: "Site administration"
+admin.site.site_title = 'HTML title from adminsitration' # default: "Django site admin"

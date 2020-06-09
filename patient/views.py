@@ -44,7 +44,7 @@ def dashboard(request):
             'disease_form':disease_form
         }
         return render(request, 'patient/dashboard.html', contex)
-ter
+
 
 @login_required(login_url='patient_login')
 def dashboard(request):

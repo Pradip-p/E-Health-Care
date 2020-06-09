@@ -1,3 +1,37 @@
+
+{% extends "base.html" %}
+{% block body_content %}
+   
+                <!-- progress / task list -->
+                <section>
+                    <div class="container-fluid">
+                      <div class="row">
+                        <div class="col-xl-10 col-lg-9 col-md-8 ml-auto">
+                          <div class="row mb-4 align-items-center">
+                            <div class="col-xl-6 col-12 mb-4 mb-xl-0">
+                              <div class="bg-dark text-white p-4 rounded">
+                                <h4 class="mb-5"> Please Enter Your Symptom </h4>
+                                <form method="POST" action="">
+                                  {% csrf_token %}
+                                  {{disease_form.as_p}}
+                                  <div class="d-flex justify-content-center mt-3 login_container">
+                                    <input class="btn login_btn" type="submit" value="Check">
+                                  </div>
+                                </form>     
+                              </div>
+                            </div>
+              
+              <!-- Disease predicted table -->
+                            <div class="col-xl-6 col-12 mb-4 mb-xl-0">
+                              <div class="bg-dark text-white p-4 rounded">
+                                <h4 class="mb-5"> You are suffering from  {{Disease}} </h4>
+                                <h5>Suggested doctor for You--></h5>
+                              </div>
+                            </div>
+              
+              <!-- end of  Disease predicted table-->
+              {% endblock %}
+
 {% load static %}
 <!doctype html>
 <html lang="en">
@@ -165,6 +199,7 @@
     <script src="{% static 'script.js' %}"></script>
   </body>
 </html>
+
 
 
 

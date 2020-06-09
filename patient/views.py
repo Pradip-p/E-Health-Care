@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect
-from patient.forms import PatientInfoForm, UserForm
+from patient.forms import *
 from django.contrib.auth import authenticate, logout,login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-# from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm
+from patient.models import Profile
+from django.db import transaction
+# Create your views here.
 
 # Create your views here.
 from django.shortcuts import render, HttpResponse
@@ -11,6 +14,16 @@ import requests
 from Health.forms import DiseaseForm
 from api.models import Disease
 from api import diseaseml
+
+
+# @login_required(login_url='patient_login')
+# def dashboard(request):
+#     contex={}
+#     return render(request, 'patient/dashboard.html', contex)
+@login_required(login_url='patient_login')
+def form(request):
+    contex={}
+    return render(request,'patient/form.html', contex)
 
 
 
@@ -31,7 +44,24 @@ def dashboard(request):
             'disease_form':disease_form
         }
         return render(request, 'patient/dashboard.html', contex)
+ter
 
+@login_required(login_url='patient_login')
+def dashboard(request):
+    if request.method=="POST":
+        disease_form=DiseaseForm(request.POST)
+        if disease_form.is_valid:
+            disease_form.save()
+            ob=Disease.objects.latest('id')
+            sur=diseaseml.pred(ob)
+            contex={"Disease":sur}
+            return render(request,'patient/dashboard.html', contex)
+    else:
+        disease_form=DiseaseForm()
+        contex={
+            'disease_form':disease_form
+        }
+        return render(request, 'patient/dashboard.html', contex)
 
 def patient_register(request):
     patient_register=UserForm()
@@ -54,8 +84,41 @@ def patient_register(request):
             'patient_register':patient_register,
         }
         return render(request, 'patient/register.html', contex)
-    
 
+
+@login_required(login_url='patient_login') 
+@transaction.atomic   
+def patient_profile(request):
+    if request.method=='POST':
+        """patient=request.user
+        print(patient)"""
+        user_form=UpdateForm(request.POST,instance=request.user)
+        patient_profile=ProfileForm(request.POST ,request.FILES ,instance=request.user.profile)
+        if user_form.is_valid() and patient_profile.is_valid():
+            user_form.save()
+            patient_profile.save()
+            return redirect("patient_profile")
+        else:
+            context={
+                'user_form':user_form,
+                'patient_profile':patient_profile
+            }
+            print('invalid inputs')
+            return render(request,'patient/profile.html',context)
+
+    else:
+        user_form=UpdateForm(instance=request.user)
+        patient_profile=ProfileForm(instance=request.user.profile)
+        context={
+            'user_form':user_form,
+            'patient_profile':patient_profile,
+        }
+        return render(request,'patient/profile.html',context)
+"""
+@login_required
+def patient_update(request):
+    return render(request,'patient/update_profile.html')
+"""
 
 
 def patient_login(request):
@@ -72,6 +135,7 @@ def patient_login(request):
             return render(request, 'patient/login.html')
     else:
         return render(request, 'patient/login.html')
+
 def logoutpatient(request):
     print("logout user")
     logout(request)

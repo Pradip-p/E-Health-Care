@@ -3,7 +3,7 @@
 {% block body_content %}
 <h4 class="mb-5">My Profile</h4>
 <div align="center">
-  {% if request.user.profile.profile_pic %}
+   {% if request.user.profile.profile_pic %}
 
   <img src="{{request.user.profile.profile_pic.url}}" alt="Images" height="150px" class="img-fluid" />
 
@@ -12,8 +12,17 @@
   {% endif %}
 </div>
 <div class="card-body">
-
 </div>
+
+
+
+
+
+<div  class="card text-white bg-secondary mb-3" >
+  <div class="card-body">
+  <div class="card-group">
+    <br />
+
 <form method="POST" action="" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="form-inline">
@@ -53,10 +62,16 @@
   <br />
   <br />
 
-  <button type="submit" class="btn btn-primary btn-user btn-block"> Update Profile</button>
+  <button type="submit" class="btn btn-primary btn-user "> Update Profile</button>
 
   <br />
   <br />
 </form>
+</div>
+  </div>
+</div>
+
 
 {% endblock %}
+
+

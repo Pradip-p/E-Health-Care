@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from patient.models import Profile
 from django.db import transaction
+from patient.models import *
 # Create your views here.
 
 # Create your views here.
@@ -23,7 +24,23 @@ from api import diseaseml
 @login_required(login_url='patient_login')
 def form(request):
     contex={}
-    return render(request,'patient/form.html', contex)
+    if request.method=="POST":
+        disease = request.POST.get('disease')   
+        ob=Doctor.objects.get(pk=1)
+        rog=ob.category.name
+        print(rog)
+        if rog==disease:
+            name=ob.name
+            contex={
+                'name':name
+            }
+            return render(request,'patient/form.html', contex)
+
+
+        
+    else:
+        contex={}
+        return render(request,'patient/form.html', contex)
 
 
 
@@ -90,6 +107,7 @@ def patient_register(request):
 @transaction.atomic   
 def patient_profile(request):
     if request.method=='POST':
+        
         """patient=request.user
         print(patient)"""
         user_form=UpdateForm(request.POST,instance=request.user)

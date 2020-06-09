@@ -3,11 +3,9 @@
 {% block body_content %}
 <h4 class="mb-5">My Profile</h4>
 <div align="center">
-   {% if request.user.profile.profile_pic %}
-
-  <img src="{{request.user.profile.profile_pic.url}}" alt="Images" height="150px" class="img-fluid" />
-
-  {% else %}
+   {% if request.user.profile.profile_pic.url != '' %}
+  <img src="{{request.user.profile.profile_pic.url}}" alt="Images" height="200px"/>
+  {% else %} 
   <i class="fas fa-10x fa-user-circle"></i>
   {% endif %}
 </div>

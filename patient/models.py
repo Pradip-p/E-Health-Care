@@ -14,9 +14,9 @@ class Profile(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validators should be a list
     address=models.CharField(max_length=40)
     gender=models.CharField( max_length=50,blank=True,choices=(('Female','Female'),('Male','Male'),('Other','Other')))
-    age=models.IntegerField(blank=True)
+    age=models.IntegerField(blank=True , null=True)
     status=models.CharField(max_length=20,blank=True,choices=(('Single','Single'),('Married','Married')))
-    profile_pic=models.ImageField(blank=True,null=True,upload_to='media')
+    profile_pic=models.ImageField(blank=True,null=True)
 
 @receiver(post_save,sender=User)
 def create_user_profile(sender,instance,created,**kwargs):

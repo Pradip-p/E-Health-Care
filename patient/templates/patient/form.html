@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block body_content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form method="POST" action="">
+        {% csrf_token %}
+        Disease Name:<input type="text">
+        <input type="text">
+        <div class="d-flex justify-content-center mt-3 login_container">
+            <input class="btn login_btn" type="submit" value="submit">
+        </div>
+
+    </form>
+</body>
+</html>
+{% endblock %}

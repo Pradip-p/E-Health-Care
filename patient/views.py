@@ -19,7 +19,10 @@ from api import diseaseml
 # def dashboard(request):
 #     contex={}
 #     return render(request, 'patient/dashboard.html', contex)
-
+@login_required(login_url='patient_login')
+def form(request):
+    contex={}
+    return render(request,'patient/form.html', contex)
 
 @login_required(login_url='patient_login')
 def dashboard(request):

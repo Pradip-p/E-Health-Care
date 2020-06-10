@@ -3,6 +3,39 @@ from django.contrib.auth import authenticate, login as dj_login
 from doctor.models import DoctorInfo
 from django.contrib import messages
 # Create your views here.
+
+def doctor_login(request):
+    if request.method=="POST":
+        username=request.POST.get('username')
+        password=request.POST.get('password')
+        doctor=DoctorInfo.objects.filter(username=username,password=password).first()
+        if doctor:
+            request.session['username']=username
+            context={
+            'logged_in':True
+            }
+            return render(request,'doctor/dashboard.html',context)
+        else:
+            context={
+            'logged_in':False,
+            'messages':'Invalid username or password'
+            }
+            return render(request,'doctor/login.html',context)
+
+    else:
+        return render(request,'doctor/login.html')
+
+
+def logout(request):
+    del request.session['username']
+    
+    return redirect('/doctor')
+
+
+
+
+"""
+
 def dashboard(request):
     contex={}
     name = request.session.get('username')
@@ -40,3 +73,6 @@ def logout(request):
     user = request.session.get('user_id')
     del user
     return redirect('/')
+
+
+"""    

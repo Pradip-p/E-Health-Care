@@ -4,8 +4,9 @@ from doctor import views
 from django.views.generic.base import RedirectView
 
 urlpatterns = [        
-path('doctor/',RedirectView.as_view(url='doctor_login/')),
+#path('doctor/',RedirectView.as_view(url='doctor_login/')),
 path('doctor_login/', views.doctor_login,name='doctor_login'),
-path('dashboard/', views.dashboard, name="dashboard"),
-path('logout/', views.logout, name="logout")
+#path('dashboard/', views.dashboard, name="dashboard"),
+path('logout/', views.logout, name="logout"),
+
 ]

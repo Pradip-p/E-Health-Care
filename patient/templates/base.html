@@ -28,9 +28,9 @@
                 {% if request.user.profile.profile_pic.url != '' %}
                 <img src="{{request.user.profile.profile_pic.url}}" width="50" class="rounded-circle mr-3">
                 {% else %} 
-                  <i class="fas fa-3x fa-user-circle"></i>
+                   <span class="badge badge-danger badge-counter"><i class="fas fa-1x fa-exclamation-circle"></i></span>
                   {% endif %}
-                <a href="#" class="text-white"> {{request.user}}</a>
+                <a href="#" class="text-white">Hello {{request.user}}</a>
               </div>
               <ul class="navbar-nav flex-column mt-4">
                 <li class="nav-item"><a href="{% url 'dashboard' %}" class="nav-link text-white p-3 mb-2 current"><i class="fas fa-home text-light fa-lg mr-3"></i>Dashboard</a></li>

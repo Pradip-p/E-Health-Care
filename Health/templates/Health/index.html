@@ -1,257 +1,105 @@
 {% load static %}
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<title>E-Health</title>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="description" content="CareMed demo project">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/bootstrap4/bootstrap.min.css' %}">
-<link href="{% static 'plugins/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
-<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/owl.theme.default.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'plugins/OwlCarousel2-2.2.1/animate.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/main_styles.css' %}">
-<link rel="stylesheet" type="text/css" href="{% static 'styles/responsive.css' %}">
-</head>
-<body>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<div class="super_container">
-	
-	<!-- Header -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>E-Health</title>
+    <nav class="navbar navbar-dark bg-dark navbar-fixed-top">
 
-	<header class="header trans_200">
-		
-		<!-- Top Bar -->
-		<div class="top_bar">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="top_bar_content d-flex flex-row align-items-center justify-content-start">
-							
-						</div>
+        
+        <a class="navbar-brand" href="#">E-Health Care</a>
+      
+      </nav>
+      <style>
+        .footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: black;
+          color: white;
+          text-align: center;
+        }
+        </style>
+  </head>
+  <body style="background-color:rgba(41, 29, 29, 0.315);">
+      <br><br>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;" >
+                <img class="card-img-top" src="{% static 'doctor.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                  
+                    <div class="col-sm">
+                        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;" > 
+                            <div class="card-body" style="text-align: center;">
+                            <h5>
+                                <a class="nav-link" href="/doctor/doctor_login"><i class="fa fa-user-secret"></i>&nbsp;Doctor <span class="sr-only">(current)</span></a>
+                            </h5>
+                            </div>
+                          </div>
+                      </div>
+                  
+                </div>
+              </div>
+          </div>
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'admin.png' %}" alt="Card image cap" height="290px">
+                <div class="card-body">
+                  
+                    <div class="col-sm">
+                        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;" > 
+                            <div class="card-body" style="text-align: center;">
+                            <h5>
+                                <a class="nav-link" href="/admin"><i class="fa fa-user-secret"></i>&nbsp;Admin <span class="sr-only">(current)</span></a>
+                            </h5>
+                            </div>
+                          </div>
+                      </div>
+                 
+                </div>
+              </div>
+          </div>
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'patient.png' %}" alt="Card image cap">
+                <div class="card-body">
+                  
+                    <div class="col-sm">
+                        <div class="card text-white bg-dark mb-3" style=" height: 6rem;"> 
+                            <div class="card-body" style="text-align: center;">
+                              <a class="nav-link" href="/patient/patient_login"></i>&nbsp;Sign In <span class="sr-only">(current)</span></a>
+                              <a class="nav-link" href="/patient/patient_register">Sign Up <span class="sr-only">(current)</span></a>
+                            </div>
+                      
+                          </div>
+                    
+                      </div>
+                  
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
 
-					</div>
-				</div>
-			</div>
-		</div>
+      <div class="footer">
+        <div class="container">
+        <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This Web Application is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by Pradip, Pawan and Sushil</a></p>
+      </div>
+     </div>
 
-		<!-- Header Content -->
-		<div class="header_container">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="header_content d-flex flex-row align-items-center justify-content-start">
-							<nav class="main_nav ml-auto">
-								<ul>
-									<li><a href="/">Home</a></li>
-								
-								</ul>
-							</nav>
-							<div class="hamburger ml-auto"><i class="fa fa-bars" aria-hidden="true"></i></div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<!-- Logo -->
-		<div class="logo_container_outer">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="logo_container">
-							<a href="#">
-								<div class="logo_content d-flex flex-column align-items-start justify-content-center">
-									<div class="logo_line"></div>
-									<div class="logo d-flex flex-row align-items-center justify-content-center">
-										<div class="logo_text">E-<span>Health</span></div>
-										<div class="logo_box">+</div>
-									</div>
-									<div class="logo_sub"> Care Center</div>
-								</div>
-							</a>
-						</div>
-					</div>
-				</div>
-			</div>	
-		</div>
-
-	</header>
-
-	<!-- Menu -->
-
-	<div class="menu_container menu_mm">
-
-		<!-- Menu Close Button -->
-		<div class="menu_close_container">
-			<div class="menu_close"></div>
-		</div>
-
-		<!-- Menu Items -->
-		<div class="menu_inner menu_mm">
-			<div class="menu menu_mm">
-				<ul class="menu_list menu_mm">
-					<li class="menu_item menu_mm"><a href="/">Home</a></li>
-				</ul>
-			</div>
-			
-
-		</div>
-
-	</div>
-	
-	<!-- Home -->
-
-	<div class="home">
-		<div class="home_slider_container">
-			<!-- Home Slider -->
-			<div class="owl-carousel owl-theme home_slider">
-				
-				<!-- Slider Item -->
-				<div class="owl-item">
-					<div class="home_slider_background" style="background-image:url('/static/images/home_background_1.jpg')"></div>
-					<div class="home_content">
-						<div class="container">
-							<div class="row">
-								<div class="col">
-									<div class="home_content_inner">
-										<div class="home_title"><h1>E-Health care</h1></div>
-										<div class="home_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam. Integer accumsan sodales odio, id tempus velit ullamcorper id. Quisque at erat eu.</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Slider Item -->
-				<div class="owl-item">
-					<div class="home_slider_background" style="background-image:url('/static/images/home_background_1.jpg')"></div>
-					<div class="home_content">
-						<div class="container">
-							<div class="row">
-								<div class="col">
-									<div class="home_content_inner">
-										<div class="home_title"><h1>E-Health care</h1></div>
-										<div class="home_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam. Integer accumsan sodales odio, id tempus velit ullamcorper id. Quisque at erat eu.</p>
-										</div>
-										
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<!-- Slider Item -->
-				<div class="owl-item">
-					<div class="home_slider_background" style="background-image:url('/static/images/home_background_1.jpg')"></div>
-					<div class="home_content">
-						<div class="container">
-							<div class="row">
-								<div class="col">
-									<div class="home_content_inner">
-										<div class="home_title"><h1>E-Health care</h1></div>
-										<div class="home_text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tempus vestibulum mauris quis aliquam. Integer accumsan sodales odio, id tempus velit ullamcorper id. Quisque at erat eu.</p>
-										</div>
-										
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-
-			<!-- Slider Progress -->
-			<div class="home_slider_progress"></div>
-		</div>
-	</div>
-
-	<!-- 3 Boxes -->
-
-	<div class="boxes">
-		<div class="container">
-			<div class="row">
-				
-				<!-- Box -->
-				<div class="col-lg-4 box_col">
-					<div class="box working_hours">
-						<div class="box_icon d-flex flex-column align-items-start justify-content-center"><div style="width:29px; height:29px;" Patient><img src="{% static 'images/patient.png' %}" alt=""></div></div>
-						<div class="box_title">Patient</div>
-                                <h4 style="text-align: center;">
-                                <a class="nav-link" href="/patient/patient_login"><i class="fa fa-users"></i>&nbsp;Sign In <span class="sr-only">(current)</span></a>
-                                <a class="nav-link" href="/patient/patient_register">Sign Up <span class="sr-only">(current)</span></a>
-                                </h4>
-					</div>
-				</div>
-
-				<!-- Box -->
-				<div class="col-lg-4 box_col">
-					<div class="box box_appointments">
-						<div class="box_icon d-flex flex-column align-items-start justify-content-center"><div style="width: 29px; height:29px;"><img src="{% static 'images/doctor.png' %}" alt=""></div></div>
-                        <div class="box_title">Doctor</div>
-                        <h4 style="text-align: center;">
-                         <a class="nav-link" href="/doctor/doctor_login"><i class="fa fa-user-md"></i>&nbsp;Sign In <span class="sr-only">(current)</span></a>
-                        </h4>
-					</div>
-				</div>
-
-				<!-- Box -->
-				<div class="col-lg-4 box_col">
-					<div class="box box_emergency">
-						<div class="box_icon d-flex flex-column align-items-start justify-content-center"><div style="width: 37px; height:37px; margin-left:-4px;"><img src="{% static 'images/admin.png' %}" alt=""></div></div>
-						<div class="box_title" >Admin</div>
-						 <h4 style="text-align: center;">
-              
-                            <a class="nav-link" href="/admin"><i class="fa fa-user-secret"></i>&nbsp;sign In <span class="sr-only">(current)</span></a>
-              
-                        </h4>
-					    </div>
-				    </div>
-
-			        </div>
-		        </div>
-	        </div>
-
-	
-	
-
-	<!-- Footer -->
-
-	<footer class="footer">
-		<div class="copyright">
-			<div class="container">
-				<div class="row">
-					<div class="col">
-						<div class="copyright_content d-flex flex-lg-row flex-column align-items-lg-center justify-content-start">
-							<div class="cr"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This Web Application is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by Pradip, Pawan and Sushil</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></div>
-							<div class="footer_social ml-lg-auto">
-								
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>			
-		</div>
-	</footer>
-</div>
-
-<script src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-<script src="{% static 'styles/bootstrap4/popper.js' %}"></script>
-<script src="{% static 'styles/bootstrap4/bootstrap.min.js' %}"></script>
-<script src="{% static 'plugins/OwlCarousel2-2.2.1/owl.carousel.js' %}"></script>
-<script src="{% static 'plugins/easing/easing.js' %}"></script>
-<script src="{% static 'plugins/parallax-js-master/parallax.min.js' %}"></script>
-<script src="{% static 'js/custom.js' %}"></script>
-</body>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
 </html>

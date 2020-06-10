@@ -64,6 +64,11 @@ def dashboard(request):
 
 
 @login_required(login_url='patient_login')
+def my_profile(request):
+    return render(request,'patient/my_profile.html')
+
+
+@login_required(login_url='patient_login')
 def dashboard(request):
     if request.method=="POST":
         disease_form=DiseaseForm(request.POST)
@@ -115,7 +120,7 @@ def patient_profile(request):
         if user_form.is_valid() and patient_profile.is_valid():
             user_form.save()
             patient_profile.save()
-            return redirect("patient_profile")
+            return redirect("my_profile")
         else:
             context={
                 'user_form':user_form,

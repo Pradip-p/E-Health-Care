@@ -6,7 +6,7 @@ from api import diseaseml
 
 
 def index(request):
-    if request.method=="GET":
+    """if request.method=="GET":
         disease_form=DiseaseForm(request.POST)
         response = requests.get("http://127.0.0.1:8000/api/api/api/10")
         data = response.json()
@@ -25,6 +25,8 @@ def index(request):
             ob=Disease.objects.latest('id')
             sur=diseaseml.pred(ob)
             contex={"Disease":sur}
-    return render(request,'Health/index.html', contex)
+    return render(request,'Health/index.html', contex)"""
+
+    return render(request,'Health/index.html')
 
 

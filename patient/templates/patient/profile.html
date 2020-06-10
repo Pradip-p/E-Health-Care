@@ -4,7 +4,7 @@
 <h4 class="mb-5">My Profile</h4>
 <div align="center">
    {% if request.user.profile.profile_pic.url != '' %}
-  <img src="{{request.user.profile.profile_pic.url}}" alt="Images" height="200px"/>
+  <img src="{{request.user.profile.profile_pic.url}}" alt="Images" height="300px"/>
   {% else %} 
   <i class="fas fa-10x fa-user-circle"></i>
   {% endif %}

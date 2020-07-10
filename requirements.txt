@@ -15,7 +15,7 @@ constantly==15.1.0
 cryptography==2.9.2
 cssselect==1.1.0
 cycler==0.10.0
-Django==2.2.2
+Django==2.2.13
 django-filter==2.2.0
 djangorestframework==3.11.0
 docker-py==1.10.6

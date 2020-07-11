@@ -8,6 +8,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 import pickle
 import os
+
 from sklearn import preprocessing 
 
 def pre_processing(df):
@@ -23,7 +24,7 @@ def pre_processing(df):
     'weight_gain':25, 'mood_swings':26, 'neck_pain':27, 'muscle_weakness':28, 'stiff_neck':29,
     'pus_filled_pimples':30, 'burning_micturition':31, 'bladder_discomfort':32,
     'high_fever':33}
-    print("*"*50)
+    # print("*"*50)
 
     data1={'skin_rash':1, 'nodal_skin_eruptions':2, 'shivering':3, 'chills':18, 'acidity':5,
         'ulcers_on_tongue':35, 'vomiting':6, 'yellowish_skin':20,'stomach_pain':4,
@@ -56,6 +57,7 @@ def pre_processing(df):
     df["Symptom_1"].replace(data, inplace=True)
     df["Symptom_2"].replace(data1, inplace=True)
     df["Symptom_3"].replace(data2, inplace=True)
+    print(df)
     return df
 
 def training():
@@ -64,8 +66,8 @@ def training():
     y=df[["Disease"]]
     df.drop("Disease", axis="columns", inplace=True)
     x=df
-    print("#"*50)
-    print(x)
+    # print("#"*50)
+    # print(x)
     dummyRow=pd.DataFrame(np.zeros(len(x.columns)).reshape(1,len(x.columns)), columns=x.columns)
     dummyRow.to_csv('dummyRow.csv', index=False)
     model=RandomForestClassifier(random_state=2)

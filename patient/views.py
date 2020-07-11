@@ -12,15 +12,47 @@ from patient.models import *
 # Create your views here.
 from django.shortcuts import render, HttpResponse
 import requests
-from Health.forms import DiseaseForm
+from Health.forms import DiseaseForm, HeartForm
 from api.models import Disease
 from api import diseaseml
+# from . import heart
+from patient.heart import pred
+
 
 
 # @login_required(login_url='patient_login')
 # def dashboard(request):
 #     contex={}
 #     return render(request, 'patient/dashboard.html', contex)
+
+@login_required(login_url='patient_login')
+def heart(request):
+    if request.method=="GET":
+        heart_form=HeartForm()
+        contex={
+            'heart_form':heart_form
+        }
+        return render(request,'patient/heart.html', contex)
+    elif  request.method=="POST":
+        heart_form=HeartForm(request.POST)
+        if heart_form.is_valid:
+            heart_form.save()
+            ob=Heart.objects.latest('id')
+            print(ob)
+            sur=pred(ob)
+            sur=", ".join( repr(e) for e in sur).strip("''")
+            if sur== '1':
+                name= "Yes(Heart Disease)"
+            elif sur=='0':
+                name="No (Heart Disease)"
+                
+            contex={
+                'sur':name,
+            }
+            return render(request,'patient/heart.html', contex)
+
+
+
 @login_required(login_url='patient_login')
 def form(request):
     contex={}
@@ -45,22 +77,27 @@ def form(request):
 
 
 
-@login_required(login_url='patient_login')
-def dashboard(request):
-    if request.method=="POST":
-        disease_form=DiseaseForm(request.POST)
-        if disease_form.is_valid:
-            disease_form.save()
-            ob=Disease.objects.latest('id')
-            sur=diseaseml.pred(ob)
-            contex={"Disease":sur}
-            return render(request,'patient/dashboard.html', contex)
-    else:
-        disease_form=DiseaseForm()
-        contex={
-            'disease_form':disease_form
-        }
-        return render(request, 'patient/dashboard.html', contex)
+# @login_required(login_url='patient_login')
+# def dashboard(request):
+#     if request.method=="POST":
+#         disease_form=DiseaseForm(request.POST)
+#         if disease_form.is_valid:
+#             disease_form.save()
+#             ob=Disease.objects.latest('id')
+#             sur=diseaseml.pred(ob)
+#             print("@"*80)
+#             print(sur)
+#             contex={"Disease":sur}
+#             # ob=Doctor.objects.get(pk=1)
+#             # if sur==ob:
+        
+#             return render(request,'patient/dashboard.html', contex)
+#     else:
+#         disease_form=DiseaseForm()
+#         contex={
+#             'disease_form':disease_form
+#         }
+#         return render(request, 'patient/dashboard.html', contex)
 
 
 @login_required(login_url='patient_login')
@@ -76,8 +113,26 @@ def dashboard(request):
             disease_form.save()
             ob=Disease.objects.latest('id')
             sur=diseaseml.pred(ob)
-            contex={"Disease":sur}
-            return render(request,'patient/dashboard.html', contex)
+            
+            print("@"*80)
+            sur=", ".join( repr(e) for e in sur).strip("''")
+            disease=Disease1.objects.all()
+            for i in disease:
+                print(i)
+                if sur==i.name:
+                    ob=Disease1.objects.get(name=sur)
+                    doctor_name=ob.category.name
+                    phone=ob.category.phone_number
+                    email=ob.category.email
+                    print("Yes, finally working !!")
+
+            # if sur==i
+
+            contex={"Disease":sur,
+            'name':doctor_name,
+            'phone':phone,
+            'email':email}
+            return render(request,'patient/predict.html', contex)
     else:
         disease_form=DiseaseForm()
         contex={

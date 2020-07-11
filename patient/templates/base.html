@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
-    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <title>E-Health Care</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.min.css' %}">
@@ -151,7 +151,7 @@
                             <a href="{% url 'form' %}"><i class="fa fa-user-md"></i> <span>Search Doctors</span></a>
                         </li>
                         <li>
-                            <a href=""><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                            <a href="{% url 'heart' %}"><i class="fa fa-wheelchair"></i> <span>Heart Check</span></a>
                         </li>
                         <li>
                             <a href=""><i class="fa fa-calendar"></i> <span>Appointments</span></a>

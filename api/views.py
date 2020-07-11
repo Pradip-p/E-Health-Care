@@ -13,7 +13,7 @@ class DiseaseViewSet(viewsets.ModelViewSet):
     serializer_class=DiseaseSerializer
     def create(self, request, *args,**kwargs):
           super(viewsets.ModelViewSet, self).create(request,*args,**kwargs)
-    #       # viewsets.ModelViewSet.create(request,*args,**kwargs)
+           # viewsets.ModelViewSet.create(request,*args,**kwargs)
           ob=Disease.objects.latest('id')
           sur=diseaseml.pred(ob)
           return Response({"status":"Success","Disease":sur,'tmp':args})

@@ -13,5 +13,7 @@ path('form/', views.form, name="form"),
 #path('update_profile/',views.patient_update,name='update_profile'),
 path('dashboard/', views.dashboard, name="dashboard"),
 # path('check/', views.check, name="check"),
-path('logoutpatient/', views.logoutpatient, name="logoutpatient")
+path('logoutpatient/', views.logoutpatient, name="logoutpatient"),
+
+path('heart/', views.heart, name="heart"),
 ]

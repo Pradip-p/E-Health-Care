@@ -9,3 +9,16 @@ So to cope up with all of those problems this app is designed which would prove 
 * To help out the poor and helpless people with the normal medical checkup.
 * To help people avoid paying huge amount to the doctors unnecessarily.
 * To extend the role of the technology in the medical field.
+
+## Installation
+
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install requirements file.
+
+
+```bash
+pip install -r requirements.txt
+```
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.

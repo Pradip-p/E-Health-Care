@@ -16,7 +16,11 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install require
 
 
 ```bash
-pip install -r requirements.txt
+* pip install -r requirements.txt
+* python manage.py makemigrations
+* python manage.py migrate
+* python manage.py createsuperuser
+* python manage.py runserver
 ```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

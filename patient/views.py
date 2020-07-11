@@ -85,7 +85,7 @@ def heart(request):
 
 
 @login_required(login_url='patient_login')
-def form(request):
+def search_doctor(request):
     contex={}
     if request.method=="POST":
         disease = request.POST.get('disease')   
@@ -97,13 +97,13 @@ def form(request):
             contex={
                 'name':name
             }
-            return render(request,'patient/form.html', contex)
+            return render(request,'patient/search_doctor.html', contex)
 
 
         
     else:
         contex={}
-        return render(request,'patient/form.html', contex)
+        return render(request,'patient/search_doctor.html', contex)
 
 
 
@@ -163,7 +163,7 @@ def dashboard(request):
             'name':doctor_name,
             'phone':phone,
             'email':email}
-            return render(request,'patient/predict.html', contex)
+            return render(request,'patient/show_doctor_info.html', contex)
     else:
         disease_form=DiseaseForm()
         contex={

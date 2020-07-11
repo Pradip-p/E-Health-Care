@@ -2,6 +2,7 @@ from django import forms
 from api.models import Disease
 from patient.models import Heart, Diabetes
 
+
 class DiabetesForm(forms.ModelForm):
     class Meta():
         model = Diabetes
@@ -13,10 +14,6 @@ class DiseaseForm(forms.ModelForm):
         model = Disease
         fields='__all__'
     
-
-
-
-
 class HeartForm(forms.ModelForm):
     class Meta():
         model = Heart

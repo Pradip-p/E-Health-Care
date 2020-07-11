@@ -30,6 +30,7 @@ def save_user_profile(sender,instance,**kwargs):
 	instance.profile.save()
  
 
+
 class Disease1(models.Model):
     name=models.CharField(max_length=200)
     category=models.ForeignKey(on_delete= CASCADE, to=DoctorInfo)

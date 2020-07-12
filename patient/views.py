@@ -12,11 +12,12 @@ from patient.models import *
 # Create your views here.
 from django.shortcuts import render, HttpResponse
 import requests
-from Health.forms import DiseaseForm, HeartForm
+from Health.forms import DiseaseForm, HeartForm, DiabetesForm
 from api.models import Disease
 from api import diseaseml
 # from . import heart
 from patient.heart import pred
+from patient.Diabetes import pred
 
 
 
@@ -24,6 +25,36 @@ from patient.heart import pred
 # def dashboard(request):
 #     contex={}
 #     return render(request, 'patient/dashboard.html', contex)
+
+
+@login_required(login_url='patient_login')
+def Diabetes(request):
+    if request.method=="GET":
+        diabetes_form=DiabetesForm()
+        contex={
+            'diabetes_form':diabetes_form
+        }
+        return render(request,'patient/diabetes.html', contex)
+    elif  request.method=="POST":
+        diabetes_form=DiabetesForm(request.POST)
+        if diabetes_form.is_valid:
+            diabetes_form.save()
+            from patient.models import Diabetes
+            ob=Diabetes.objects.latest('id')
+            print(ob)
+            sur=pred(ob)
+            sur=", ".join( repr(e) for e in sur).strip("''")
+            if sur== '1':
+                name= "Yes, You are suffering  from Diabetes problems"
+            elif sur=='0':
+                name="You are not suffering from Diabetes prolems"
+                
+            contex={
+                'sur':name,
+            }
+
+            return render(request,'patient/diabetes_results.html', contex)
+
 
 @login_required(login_url='patient_login')
 def heart(request):
@@ -42,14 +73,14 @@ def heart(request):
             sur=pred(ob)
             sur=", ".join( repr(e) for e in sur).strip("''")
             if sur== '1':
-                name= "Yes(Heart Disease)"
+                name= "Yes, You are suffuring from heart problems"
             elif sur=='0':
-                name="No (Heart Disease)"
+                name="You are not suffuring from heart problmes"
                 
             contex={
                 'sur':name,
             }
-            return render(request,'patient/heart.html', contex)
+            return render(request,'patient/heart_results.html', contex)
 
 
 

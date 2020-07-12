@@ -6,6 +6,8 @@ import numpy as np
 # import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.neighbors import KNeighborsClassifier
+from sklearn.metrics import confusion_matrix, accuracy_score
+from sklearn.model_selection import train_test_split
 
 
 def pre_processing(X):
@@ -32,13 +34,18 @@ def training():
 
     classifier = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
     
-    # x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2, random_state=5)
-    classifier.fit(X, y)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 0)
+    classifier.fit(X_train, y_train)
     # print(model.score(x_test,y_test))
     pkl_filename="pickle_model_heart.pkl"
     with open(pkl_filename,'wb') as file:
         pickle.dump(classifier,file)
-        # print(pkl_filename)
+    
+    y_pred = classifier.predict(X_test)
+    cm = confusion_matrix(y_test, y_pred)
+    print(cm)
+    print(accuracy_score(y_test, y_pred))
+
 
 def pred(ob):
     d1=ob.to_dict()
@@ -55,6 +62,7 @@ def pred(ob):
         classifier=pickle.load(file)
     pred=classifier.predict(df2)
     return pred
+
 
 
 if __name__=="__main__":

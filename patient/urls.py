@@ -16,4 +16,5 @@ path('dashboard/', views.dashboard, name="dashboard"),
 path('logoutpatient/', views.logoutpatient, name="logoutpatient"),
 
 path('heart/', views.heart, name="heart"),
+path('Diabetes/', views.Diabetes, name="Diabetes"),
 ]

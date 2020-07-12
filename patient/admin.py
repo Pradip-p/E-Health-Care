@@ -4,3 +4,4 @@ from patient.models import *
 admin.site.register(Profile)
 admin.site.register(Disease1)
 admin.site.register(Heart) 
+admin.site.register(Diabetes)

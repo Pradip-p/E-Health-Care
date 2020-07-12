@@ -72,3 +72,26 @@ class Heart(models.Model):
             'thal':self.thal,
 
         }
+
+
+class Diabetes(models.Model):
+    Pregnancies=models.IntegerField()
+    Glucose=models.IntegerField()
+    BloodPressure=models.IntegerField()
+    SkinThickness=models.IntegerField()
+    Insulin=models.IntegerField()
+    BMI=models.IntegerField()
+    DiabetesPedigreeFunction=models.IntegerField()
+    Age=models.IntegerField()
+    
+    def to_dict(self):
+        return{
+            'Pregnancies':self.Pregnancies,
+            'Glucose':self.Glucose,
+            'BloodPressure':self.BloodPressure,
+            'SkinThickness':self.SkinThickness,
+            'Insulin':self.Insulin,
+            'BMI':self.BMI,
+            'DiabetesPedigreeFunction':self.DiabetesPedigreeFunction,
+            'Age':self.Age,
+        }

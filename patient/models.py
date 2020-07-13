@@ -33,7 +33,7 @@ def save_user_profile(sender,instance,**kwargs):
 
 class Disease1(models.Model):
     name=models.CharField(max_length=200)
-    category=models.ForeignKey(on_delete= CASCADE, to=DoctorInfo)
+    doctor_name=models.ForeignKey(on_delete= CASCADE, to=DoctorInfo)
     def __str__(self):
         return self.name 
 

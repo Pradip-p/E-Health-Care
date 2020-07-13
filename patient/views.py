@@ -19,8 +19,6 @@ from api import diseaseml
 from patient.heart import pred
 from patient.Diabetes import pred
 
-
-
 # @login_required(login_url='patient_login')
 # def dashboard(request):
 #     contex={}
@@ -207,6 +205,7 @@ def patient_register(request):
         return render(request, 'patient/register.html', contex)
 
 
+
 @login_required(login_url='patient_login') 
 @transaction.atomic   
 def patient_profile(request):
@@ -253,7 +252,7 @@ def patient_login(request):
             # return render(request, 'patient/dashboard.html')
             return redirect('dashboard')
         else:
-            messages.info(request, "Invalid Username or password")
+            messages.info(request, "Invalid username or password")
             return render(request, 'patient/login.html')
     else:
         return render(request, 'patient/login.html')

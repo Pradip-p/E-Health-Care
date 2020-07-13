@@ -38,6 +38,7 @@ class WhoPredictDisease(models.Model):
     predicted_disease=models.CharField(max_length=50)
     #who_predict=models.OneToOneField(Profile,on_delete=models.CASCADE)
 
+
 class Disease1(models.Model):
     name=models.CharField(max_length=200)
     doctor_name=models.ForeignKey(on_delete= CASCADE, to=DoctorInfo)
@@ -80,7 +81,6 @@ class Heart(models.Model):
             'thal':self.thal,
 
         }
-
 
 class Diabetes(models.Model):
     Pregnancies=models.IntegerField()

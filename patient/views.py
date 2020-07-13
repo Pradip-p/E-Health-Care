@@ -152,9 +152,9 @@ def dashboard(request):
                 print(i)
                 if sur==i.name:
                     ob=Disease1.objects.get(name=sur)
-                    doctor_name=ob.category.name
-                    phone=ob.category.phone_number
-                    email=ob.category.email
+                    doctor_name=ob.doctor_name.name
+                    phone=ob.doctor_name.phone_number
+                    email=ob.doctor_name.email
                     print("Yes, finally working !!")
 
             # if sur==i

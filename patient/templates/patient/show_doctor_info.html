@@ -11,9 +11,8 @@
 
 <div class="card-box">
     <h4 class="mb-5"> You are suffering from  {{Disease}} </h4>
-    
-      <h5>Suggested doctor Information</h5>
-
+    {% if doctor_disease_list.all %}
+      <h5>Suggested Doctor Information</h5>
       <div class="container">
         <div class="row">
           <div class=" col md-12">
@@ -27,13 +26,19 @@
                   </tr>
                 </thead>
                 <tbody>
-                
+                {% for info in disease_doctor_list %}
                   <tr>
-                    <th> {{ name }}</th>
-                    <td>{{email}}</td>
-                    <td>{{phone}}</td>
+                    <th> {{info.doctor_name.name }}</th>
+                    <td>{{info.doctor_name.email}}</td>
+                    <td>{{info.doctor_name.email}}</td>
                   </tr>
+                  {% endfor %}
                   </table>
+            {% else %}
+            <h5>No Doctor Available </h5>
+
+
+              {% endif %}
 
 </div>
 </div>

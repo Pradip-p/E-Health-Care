@@ -1,0 +1,42 @@
+
+{% extends "base.html" %}
+{% block body_content %}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="page-title">Results</h4>
+            </div>
+        </div>
+
+<div class="card-box">
+    <h4 class="mb-5"> You are suffering from  {{Disease}} </h4>
+    
+      <h5>Suggested doctor Information</h5>
+
+      <div class="container">
+        <div class="row">
+          <div class=" col md-12">
+           
+              <table class="table table-light">
+                <thead>
+                  <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                
+                  <tr>
+                    <th> {{ name }}</th>
+                    <td>{{email}}</td>
+                    <td>{{phone}}</td>
+                  </tr>
+                  </table>
+
+</div>
+</div>
+</div>
+{% endblock %}

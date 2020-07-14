@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block body_content %}
+
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="page-title">Pneumonia check up</h4>
+            </div>
+        </div>
+
+<div class="card-box">
+      <h4 class="mb-5"></h4>
+      <div class="container">
+        <div class="row">
+          <div class=" col md-12">
+            <h4>Image Uploader</h4><br><br>
+            <div>
+            <form enctype="multipart/form-data" method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Upload"/>
+            </form>
+        </div>
+    </div>
+            <br><br>
+            <h4 class="mb-5"> {{sur}} </h4>
+            <br><br>
+</div>
+</div>
+{% endblock %}

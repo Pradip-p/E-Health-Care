@@ -1,0 +1,139 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+        <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Edit Profile</h4>
+                    </div>
+                </div>
+                   
+<form method="POST" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+   <div class="card-box">
+                       <h3 class="card-title">My Informations</h3>
+  <div class="form-group">
+    <label for="id_email">Email address</label>&nbsp &nbsp
+    <input class="form-control" value="{{request.user.email}}"  name="email"
+      maxlength="254" id="id_email">
+  </div>
+  <br />
+  <div class="form-group"><label for="id_name">Name</label>&nbsp &nbsp <input type="text" value="{{request.user.profile.name}}" name="name"
+      maxlength="20" required id="id_name" class="form-control"></div>
+
+  <br />
+  <div class="form-group"><label for="id_phone_number">Phone number</label> &nbsp &nbsp<input type="text"
+      class="form-control" value="{{request.user.profile.phone_number}}" name="phone_number" maxlength="17"
+      id="id_phone_number"></div>
+  <br />
+  <div class="form-group"><label for="id_address">Address</label>&nbsp &nbsp <input
+      value="{{request.user.profile.address}}" type="text" class="form-control" name="address" maxlength="40" required
+      id="id_address"></div>
+  <br />
+  <div class="form-group"><label for="id_gender">Gender</label> &nbsp &nbsp<select class="form-control form-control-lg"
+      value="{{request.user.profile.gender}}" name="gender" id="id_gender">\n <option readonly value="Female">Female
+      </option>\n\n <option readonly value="Male" selected>Male</option>\n\n <option readonly value="Other">Other
+      </option>\n\n</select></div>
+  <br />
+  <div class="form-group"><label for="id_age">Age</label> &nbsp &nbsp<input class="form-control" type="text" name="age"
+      value="{{request.user.profile.age}}" maxlength="20" required id="id_age"></div>
+  <br />
+  <div class="form-group"><label for="id_status">Status</label> &nbsp &nbsp<select name="status" id="id_status"
+      class="form-control form-control-lg">\n <option value="Single" selected>Single</option>\n\n <option
+        value="Married">Married</option>\n\n</select></div><br />
+
+  <div class="form-group"><label for="id_profile_pic">Profile Picture</label>
+    <br />
+    <br />
+    <input class="form-control-file" type="file" name="profile_pic" accept="image/*" id="id_profile_pic" value="{{request.user.profile.profile_pic}}"></div>
+  <br />
+
+
+  <button type="submit" class="btn btn-primary btn-user "> Update Profile</button>
+
+  <br />
+  
+  </div>
+ 
+      
+</form>
+</div>
+</div>
+
+
+<!--
+<h4 class="mb-5">My Profile</h4>
+<div align="center">
+   {% if request.user.profile.profile_pic.url != '' %}
+  <img src="{{request.user.profile.profile_pic.url}}" alt="Images" height="300px"/>
+  {% else %} 
+  <i class="fas fa-10x fa-user-circle"></i>
+  {% endif %}
+</div>
+<div class="card-body">
+</div>
+
+-->
+<!--
+
+
+<div  class="card text-white bg-secondary mb-3" >
+  <div class="card-body">
+  <div class="card-group">
+    <br />
+
+<form method="POST" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="form-inline">
+    <label for="id_email">Email address</label>&nbsp &nbsp
+    <input class="form-control" value="{{request.user.email}}" style="width: 300px;" type="email" name="email"
+      maxlength="254" id="id_email">
+  </div>
+  <br />
+  <div class="form-inline"><label for="id_name">Name</label>&nbsp &nbsp <input type="text" value="{{request.user.profile.name}}" name="name"
+      maxlength="20" required id="id_name" class="form-control"></div>
+
+  <br />
+  <div class="form-inline"><label for="id_phone_number">Phone number</label> &nbsp &nbsp<input type="text"
+      class="form-control" value="{{request.user.profile.phone_number}}" name="phone_number" maxlength="17"
+      id="id_phone_number"></div>
+  <br />
+  <div class="form-inline"><label for="id_address">Address</label>&nbsp &nbsp <input
+      value="{{request.user.profile.address}}" type="text" class="form-control" name="address" maxlength="40" required
+      id="id_address"></div>
+  <br />
+  <div class="form-inline"><label for="id_gender">Gender</label> &nbsp &nbsp<select class="form-control form-control-lg"
+      value="{{request.user.profile.gender}}" name="gender" id="id_gender">\n <option readonly value="Female">Female
+      </option>\n\n <option readonly value="Male" selected>Male</option>\n\n <option readonly value="Other">Other
+      </option>\n\n</select></div>
+  <br />
+  <div class="form-inline"><label for="id_age">Age</label> &nbsp &nbsp<input class="form-control" type="text" name="age"
+      value="{{request.user.profile.age}}" maxlength="20" required id="id_age"></div>
+  <br />
+  <div class="form-inline"><label for="id_status">Status</label> &nbsp &nbsp<select name="status" id="id_status"
+      class="form-control form-control-lg">\n <option value="Single" selected>Single</option>\n\n <option
+        value="Married">Married</option>\n\n</select></div><br />
+
+  <div class="form-inline"><label for="id_profile_pic">Profile Picture</label>
+    <br />
+    <br />
+    <input class="form-control-file" type="file" name="profile_pic" accept="image/*" id="id_profile_pic"></div>
+  <br />
+  <br />
+
+  <button type="submit" class="btn btn-primary btn-user "> Update Profile</button>
+
+  <br />
+  <br />
+</form>
+</div>
+  </div>
+</div>
+
+-->
+
+
+{% endblock %}
+
+

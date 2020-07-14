@@ -1,0 +1,119 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>E-Health</title>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <img width="70px" height="50px"src="{% static 'logo2.png' %}">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      <a class="navbar-brand" href="/" style="font-size: 30px;">E-Health Care
+        
+      </a>
+     
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item active">
+           
+            <a class="nav-link" href="/" style="font-size: 20px;">Home&nbsp;&nbsp;&nbsp;<img width="30px" height="30px"src="{% static 'home.png' %}">&nbsp;&nbsp;  <span class="sr-only">(current)<i class="far fa-home"></i></span></a>
+          </li>
+          
+       
+         
+        </ul>
+      
+      </div>
+    </nav>
+      <style>
+        .footer {
+          position: fixed;
+          left: 0;
+          bottom: 0;
+          width: 100%;
+          background-color: black;
+          color: white;
+          text-align: center;
+        }
+        </style>
+  </head>
+  <body style="background-color:rgba(41, 29, 29, 0.315);">
+      <br><br>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;" >
+                <img class="card-img-top" src="{% static 'doctor.jpg' %}" alt="Card image cap">
+                <div class="card-body">
+                  
+                    <div class="col-sm">
+                        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;" > 
+                            <div class="card-body" style="text-align: center;">
+                            <h5>
+                                <a class="nav-link" href="/doctor/doctor_login"><i class="fa fa-user-secret"></i>&nbsp;Doctor <span class="sr-only">(current)</span></a>
+                            </h5>
+                            </div>
+                          </div>
+                      </div>
+                  
+                </div>
+              </div>
+          </div>
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'admin.png' %}" alt="Card image cap" height="290px">
+                <div class="card-body">
+                  
+                    <div class="col-sm">
+                        <div class="card text-white bg-dark mb-3" style="max-width: 18rem;" > 
+                            <div class="card-body" style="text-align: center;">
+                            <h5>
+                                <a class="nav-link" href="/admin"><i class="fa fa-user-secret"></i>&nbsp;Admin <span class="sr-only">(current)</span></a>
+                            </h5>
+                            </div>
+                          </div>
+                      </div>
+                 
+                </div>
+              </div>
+          </div>
+          <div class="col-sm">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="{% static 'patient.png' %}" alt="Card image cap">
+                <div class="card-body">
+                  
+                    <div class="col-sm">
+                        <div class="card text-white bg-dark mb-3" style=" height: 6rem;"> 
+                            <div class="card-body" style="text-align: center;">
+                              <a class="nav-link" href="/patient/patient_login"></i>&nbsp;Sign In <span class="sr-only">(current)</span></a>
+                              <a class="nav-link" href="/patient/patient_register">Sign Up <span class="sr-only">(current)</span></a>
+                            </div>
+                      
+                          </div>
+                    
+                      </div>
+                  
+                </div>
+              </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="container">
+        <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This Web Application is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by Pradip, Pawan and Sushil</a></p>
+      </div>
+     </div>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  </body>
+</html>

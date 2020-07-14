@@ -1,0 +1,33 @@
+
+
+{% extends "base.html" %}
+{% block body_content %}
+
+       <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Check Disease</h4>
+                    </div>
+                </div>
+                   
+              <form method="POST" action="" enctype="multipart/form-data">
+                {% csrf_token %}
+                 <div class="card-box">
+                   <h3 class="card-title">Please enter you symtoms</h3>
+
+                    {{disease_form.as_p}}
+                   
+                    <button type="Check" class="btn btn-primary btn-user "> Check</button>
+
+                    </div>
+
+                    </div>
+                    </form>
+                 
+                        
+                </div>
+              </div>
+
+{% endblock %}
+

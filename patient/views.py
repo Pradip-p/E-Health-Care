@@ -9,11 +9,10 @@ from django.db import transaction
 from patient.models import *
 # Create your views here.
 
-# Create your views here.
 from django.shortcuts import render, HttpResponse
 import requests
 
-from Health.forms import DiseaseForm, HeartForm, DiabetesForm, ImageForm
+from Health.forms import *
 from api.models import Disease
 from api import diseaseml
 # from . import heart
@@ -22,7 +21,7 @@ from patient.Diabetes import pred
 from patient.pneumonia import pred1
 from .models import Image
 
-
+ 
 @login_required(login_url='patient_login')
 def showimage(request):   
     lastimage= Image.objects.last()
@@ -49,20 +48,6 @@ def showimage(request):
         }
     return render(request, 'patient/image.html', context)
     
-from Health.forms import DiseaseForm, HeartForm, DiabetesForm
-from api.models import Disease
-from api import diseaseml
-# from . import heart
-from patient.heart import pred
-from patient.Diabetes import pred
-
-# @login_required(login_url='patient_login')
-# def dashboard(request):
-#     contex={}
-#     return render(request, 'patient/dashboard.html', contex)
-
-
-
 @login_required(login_url='patient_login')
 def Diabetes(request):
     if request.method=="GET":
@@ -109,20 +94,10 @@ def heart(request):
             sur=pred_heart(ob)
             sur=", ".join( repr(e) for e in sur).strip("''")
 
-        #who_predict_disease=WhoPredictDisease.objects.all()
-        if heart_form.is_valid:
-            heart_form.save()
-            ob=Heart.objects.latest('id')
-            print(ob)
-            sur=pred(ob)
-            sur=", ".join( repr(e) for e in sur).strip("''")
-            #who_predict_disease.name=request.user.username
-            #who_predict_disease.predicted_disease=sur
-
             if sur== '1':
-                name= "Yes, You are suffuring from heart problems"
+                name= "Yes, You are suffuring from heart problem"
             elif sur=='0':
-                name="You are not suffuring from heart problmes"
+                name="You are not suffuring from heart problme"
                 
             contex={
                 'sur':name,
@@ -151,9 +126,6 @@ def search_doctor(request):
             return render(request,'patient/form.html', contex)
 
             return render(request,'patient/search_doctor.html', contex)
-
-
-        
     else:
         contex={}
 
@@ -226,9 +198,6 @@ def patient_register(request):
 @transaction.atomic   
 def patient_profile(request):
     if request.method=='POST':
-        
-        """patient=request.user
-        print(patient)"""
         user_form=UpdateForm(request.POST,instance=request.user)
         patient_profile=ProfileForm(request.POST ,request.FILES ,instance=request.user.profile)
         if user_form.is_valid() and patient_profile.is_valid():
@@ -251,11 +220,6 @@ def patient_profile(request):
             'patient_profile':patient_profile,
         }
         return render(request,'patient/profile.html',context)
-"""
-@login_required
-def patient_update(request):
-    return render(request,'patient/update_profile.html')
-"""
 
 
 def patient_login(request):
@@ -265,7 +229,6 @@ def patient_login(request):
         user =authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
-            # return render(request, 'patient/dashboard.html')
             return redirect('dashboard')
         else:
             messages.info(request, "Invalid Username or password")

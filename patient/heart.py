@@ -51,9 +51,6 @@ def training():
 def pred_heart(ob):
     d1=ob.to_dict()
     df=pd.DataFrame(d1,index=[0])
-def pred(ob):
-    d1=ob.to_dict()
-    df=pd.DataFrame(d1,index=[0])
     # df=pre_processing(df)
     # df.drop("Disease", axis="columns", inplace=True)
 

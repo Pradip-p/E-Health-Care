@@ -33,6 +33,19 @@ def save_user_profile(sender,instance,**kwargs):
 class Disease1(models.Model):
     name=models.CharField(max_length=200)
     category=models.ForeignKey(on_delete= CASCADE, to=DoctorInfo)
+class WhoPredictDisease(models.Model):
+    name=models.CharField(max_length=20)
+    email=models.CharField(max_length=30,blank=True)
+    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validators should be a list
+    predicted_disease=models.CharField(max_length=50)
+    #who_predict=models.OneToOneField(Profile,on_delete=models.CASCADE)
+
+
+class Disease1(models.Model):
+    name=models.CharField(max_length=200)
+    doctor_name=models.ForeignKey(on_delete= CASCADE, to=DoctorInfo)
+
     def __str__(self):
         return self.name 
 
@@ -73,7 +86,6 @@ class Heart(models.Model):
 
         }
 
-
 class Diabetes(models.Model):
     Pregnancies=models.IntegerField()
     Glucose=models.IntegerField()
@@ -104,3 +116,5 @@ class Image(models.Model):
 
     # def __str__(self):
     #     return self.name + ": " + str(self.imagefile)
+    
+

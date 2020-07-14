@@ -47,9 +47,16 @@ def training():
     print(accuracy_score(y_test, y_pred))
 
 
+
 def pred_heart(ob):
     d1=ob.to_dict()
     df=pd.DataFrame(d1,index=[0])
+def pred(ob):
+    d1=ob.to_dict()
+    df=pd.DataFrame(d1,index=[0])
+    # df=pre_processing(df)
+    # df.drop("Disease", axis="columns", inplace=True)
+
     dummyRow_filename="dummyRow_heart.csv"
     df2=pd.read_csv(dummyRow_filename)
     for c1 in df.columns:

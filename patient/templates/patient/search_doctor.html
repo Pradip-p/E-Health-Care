@@ -1,0 +1,40 @@
+
+
+{% extends "base.html" %}
+{% block body_content %}
+
+<div class="page-wrapper">
+    <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title">Search Available Doctor</h4>
+                    </div>
+                </div>
+            <div class="card-box">
+
+                 <form method="POST" action="">
+                    {% csrf_token %}
+                    Disease Name:<input type="text" name="disease">
+                      <div class="d-flex justify-content-center mt-3 login_container">
+                                  <button type="submit" value="submit" class="btn btn-primary btn-user "> Find Doctor</button>
+                        </div>
+                </form>
+            </div>
+
+                   
+            <div class="card-box">
+                          <h4 class="mb-5"> Suggested doctor for You--</h4>
+                              {{name}}
+
+            </div>
+                                           
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
+ 
+   {% csrf_token %}

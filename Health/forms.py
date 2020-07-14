@@ -6,6 +6,8 @@ class ImageForm(forms.ModelForm):
     class Meta:
         model= Image
         fields= ["imagefile"]
+from patient.models import Heart, Diabetes
+
 
 
 class DiabetesForm(forms.ModelForm):
@@ -18,11 +20,6 @@ class DiseaseForm(forms.ModelForm):
     class Meta():
         model = Disease
         fields='__all__'
-    
-
-
-
-
 class HeartForm(forms.ModelForm):
     class Meta():
         model = Heart

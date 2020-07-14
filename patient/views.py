@@ -12,6 +12,7 @@ from patient.models import *
 # Create your views here.
 from django.shortcuts import render, HttpResponse
 import requests
+
 from Health.forms import DiseaseForm, HeartForm, DiabetesForm, ImageForm
 from api.models import Disease
 from api import diseaseml
@@ -48,6 +49,19 @@ def showimage(request):
         }
     return render(request, 'patient/image.html', context)
     
+from Health.forms import DiseaseForm, HeartForm, DiabetesForm
+from api.models import Disease
+from api import diseaseml
+# from . import heart
+from patient.heart import pred
+from patient.Diabetes import pred
+
+# @login_required(login_url='patient_login')
+# def dashboard(request):
+#     contex={}
+#     return render(request, 'patient/dashboard.html', contex)
+
+
 
 @login_required(login_url='patient_login')
 def Diabetes(request):
@@ -88,11 +102,23 @@ def heart(request):
         return render(request,'patient/heart.html', contex)
     elif  request.method=="POST":
         heart_form=HeartForm(request.POST)
+
         if heart_form.is_valid:
             heart_form.save()
             ob=Heart.objects.latest('id')
             sur=pred_heart(ob)
             sur=", ".join( repr(e) for e in sur).strip("''")
+
+        #who_predict_disease=WhoPredictDisease.objects.all()
+        if heart_form.is_valid:
+            heart_form.save()
+            ob=Heart.objects.latest('id')
+            print(ob)
+            sur=pred(ob)
+            sur=", ".join( repr(e) for e in sur).strip("''")
+            #who_predict_disease.name=request.user.username
+            #who_predict_disease.predicted_disease=sur
+
             if sur== '1':
                 name= "Yes, You are suffuring from heart problems"
             elif sur=='0':
@@ -106,7 +132,11 @@ def heart(request):
 
 
 @login_required(login_url='patient_login')
+
 def form(request):
+    pass
+def search_doctor(request):
+
     contex={}
     if request.method=="POST":
         disease = request.POST.get('disease')   
@@ -120,11 +150,17 @@ def form(request):
             }
             return render(request,'patient/form.html', contex)
 
+            return render(request,'patient/search_doctor.html', contex)
+
 
         
     else:
         contex={}
+
         return render(request,'patient/form.html', contex)
+
+        return render(request,'patient/search_doctor.html', contex)
+
 
 
 
@@ -186,11 +222,41 @@ def dashboard(request):
             'email':email}
             return render(request,'patient/predict.html', contex)
     else:
-        disease_form=DiseaseForm()
-        contex={
-            'disease_form':disease_form
-        }
-        return render(request, 'patient/dashboard.html', contex)
+
+
+            disease_predicter=WhoPredictDisease()
+            disease_predicter.name=request.user.profile.name
+            disease_predicter.email=request.user.email
+            disease_predicter.phone_number=request.user.profile.phone_number
+            disease_predicter.predicted_disease=sur
+            disease_predicter.save()
+
+            disease_doctor_list=Disease1.objects.filter(name=sur)
+            '''for i in disease:
+                print(i)
+                if sur==i.name:
+                    ob=Disease1.objects.get(name=sur)
+                    doctor_name=ob.doctor_name.name
+                    phone=ob.doctor_name.phone_number
+                    email=ob.doctor_name.email
+                    print("Yes, finally working !!")
+            '''
+
+            contex={"Disease":sur,
+            'disease_doctor_list':disease_doctor_list
+            #'name':'',
+            #'phone':'',
+            #'email':''
+            }
+            return render(request,'patient/show_doctor_info.html', contex)
+    # else:
+        #print(request.user.username)
+
+        # disease_form=DiseaseForm()
+        # contex={
+        #     'disease_form':disease_form
+        # }
+        # return render(request, 'patient/dashboard.html', contex)
 
 def patient_register(request):
     patient_register=UserForm()
@@ -213,6 +279,9 @@ def patient_register(request):
             'patient_register':patient_register,
         }
         return render(request, 'patient/register.html', contex)
+
+
+
 
 
 @login_required(login_url='patient_login') 
@@ -262,6 +331,7 @@ def patient_login(request):
             return redirect('dashboard')
         else:
             messages.info(request, "Invalid Username or password")
+            messages.info(request, "Invalid username or password")
             return render(request, 'patient/login.html')
     else:
         return render(request, 'patient/login.html')

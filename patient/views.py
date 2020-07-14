@@ -19,8 +19,6 @@ from api import diseaseml
 from patient.heart import pred
 from patient.Diabetes import pred
 
-
-
 # @login_required(login_url='patient_login')
 # def dashboard(request):
 #     contex={}
@@ -66,12 +64,15 @@ def heart(request):
         return render(request,'patient/heart.html', contex)
     elif  request.method=="POST":
         heart_form=HeartForm(request.POST)
+        #who_predict_disease=WhoPredictDisease.objects.all()
         if heart_form.is_valid:
             heart_form.save()
             ob=Heart.objects.latest('id')
             print(ob)
             sur=pred(ob)
             sur=", ".join( repr(e) for e in sur).strip("''")
+            #who_predict_disease.name=request.user.username
+            #who_predict_disease.predicted_disease=sur
             if sur== '1':
                 name= "Yes, You are suffuring from heart problems"
             elif sur=='0':
@@ -85,7 +86,7 @@ def heart(request):
 
 
 @login_required(login_url='patient_login')
-def form(request):
+def search_doctor(request):
     contex={}
     if request.method=="POST":
         disease = request.POST.get('disease')   
@@ -97,13 +98,13 @@ def form(request):
             contex={
                 'name':name
             }
-            return render(request,'patient/form.html', contex)
+            return render(request,'patient/search_doctor.html', contex)
 
 
         
     else:
         contex={}
-        return render(request,'patient/form.html', contex)
+        return render(request,'patient/search_doctor.html', contex)
 
 
 
@@ -147,24 +148,34 @@ def dashboard(request):
             
             print("@"*80)
             sur=", ".join( repr(e) for e in sur).strip("''")
-            disease=Disease1.objects.all()
-            for i in disease:
+
+            disease_predicter=WhoPredictDisease()
+            disease_predicter.name=request.user.profile.name
+            disease_predicter.email=request.user.email
+            disease_predicter.phone_number=request.user.profile.phone_number
+            disease_predicter.predicted_disease=sur
+            disease_predicter.save()
+
+            disease_doctor_list=Disease1.objects.filter(name=sur)
+            '''for i in disease:
                 print(i)
                 if sur==i.name:
                     ob=Disease1.objects.get(name=sur)
-                    doctor_name=ob.category.name
-                    phone=ob.category.phone_number
-                    email=ob.category.email
+                    doctor_name=ob.doctor_name.name
+                    phone=ob.doctor_name.phone_number
+                    email=ob.doctor_name.email
                     print("Yes, finally working !!")
-
-            # if sur==i
+            '''
 
             contex={"Disease":sur,
-            'name':doctor_name,
-            'phone':phone,
-            'email':email}
-            return render(request,'patient/predict.html', contex)
+            'disease_doctor_list':disease_doctor_list
+            #'name':'',
+            #'phone':'',
+            #'email':''
+            }
+            return render(request,'patient/show_doctor_info.html', contex)
     else:
+        #print(request.user.username)
         disease_form=DiseaseForm()
         contex={
             'disease_form':disease_form
@@ -192,6 +203,7 @@ def patient_register(request):
             'patient_register':patient_register,
         }
         return render(request, 'patient/register.html', contex)
+
 
 
 @login_required(login_url='patient_login') 
@@ -240,7 +252,7 @@ def patient_login(request):
             # return render(request, 'patient/dashboard.html')
             return redirect('dashboard')
         else:
-            messages.info(request, "Invalid Username or password")
+            messages.info(request, "Invalid username or password")
             return render(request, 'patient/login.html')
     else:
         return render(request, 'patient/login.html')

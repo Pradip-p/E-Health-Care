@@ -162,32 +162,6 @@ def search_doctor(request):
         return render(request,'patient/search_doctor.html', contex)
 
 
-
-
-
-# @login_required(login_url='patient_login')
-# def dashboard(request):
-#     if request.method=="POST":
-#         disease_form=DiseaseForm(request.POST)
-#         if disease_form.is_valid:
-#             disease_form.save()
-#             ob=Disease.objects.latest('id')
-#             sur=diseaseml.pred(ob)
-#             print("@"*80)
-#             print(sur)
-#             contex={"Disease":sur}
-#             # ob=Doctor.objects.get(pk=1)
-#             # if sur==ob:
-        
-#             return render(request,'patient/dashboard.html', contex)
-#     else:
-#         disease_form=DiseaseForm()
-#         contex={
-#             'disease_form':disease_form
-#         }
-#         return render(request, 'patient/dashboard.html', contex)
-
-
 @login_required(login_url='patient_login')
 def my_profile(request):
     return render(request,'patient/my_profile.html')
@@ -201,62 +175,28 @@ def dashboard(request):
             disease_form.save()
             ob=Disease.objects.latest('id')
             sur=diseaseml.pred(ob)
-            
-            print("@"*80)
             sur=", ".join( repr(e) for e in sur).strip("''")
-            disease=Disease1.objects.all()
-            for i in disease:
-                print(i)
-                if sur==i.name:
-                    ob=Disease1.objects.get(name=sur)
-                    doctor_name=ob.category.name
-                    phone=ob.category.phone_number
-                    email=ob.category.email
-                    print("Yes, finally working !!")
-
-            # if sur==i
-
-            contex={"Disease":sur,
-            'name':doctor_name,
-            'phone':phone,
-            'email':email}
-            return render(request,'patient/predict.html', contex)
-    else:
-
-
             disease_predicter=WhoPredictDisease()
             disease_predicter.name=request.user.profile.name
             disease_predicter.email=request.user.email
             disease_predicter.phone_number=request.user.profile.phone_number
             disease_predicter.predicted_disease=sur
             disease_predicter.save()
-
             disease_doctor_list=Disease1.objects.filter(name=sur)
-            '''for i in disease:
-                print(i)
-                if sur==i.name:
-                    ob=Disease1.objects.get(name=sur)
-                    doctor_name=ob.doctor_name.name
-                    phone=ob.doctor_name.phone_number
-                    email=ob.doctor_name.email
-                    print("Yes, finally working !!")
-            '''
-
-            contex={"Disease":sur,
+            
+            contex={
+            "Disease":sur,
             'disease_doctor_list':disease_doctor_list
-            #'name':'',
-            #'phone':'',
-            #'email':''
             }
             return render(request,'patient/show_doctor_info.html', contex)
-    # else:
-        #print(request.user.username)
+    else:
+        print(request.user.username)
 
-        # disease_form=DiseaseForm()
-        # contex={
-        #     'disease_form':disease_form
-        # }
-        # return render(request, 'patient/dashboard.html', contex)
+        disease_form=DiseaseForm()
+        contex={
+            'disease_form':disease_form
+        }
+        return render(request, 'patient/dashboard.html', contex)
 
 def patient_register(request):
     patient_register=UserForm()
@@ -264,7 +204,6 @@ def patient_register(request):
         patient_register= UserForm(request.POST)
         if patient_register.is_valid():
             patient_register.save()
-            # register.set_password(register.password)
             return redirect("patient_login")
         else:
             contex={
@@ -274,7 +213,6 @@ def patient_register(request):
             return render(request, 'patient/register.html', contex)
     else:     
         patient_register=UserForm()
-        # patient_register=PatientRegisterForm()
         contex={
             'patient_register':patient_register,
         }

@@ -14,18 +14,86 @@
 
                  <form method="POST" action="">
                     {% csrf_token %}
-                    Disease Name:<input type="text" name="disease">
+                    <label>
+                        Search Doctor
+                    </label>
+                    <input type="text" class="form-control" value="{{ request.POST.term }}" name="term" placeholder="Search by doctor name or disease name">
                       <div class="d-flex justify-content-center mt-3 login_container">
                                   <button type="submit" value="submit" class="btn btn-primary btn-user "> Find Doctor</button>
                         </div>
                 </form>
             </div>
-
                    
             <div class="card-box">
-                          <h4 class="mb-5"> Suggested doctor for You--</h4>
-                              {{name}}
+                {% if doctors.all %}
+                <h4 class="mb-5"> List of Doctors--</h4>
+                          <table class="table table-light">
+                            <thead>
+                              <tr>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email</th>
+                                <!-- <th scope="col">Address</th> -->
+                                <th scope="col">Contact</th>
+                                <th scope="col">Action</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                                {% for doctor in doctors %}
+                              <tr>
+                                <th>{{doctor.name}}</th>
+                                <td>{{doctor.email}}</td>
+                                <td>{{doctor.phone_number}}</td>
+                                <!-- <td>{{doctor.disease1.name}}</td> -->
+                                <td>View Profile</td>
+                              </tr>
+                              {% endfor %}
+                            </tbody>
+                              </table>
+                              <!-- {% if doctors.has_other_pages %}
+                              <nav aria-label="Page navigation example">
+                              <ul class="pagination justify-content-center"">
 
+                              {% if doctors.has_previous %}
+                              <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Previous">
+                              <span aria-hidden="true">&laquo;</span>
+                              </a>
+                              </li>
+
+                              {% else %}
+                              <li class="page-item disabled">
+                              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+                              </li>
+
+                              {% endif %}
+
+                              {% for i in doctors.paginator.page_range %}
+                              {% if doctors.number == i %}
+                                   <li class="page-item active" aria-current="page">
+                                      <a class="page-link" href="#">{{i}} <span class="sr-only">(current)</span></a>
+                                  </li>
+                              {% else %}
+                                <li class="page-item"><a class="page-link" href="?page={{ i }}">{{i}}</a></li>
+                              {% endif %}
+                              {% endfor %}
+
+                              {% if doctors.has_next %}
+                              <li class="page-item">
+                              <a class="page-link" href="#" aria-label="Next">
+                              <span aria-hidden="true">&raquo;</span>
+                              </a>
+                              </li>
+                              {% else %}
+                              <li class="page-item disabled">
+                              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+                              </li>
+                              {% endif %}
+                              </ul>
+                              </nav>
+                              {% endif %} -->
+                {% else %}
+                <h4 class="mb-5"> No Doctors Available--</h4>
+                {% endif %}
             </div>
                                            
     </div>
@@ -37,4 +105,3 @@
 
 
  
-   {% csrf_token %}

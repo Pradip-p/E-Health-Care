@@ -21,7 +21,11 @@ from patient.Diabetes import pred
 from patient.pneumonia import pred1
 from .models import Image
 
- 
+from django.db.models import Q
+# Pagination import 
+# from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+
 @login_required(login_url='patient_login')
 def showimage(request):   
     lastimage= Image.objects.last()
@@ -111,28 +115,50 @@ def heart(request):
 def form(request):
     pass
 def search_doctor(request):
-
-    contex={}
+    context={}
     if request.method=="POST":
-        disease = request.POST.get('disease')   
-        ob=Doctor.objects.get(pk=1)
-        rog=ob.category.name
-        print(rog)
-        if rog==disease:
-            name=ob.name
-            contex={
-                'name':name
-            }
-            return render(request,'patient/form.html', contex)
+        search_term=request.POST.get('term')
+        disease=Disease1.objects.filter(name__icontains=search_term)
+        if search_term==None:
+            search_term=""
+        doctor_name=[]
+        for d in disease:
+            doctor_name.append(d.doctor)
+        # page=request.GET.get('page',1) 
+        doctors=DoctorInfo.objects.filter(Q(name__in=doctor_name) | Q(name__icontains=search_term))
+        # count=doctors.count()
+        # paginator=Paginator(doctors,3)
+        # try:
+        #     doctors=paginator.page(page)
+        # except PageNotAnInteger:
+        #     doctors=paginator.page(1)
+        # except EmptyPage:
+        #     doctors=paginator.page(paginator.num_pages) 
+        # print(doctors)
+        context={
+            'doctors':doctors,
+            # 'count':count
+        }
+        return render(request,'patient/search_doctor.html',context)
 
-            return render(request,'patient/search_doctor.html', contex)
+    # else:
     else:
-        contex={}
-
-        return render(request,'patient/form.html', contex)
-
-        return render(request,'patient/search_doctor.html', contex)
-
+        # page=request.GET.get('page',1)
+        doctors=DoctorInfo.objects.all().order_by('-id')[:10]
+        # count=doctors.count()
+        # paginator=Paginator(doctors,3)
+        # try:
+        #     doctors=paginator.page(page)
+        # except PageNotAnInteger:
+        #     doctors=paginator.page(1)
+        # except EmptyPage:
+        #     doctors=paginator.page(paginator.num_pages) 
+        context={
+            "doctors":doctors,
+            # "count":count
+        }
+        return render(request,'patient/search_doctor.html',context)
+   
 
 @login_required(login_url='patient_login')
 def my_profile(request):
@@ -148,14 +174,13 @@ def dashboard(request):
             ob=Disease.objects.latest('id')
             sur=diseaseml.pred(ob)
             sur=", ".join( repr(e) for e in sur).strip("''")
-            disease_predicter=WhoPredictDisease()
-            disease_predicter.name=request.user.profile.name
-            disease_predicter.email=request.user.email
-            disease_predicter.phone_number=request.user.profile.phone_number
-            disease_predicter.predicted_disease=sur
-            disease_predicter.save()
+            # disease_predicter=WhoPredictDisease()
+            # disease_predicter.name=request.user.profile.name
+            # disease_predicter.email=request.user.email
+            # disease_predicter.phone_number=request.user.profile.phone_number
+            # disease_predicter.predicted_disease=sur
+            # disease_predicter.save()
             disease_doctor_list=Disease1.objects.filter(name=sur)
-            
             contex={
             "Disease":sur,
             'disease_doctor_list':disease_doctor_list

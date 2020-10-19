@@ -19,11 +19,13 @@ class Profile(models.Model):
     status=models.CharField(max_length=20,blank=True,choices=(('Single','Single'),('Married','Married')))
     profile_pic=models.ImageField(blank=True,null=True)
 
+    def __str__(self):
+        return self.name
+
 @receiver(post_save,sender=User)
 def create_user_profile(sender,instance,created,**kwargs):
 	if created:
-		Profile.objects.create(user=instance)
-
+		Profile.objects.create(user=instance,name=instance.username)
 
 @receiver(post_save,sender=User)
 def save_user_profile(sender,instance,**kwargs):
@@ -34,23 +36,24 @@ def save_user_profile(sender,instance,**kwargs):
     # name=models.CharField(max_length=200)
     # category=models.ForeignKey(on_delete= CASCADE, to=DoctorInfo)
 class WhoPredictDisease(models.Model):
-    name=models.CharField(max_length=20)
-    email=models.CharField(max_length=30,blank=True)
-    phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
-    phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validators should be a list
-    predicted_disease=models.CharField(max_length=50)
+    predict_by=models.ForeignKey(Profile,on_delete=models.CASCADE)
+    predicted_disease=models.CharField(max_length=30)
+    # def __str__(self):
+    #     return "Profile"
+    # name=models.CharField(max_length=20)
+    # email=models.CharField(max_length=30,blank=True)
+    # phone_regex = RegexValidator(regex=r'^\+?1?\d{9,15}$', message="Phone number must be entered in the format: '+999999999'. Up to 15 digits allowed.")
+    # phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validators should be a list
+    # predicted_disease=models.CharField(max_length=50)
     #who_predict=models.OneToOneField(Profile,on_delete=models.CASCADE)
-
 
 class Disease1(models.Model):
     name=models.CharField(max_length=200)
-    doctor_name=models.ForeignKey(on_delete= CASCADE, to=DoctorInfo)
-
+    doctor=models.ForeignKey(DoctorInfo,on_delete=models.CASCADE,null=True)
+    # doctor=models.ManyToManyField(DoctorInfo)
+    # doctor_name=models.ManyToManyField(on_delete= CASCADE, to=DoctorInfo)
     def __str__(self):
         return self.name 
-
-
-
 
 # Create your models here.
 class Heart(models.Model):
@@ -107,12 +110,9 @@ class Diabetes(models.Model):
             'Age':self.Age,
         }
 
-
-
 class Image(models.Model):
     # name= models.CharField(max_length=500)
     imagefile= models.FileField(upload_to='images/', null=True, verbose_name="")
-
     # def __str__(self):
     #     return self.name + ": " + str(self.imagefile)
     

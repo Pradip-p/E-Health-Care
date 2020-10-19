@@ -1,0 +1,66 @@
+{
+  "name": "@jupyterlab/statusbar-extension",
+  "version": "2.1.2",
+  "description": "JupyterLab - Statusbar Extension",
+  "homepage": "https://github.com/jupyterlab/jupyterlab",
+  "bugs": {
+    "url": "https://github.com/jupyterlab/jupyterlab/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jupyterlab/jupyterlab.git"
+  },
+  "license": "BSD-3-Clause",
+  "author": "Project Jupyter, Richa Gadgil, Takahiro Shimokobe, Declan Kelly",
+  "files": [
+    "lib/**/*.d.ts",
+    "lib/**/*.js.map",
+    "lib/**/*.js",
+    "style/**/*.{css,eot,gif,html,jpg,json,png,svg,woff2,ttf}",
+    "schema/*.json"
+  ],
+  "sideEffects": [
+    "style/**/*"
+  ],
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "style": "style/index.css",
+  "directories": {
+    "lib": "lib/"
+  },
+  "scripts": {
+    "build": "tsc -b",
+    "clean": "rimraf lib",
+    "docs": "typedoc src",
+    "prepublishOnly": "npm run build",
+    "watch": "tsc -b --watch"
+  },
+  "dependencies": {
+    "@jupyterlab/application": "^2.1.2",
+    "@jupyterlab/apputils": "^2.1.1",
+    "@jupyterlab/cells": "^2.1.2",
+    "@jupyterlab/console": "^2.1.2",
+    "@jupyterlab/docregistry": "^2.1.2",
+    "@jupyterlab/fileeditor": "^2.1.2",
+    "@jupyterlab/mainmenu": "^2.1.1",
+    "@jupyterlab/notebook": "^2.1.2",
+    "@jupyterlab/settingregistry": "^2.1.0",
+    "@jupyterlab/statusbar": "^2.1.1",
+    "@lumino/widgets": "^1.11.1"
+  },
+  "devDependencies": {
+    "@types/react": "~16.9.16",
+    "@types/react-dom": "~16.9.4",
+    "rimraf": "~3.0.0",
+    "typedoc": "^0.15.4",
+    "typescript": "~3.7.3"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "jupyterlab": {
+    "extension": true,
+    "schemaDir": "schema"
+  },
+  "gitHead": "e5621e27ebc6cc46794cf0f1fcdffd31a0883225"
+}

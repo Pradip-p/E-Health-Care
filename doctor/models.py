@@ -11,6 +11,5 @@ class DoctorInfo(models.Model):
     phone_number = models.CharField(validators=[phone_regex], max_length=17, blank=True) # validators should be a list
     # category=models.CharField(max_length=40)
 
-    
     def __str__(self):
         return self.name

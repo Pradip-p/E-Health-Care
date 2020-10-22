@@ -31,6 +31,14 @@ def create_user_profile(sender,instance,created,**kwargs):
 def save_user_profile(sender,instance,**kwargs):
 	instance.profile.save()
 
+class Feedback(models.Model):
+    text=models.TextField(max_length=200)
+    title=models.CharField(max_length=50)
+    picture=models.ImageField()
+    date=models.DateTimeField(auto_now_add=True)
+    uploaded_by=models.ForeignKey(Profile,on_delete=models.CASCADE)
+    def __str__(self):
+        return self.title
 
 class WhoPredictDisease(models.Model):
     predict_by=models.ForeignKey(Profile,on_delete=models.CASCADE)

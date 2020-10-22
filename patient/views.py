@@ -114,6 +114,60 @@ def heart(request):
 
 def form(request):
     pass
+
+@login_required(login_url='patient_login')
+def feedback(request):
+    page=request.GET.get('page',1)
+    feedbacks=Feedback.objects.filter(Q(uploaded_by=request.user.profile))
+    paginator=Paginator(feedbacks,8)
+    try:
+        feedbacks=paginator.page(page)
+    except PageNotAnInteger:
+        feedbacks=paginator.page(1)
+    except EmptyPage:
+        feedbacks=paginator.page(paginator.num_pages)
+    context={
+        'feedbacks':feedbacks
+    }
+    return render(request,'patient/feedback.html',context)
+
+@login_required(login_url='patient_login')
+def feedback_detail(request,pk):
+    feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
+    print(feedback)
+    context={
+        "feedback":feedback
+    }
+    return render(request,'patient/feedback_detail.html',context)
+
+@login_required(login_url='patient_login')
+def feedback_edit(request,pk):
+    try:
+        feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
+    except FeedbackDoesNotExist:
+        return redirect('feedback')
+    if request.method=='POST':   
+        feedback_form=FeedbackForm(request.POST or None,request.FILES,instance=feedback)
+        if feedback_form.is_valid():
+            update=feedback_form.save(commit=False)
+            update.uploaded_by=request.user.profile
+            update.save()
+            return redirect('feedback')
+        else:
+            context={
+                'feedback_form':feedback_form,
+                'feedback':feedback
+            }
+            return render(request,'patient/feedback_form.html',context)
+    else:
+        feedback_form=FeedbackForm(request.POST or None,request.FILES,instance=feedback)
+        context={
+            'feedback_form':feedback_form,
+            'feedback':feedback
+        }
+        return render(request,'patient/feedback_form.html',context)
+
+
 def search_doctor(request):
     context={}
     if request.method=="POST":
@@ -124,17 +178,7 @@ def search_doctor(request):
         doctor_name=[]
         for d in disease:
             doctor_name.append(d.doctor)
-        # page=request.GET.get('page',1) 
         doctors=DoctorInfo.objects.filter(Q(name__in=doctor_name) | Q(name__icontains=search_term))
-        # count=doctors.count()
-        # paginator=Paginator(doctors,3)
-        # try:
-        #     doctors=paginator.page(page)
-        # except PageNotAnInteger:
-        #     doctors=paginator.page(1)
-        # except EmptyPage:
-        #     doctors=paginator.page(paginator.num_pages) 
-        # print(doctors)
         context={
             'doctors':doctors,
             # 'count':count
@@ -143,16 +187,7 @@ def search_doctor(request):
 
     # else:
     else:
-        # page=request.GET.get('page',1)
-        doctors=DoctorInfo.objects.all().order_by('-id')[:10]
-        # count=doctors.count()
-        # paginator=Paginator(doctors,3)
-        # try:
-        #     doctors=paginator.page(page)
-        # except PageNotAnInteger:
-        #     doctors=paginator.page(1)
-        # except EmptyPage:
-        #     doctors=paginator.page(paginator.num_pages) 
+        doctors=DoctorInfo.objects.all().order_by('-id')[:10]   
         context={
             "doctors":doctors,
             # "count":count
@@ -167,6 +202,7 @@ def doctor_profile(request,pk):
         'doctor':doctor,
     }
     return render(request,'patient/doctor_profile.html',context)
+
 
 @login_required(login_url='patient_login')
 def my_profile(request):
@@ -205,8 +241,13 @@ def dashboard(request):
 
 @login_required(login_url='patient_login')
 def home(request):
+    # if request.method=='GET':
     page=request.GET.get('page',1)
-    doctors=DoctorInfo.objects.all()
+    search_term=request.GET.get('term')
+    if search_term==None:
+        search_term=""
+    doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term)| Q(department__icontains=search_term))
+    # doctors=DoctorInfo.objects.all()
     paginator=Paginator(doctors,8)
     try:
         doctors=paginator.page(page)
@@ -218,6 +259,17 @@ def home(request):
         'doctors':doctors,
     } 
     return render(request,'patient/home.html',context)
+    # elif request.method=='POST':
+    #     search_term=request.POST.get('term')
+    #     if search_term==None:
+    #         search_term=""
+    #     doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term))
+    #     context={
+    #         'doctors':doctors
+    #     }
+    #     return render(request,'patient/home.html',context)
+
+
 
 
 def patient_register(request):

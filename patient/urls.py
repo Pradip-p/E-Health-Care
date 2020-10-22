@@ -19,6 +19,9 @@ path('dashboard/', views.dashboard, name="dashboard"),
 
 path('home/',views.home,name="home"),
 path('home/doctor_profile/<int:pk>',views.doctor_profile),
+path('feedback/',views.feedback,name="feedback"),
+path('feedback/detail/<int:pk>',views.feedback_detail),
+path('feedback/edit/<int:pk>',views.feedback_edit),
 # path('check/', views.check, name="check"),
 path('logoutpatient/', views.logoutpatient, name="logoutpatient"),
 

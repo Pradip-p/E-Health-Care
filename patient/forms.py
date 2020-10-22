@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from patient.models import Profile
+from patient.models import Profile,Feedback
 from django.contrib.auth.forms import UserCreationForm
 
 class PatientInfoForm(forms.ModelForm):
@@ -39,3 +39,12 @@ class UpdateForm(forms.ModelForm):
 		model=User
 		fields=('email',)	
 		
+class FeedbackForm(forms.ModelForm):
+	class Meta:
+		model=Feedback
+		fields=('title','text','picture')
+		label={
+			'title':'Title',
+			'text':'Description',
+			'picture':'Picture'
+		}

@@ -158,7 +158,15 @@ def search_doctor(request):
             # "count":count
         }
         return render(request,'patient/search_doctor.html',context)
-   
+
+@login_required(login_url='patient_login')
+def doctor_profile(request,pk):
+    doctor=DoctorInfo.objects.get(id=pk)
+    # print(doctor.__dict__)
+    context={
+        'doctor':doctor,
+    }
+    return render(request,'patient/doctor_profile.html',context)
 
 @login_required(login_url='patient_login')
 def my_profile(request):
@@ -194,6 +202,23 @@ def dashboard(request):
             'disease_form':disease_form
         }
         return render(request, 'patient/dashboard.html', contex)
+
+@login_required(login_url='patient_login')
+def home(request):
+    page=request.GET.get('page',1)
+    doctors=DoctorInfo.objects.all()
+    paginator=Paginator(doctors,8)
+    try:
+        doctors=paginator.page(page)
+    except PageNotAnInteger:
+        doctors=paginator.page(1)
+    except EmptyPage:
+        doctors=paginator.page(paginator.num_pages)
+    context={
+        'doctors':doctors,
+    } 
+    return render(request,'patient/home.html',context)
+
 
 def patient_register(request):
     patient_register=UserForm()
@@ -254,7 +279,7 @@ def patient_login(request):
         user =authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
-            return redirect('dashboard')
+            return redirect('home')
         else:
             messages.info(request, "Invalid Username or password")
             messages.info(request, "Invalid username or password")

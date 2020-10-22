@@ -12,8 +12,6 @@ from django.conf import settings
 
 
 
-
-
 def training():
       zip_ref = zipfile.ZipFile("17810_23812_bundle_archive.zip", 'r')
       zip_ref.extractall("tmp")

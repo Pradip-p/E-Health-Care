@@ -5,8 +5,6 @@ admin.site.register(Profile)
 admin.site.register(Disease1)
 admin.site.register(Heart) 
 admin.site.register(Diabetes)
-
 admin.site.register(Image)
-
 admin.site.register(WhoPredictDisease)
 

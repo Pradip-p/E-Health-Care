@@ -30,11 +30,8 @@ def create_user_profile(sender,instance,created,**kwargs):
 @receiver(post_save,sender=User)
 def save_user_profile(sender,instance,**kwargs):
 	instance.profile.save()
- 
 
-# class Disease1(models.Model):
-    # name=models.CharField(max_length=200)
-    # category=models.ForeignKey(on_delete= CASCADE, to=DoctorInfo)
+
 class WhoPredictDisease(models.Model):
     predict_by=models.ForeignKey(Profile,on_delete=models.CASCADE)
     predicted_disease=models.CharField(max_length=30)

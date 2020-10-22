@@ -1,8 +1,7 @@
 
-
 {% extends "base.html" %}
+{% load static %}
 {% block body_content %}
-
 <div class="page-wrapper">
     <div class="content">
                 <div class="row">
@@ -11,8 +10,13 @@
                     </div>
                 </div>
             <div class="card-box">
-
-                 <form method="POST" action="">
+              <form class="form-inline my-2 my-lg-0" method="POST" action="">
+                {% csrf_token %}
+                <input style="width: 50%;" type="text" class="form-control mr-sm-2" value="{{ request.POST.term }}" name="term" placeholder="Search by doctor name or disease name">
+                <!-- <input value={{request.POST.term}} name="term" class="form-control mr-sm-2" type="text" placeholder="Search by speciality" aria-label="Search"> -->
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="submit">Search</button>
+              </form>
+                 <!-- <form method="POST" action="">
                     {% csrf_token %}
                     <label>
                         Search Doctor
@@ -21,18 +25,44 @@
                       <div class="d-flex justify-content-center mt-3 login_container">
                                   <button type="submit" value="submit" class="btn btn-primary btn-user "> Find Doctor</button>
                         </div>
-                </form>
+                </form> -->
             </div>
                    
             <div class="card-box">
                 {% if doctors.all %}
                 <h4 class="mb-5"> List of Doctors--</h4>
-                          <table class="table table-light">
+                <div class="table-responsive">
+									<table class="table table-hover mb-0">
+                    <thead>
+                      <tr class="table-primary">
+                        <th scope="col">Doctor ID</th>
+                        <th scope="col">Department</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Contact</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+										<tbody>
+                      <tbody>
+                        {% for doctor in doctors %}
+                      <tr class="table-secondary">
+                        <th>{{doctor.doc_id}}</th>
+                        <td>{{doctor.department}}</td>
+                        <th>Dr.{{doctor.name}}</th>
+                        <td>{{doctor.email}}</td>
+                        <td>{{doctor.phone_number}}</td>
+                        <td><a href="doctor_profile/{{doctor.id}}" type="button" class="btn btn-primary">View Profile</a></td>
+                      </tr>
+                      {% endfor %}
+                    </tbody>
+									</table>
+								</div>
+                          <!-- <table class="table table-light">
                             <thead>
                               <tr>
                                 <th scope="col">Name</th>
                                 <th scope="col">Email</th>
-                                <!-- <th scope="col">Address</th> -->
                                 <th scope="col">Contact</th>
                                 <th scope="col">Action</th>
                               </tr>
@@ -43,12 +73,11 @@
                                 <th>{{doctor.name}}</th>
                                 <td>{{doctor.email}}</td>
                                 <td>{{doctor.phone_number}}</td>
-                                <!-- <td>{{doctor.disease1.name}}</td> -->
                                 <td>View Profile</td>
                               </tr>
                               {% endfor %}
                             </tbody>
-                              </table>
+                              </table> -->
                               <!-- {% if doctors.has_other_pages %}
                               <nav aria-label="Page navigation example">
                               <ul class="pagination justify-content-center"">

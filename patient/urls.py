@@ -12,10 +12,13 @@ path('my_profile/',views.my_profile,name="my_profile"),
 
 path('form/', views.form, name="form"),
 
-path('search_doctor/', views.search_doctor, name="search_doctor"),
-
+path('search_doctor/', views.search_doctor,name="search_doctor"),
+path('search_doctor/doctor_profile/<int:pk>',views.doctor_profile),
 #path('update_profile/',views.patient_update,name='update_profile'),
 path('dashboard/', views.dashboard, name="dashboard"),
+
+path('home/',views.home,name="home"),
+path('home/doctor_profile/<int:pk>',views.doctor_profile),
 # path('check/', views.check, name="check"),
 path('logoutpatient/', views.logoutpatient, name="logoutpatient"),
 

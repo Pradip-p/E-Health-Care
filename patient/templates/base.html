@@ -126,7 +126,7 @@
           <div class="dropdown-menu">
             <a class="dropdown-item" href="{% url 'my_profile' %}">My Profile</a>
             <a class="dropdown-item" href="{% url 'patient_profile' %}">Edit Profile</a>
-            <a class="dropdown-item" href="/">Logout</a>
+            <a class="dropdown-item" href="/" data-toggle="modal" data-target="#logoutModal">Logout</a>
           </div>
                 </li>
             </ul>
@@ -315,6 +315,23 @@
 
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+              <a class="btn btn-primary" href="/">Logout</a>
+            </div>
+          </div>
+        </div>
+      </div>
     <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
   <script src="{% static 'assets/js/popper.min.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
@@ -322,6 +339,15 @@
     <script src="{% static 'assets/js/Chart.bundle.js' %}"></script>
     <script src="{% static 'assets/js/chart.js' %}"></script>
     <script src="{% static 'assets/js/app.js' %}"></script>
+    <script type="text/javaScript">
+        $(function () {
+             $('[data-toggle="tooltip"]').tooltip();
+             tinymce.init({
+             selector: 'textarea#editor',
+             menubar: false
+           });
+           })
+     </script>
 
 </body>
 

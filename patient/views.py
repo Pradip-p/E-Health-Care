@@ -118,7 +118,7 @@ def form(request):
 @login_required(login_url='patient_login')
 def feedback(request):
     page=request.GET.get('page',1)
-    feedbacks=Feedback.objects.filter(Q(uploaded_by=request.user.profile))
+    feedbacks=Feedback.objects.filter(Q(uploaded_by=request.user.profile)).order_by('-id')
     paginator=Paginator(feedbacks,8)
     try:
         feedbacks=paginator.page(page)
@@ -141,33 +141,63 @@ def feedback_detail(request,pk):
     return render(request,'patient/feedback_detail.html',context)
 
 @login_required(login_url='patient_login')
+def feedback_delete(request,pk):
+    try:
+        feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
+    except:
+        return redirect('feedback')
+    feedback.delete()
+    return redirect('feedback')
+
+@login_required(login_url='patient_login')
 def feedback_edit(request,pk):
     try:
         feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
-    except FeedbackDoesNotExist:
+    except:
         return redirect('feedback')
     if request.method=='POST':   
-        feedback_form=FeedbackForm(request.POST or None,request.FILES,instance=feedback)
-        if feedback_form.is_valid():
-            update=feedback_form.save(commit=False)
+        feedback_edit_form=FeedbackForm(request.POST or None,request.FILES,instance=feedback)
+        if feedback_edit_form.is_valid():
+            update=feedback_edit_form.save(commit=False)
             update.uploaded_by=request.user.profile
             update.save()
             return redirect('feedback')
         else:
             context={
-                'feedback_form':feedback_form,
+                'feedback_edit_form':feedback_edit_form,
                 'feedback':feedback
             }
-            return render(request,'patient/feedback_form.html',context)
+            return render(request,'patient/feedback_edit_form.html',context)
     else:
         feedback_form=FeedbackForm(request.POST or None,request.FILES,instance=feedback)
         context={
             'feedback_form':feedback_form,
             'feedback':feedback
         }
-        return render(request,'patient/feedback_form.html',context)
+        return render(request,'patient/feedback_edit_form.html',context)
 
+@login_required(login_url='patient_login')
+def feedback_add(request):
+    if request.method=='POST':
+        feedback_add_form=FeedbackForm(request.POST or None,request.FILES or None)
+        if feedback_add_form.is_valid():
+            add_feedback=feedback_add_form.save(commit=False)
+            add_feedback.uploaded_by=request.user.profile
+            add_feedback.save()
+            return redirect('feedback')
+        else:
+            context={
+                'feedback_add_form':feedback_add_form
+            }
+            return render(request,'patient/feedback_add_form.html',context)
+    else:
+        feedback_add_form=FeedbackForm()
+        context={
+            'feedback_add_form':feedback_add_form
+        }
+        return render(request,'patient/feedback_add_form.html',context)
 
+@login_required(login_url='patient_login')
 def search_doctor(request):
     context={}
     if request.method=="POST":

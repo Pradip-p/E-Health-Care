@@ -22,6 +22,9 @@ path('home/doctor_profile/<int:pk>',views.doctor_profile),
 path('feedback/',views.feedback,name="feedback"),
 path('feedback/detail/<int:pk>',views.feedback_detail),
 path('feedback/edit/<int:pk>',views.feedback_edit),
+path('feedback/add_feedback',views.feedback_add),
+path('feedback/delete/<int:pk>',views.feedback_delete),
+
 # path('check/', views.check, name="check"),
 path('logoutpatient/', views.logoutpatient, name="logoutpatient"),
 

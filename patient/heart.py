@@ -15,10 +15,6 @@ def pre_processing(X):
     X = sc.fit_transform(X)
     return X
 
-    
-
-
-
 def training():
     df=pd.read_csv("heart.csv")
     y=df[["target"]]

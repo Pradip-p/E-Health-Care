@@ -126,7 +126,7 @@
           <div class="dropdown-menu">
             <a class="dropdown-item" href="{% url 'my_profile' %}">My Profile</a>
             <a class="dropdown-item" href="{% url 'patient_profile' %}">Edit Profile</a>
-            <a class="dropdown-item" href="/" data-toggle="modal" data-target="#logoutModal">Logout</a>
+            <a class="dropdown-item" href="{% url 'logoutpatient' %}" data-toggle="modal" data-target="#logoutModal">Logout</a>
           </div>
                 </li>
             </ul>
@@ -135,7 +135,7 @@
                 <div class="dropdown-menu dropdown-menu-right">
                     <a class="dropdown-item" href="{% url 'my_profile' %}">My Profile</a>
                     <a class="dropdown-item" href="{% url 'patient_profile' %}">Edit Profile</a>
-                    <a class="dropdown-item" href="/">Logout</a>
+                    <a class="dropdown-item" href="{% url 'logoutpatient' %}">Logout</a>
                 </div>
             </div>
         </div>
@@ -327,7 +327,7 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
               <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-              <a class="btn btn-primary" href="/">Logout</a>
+              <a class="btn btn-primary" href="{% url 'logoutpatient' %}">Logout</a>
             </div>
           </div>
         </div>

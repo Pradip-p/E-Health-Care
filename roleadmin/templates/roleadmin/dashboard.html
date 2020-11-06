@@ -1,0 +1,188 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+{% block body_content %}
+<div class="page-wrapper">
+<div class="content">
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+            <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+            <div class="dash-widget-info text-right">
+                <h3>123</h3>
+                <span class="widget-title1">Predictions <i class="fa fa-check" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+            <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+            <div class="dash-widget-info text-right">
+                <h3>{{patients}}</h3>
+                <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+            <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+            <div class="dash-widget-info text-right">
+                <h3>{{doctors}}</h3>
+                <span class="widget-title3">Doctors <i class="fa fa-check" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+            <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
+            <div class="dash-widget-info text-right">
+                <h3>{{feedbacks}}</h3>
+                <span class="widget-title4">Feedbacks <i class="fa fa-check" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-6 col-lg-8 col-xl-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title d-inline-block">New Patients </h4> <a href="patients.html" class="btn btn-primary float-right">View all</a>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive" style="max-height: 312px; overflow-y: auto; overflow-x: auto;">
+                    <table class="table mb-0 new-patient-table">
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
+                                    <h2>John Doe</h2>
+                                </td>
+                                <td>Johndoe21@gmail.com</td>
+                                <td>+1-202-555-0125</td>
+                                <td><button class="btn btn-primary btn-primary-one float-right">Fever</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
+                                    <h2>Richard</h2>
+                                </td>
+                                <td>Richard123@yahoo.com</td>
+                                <td>202-555-0127</td>
+                                <td><button class="btn btn-primary btn-primary-two float-right">Cancer</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
+                                    <h2>Villiam</h2>
+                                </td>
+                                <td>Richard123@yahoo.com</td>
+                                <td>+1-202-555-0106</td>
+                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
+                                    <h2>Martin</h2>
+                                </td>
+                                <td>Richard123@yahoo.com</td>
+                                <td>776-2323 89562015</td>
+                                <td><button class="btn btn-primary btn-primary-four float-right">Fever</button></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
+                                    <h2>Villiam</h2>
+                                </td>
+                                <td>Richard123@yahoo.com</td>
+                                <td>+1-202-555-0106</td>
+                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
+                            </tr>  <tr>
+                                <td>
+                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
+                                    <h2>Villiam</h2>
+                                </td>
+                                <td>Richard123@yahoo.com</td>
+                                <td>+1-202-555-0106</td>
+                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
+                            </tr>  <tr>
+                                <td>
+                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
+                                    <h2>Villiam</h2>
+                                </td>
+                                <td>Richard123@yahoo.com</td>
+                                <td>+1-202-555-0106</td>
+                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
+                            </tr>  <tr>
+                                <td>
+                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
+                                    <h2>Villiam</h2>
+                                </td>
+                                <td>Richard123@yahoo.com</td>
+                                <td>+1-202-555-0106</td>
+                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
+                            </tr>  <tr>
+                                <td>
+                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
+                                    <h2>Villiam</h2>
+                                </td>
+                                <td>Richard123@yahoo.com</td>
+                                <td>+1-202-555-0106</td>
+                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-4" >
+        <div class="card member-panel">
+            <div class="card-header bg-white">
+                <h4 class="card-title mb-0">Doctors</h4>
+            </div>
+            <div class="card-body">
+                <ul class="contact-list">
+                    {% for doctor in doctorinfo %}
+                    <li>
+                        <div class="contact-cont">
+                            <div class="float-left user-img m-r-10">
+                                <a href="profile.html" title="John Doe">
+                                    {% if doctor.picture.url != '' %}
+                                    <img src="{{doctor.picture.url}}" alt="" class="w-40 rounded-circle" style="max-height: fit-content;">
+                                    {% else %}
+                                    <img src="{% static 'assets/img/user.jpg' %}" alt="" class="w-40 rounded-circle">
+                                    {% endif %}
+                                    <span class="status online">                     
+                                    </span></a>
+                            </div>
+                            <div class="contact-info">
+                                <span class="contact-name text-ellipsis">{{doctor.name}}</span>
+                                <span class="contact-date">{{doctor.department}}</span>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                   
+                </ul>
+            </div>
+            <div class="card-footer text-center bg-white">
+                <a href="doctors.html" class="text-muted">View all Doctors</a>
+            </div>
+        </div>
+    </div>
+<div>
+</div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

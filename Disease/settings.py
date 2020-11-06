@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'patient',
     'doctor',
     'Health',
+    'roleadmin',
     'rest_framework',
     'api',
     'django.contrib.admin',

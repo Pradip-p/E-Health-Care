@@ -363,8 +363,8 @@ def patient_login(request):
             login(request,user)
             return redirect('home')
         else:
-            messages.info(request, "Invalid Username or password")
-            messages.info(request, "Invalid username or password")
+            messages.info(request, "Please enter valid credentials")
+            # messages.info(request, "Invalid username or password")
             return render(request, 'patient/login.html')
     else:
         return render(request, 'patient/login.html')

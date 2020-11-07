@@ -49,12 +49,12 @@
                                 <input value="{{doctor.phone_number}}" class="form-control" type="text" name="phone_number" maxlength="17" id="id_phone_number"> 
                             </div>
                         </div>
-                            <div class="col-sm-6">
-                                <div class="form-group">
-                                    <label>Date of Birth &nbsp &nbsp <a href="">{{doctor.birthday | date:"d/m/y"}}</a></label>
-                                        <input value="{{doctor.birthday}}" id="id_birthday" placeholder="Pick a date" type="date" class="form-control" >
-                                </div>
+                        <div class="col-sm-6">
+                        <div class="form-group">
+                        <label for="id_hospital">Hospital</label> 
+                        <input type="text" value="{{doctor.hospital}}"s name="hospital" maxlength="100" required id="id_hospital">
                             </div>
+                        </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="id_picture">Current Picture</label>
@@ -75,9 +75,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_doc_id">Doctor ID</label>
+                                <label for="id_doctorID">Doctor ID</label>
         
-                                <input value="{{doctor.doc_id}}" class="form-control" type="text" name="doc_id" maxlength="50" required id="id_doc_id">
+                                <input value="{{doctor.doctorID}}" class="form-control" type="text" name="doctorID" maxlength="50" required id="id_doctorID">
                             </div>
                         </div>
                         <div class="col-sm-6">

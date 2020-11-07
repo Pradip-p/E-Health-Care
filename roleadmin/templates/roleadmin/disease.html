@@ -1,0 +1,24 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block body_content %}
+<div class="page-wrapper">
+  <div class="content">
+      <div class="row">
+        <div class="col-sm-4 col-3">
+          <!-- <h4 class="page-title">Disease---Doctors</h4> -->
+          <a href="add" class="btn btn-primary btn-rounded float-left"><i class="fa fa-plus"></i> Add Disease</a>
+          
+        </div>
+        <div class="col-sm-8 col-9 text-right m-b-20">
+          <form class="form-inline my-2 my-lg-0 float-right" method="GET" action="" style="text-align: right;">
+              <!-- {% csrf_token %} -->
+              <input  type="text" class="form-control mr-sm-2" value="{{ request.GET.term }}" name="term" placeholder="Name,address,speciality">
+              <!-- <input value={{request.POST.term}} name="term" class="form-control mr-sm-2" type="text" placeholder="Search by speciality" aria-label="Search"> -->
+              <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="submit">Search</button>
+            </form>
+          </div>  
+      </div>
+  </div>
+</div>
+{% endblock %}

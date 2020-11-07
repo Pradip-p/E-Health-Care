@@ -5,7 +5,10 @@
     <div class="content">
         <div class="row">
             <div class="col-sm-4 col-3">
-                <h4 class="page-title">Specialist</h4>
+                <!-- <h4 class="page-title">Specialist -->
+                        <a href="add" class="btn btn-primary btn-rounded float-left"><i class="fa fa-plus"></i> Add Doctor</a>
+                    <!-- </div> -->
+                <!-- </h4> -->
             </div>
             <div class="col-sm-8 col-9 text-right m-b-20">
             <form class="form-inline my-2 my-lg-0 float-right" method="GET" action="" style="text-align: right;">
@@ -15,6 +18,7 @@
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="submit">Search</button>
               </form>
             </div>
+           
         </div>
         <div class="row doctor-grid">
             {% for doctor in doctors %}
@@ -31,7 +35,8 @@
                         <a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                         <div class="dropdown-menu dropdown-menu-right">
                             <a class="dropdown-item" href="edit/{{doctor.id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
-                            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                            <a class="dropdown-item" data-toggle="tooltip" data-placement="top" title="Delete" href="delete/{{doctor.id}}" onclick="return confirm('Are you sure want to delete Doctor : {{doctor.name}}')">
+                                <i class="fa fa-trash-o m-r-5"></i> Delete</a>
                         </div>
                     </div>
                     <h4 class="doctor-name text-ellipsis"><a href="profile.html">{{doctor.name}}</a></h4>

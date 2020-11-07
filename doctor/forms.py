@@ -1,5 +1,7 @@
 from django import forms
 from doctor.models import DoctorInfo
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class DoctorForm(forms.ModelForm):
     class Meta:
@@ -7,7 +9,7 @@ class DoctorForm(forms.ModelForm):
         fields='__all__'
         # exclude=('birthday',)
 
-class Trial(forms.ModelForm):
+class UserForm(UserCreationForm):
     class Meta:
-        model=DoctorInfo
-        fields='__all__'
+        model=User
+        fields=['username','email','password1','password2']

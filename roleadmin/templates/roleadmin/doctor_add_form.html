@@ -50,12 +50,12 @@
                             </div>
                         </div>
                         <!-- <div class="col-sm-6"> -->
-                            <div class="col-sm-6">
+                            <!-- <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Date of Birth</label>
                                         <input type="date" class="form-control">
                                 </div>
-                            </div>
+                            </div> -->
                         <!-- </div> -->
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -76,9 +76,9 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_doc_id">Doctor ID</label>
+                                <label for="id_doctorID">Doctor ID</label>
         
-                                <input class="form-control" type="text" name="doc_id" maxlength="50" required id="id_doc_id">
+                                <input class="form-control" type="text" name="doctorID" maxlength="50" required id="doctorID">
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -108,9 +108,11 @@
                             <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/> -->
 
                         </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Add Doctor</button>
+                <br/>
+                        <a href="{% url 'doctors_list' %}" class="btn btn-secondary btn-lg btn-block">Cancel</a>
                 </form>
-                <button type="button" class="btn btn-primary btn-lg btn-block">Add Doctor</button>
-
+                
             </div>
         </div>
     </div>

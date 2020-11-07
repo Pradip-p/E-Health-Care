@@ -9,6 +9,8 @@ from patient.models import Profile,Feedback
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
 from doctor.forms import DoctorForm
+
+from roleadmin.forms import AddDiseaseForm
 # Create your views here.
 @login_required(login_url="roleadmin_login")
 def admin_dashboard(request):
@@ -23,6 +25,30 @@ def admin_dashboard(request):
         'doctorinfo':doctorinfo,
     }
     return render(request,'roleadmin/dashboard.html',context)
+
+@login_required(login_url="roleadmin_login")
+def disease(request):
+   
+    return render(request,'roleadmin/disease.html')
+
+@login_required(login_url="roleadmin_login")
+def assign_disease(request):
+    if request.method=="POST":
+        assign_disease_form=AddDiseaseForm(request.POST or None)
+        if assign_disease_form.is_valid():
+            assign_disease_form.save()
+            return redirect('disease')
+        else:
+            context={
+                'assign_disease_form':assign_disease_form
+            }
+            return render(request,'roleadmin/assign_disease_form.html',context)
+    else:
+        assign_disease_form=AddDiseaseForm()  
+        context={
+            'assign_disease_form':assign_disease_form
+        }
+        return render(request,'roleadmin/assign_disease_form.html',context)
 
 @login_required(login_url="roleadmin_login")
 def doctors_list(request):
@@ -43,6 +69,27 @@ def doctors_list(request):
         'doctors':doctors,
     } 
     return render(request,'roleadmin/doctor_list.html',context)
+
+@login_required(login_url="roleadmin_login")
+def add_doctor(request):
+    if request.method=='POST':
+        doctor_add_form=DoctorForm(request.POST or None,request.FILES or None)
+        if doctor_add_form.is_valid():
+            add_doctor=doctor_add_form.save(commit=False)
+            # add_feedback.uploaded_by=request.user.profile
+            add_doctor.save()
+            return redirect('doctors_list')
+        else:
+            context={
+                'doctor_add_form':doctor_add_form
+            }
+            return render(request,'roleadmin/doctor_add_form.html',context)
+    else:
+        doctor_add_form=DoctorForm()
+        context={
+            'doctor_add_form':doctor_add_form
+        }
+        return render(request,'roleadmin/doctor_add_form.html',context)
 
 @login_required(login_url="roleadmin_login")
 def edit_doctor(request,pk):
@@ -72,6 +119,14 @@ def edit_doctor(request,pk):
         }
         return render(request,'roleadmin/doctor_edit_form.html',context)
 
+@login_required(login_url="roleadmin_login")
+def delete_doctor(request,pk):
+    try:
+        doctor=DoctorInfo.objects.get(id=pk)
+    except:
+        return redirect('doctors_list')
+    doctor.delete()
+    return redirect('doctors_list')
 
 @login_required(login_url="roleadmin_login")
 def patients_list(request):

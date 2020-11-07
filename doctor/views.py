@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login as dj_login
 from doctor.models import DoctorInfo
 from django.contrib import messages
+from doctor.forms import UserForm
 # Create your views here.
 
 def doctor_login(request):
@@ -26,9 +27,29 @@ def doctor_login(request):
         return render(request,'doctor/login.html')
 
 
+# def doctor_register(request):
+#     doctor_register=UserForm()
+#     if request.method == 'POST':
+#         doctor_register= UserForm(request.POST)
+#         if doctor_register.is_valid():
+#             doctor_register.save()
+#             return redirect("doctor_login")
+#         else:
+#             contex={
+#                 'doctor_register':doctor_register
+#             }
+#             print("in valid inputs")
+#             return render(request, 'doctor/register.html', contex)
+#     else:     
+#         doctor_register=UserForm()
+#         contex={
+#             'doctor_register':doctor_register,
+#         }
+#         return render(request, 'doctor/register.html', contex)
+
+
 def logout(request):
     del request.session['username']
-    
     return redirect('/doctor')
 
 

@@ -1,4 +1,5 @@
 {% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block body_content %}
 <div class="page-wrapper">
@@ -15,26 +16,35 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_name">Doctor Name</label> 
-                                <input value="{{doctor.name}}" class="form-control" type="text" name="name" maxlength="40" required id="id_name">
+                                {{ userForm.first_name|as_crispy_field }}
+                                <!-- <label for="id_name">Doctor Name</label>  -->
+                                <!-- <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name"> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_email">Email:</label>    
-                                <input value="{{doctor.email}}" class="form-control" type="email" name="email" maxlength="254" required id="id_email">
+                                {{ userForm.last_name|as_crispy_field }}
+                                <!-- <label for="id_name">Doctor Name</label>  -->
+                                <!-- <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name"> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_username">Username</label>
-                                <input value="{{doctor.username}}" class="form-control" type="text" name="username" maxlength="40" required id="id_username">
+                            {{ userForm.email|as_crispy_field }}
+                                <!-- <label for="id_email">Email:</label>     -->
+                                <!-- <input value="" class="form-control" type="email" name="email" maxlength="254" required id="id_email"> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_password">Password</label> 
-                                <input value="{{doctor.password}}" class="form-control" type="text" name="password" maxlength="20" required id="id_password">
+                                {{ userForm.username|as_crispy_field }}
+                               
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ userForm.password|as_crispy_field }}
+
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -49,28 +59,16 @@
                                 <input value="{{doctor.phone_number}}" class="form-control" type="text" name="phone_number" maxlength="17" id="id_phone_number"> 
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                        <div class="form-group">
-                        <label for="id_hospital">Hospital</label> 
-                        <input type="text" value="{{doctor.hospital}}"s name="hospital" maxlength="100" required id="id_hospital">
-                            </div>
-                        </div>
+                      
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_picture">Current Picture</label>
-                                <a href="feedback.picture.url">{{doctor.picture}}</a> 
-                                <input type="file" name="picture" accept="image/*" id="id_picture" value="doctor.picture.url" >
-                               
+                                {{doctor_add_form.picture|as_crispy_field}} 
                             </div>
                         </div>
                         <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="id_gender">Gender</label> 
-                            <select value="{{doctor.gender}}" name="gender" id="id_gender" class="form-control">
-                                <option value="Female">Female</option>
-                                <option value="Male">Male</option>
-                                <option value="Other">Other</option>
-                            </select>
+                            {{doctor_add_form.gender|as_crispy_field}}
+                           
                         </div>
                         </div>
                         <div class="col-sm-6">

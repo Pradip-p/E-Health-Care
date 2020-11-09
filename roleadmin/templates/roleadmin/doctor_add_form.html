@@ -1,4 +1,5 @@
 {% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
 {% load static %}
 {% block body_content %}
 <div class="page-wrapper">
@@ -15,38 +16,48 @@
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_name">Doctor Name</label> 
-                                <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name">
+                                {{ userForm.first_name|as_crispy_field }}
+                                <!-- <label for="id_name">Doctor Name</label>  -->
+                                <!-- <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name"> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_email">Email:</label>    
-                                <input value="" class="form-control" type="email" name="email" maxlength="254" required id="id_email">
+                                {{ userForm.last_name|as_crispy_field }}
+                                <!-- <label for="id_name">Doctor Name</label>  -->
+                                <!-- <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name"> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_username">Username</label>
-                                <input value="" class="form-control" type="text" name="username" maxlength="40" required id="id_username">
+                            {{ userForm.email|as_crispy_field }}
+                                <!-- <label for="id_email">Email:</label>     -->
+                                <!-- <input value="" class="form-control" type="email" name="email" maxlength="254" required id="id_email"> -->
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_password">Password</label> 
-                                <input value="" class="form-control" type="text" name="password" maxlength="20" required id="id_password">
+                                {{ userForm.username|as_crispy_field }}
+                               
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_address">Address</label> 
-                                <input value="" class="form-control" type="text" name="address" maxlength="100" required id="id_address">  
+                                {{ userForm.password|as_crispy_field }}
+
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_phone_number">Phone Number</label> 
-                                <input class="form-control" type="text" name="phone_number" maxlength="17" id="id_phone_number"> 
+                                {{doctor_add_form.address|as_crispy_field}}
+
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{doctor_add_form.phone_number|as_crispy_field}}
+                                <!-- <label for="id_phone_number">Phone Number</label>  -->
+                                <!-- <input class="form-control" type="text" name="phone_number" maxlength="17" id="id_phone_number">  -->
                             </div>
                         </div>
                         <!-- <div class="col-sm-6"> -->
@@ -59,50 +70,44 @@
                         <!-- </div> -->
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_picture">Picture</label> 
-                                <input type="file" name="picture" accept="image/*" id="id_picture">
+                                {{doctor_add_form.picture|as_crispy_field}}
                                
                             </div>
                         </div>
                         <div class="col-sm-6">
                         <div class="form-group">
-                            <label for="id_gender">Gender</label> 
-                            <select name="gender" id="id_gender" class="form-control">
-                                <option value="Female">Female</option>
-                                <option value="Male">Male</option>
-                                <option value="Other">Other</option>
-                            </select>
+                            {{doctor_add_form.gender|as_crispy_field}}
+
                         </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_doctorID">Doctor ID</label>
-        
-                                <input class="form-control" type="text" name="doctorID" maxlength="50" required id="doctorID">
+                                {{doctor_add_form.doctorID|as_crispy_field}}
+
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                            <label for="id_department">Department</label>
-                            <input class="form-control" type="text" name="department" maxlength="30" required id="id_department">
+                                {{doctor_add_form.department|as_crispy_field}}
+
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                        <label for="id_education_college">Education college</label> 
-                        <input class="form-control" type="text" name="education_college" maxlength="100" required id="id_education_college">         
+                                {{doctor_add_form.education_degree|as_crispy_field}}
+
                             </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="id_education_degree">Education degree</label> 
-                                    <input class="form-control" type="text" name="education_degree" maxlength="100" required id="id_education_degree">
+                                    {{doctor_add_form.education_college|as_crispy_field}}
+
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                            <label for="id_education_year">Education year</label>
-                             <input class="form-control" type="text" name="education_year" maxlength="50" required id="id_education_year">
+                                    {{doctor_add_form.education_year|as_crispy_field}}
+
                             </div>
                             </div>
                             <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/> -->

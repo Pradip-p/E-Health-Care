@@ -208,7 +208,9 @@ def search_doctor(request):
         doctor_name=[]
         for d in disease:
             doctor_name.append(d.doctor)
-        doctors=DoctorInfo.objects.filter(Q(name__in=doctor_name) | Q(name__icontains=search_term))
+        print(doctor_name)
+        # doctors=DoctorInfo.objects.filter(Q())
+        doctors=DoctorInfo.objects.filter(Q(user__first_name__in=doctor_name) | Q(user__last_name__in=doctor_name)| Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term)|Q(department__icontains=search_term))
         context={
             'doctors':doctors,
             # 'count':count
@@ -276,7 +278,7 @@ def home(request):
     search_term=request.GET.get('term')
     if search_term==None:
         search_term=""
-    doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term)| Q(department__icontains=search_term))
+    doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
     # doctors=DoctorInfo.objects.all()
     paginator=Paginator(doctors,8)
     try:

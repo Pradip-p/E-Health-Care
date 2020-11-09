@@ -1,6 +1,9 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
+from django.http import HttpResponseRedirect
+from django.contrib.auth.models import Group
+
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -8,7 +11,7 @@ from doctor.models import DoctorInfo
 from patient.models import Profile,Feedback
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
-from doctor.forms import DoctorForm
+from doctor.forms import DoctorForm,DoctorUserForm
 
 from roleadmin.forms import AddDiseaseForm
 # Create your views here.
@@ -56,7 +59,8 @@ def doctors_list(request):
     search_term=request.GET.get('term')
     if search_term==None:
         search_term=""
-    doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term)| Q(department__icontains=search_term))
+    # doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term)| Q(department__icontains=search_term))
+    doctors=DoctorInfo.objects.filter(Q(address__icontains=search_term)| Q(department__icontains=search_term))
     # doctors=DoctorInfo.objects.all()
     paginator=Paginator(doctors,8)
     try:
@@ -70,61 +74,102 @@ def doctors_list(request):
     } 
     return render(request,'roleadmin/doctor_list.html',context)
 
+# @login_required(login_url="roleadmin_login")
+# def add_doctor(request):
+#     if request.method=='POST':
+#         doctor_add_form=DoctorForm(request.POST or None,request.FILES or None)
+#         if doctor_add_form.is_valid():
+#             add_doctor=doctor_add_form.save(commit=False)
+#             # add_feedback.uploaded_by=request.user.profile
+#             add_doctor.save()
+#             return redirect('doctors_list')
+#         else:
+#             context={
+#                 'doctor_add_form':doctor_add_form
+#             }
+#             return render(request,'roleadmin/doctor_add_form.html',context)
+#     else:
+#         doctor_add_form=DoctorForm()
+#         context={
+#             'doctor_add_form':doctor_add_form
+#         }
+#         return render(request,'roleadmin/doctor_add_form.html',context)
 @login_required(login_url="roleadmin_login")
 def add_doctor(request):
+    userForm=DoctorUserForm()
+    doctor_add_form=DoctorForm()
+    mydict={'userForm':userForm,'doctor_add_form':doctor_add_form}
     if request.method=='POST':
-        doctor_add_form=DoctorForm(request.POST or None,request.FILES or None)
-        if doctor_add_form.is_valid():
-            add_doctor=doctor_add_form.save(commit=False)
-            # add_feedback.uploaded_by=request.user.profile
-            add_doctor.save()
-            return redirect('doctors_list')
-        else:
-            context={
-                'doctor_add_form':doctor_add_form
-            }
-            return render(request,'roleadmin/doctor_add_form.html',context)
-    else:
-        doctor_add_form=DoctorForm()
-        context={
-            'doctor_add_form':doctor_add_form
-        }
-        return render(request,'roleadmin/doctor_add_form.html',context)
+        userForm=DoctorUserForm(request.POST)
+        doctor_add_form=DoctorForm(request.POST,request.FILES)
+        if userForm.is_valid() and doctor_add_form.is_valid():
+            user=userForm.save()
+            user.set_password(user.password)
+            user.save()
+            doctor=doctor_add_form.save(commit=False)
+            doctor.user=user
+            doctor.save()
+            my_doctor_group=Group.objects.get_or_create(name='DOCTOR')
+            my_doctor_group[0].user_set.add(user)
+        return redirect('doctors_list')
+    return render(request,'roleadmin/doctor_add_form.html',context=mydict)
 
-@login_required(login_url="roleadmin_login")
+# @login_required(login_url="roleadmin_login")
+# def edit_doctor(request,pk):
+#     try:
+#         doctor=DoctorInfo.objects.get(id=pk)
+#     except:
+#         return redirect('doctors_list')
+#     if request.method=='POST':   
+#         doctor_edit_form=DoctorForm(request.POST or None,request.FILES,instance=doctor)
+#         if doctor_edit_form.is_valid():
+#             update=doctor_edit_form.save(commit=False)
+#             # update.uploaded_by=request.user.profile
+#             update.save()
+#             return redirect('doctors_list')
+#         else:
+#             print(doctor_edit_form.errors)
+#             context={
+#                 'doctor_edit_form':doctor_edit_form,
+#                 'doctor':doctor
+#             }
+#             return render(request,'roleadmin/doctor_edit_form.html',context)
+#     else:
+#         doctor_edit_form=DoctorForm()
+#         context={
+#             'doctor_edit_form':doctor_edit_form,
+#             'doctor':doctor
+#         }
+#         return render(request,'roleadmin/doctor_edit_form.html',context)
+@login_required(login_url='roleadminlogin')
 def edit_doctor(request,pk):
     try:
         doctor=DoctorInfo.objects.get(id=pk)
     except:
-        return redirect('doctors_list')
-    if request.method=='POST':   
-        doctor_edit_form=DoctorForm(request.POST or None,request.FILES,instance=doctor)
-        if doctor_edit_form.is_valid():
-            update=doctor_edit_form.save(commit=False)
-            # update.uploaded_by=request.user.profile
-            update.save()
+        return redirect('doctors_list')        
+    user=User.objects.get(id=doctor.user_id)
+    userForm=DoctorUserForm(instance=user)
+    doctor_add_form=DoctorForm(request.FILES,instance=doctor)
+    mydict={'userForm':userForm,'doctor_add_form':doctor_add_form,'doctor':doctor}
+    if request.method=='POST':
+        userForm=DoctorUserForm(request.POST,instance=user)
+        doctor_add_form=DoctorForm(request.POST,request.FILES,instance=doctor)
+        if userForm.is_valid() and doctor_add_form.is_valid():
+            user=userForm.save()
+            user.set_password(user.password)
+            user.save()
+            doctor_add_form.save()
             return redirect('doctors_list')
-        else:
-            print(doctor_edit_form.errors)
-            context={
-                'doctor_edit_form':doctor_edit_form,
-                'doctor':doctor
-            }
-            return render(request,'roleadmin/doctor_edit_form.html',context)
-    else:
-        doctor_edit_form=DoctorForm()
-        context={
-            'doctor_edit_form':doctor_edit_form,
-            'doctor':doctor
-        }
-        return render(request,'roleadmin/doctor_edit_form.html',context)
+    return render(request,'roleadmin/doctor_edit_form.html',context=mydict)
 
 @login_required(login_url="roleadmin_login")
 def delete_doctor(request,pk):
     try:
         doctor=DoctorInfo.objects.get(id=pk)
     except:
-        return redirect('doctors_list')
+        return redirect('doctors_list')        
+    user=User.objects.get(id=doctor.user_id)
+    user.delete()
     doctor.delete()
     return redirect('doctors_list')
 

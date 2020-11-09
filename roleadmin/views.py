@@ -114,33 +114,8 @@ def add_doctor(request):
         return redirect('doctors_list')
     return render(request,'roleadmin/doctor_add_form.html',context=mydict)
 
-# @login_required(login_url="roleadmin_login")
-# def edit_doctor(request,pk):
-#     try:
-#         doctor=DoctorInfo.objects.get(id=pk)
-#     except:
-#         return redirect('doctors_list')
-#     if request.method=='POST':   
-#         doctor_edit_form=DoctorForm(request.POST or None,request.FILES,instance=doctor)
-#         if doctor_edit_form.is_valid():
-#             update=doctor_edit_form.save(commit=False)
-#             # update.uploaded_by=request.user.profile
-#             update.save()
-#             return redirect('doctors_list')
-#         else:
-#             print(doctor_edit_form.errors)
-#             context={
-#                 'doctor_edit_form':doctor_edit_form,
-#                 'doctor':doctor
-#             }
-#             return render(request,'roleadmin/doctor_edit_form.html',context)
-#     else:
-#         doctor_edit_form=DoctorForm()
-#         context={
-#             'doctor_edit_form':doctor_edit_form,
-#             'doctor':doctor
-#         }
-#         return render(request,'roleadmin/doctor_edit_form.html',context)
+
+
 @login_required(login_url='roleadminlogin')
 def edit_doctor(request,pk):
     try:
@@ -176,9 +151,10 @@ def delete_doctor(request,pk):
 @login_required(login_url="roleadmin_login")
 def patients_list(request):
     search_term=request.GET.get('term')
+    users=User.objects.filter(groups__name="PATIENT")
     if search_term==None:
         search_term=""
-    patients=Profile.objects.filter(Q(name__icontains=search_term) | Q(user__email__icontains=search_term) | Q(address__icontains=search_term))
+    patients=Profile.objects.filter(user_id__in=users).filter(Q(name__icontains=search_term) | Q(user__email__icontains=search_term) | Q(address__icontains=search_term))
     context={
         'patients':patients,
     }

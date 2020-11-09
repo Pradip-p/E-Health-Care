@@ -20,6 +20,7 @@ from patient.heart import pred_heart
 from patient.Diabetes import pred
 from patient.pneumonia import pred1
 from .models import Image
+from django.contrib.auth.models import Group
 
 from django.db.models import Q
 # Pagination import 
@@ -205,21 +206,20 @@ def search_doctor(request):
         disease=Disease1.objects.filter(name__icontains=search_term)
         if search_term==None:
             search_term=""
-        doctor_name=[]
+        doctorID=[]
         for d in disease:
-            doctor_name.append(d.doctor)
-        print(doctor_name)
+            doctorID.append(d.doctor.id)
+        # print(doctor_name)
         # doctors=DoctorInfo.objects.filter(Q())
-        doctors=DoctorInfo.objects.filter(Q(user__first_name__in=doctor_name) | Q(user__last_name__in=doctor_name)| Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term)|Q(department__icontains=search_term))
+        doctors=DoctorInfo.objects.filter(id__in=doctorID) or DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term)|Q(department__icontains=search_term))
         context={
             'doctors':doctors,
             # 'count':count
         }
         return render(request,'patient/search_doctor.html',context)
-
     # else:
     else:
-        doctors=DoctorInfo.objects.all().order_by('-id')[:10]   
+        doctors=[]
         context={
             "doctors":doctors,
             # "count":count
@@ -309,7 +309,9 @@ def patient_register(request):
     if request.method == 'POST':
         patient_register= UserForm(request.POST)
         if patient_register.is_valid():
-            patient_register.save()
+            user=patient_register.save()
+            my_patient_group=Group.objects.get_or_create(name="PATIENT")
+            my_patient_group[0].user_set.add(user)
             return redirect("patient_login")
         else:
             contex={

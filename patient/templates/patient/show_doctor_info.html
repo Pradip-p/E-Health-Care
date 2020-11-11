@@ -17,20 +17,24 @@
         <div class="row">
           <div class=" col md-12">
            
-              <table class="table table-light">
+              <table class="table table-border table-striped custom-table datatable mb-0" style="max-height: 500px; overflow-x: auto; overflow-y: auto;">
                 <thead>
                   <tr>
+                    <th scope="col">DoctorID</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Department</th>
                     <th scope="col">Email</th>
                     <th scope="col">Phone Number</th>
                   </tr>
                 </thead>
                 <tbody>
-                  {% for info in disease_doctor_list %}
+                  {% for doctor in disease_doctor_list %}
                   <tr>
-                    <th> {{info.doctor_name.name }}</th>
-                    <td>{{info.doctor_name.email}}</td>
-                    <td>{{info.doctor_name.email}}</td>
+                    <th> {{doctor.doctorID}}</th>
+                    <th> {{doctor.user.first_name}}&nbsp;{{doctor.user.last_name}}</th>
+                    <th>{{doctor.department}}</th>
+                    <td>{{doctor.user.email}}</td>
+                    <td>{{doctor.phone_number}}</td>
                   </tr>
                   {% endfor %}
            

@@ -72,14 +72,29 @@ def Diabetes(request):
             sur=", ".join( repr(e) for e in sur).strip("''")
             if sur== '1':
                 name= "Yes, You are suffering  from Diabetes problems"
+                disease_name="Diabetes"
+                # saving  user information who predict disease and suggesting doctors
+                predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=disease_name)
+                predict.save()
+                disease=Disease1.objects.filter(name__icontains=disease_name)
+                listDoctorID=[]
+                for d in disease:
+                    listDoctorID.append(d.doctor.id)
+                disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
+                context={
+                    'sur':'You are suffering from diabetes problem',
+                    'disease_doctor_list':disease_doctor_list,
+                }
             elif sur=='0':
-                name="You are not suffering from Diabetes prolems"
-                
-            contex={
-                'sur':name,
-            }
-
+                 context={
+                    'sur':'You are not suffering from diabetes problem',
+                    # 'disease_doctor_list':disease_doctor_list
+                }
             return render(request,'patient/diabetes_results.html', contex)
+        # else:
+        #     return render(request,'patient/diabetes.html',context)
+        #     pass
+
 
 
 @login_required(login_url='patient_login')
@@ -110,6 +125,35 @@ def heart(request):
             return render(request,'patient/heart_results.html', contex)
 
 
+@login_required(login_url='patient_login')
+def dashboard(request):
+    if request.method=="POST":
+        disease_form=DiseaseForm(request.POST)
+        if disease_form.is_valid:
+            disease_form.save()
+            ob=Disease.objects.latest('id')
+            sur=diseaseml.pred(ob)
+            sur=", ".join( repr(e) for e in sur).strip("''")
+            predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=sur)
+            predict.save()
+            disease=Disease1.objects.filter(name__icontains=sur)
+            listDoctorID=[]
+            for d in disease:
+                listDoctorID.append(d.doctor.id)
+            disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
+            contex={
+            "Disease":sur,
+            'disease_doctor_list':disease_doctor_list
+            }
+            return render(request,'patient/show_doctor_info.html', contex)
+    else:
+        print(request.user.username)
+
+        disease_form=DiseaseForm()
+        contex={
+            'disease_form':disease_form
+        }
+        return render(request, 'patient/dashboard.html', contex)
 
 @login_required(login_url='patient_login')
 
@@ -241,35 +285,6 @@ def my_profile(request):
     return render(request,'patient/my_profile.html')
 
 
-@login_required(login_url='patient_login')
-def dashboard(request):
-    if request.method=="POST":
-        disease_form=DiseaseForm(request.POST)
-        if disease_form.is_valid:
-            disease_form.save()
-            ob=Disease.objects.latest('id')
-            sur=diseaseml.pred(ob)
-            sur=", ".join( repr(e) for e in sur).strip("''")
-            # disease_predicter=WhoPredictDisease()
-            # disease_predicter.name=request.user.profile.name
-            # disease_predicter.email=request.user.email
-            # disease_predicter.phone_number=request.user.profile.phone_number
-            # disease_predicter.predicted_disease=sur
-            # disease_predicter.save()
-            disease_doctor_list=Disease1.objects.filter(name=sur)
-            contex={
-            "Disease":sur,
-            'disease_doctor_list':disease_doctor_list
-            }
-            return render(request,'patient/show_doctor_info.html', contex)
-    else:
-        print(request.user.username)
-
-        disease_form=DiseaseForm()
-        contex={
-            'disease_form':disease_form
-        }
-        return render(request, 'patient/dashboard.html', contex)
 
 @login_required(login_url='patient_login')
 def home(request):

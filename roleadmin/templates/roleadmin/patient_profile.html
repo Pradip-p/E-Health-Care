@@ -1,0 +1,80 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+{% block body_content %}   
+     <div class="page-wrapper">
+            <div class="content">
+                <div class="row">
+                    <div class="col-sm-7 col-6">
+                        <h4 class="page-title">Patient Profile</h4>
+                    </div>
+
+                    <!-- <div class="col-sm-5 col-6 text-right m-b-30">
+                        <a href="{% url 'patient_profile' %}" class="btn btn-primary btn-rounded"><i class="fa fa-plus"></i> Edit Profile</a>
+                    </div> -->
+                </div>
+                <div class="card-box profile-header">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="profile-view">
+                                <div class="profile-img-wrap">
+                                    <div class="profile-img">
+                                        <a href="#">
+                                        {% if patient.profile_pic.url != '' %}
+<img class="avatar" src="{{patient.profile_pic.url}}" alt="Please upload Profile Picture" > 
+{% else %}
+<img class="avatar" src="{% static 'assets/img/doctor-03.png' %}" alt="upload profile" width=50 height=50>
+{% endif %}
+</a>
+                                    </div>
+                                </div>
+                                <div class="profile-basic">
+                                    <div class="row">
+                                        <div class="col-md-5">
+                                            <div class="profile-info-left">
+                                                <h3 class="user-name m-t-0 mb-0">Welcome admin !</h3>
+                                                <br />
+                                                <br />
+                                                <div class="staff-msg"><a href="" class="btn btn-primary">Send Message</a></div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-7">
+                                            <ul class="personal-info">
+                                                <li>
+                                                    <span class="title">Phone:</span>
+                                                    <span class="text"><a href="#">{{patient.phone_number}}</a></span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Email:</span>
+                                                    <span class="text"><a href="#">{{patient.user.email}}</a></span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Birthday:</span>
+                                                    <span class="text">3rd March</span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Address:</span>
+                                                    <span class="text">{{patient.address}}</span>
+                                                </li>
+                                                <li>
+                                                    <span class="title">Gender:</span>
+                                                    <span class="text">{{patient.gender}}</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>                        
+                        </div>
+                    </div>
+                </div>
+
+                <!-- BAKI CONTETNT THIYO -->
+
+
+
+            </div>
+        </div>
+{% endblock %}
+
+
+	

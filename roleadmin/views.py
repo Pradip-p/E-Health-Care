@@ -8,7 +8,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from doctor.models import DoctorInfo
-from patient.models import Profile,Feedback
+from patient.models import Profile,Feedback,Disease1
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
 from doctor.forms import DoctorForm,DoctorUserForm
@@ -31,8 +31,26 @@ def admin_dashboard(request):
 
 @login_required(login_url="roleadmin_login")
 def disease(request):
-   
-    return render(request,'roleadmin/disease.html')
+    # page=request.GET.get('page',1)
+    search_term=request.GET.get('term')
+    if search_term==None:
+        search_term=""
+    diseases=Disease1.objects.filter(Q(name__icontains=search_term)|Q(doctor__user__first_name__icontains=search_term)|Q(doctor__user__last_name__icontains=search_term)).order_by('-id')
+    # doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term)| Q(department__icontains=search_term))
+    # doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
+    # doctors=DoctorInfo.objects.all()
+    # paginator=Paginator(diseases,8)
+    # try:
+        # diseases=paginator.page(page)
+    # except PageNotAnInteger:
+        # diseases=paginator.page(1)
+    # except EmptyPage:
+        # diseases=paginator.page(paginator.num_pages)
+    context={
+        'diseases':diseases,
+    } 
+    # return render(request,'roleadmin/doctor_list.html',context)   
+    return render(request,'roleadmin/disease.html',context)
 
 @login_required(login_url="roleadmin_login")
 def assign_disease(request):
@@ -54,13 +72,37 @@ def assign_disease(request):
         return render(request,'roleadmin/assign_disease_form.html',context)
 
 @login_required(login_url="roleadmin_login")
+def edit_disease(request,pk):
+    try:
+        disease=Disease1.objects.get(id=pk)
+    except:
+        return redirect('disease')        
+    assign_disease_form=AddDiseaseForm(request.POST,instance=disease)
+    mydict={'assign_disease_form':assign_disease_form,'disease':disease}
+    if request.method=='POST':
+        assign_disease_form=AddDiseaseForm(request.POST,instance=disease)
+        if assign_disease_form.is_valid():
+            assign_disease_form.save()
+            return redirect('disease')
+    return render(request,'roleadmin/assign_disease_edit_form.html',context=mydict)
+
+@login_required(login_url="roleadmin_login")
+def delete_disease(request,pk):
+    try:
+        disease=Disease1.objects.get(id=pk)
+    except:
+        return redirect('disease')
+    disease.delete()
+    return redirect('disease')
+    # disease=Disease1.objects.filter()
+@login_required(login_url="roleadmin_login")
 def doctors_list(request):
     page=request.GET.get('page',1)
     search_term=request.GET.get('term')
     if search_term==None:
         search_term=""
     # doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term)| Q(department__icontains=search_term))
-    doctors=DoctorInfo.objects.filter(Q(address__icontains=search_term)| Q(department__icontains=search_term))
+    doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
     # doctors=DoctorInfo.objects.all()
     paginator=Paginator(doctors,8)
     try:
@@ -159,6 +201,60 @@ def patients_list(request):
         'patients':patients,
     }
     return render(request,'roleadmin/patient_list.html',context)
+
+@login_required(login_url="roleadmin_login")
+def patient_profile(request,pk):
+    try:
+        users=User.objects.filter(groups__name="PATIENT")
+        patient=Profile.objects.filter(user_id__in=users).get(id=pk)
+        print(patient)
+    except:
+        return redirect('patients_list')
+    context={
+        'patient':patient
+    }
+    return render(request,'roleadmin/patient_profile.html',context)
+
+@login_required(login_url="roleadmin_login")
+def patient_delete(request,pk):
+    try:
+        users=User.objects.filter(groups__name="PATIENT")
+        patient=Profile.objects.filter(user_id__in=users).get(id=pk)
+    except:
+        return redirect('patients_list')        
+    # user=User.objects.get(id=doctor.user_id)
+    # user.delete()
+    patient.delete()
+    return redirect('patients_list')    
+
+@login_required(login_url='roleadmin_login')
+def our_feedback(request):
+    page=request.GET.get('page',1)
+    feedbacks=Feedback.objects.all().order_by('-id')
+    paginator=Paginator(feedbacks,9)
+    try:
+        feedbacks=paginator.page(page)
+    except PageNotAnInteger:
+        feedbacks=paginator.page(1)
+    except EmptyPage:
+        feedbacks=paginator.page(paginator.num_pages)
+    context={
+        'feedbacks':feedbacks
+    }
+    return render(request,'roleadmin/feedback.html',context)
+
+@login_required(login_url='roleadmin_login')
+def our_feedback_detail(request,pk):
+    try:
+        feedback=Feedback.objects.get(id=pk)
+    except:
+        return redirect('our_feedback')
+    print(feedback)
+    context={
+        "feedback":feedback
+    }
+    return render(request,'roleadmin/feedback_detail.html',context)
+
 def roleadmin_login(request):
     if request.method=='POST':
         username=request.POST.get('username')

@@ -28,7 +28,8 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @login_required(login_url='patient_login')
-def showimage(request):   
+def showimage(request):  
+    
     lastimage= Image.objects.last()
     imagefile= lastimage.imagefile
     form= ImageForm(request.POST or None, request.FILES or None)

@@ -20,9 +20,7 @@ def training():
     y=df[["target"]]
     df.drop("target", axis="columns", inplace=True)
     X=df
-    # X = df.iloc[:, :-1].values
-    # y = df.iloc[:, -1].values
-    # X=pre_processing(X)
+
 
 
     dummyRow_heart=pd.DataFrame(np.zeros(len(X.columns)).reshape(1,len(X.columns)), columns=X.columns)
@@ -47,14 +45,15 @@ def training():
 def pred_heart(ob):
     d1=ob.to_dict()
     df=pd.DataFrame(d1,index=[0])
-    # df=pre_processing(df)
-    # df.drop("Disease", axis="columns", inplace=True)
+    print(type(df))
+    print('==========>>>>',df)
+
 
     dummyRow_filename="dummyRow_heart.csv"
     df2=pd.read_csv(dummyRow_filename)
     for c1 in df.columns:
         df2[c1]=df[c1]
-        print(df2[c1])
+        
     pkl_filename='pickle_model_heart.pkl'
     with open(pkl_filename,'rb') as file:
         classifier=pickle.load(file)

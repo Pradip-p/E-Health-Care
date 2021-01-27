@@ -19,6 +19,7 @@ from api import diseaseml
 from patient.heart import pred_heart
 from patient.Diabetes import pred
 from patient.pneumonia import pred1
+from api.diseaseml import pred
 from .models import Image
 from django.contrib.auth.models import Group
 
@@ -28,6 +29,7 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 @login_required(login_url='patient_login')
+#for Pnemonia check
 def showimage(request):  
     
     lastimage= Image.objects.last()
@@ -55,6 +57,7 @@ def showimage(request):
     return render(request, 'patient/image.html', context)
     
 @login_required(login_url='patient_login')
+#For Diabetes Disease Prediction
 def Diabetes(request):
     if request.method=="GET":
         diabetes_form=DiabetesForm()
@@ -99,6 +102,7 @@ def Diabetes(request):
 
 
 @login_required(login_url='patient_login')
+# For heart Disease predicton
 def heart(request):
     if request.method=="GET":
         heart_form=HeartForm()
@@ -127,34 +131,73 @@ def heart(request):
 
 
 @login_required(login_url='patient_login')
+#Disease prediction as well dashboard !!
 def dashboard(request):
-    if request.method=="POST":
-        disease_form=DiseaseForm(request.POST)
-        if disease_form.is_valid:
-            disease_form.save()
-            ob=Disease.objects.latest('id')
-            sur=diseaseml.pred(ob)
-            sur=", ".join( repr(e) for e in sur).strip("''")
-            predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=sur)
-            predict.save()
-            disease=Disease1.objects.filter(name__icontains=sur)
-            listDoctorID=[]
-            for d in disease:
-                listDoctorID.append(d.doctor.id)
-            disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
-            contex={
-            "Disease":sur,
-            'disease_doctor_list':disease_doctor_list
-            }
-            return render(request,'patient/show_doctor_info.html', contex)
-    else:
-        print(request.user.username)
+	if request.method =="POST":
+		if request.POST.get('value1'):
+			disease = Disease()
+			value1 = request.POST.get('value1')
+			# print(value1)
+			
+			value2 = request.POST.get('value2')
+			
+			value3 = request.POST.get('value3')
+			
+			value4 = request.POST.get('value4')
+			
+			value5 = request.POST.get('value5')
+			
+			value6 = request.POST.get('value6')
+			disease.value_1 = value1
+			disease.value_2 = value2
+			disease.value_3 = value3
+			disease.value_4 = value4
+			disease.value_5 = value5
+			disease.value_6 = value6
+			disease.save()
+			ob = Disease.objects.latest('id')
+			sur = pred(ob)
+			print(sur)
 
-        disease_form=DiseaseForm()
-        contex={
-            'disease_form':disease_form
-        }
-        return render(request, 'patient/dashboard.html', contex)
+
+		return render(request, 'patient/dashboard.html')
+	else:
+		return render(request, 'patient/dashboard.html')
+    # if request.method=="POST":
+	# 	username = request.POST.get('Mustard')
+    #     username = request.POST.get('Mustard')
+    #     username = request.POST.get('Mustard')
+    #     username = request.POST.get('Mustard')
+    #     username = request.POST.get('Mustard')
+    #     username = request.POST.get('Mustard')
+        # print('username of the input form=====>>>', username)
+		# password = request.POST.get('password')
+        # disease_form=DiseaseForm(request.POST)
+        # if disease_form.is_valid:
+        #     disease_form.save()
+        #     ob=Disease.objects.latest('id')
+        #     sur=diseaseml.pred(ob)
+        #     sur=", ".join( repr(e) for e in sur).strip("''")
+        #     predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=sur)
+        #     predict.save()
+        #     disease=Disease1.objects.filter(name__icontains=sur)
+        #     listDoctorID=[]
+        #     for d in disease:
+        #         listDoctorID.append(d.doctor.id)
+        #     disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
+        #     contex={
+        #     "Disease":sur,
+        #     'disease_doctor_list':disease_doctor_list
+        #     }
+        #     return render(request,'patient/show_doctor_info.html', contex)
+    # else:
+        # print(request.user.username)
+
+        # disease_form=DiseaseForm()
+        # contex={
+        #     'disease_form':disease_form
+        # }
+        # return render(request, 'patient/dashboard.html')
 
 @login_required(login_url='patient_login')
 

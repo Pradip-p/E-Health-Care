@@ -419,7 +419,7 @@ def training():
     # # print(x)
 
     dummyRow=pd.DataFrame(np.zeros(len(X.columns)).reshape(1,len(X.columns)), columns=X.columns)
-    dummyRow.to_csv('dummyRowDisease.csv', index=False)
+    dummyRow.to_csv('datasets/dummyRowDisease.csv', index=False)
     # model=RandomForestClassifier(random_state=2)
     # # model=XGBClassifier(max_depth=2,min_child_weight=3, gamma=0,subsample=0.86, reg_alpha=0, n_estimators=125)
     # x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2, random_state=5)
@@ -428,7 +428,7 @@ def training():
     # print(model)
     # print("#"*50)
     # print(model.score(x_test,y_test))
-    pkl_filename="pickle_model_disease.pkl"
+    pkl_filename="datasets/pickle_model_disease.pkl"
     with open(pkl_filename,'wb') as file:
         pickle.dump(clf2,file)
         print(pkl_filename)
@@ -447,12 +447,12 @@ def pred(ob):
     df=pd.DataFrame(d1,index=[0])
     df=pre_processing(df)
     # df.drop("Disease", axis="columns", inplace=True)
-    dummyRow_filename="dummyRowDisease.csv"
+    dummyRow_filename="datasets/dummyRowDisease.csv"
     df2=pd.read_csv(dummyRow_filename)
     for c1 in df.columns:
         df2[c1]=df[c1]
         # print(df2[c1])
-    pkl_filename='pickle_model_disease.pkl'
+    pkl_filename='datasets/pickle_model_disease.pkl'
     with open(pkl_filename,'rb') as file:
         model=pickle.load(file)
     pred=model.predict(df2)

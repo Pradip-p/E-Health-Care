@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.8
 ENV PYTHONUNBUFFERED=1
 WORKDIR /E-Health-Care
 COPY requirements.txt /E-Health-Care/

@@ -38,30 +38,37 @@ def pre_processing(df):
     else:
         receiving_blood_transfusion = 0
 
+    
     if 'red_sore_around_nose' in df1:
         red_sore_around_nose = 1
     else:
         red_sore_around_nose = 0
+    
     if 'abnormal_menstruation' in df1:
         abnormal_menstruation = 1
     else:
         abnormal_menstruation = 0
+    
     if 'continuous_sneezing' in df1:
         continuous_sneezing = 1 
     else:
         continuous_sneezing = 0
+
     if 'breathlessness' in df1:
         breathlessness = 1
     else:
         breathlessness = 0
+
     if 'blackheads' in df1:
         blackheads = 1
     else:
         blackheads = 0
+
     if 'shivering' in df1:
         shivering = 1
     else:
         shivering = 0
+
     if 'dizziness' in df1:
         dizziness = 1
     else:
@@ -313,13 +320,13 @@ def pre_processing(df):
     data_dict['yellowing_of_eyes'] = yellowing_of_eyes
     data_dict['joint_pain'] = joint_pain
     data_dict['muscle_pain'] = muscle_pain
-    print(len(data_dict))
+    print(data_dict)
 
     df=pd.DataFrame(data_dict,index=[0])
     return df
   
 def training():
-    data = pd.read_csv("Training.csv")
+    data = pd.read_csv("datasets/Training.csv")
     # Import train_test_split function
     from sklearn.model_selection import train_test_split
 
@@ -418,7 +425,7 @@ def training():
     # # print("#"*50)
     # # print(x)
 
-    dummyRow=pd.DataFrame(np.zeros(len(X.columns)).reshape(1,len(X.columns)), columns=X.columns)
+    dummyRow=pd.DataFrame(np.zeros(len(X_reduced.columns)).reshape(1,len(X_reduced.columns)), columns=X_reduced.columns)
     dummyRow.to_csv('datasets/dummyRowDisease.csv', index=False)
     # model=RandomForestClassifier(random_state=2)
     # # model=XGBClassifier(max_depth=2,min_child_weight=3, gamma=0,subsample=0.86, reg_alpha=0, n_estimators=125)
@@ -446,17 +453,30 @@ def pred(ob):
     d1=ob.to_dict()
     df=pd.DataFrame(d1,index=[0])
     df=pre_processing(df)
+    print("*"*80)
+    df_dict = df.to_dict()
+    symptoms = [] 
+    for disease_name, value in df_dict.items(): 
+        # print(disease_name)
+        # print(value[0])
+        if value[0]==1:
+            symptoms.append(disease_name)
+
+
+        
+
     # df.drop("Disease", axis="columns", inplace=True)
     dummyRow_filename="datasets/dummyRowDisease.csv"
     df2=pd.read_csv(dummyRow_filename)
-    for c1 in df.columns:
+    for c1 in df.columns:	
+        # print(c1)
         df2[c1]=df[c1]
         # print(df2[c1])
     pkl_filename='datasets/pickle_model_disease.pkl'
     with open(pkl_filename,'rb') as file:
         model=pickle.load(file)
     pred=model.predict(df2)
-    return pred
+    return pred, symptoms
 
 if __name__=="__main__":
     training()#df

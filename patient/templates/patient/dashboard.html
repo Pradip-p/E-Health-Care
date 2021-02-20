@@ -1,127 +1,125 @@
 
 
 {% extends "base.html" %}
+
 {% block body_content %}
 
-       <div class="page-wrapper">
-            <div class="content">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h4 class="page-title">Check Your Disease</h4>
-                    </div>
-                </div>
-                   
-              <form method="POST" action="/patient/dashboard/" enctype="multipart/form-data">
-                {% csrf_token %}
-                 <div class="card-box">
-                   <h3 class="card-title">Please, choose at least 6 symptoms for prediction your disease</h3>
-                   <!-- $('select').selectpicker(); -->
-                  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-                  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/css/bootstrap-select.css">
-                  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.8.1/js/bootstrap-select.js"></script>
-                  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-
-
-                  
-                  <h4>symptoms 1</h4>
-                  <select class="selectpicker" name = 'value1' >
-                    <option>receiving_blood_transfusion</option>
-                    <option>red_sore_around_nose</option>
-                    <option>abnormal_menstruation</option>
-                    <option>continuous_sneezing</option>
-                    <option>breathlessness</option>
-                    <option>blackheads</option>
-                    <option>shivering</option>
-                    <option>dizziness</option>
-                    
-                  </select>
-
-                  <br>
-                  <br>
-                  <h4>symptoms 2</h4>
-                  <select class="selectpicker" name = 'value2'>
-                    <option>back_pain</option>
-                    <option>unsteadiness</option>
-                    <option>yellow_crust_ooze</option>
-                    <option>muscle_weakness</option>
-                    <option>loss_of_balance</option>
-                    <option>chills</option>
-                    <option>ulcers_on_tongue</option>
-                    <option>stomach_bleeding</option>
-                  
-                  </select>
-                  <br>
-                  <br>
-                  <h4>symptoms 3</h4>
-                  <select class="selectpicker" name = 'value3'>
-                    <option>lack_of_concentration</option>
-                    <option>coma</option> 
-                    <option>neck_pain</option>
-                    <option>weakness_of_one_body_side</option>
-                    <option>diarrhoea</option>
-                    <option>receiving_unsterile_injections</option>
-                    <option>headache</option>
-                    <option>family_history</option>
-                  </select>
-                  <br>
-                  <br>
-                  <h4>symptoms 4</h4>
-                  <select class="selectpicker" name = 'value4' >
-                    <option>fast_heart_rate</option>
-                    <option>pain_behind_the_eyes</option>
-                    <option>sweating</option>
-                    <option>mucoid_sputum</option>
-                    <option>spotting_urination</option>
-                    <option>sunken_eyes</option>
-                    <option>dischromic_patches</option>
-                    <option>nausea</option>
-                    
-                  </select>
-                  <br>
-                  <br>
-                  <h4>symptoms 5</h4>
-                  <select class="selectpicker" name ='value5'>
-                    <option>dehydration</option>
-                    <option>loss_of_appetite</option>
-                    <option>abdominal_pain</option>
-                    <option>stomach_pain</option>
-                    <option>yellowish_skin</option>
-                    <option>altered_sensorium</option>
-                    <option>chest_pain</option>
-                    <option>muscle_wasting</option>
-                  </select>
-                  <br>
-                  <br>
-                  <h4>symptoms 6</h4>
-                  <select class="selectpicker" name = 'value6'>
-                    <option>vomiting</option>
-                    <option>mild_fever</option>
-                    <option>high_fever</option>
-                    <option>red_spots_over_body</option>
-                    <option>dark_urine</option>
-                    <option>itching</option>
-                    <option>yellowing_of_eyes</option>
-                    <option>fatigue</option>
-                    <option>joint_pain</option>
-                    <option>muscle_pain</option>
-                  </select>
-                  <br>
-                  <br>
-                  <br>
-
-                    <!-- {{disease_form.as_p}} -->
-                   
-                    <button type="Check" class="btn btn-primary btn-user "> Check</button>
-
-                    </div>
-
-                    </div>
-                    </form>
-                 
-                        
-                </div>
+<div class="page-wrapper">
+  <div class="content">
+              <div class="row">
+                  <div class="col-sm-12">
+                      <h4 class="page-title">Please, choose at least 6 symptoms for prediction your disease</h4>
+                  </div>
               </div>
+          <div class="card-box" style="background-color: grey;">
+     
+         
+    <form method="POST" action="/patient/dashboard/" enctype="multipart/form-data">
+      {% csrf_token %}
+       
+         <h3 class="card-title"></h3>
+         <!-- $('select').selectpicker(); -->
+        
+        <h4>symptoms 1</h4>
+        <select class="selectpicker" name = 'value1' >
+          <option>receiving_blood_transfusion</option>
+          <option>red_sore_around_nose</option>
+          <option>abnormal_menstruation</option>
+          <option>continuous_sneezing</option>
+          <option>breathlessness</option>
+          <option>blackheads</option>
+          <option>shivering</option>
+          <option>dizziness</option>
+          
+        </select>
 
-{% endblock %}
+        <br>
+        <br>
+        <h4>symptoms 2</h4>
+        <select class="selectpicker" name = 'value2'>
+          <option>back_pain</option>
+          <option>unsteadiness</option>
+          <option>yellow_crust_ooze</option>
+          <option>muscle_weakness</option>
+          <option>loss_of_balance</option>
+          <option>chills</option>
+          <option>ulcers_on_tongue</option>
+          <option>stomach_bleeding</option>
+        
+        </select>
+        <br>
+        <br>
+        <h4>symptoms 3</h4>
+        <select class="selectpicker" name = 'value3'>
+          <option>lack_of_concentration</option>
+          <option>coma</option> 
+          <option>neck_pain</option>
+          <option>weakness_of_one_body_side</option>
+          <option>diarrhoea</option>
+          <option>receiving_unsterile_injections</option>
+          <option>headache</option>
+          <option>family_history</option>
+        </select>
+        <br>
+        <br>
+        <h4>symptoms 4</h4>
+        <select class="selectpicker" name = 'value4' >
+          <option>fast_heart_rate</option>
+          <option>pain_behind_the_eyes</option>
+          <option>sweating</option>
+          <option>mucoid_sputum</option>
+          <option>spotting_urination</option>
+          <option>sunken_eyes</option>
+          <option>dischromic_patches</option>
+          <option>nausea</option>
+          
+        </select>
+        <br>
+        <br>
+        <h4>symptoms 5</h4>
+        <select class="selectpicker" name ='value5'>
+          <option>dehydration</option>
+          <option>loss_of_appetite</option>
+          <option>abdominal_pain</option>
+          <option>stomach_pain</option>
+          <option>yellowish_skin</option>
+          <option>altered_sensorium</option>
+          <option>chest_pain</option>
+          <option>muscle_wasting</option>
+        </select>
+        <br>
+        <br>
+        <h5>symptoms 6</h5>
+        <select class="selectpicker" name = 'value6'>
+          <option>vomiting</option>
+          <option>mild_fever</option>
+          <option>high_fever</option>
+          <option>red_spots_over_body</option>
+          <option>dark_urine</option>
+          <option>itching</option>
+          <option>yellowing_of_eyes</option>
+          <option>fatigue</option>
+          <option>joint_pain</option>
+          <option>muscle_pain</option>
+        </select>
+        <br>
+        <br>
+        <br>
+
+          <!-- {{disease_form.as_p}} -->
+         
+          <button type="Check" class="btn btn-primary btn-user "> Check</button>
+
+
+          </form>
+          
+         
+              
+    </div>
+    </div>
+    </div>
+
+
+ 
+  {% endblock %}
 

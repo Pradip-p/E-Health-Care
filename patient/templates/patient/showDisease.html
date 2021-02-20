@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+
+<div class="page-wrapper">
+    <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title" style="color: black;"></h4>
+                    </div>
+                </div>
+            <div class="card-box">
+                <div> 
+                    <h4 class="page-title" style="color: black;">You are suffering from <strong>{{Predicted_disease}} </strong></h4>
+                </div>
+                
+                <h4>You Enter following symptoms</h4>
+
+                <p>1.{{value1}}</p>
+                <p>2.{{value2}}</p>
+                <p>3.{{value3}}</p>
+                <p>4.{{value4}}</p>
+                <p>5.{{value5}}</p>
+                <p>6.{{value6}}</p>
+            </div>
+    </div>
+</div>
+{% endblock %}

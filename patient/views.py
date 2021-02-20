@@ -134,10 +134,10 @@ def heart(request):
 #Disease prediction as well dashboard !!
 def dashboard(request):
 	if request.method =="POST":
+		contex = {}
 		if request.POST.get('value1'):
 			disease = Disease()
 			value1 = request.POST.get('value1')
-			# print(value1)
 			
 			value2 = request.POST.get('value2')
 			
@@ -148,6 +148,7 @@ def dashboard(request):
 			value5 = request.POST.get('value5')
 			
 			value6 = request.POST.get('value6')
+
 			disease.value_1 = value1
 			disease.value_2 = value2
 			disease.value_3 = value3
@@ -157,10 +158,20 @@ def dashboard(request):
 			disease.save()
 			ob = Disease.objects.latest('id')
 			sur = pred(ob)
-			print(sur)
-
-
-		return render(request, 'patient/dashboard.html')
+			predicted_disease_name = sur[0][0]
+			symptoms = sur[1]
+		
+			value1 = symptoms[0]
+			value2 = symptoms[1]
+			value3 = symptoms[2]
+			value4 = symptoms[3]
+			value5 = symptoms[4]
+			value6 = symptoms[5]
+		                
+                                            
+        
+			
+		return render(request, 'patient/showDisease.html', context = {"Predicted_disease":predicted_disease_name,"value1": value1, 		"value2":value2, "value3":value3, "value4": value4, "value5":value5, "value6": value6})
 	else:
 		return render(request, 'patient/dashboard.html')
     # if request.method=="POST":

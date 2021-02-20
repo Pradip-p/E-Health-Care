@@ -8,7 +8,7 @@ from django.contrib.auth.models import Group
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from doctor.models import DoctorInfo
-from patient.models import Profile,Feedback,Disease1
+from patient.models import Profile,Feedback,Disease1,WhoPredictDisease
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
 from doctor.forms import DoctorForm,DoctorUserForm
@@ -21,11 +21,13 @@ def admin_dashboard(request):
     patients=Profile.objects.all().count()
     feedbacks=Feedback.objects.all().count()
     doctorinfo=DoctorInfo.objects.all().order_by('-id')
+    predictions=WhoPredictDisease.objects.all().count()
     context={
         'doctors':doctors,
         'patients':patients,
         'feedbacks':feedbacks,
         'doctorinfo':doctorinfo,
+        'predictions':predictions,
     }
     return render(request,'roleadmin/dashboard.html',context)
 

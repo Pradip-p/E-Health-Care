@@ -31,103 +31,103 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 @login_required(login_url='patient_login')
 #for Pnemonia check
 def showimage(request):  
-    
-    lastimage= Image.objects.last()
-    imagefile= lastimage.imagefile
-    form= ImageForm(request.POST or None, request.FILES or None)
-    contex={'form': form}
-    if form.is_valid():
-        form.save()
-        lastimage= Image.objects.last()
-        imagefile= lastimage.imagefile
-        print(imagefile)
-        sur=pred1(imagefile)
-        context= {
-            'imagefile':imagefile,
-            'form': form,
-            'sur':sur,
-            }
-        return render(request, 'patient/image.html', context)
-    sur = ' '
-    context= {
-        'imagefile':imagefile,
-        'form': form,
-        'sur':sur,
-        }
-    return render(request, 'patient/image.html', context)
-    
+	
+	lastimage= Image.objects.last()
+	imagefile= lastimage.imagefile
+	form= ImageForm(request.POST or None, request.FILES or None)
+	contex={'form': form}
+	if form.is_valid():
+		form.save()
+		lastimage= Image.objects.last()
+		imagefile= lastimage.imagefile
+		print(imagefile)
+		sur=pred1(imagefile)
+		context= {
+			'imagefile':imagefile,
+			'form': form,
+			'sur':sur,
+			}
+		return render(request, 'patient/image.html', context)
+	sur = ' '
+	context= {
+		'imagefile':imagefile,
+		'form': form,
+		'sur':sur,
+		}
+	return render(request, 'patient/image.html', context)
+	
 @login_required(login_url='patient_login')
 #For Diabetes Disease Prediction
 def Diabetes(request):
-    if request.method=="GET":
-        diabetes_form=DiabetesForm()
-        contex={
-            'diabetes_form':diabetes_form
-        }
-        return render(request,'patient/diabetes.html', contex)
-    elif  request.method=="POST":
-        diabetes_form=DiabetesForm(request.POST)
-        if diabetes_form.is_valid:
-            diabetes_form.save()
-            from patient.models import Diabetes
-            ob=Diabetes.objects.latest('id')
-            print(ob)
-            sur=pred(ob)
-            sur=", ".join( repr(e) for e in sur).strip("''")
-            if sur== '1':
-                name= "Yes, You are suffering  from Diabetes problems"
-                disease_name="Diabetes"
-                # saving  user information who predict disease and suggesting doctors
-                predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=disease_name)
-                predict.save()
-                disease=Disease1.objects.filter(name__icontains=disease_name)
-                listDoctorID=[]
-                for d in disease:
-                    listDoctorID.append(d.doctor.id)
-                disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
-                context={
-                    'sur':'You are suffering from diabetes problem',
-                    'disease_doctor_list':disease_doctor_list,
-                }
-            elif sur=='0':
-                 context={
-                    'sur':'You are not suffering from diabetes problem',
-                    # 'disease_doctor_list':disease_doctor_list
-                }
-            return render(request,'patient/diabetes_results.html', contex)
-        # else:
-        #     return render(request,'patient/diabetes.html',context)
-        #     pass
+	if request.method=="GET":
+		diabetes_form=DiabetesForm()
+		contex={
+			'diabetes_form':diabetes_form
+		}
+		return render(request,'patient/diabetes.html', contex)
+	elif  request.method=="POST":
+		diabetes_form=DiabetesForm(request.POST)
+		if diabetes_form.is_valid:
+			diabetes_form.save()
+			from patient.models import Diabetes
+			ob=Diabetes.objects.latest('id')
+			print(ob)
+			sur=pred(ob)
+			sur=", ".join( repr(e) for e in sur).strip("''")
+			if sur== '1':
+				name= "Yes, You are suffering  from Diabetes problems"
+				disease_name="Diabetes"
+				# saving  user information who predict disease and suggesting doctors
+				predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=disease_name)
+				predict.save()
+				disease=Disease1.objects.filter(name__icontains=disease_name)
+				listDoctorID=[]
+				for d in disease:
+					listDoctorID.append(d.doctor.id)
+				disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
+				context={
+					'sur':'You are suffering from diabetes problem',
+					'disease_doctor_list':disease_doctor_list,
+				}
+			elif sur=='0':
+				 context={
+					'sur':'You are not suffering from diabetes problem',
+					# 'disease_doctor_list':disease_doctor_list
+				}
+			return render(request,'patient/diabetes_results.html', contex)
+		# else:
+		#     return render(request,'patient/diabetes.html',context)
+		#     pass
 
 
 
 @login_required(login_url='patient_login')
 # For heart Disease predicton
 def heart(request):
-    if request.method=="GET":
-        heart_form=HeartForm()
-        contex={
-            'heart_form':heart_form
-        }
-        return render(request,'patient/heart.html', contex)
-    elif  request.method=="POST":
-        heart_form=HeartForm(request.POST)
+	if request.method=="GET":
+		heart_form=HeartForm()
+		contex={
+			'heart_form':heart_form
+		}
+		return render(request,'patient/heart.html', contex)
+	elif  request.method=="POST":
+		heart_form=HeartForm(request.POST)
 
-        if heart_form.is_valid:
-            heart_form.save()
-            ob=Heart.objects.latest('id')
-            sur=pred_heart(ob)
-            sur=", ".join( repr(e) for e in sur).strip("''")
+		if heart_form.is_valid:
+			heart_form.save()
+			ob=Heart.objects.latest('id')
+			sur=pred_heart(ob)
+			sur=", ".join( repr(e) for e in sur).strip("''")
 
-            if sur== '1':
-                name= "Yes, You are suffuring from heart problem"
-            elif sur=='0':
-                name="You are not suffuring from heart problme"
-                
-            contex={
-                'sur':name,
-            }
-            return render(request,'patient/heart_results.html', contex)
+			if sur== '1':
+				name= "Yes, You are suffuring from heart problem"
+			elif sur=='0':
+				name="You are not suffuring from heart problme"
+				
+			contex={
+				'sur':name,
+			}
+			return render(request,'patient/heart_results.html', contex)
 
 
 @login_required(login_url='patient_login')
@@ -167,234 +167,209 @@ def dashboard(request):
 			value4 = symptoms[3]
 			value5 = symptoms[4]
 			value6 = symptoms[5]
-		                
-                                            
-        
 			
-		return render(request, 'patient/showDisease.html', context = {"Predicted_disease":predicted_disease_name,"value1": value1, 		"value2":value2, "value3":value3, "value4": value4, "value5":value5, "value6": value6})
+			# patient who predrict disease is save in now database
+			predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=predicted_disease_name)
+			predict.save()
+			disease=Disease1.objects.filter(name__icontains=predicted_disease_name)
+			listDoctorID=[]
+			for d in disease:
+				listDoctorID.append(d.doctor.id)
+			disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
+						
+		   
+
+		return render(request, 'patient/showDisease.html', context = {"Predicted_disease":predicted_disease_name,'disease_doctor_list':disease_doctor_list,"value1": value1, 		"value2":value2, "value3":value3, "value4": value4, "value5":value5, "value6": value6})
+
 	else:
 		return render(request, 'patient/dashboard.html')
-    # if request.method=="POST":
-	# 	username = request.POST.get('Mustard')
-    #     username = request.POST.get('Mustard')
-    #     username = request.POST.get('Mustard')
-    #     username = request.POST.get('Mustard')
-    #     username = request.POST.get('Mustard')
-    #     username = request.POST.get('Mustard')
-        # print('username of the input form=====>>>', username)
-		# password = request.POST.get('password')
-        # disease_form=DiseaseForm(request.POST)
-        # if disease_form.is_valid:
-        #     disease_form.save()
-        #     ob=Disease.objects.latest('id')
-        #     sur=diseaseml.pred(ob)
-        #     sur=", ".join( repr(e) for e in sur).strip("''")
-        #     predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=sur)
-        #     predict.save()
-        #     disease=Disease1.objects.filter(name__icontains=sur)
-        #     listDoctorID=[]
-        #     for d in disease:
-        #         listDoctorID.append(d.doctor.id)
-        #     disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
-        #     contex={
-        #     "Disease":sur,
-        #     'disease_doctor_list':disease_doctor_list
-        #     }
-        #     return render(request,'patient/show_doctor_info.html', contex)
-    # else:
-        # print(request.user.username)
-
-        # disease_form=DiseaseForm()
-        # contex={
-        #     'disease_form':disease_form
-        # }
-        # return render(request, 'patient/dashboard.html')
+	
 
 @login_required(login_url='patient_login')
 
 def form(request):
-    pass
+	pass
 
 @login_required(login_url='patient_login')
 def feedback(request):
-    page=request.GET.get('page',1)
-    feedbacks=Feedback.objects.filter(Q(uploaded_by=request.user.profile)).order_by('-id')
-    paginator=Paginator(feedbacks,8)
-    try:
-        feedbacks=paginator.page(page)
-    except PageNotAnInteger:
-        feedbacks=paginator.page(1)
-    except EmptyPage:
-        feedbacks=paginator.page(paginator.num_pages)
-    context={
-        'feedbacks':feedbacks
-    }
-    return render(request,'patient/feedback.html',context)
+	page=request.GET.get('page',1)
+	feedbacks=Feedback.objects.filter(Q(uploaded_by=request.user.profile)).order_by('-id')
+	paginator=Paginator(feedbacks,8)
+	try:
+		feedbacks=paginator.page(page)
+	except PageNotAnInteger:
+		feedbacks=paginator.page(1)
+	except EmptyPage:
+		feedbacks=paginator.page(paginator.num_pages)
+	context={
+		'feedbacks':feedbacks
+	}
+	return render(request,'patient/feedback.html',context)
 
 @login_required(login_url='patient_login')
 def feedback_detail(request,pk):
-    feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
-    print(feedback)
-    context={
-        "feedback":feedback
-    }
-    return render(request,'patient/feedback_detail.html',context)
+	feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
+	print(feedback)
+	context={
+		"feedback":feedback
+	}
+	return render(request,'patient/feedback_detail.html',context)
 
 @login_required(login_url='patient_login')
 def feedback_delete(request,pk):
-    try:
-        feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
-    except:
-        return redirect('feedback')
-    feedback.delete()
-    return redirect('feedback')
+	try:
+		feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
+	except:
+		return redirect('feedback')
+	feedback.delete()
+	return redirect('feedback')
 
 @login_required(login_url='patient_login')
 def feedback_edit(request,pk):
-    try:
-        feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
-    except:
-        return redirect('feedback')
-    if request.method=='POST':   
-        feedback_edit_form=FeedbackForm(request.POST or None,request.FILES,instance=feedback)
-        if feedback_edit_form.is_valid():
-            update=feedback_edit_form.save(commit=False)
-            update.uploaded_by=request.user.profile
-            update.save()
-            return redirect('feedback')
-        else:
-            context={
-                'feedback_edit_form':feedback_edit_form,
-                'feedback':feedback
-            }
-            return render(request,'patient/feedback_edit_form.html',context)
-    else:
-        feedback_form=FeedbackForm(request.POST or None,request.FILES,instance=feedback)
-        context={
-            'feedback_form':feedback_form,
-            'feedback':feedback
-        }
-        return render(request,'patient/feedback_edit_form.html',context)
+	try:
+		feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
+	except:
+		return redirect('feedback')
+	if request.method=='POST':   
+		feedback_edit_form=FeedbackForm(request.POST or None,request.FILES,instance=feedback)
+		if feedback_edit_form.is_valid():
+			update=feedback_edit_form.save(commit=False)
+			update.uploaded_by=request.user.profile
+			update.save()
+			return redirect('feedback')
+		else:
+			context={
+				'feedback_edit_form':feedback_edit_form,
+				'feedback':feedback
+			}
+			return render(request,'patient/feedback_edit_form.html',context)
+	else:
+		feedback_form=FeedbackForm(request.POST or None,request.FILES,instance=feedback)
+		context={
+			'feedback_form':feedback_form,
+			'feedback':feedback
+		}
+		return render(request,'patient/feedback_edit_form.html',context)
 
 @login_required(login_url='patient_login')
 def feedback_add(request):
-    if request.method=='POST':
-        feedback_add_form=FeedbackForm(request.POST or None,request.FILES or None)
-        if feedback_add_form.is_valid():
-            add_feedback=feedback_add_form.save(commit=False)
-            add_feedback.uploaded_by=request.user.profile
-            add_feedback.save()
-            return redirect('feedback')
-        else:
-            context={
-                'feedback_add_form':feedback_add_form
-            }
-            return render(request,'patient/feedback_add_form.html',context)
-    else:
-        feedback_add_form=FeedbackForm()
-        context={
-            'feedback_add_form':feedback_add_form
-        }
-        return render(request,'patient/feedback_add_form.html',context)
+	if request.method=='POST':
+		feedback_add_form=FeedbackForm(request.POST or None,request.FILES or None)
+		if feedback_add_form.is_valid():
+			add_feedback=feedback_add_form.save(commit=False)
+			add_feedback.uploaded_by=request.user.profile
+			add_feedback.save()
+			return redirect('feedback')
+		else:
+			context={
+				'feedback_add_form':feedback_add_form
+			}
+			return render(request,'patient/feedback_add_form.html',context)
+	else:
+		feedback_add_form=FeedbackForm()
+		context={
+			'feedback_add_form':feedback_add_form
+		}
+		return render(request,'patient/feedback_add_form.html',context)
 
 @login_required(login_url='patient_login')
 def search_doctor(request):
-    context={}
-    if request.method=="POST":
-        search_term=request.POST.get('term')
-        disease=Disease1.objects.filter(name__icontains=search_term)
-        if search_term==None:
-            search_term=""
-        doctorID=[]
-        for d in disease:
-            doctorID.append(d.doctor.id)
-        # print(doctor_name)
-        # doctors=DoctorInfo.objects.filter(Q())
-        doctors=DoctorInfo.objects.filter(id__in=doctorID) or DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term)|Q(department__icontains=search_term))
-        context={
-            'doctors':doctors,
-            # 'count':count
-        }
-        return render(request,'patient/search_doctor.html',context)
-    # else:
-    else:
-        doctors=[]
-        context={
-            "doctors":doctors,
-            # "count":count
-        }
-        return render(request,'patient/search_doctor.html',context)
+	context={}
+	if request.method=="POST":
+		search_term=request.POST.get('term')
+		disease=Disease1.objects.filter(name__icontains=search_term)
+		if search_term==None:
+			search_term=""
+		doctorID=[]
+		for d in disease:
+			doctorID.append(d.doctor.id)
+		# print(doctor_name)
+		# doctors=DoctorInfo.objects.filter(Q())
+		doctors=DoctorInfo.objects.filter(id__in=doctorID) or DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term)|Q(department__icontains=search_term))
+		context={
+			'doctors':doctors,
+			# 'count':count
+		}
+		return render(request,'patient/search_doctor.html',context)
+	# else:
+	else:
+		doctors=[]
+		context={
+			"doctors":doctors,
+			# "count":count
+		}
+		return render(request,'patient/search_doctor.html',context)
 
 @login_required(login_url='patient_login')
 def doctor_profile(request,pk):
-    doctor=DoctorInfo.objects.get(id=pk)
-    # print(doctor.__dict__)
-    context={
-        'doctor':doctor,
-    }
-    return render(request,'patient/doctor_profile.html',context)
+	doctor=DoctorInfo.objects.get(id=pk)
+	# print(doctor.__dict__)
+	context={
+		'doctor':doctor,
+	}
+	return render(request,'patient/doctor_profile.html',context)
 
 
 @login_required(login_url='patient_login')
 def my_profile(request):
-    return render(request,'patient/my_profile.html')
+	return render(request,'patient/my_profile.html')
 
 
 
 @login_required(login_url='patient_login')
 def home(request):
-    # if request.method=='GET':
-    page=request.GET.get('page',1)
-    search_term=request.GET.get('term')
-    if search_term==None:
-        search_term=""
-    doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
-    # doctors=DoctorInfo.objects.all()
-    paginator=Paginator(doctors,8)
-    try:
-        doctors=paginator.page(page)
-    except PageNotAnInteger:
-        doctors=paginator.page(1)
-    except EmptyPage:
-        doctors=paginator.page(paginator.num_pages)
-    context={
-        'doctors':doctors,
-    } 
-    return render(request,'patient/home.html',context)
-    # elif request.method=='POST':
-    #     search_term=request.POST.get('term')
-    #     if search_term==None:
-    #         search_term=""
-    #     doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term))
-    #     context={
-    #         'doctors':doctors
-    #     }
-    #     return render(request,'patient/home.html',context)
+	# if request.method=='GET':
+	page=request.GET.get('page',1)
+	search_term=request.GET.get('term')
+	if search_term==None:
+		search_term=""
+	doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
+	# doctors=DoctorInfo.objects.all()
+	paginator=Paginator(doctors,8)
+	try:
+		doctors=paginator.page(page)
+	except PageNotAnInteger:
+		doctors=paginator.page(1)
+	except EmptyPage:
+		doctors=paginator.page(paginator.num_pages)
+	context={
+		'doctors':doctors,
+	} 
+	return render(request,'patient/home.html',context)
+	# elif request.method=='POST':
+	#     search_term=request.POST.get('term')
+	#     if search_term==None:
+	#         search_term=""
+	#     doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term))
+	#     context={
+	#         'doctors':doctors
+	#     }
+	#     return render(request,'patient/home.html',context)
 
 
 
 
 def patient_register(request):
-    patient_register=UserForm()
-    if request.method == 'POST':
-        patient_register= UserForm(request.POST)
-        if patient_register.is_valid():
-            user=patient_register.save()
-            my_patient_group=Group.objects.get_or_create(name="PATIENT")
-            my_patient_group[0].user_set.add(user)
-            return redirect("patient_login")
-        else:
-            contex={
-                'patient_register':patient_register
-            }
-            print("in valid inputs")
-            return render(request, 'patient/register.html', contex)
-    else:     
-        patient_register=UserForm()
-        contex={
-            'patient_register':patient_register,
-        }
-        return render(request, 'patient/register.html', contex)
+	patient_register=UserForm()
+	if request.method == 'POST':
+		patient_register= UserForm(request.POST)
+		if patient_register.is_valid():
+			user=patient_register.save()
+			my_patient_group=Group.objects.get_or_create(name="PATIENT")
+			my_patient_group[0].user_set.add(user)
+			return redirect("patient_login")
+		else:
+			contex={
+				'patient_register':patient_register
+			}
+			print("in valid inputs")
+			return render(request, 'patient/register.html', contex)
+	else:     
+		patient_register=UserForm()
+		contex={
+			'patient_register':patient_register,
+		}
+		return render(request, 'patient/register.html', contex)
 
 
 
@@ -403,47 +378,47 @@ def patient_register(request):
 @login_required(login_url='patient_login') 
 @transaction.atomic   
 def patient_profile(request):
-    if request.method=='POST':
-        user_form=UpdateForm(request.POST,instance=request.user)
-        patient_profile=ProfileForm(request.POST ,request.FILES ,instance=request.user.profile)
-        if user_form.is_valid() and patient_profile.is_valid():
-            user_form.save()
-            patient_profile.save()
-            return redirect("my_profile")
-        else:
-            context={
-                'user_form':user_form,
-                'patient_profile':patient_profile
-            }
-            print('invalid inputs')
-            return render(request,'patient/profile.html',context)
+	if request.method=='POST':
+		user_form=UpdateForm(request.POST,instance=request.user)
+		patient_profile=ProfileForm(request.POST ,request.FILES ,instance=request.user.profile)
+		if user_form.is_valid() and patient_profile.is_valid():
+			user_form.save()
+			patient_profile.save()
+			return redirect("my_profile")
+		else:
+			context={
+				'user_form':user_form,
+				'patient_profile':patient_profile
+			}
+			print('invalid inputs')
+			return render(request,'patient/profile.html',context)
 
-    else:
-        user_form=UpdateForm(instance=request.user)
-        patient_profile=ProfileForm(instance=request.user.profile)
-        context={
-            'user_form':user_form,
-            'patient_profile':patient_profile,
-        }
-        return render(request,'patient/profile.html',context)
+	else:
+		user_form=UpdateForm(instance=request.user)
+		patient_profile=ProfileForm(instance=request.user.profile)
+		context={
+			'user_form':user_form,
+			'patient_profile':patient_profile,
+		}
+		return render(request,'patient/profile.html',context)
 
 
 def patient_login(request):
-    if request.method=="POST":
-        username = request.POST.get('username')       
-        password = request.POST.get('password') 
-        user =authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request,user)
-            return redirect('home')
-        else:
-            messages.info(request, "Please enter valid credentials")
-            # messages.info(request, "Invalid username or password")
-            return render(request, 'patient/login.html')
-    else:
-        return render(request, 'patient/login.html')
+	if request.method=="POST":
+		username = request.POST.get('username')       
+		password = request.POST.get('password') 
+		user =authenticate(request, username=username, password=password)
+		if user is not None:
+			login(request,user)
+			return redirect('home')
+		else:
+			messages.info(request, "Please enter valid credentials")
+			# messages.info(request, "Invalid username or password")
+			return render(request, 'patient/login.html')
+	else:
+		return render(request, 'patient/login.html')
 
 def logoutpatient(request):
-    print("logout user")
-    logout(request)
-    return redirect("/")
+	print("logout user")
+	logout(request)
+	return redirect("/")

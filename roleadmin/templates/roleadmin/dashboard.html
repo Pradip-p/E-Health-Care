@@ -8,7 +8,7 @@
         <div class="dash-widget">
             <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
             <div class="dash-widget-info text-right">
-                <h3>123</h3>
+                <h3>{{predictions}}</h3>
                 <span class="widget-title1">Predictions <i class="fa fa-check" aria-hidden="true"></i></span>
             </div>
         </div>
@@ -51,83 +51,21 @@
                 <div class="table-responsive" style="max-height: 312px; overflow-y: auto; overflow-x: auto;">
                     <table class="table mb-0 new-patient-table">
                         <tbody>
+                            {% for patient in patient_list %}
                             <tr>
                                 <td>
-                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
-                                    <h2>John Doe</h2>
+                                   <!--  {% if patient.predict_by.profile_pic.url != '' %}
+                                    <img src="{{patient.predict_by.profile_pic.url}}" alt="" class="w-40 rounded-circle" style="max-height: fit-content;">
+                                    {% else %}
+                                    <img src="{% static 'assets/img/user.jpg' %}" alt="" class="w-40 rounded-circle">
+                                    {% endif %} -->
+                                    <h2>{{patient.predict_by.name}}</h2>
                                 </td>
-                                <td>Johndoe21@gmail.com</td>
-                                <td>+1-202-555-0125</td>
-                                <td><button class="btn btn-primary btn-primary-one float-right">Fever</button></td>
+                                <td>{{patient.predict_by.user.email}}</td>
+                                <td>{{pateint.predict_by.phone_number}}</td>
+                                <td>{{patient.predicted_disease}}</td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
-                                    <h2>Richard</h2>
-                                </td>
-                                <td>Richard123@yahoo.com</td>
-                                <td>202-555-0127</td>
-                                <td><button class="btn btn-primary btn-primary-two float-right">Cancer</button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
-                                    <h2>Villiam</h2>
-                                </td>
-                                <td>Richard123@yahoo.com</td>
-                                <td>+1-202-555-0106</td>
-                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
-                                    <h2>Martin</h2>
-                                </td>
-                                <td>Richard123@yahoo.com</td>
-                                <td>776-2323 89562015</td>
-                                <td><button class="btn btn-primary btn-primary-four float-right">Fever</button></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
-                                    <h2>Villiam</h2>
-                                </td>
-                                <td>Richard123@yahoo.com</td>
-                                <td>+1-202-555-0106</td>
-                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-                            </tr>  <tr>
-                                <td>
-                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
-                                    <h2>Villiam</h2>
-                                </td>
-                                <td>Richard123@yahoo.com</td>
-                                <td>+1-202-555-0106</td>
-                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-                            </tr>  <tr>
-                                <td>
-                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
-                                    <h2>Villiam</h2>
-                                </td>
-                                <td>Richard123@yahoo.com</td>
-                                <td>+1-202-555-0106</td>
-                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-                            </tr>  <tr>
-                                <td>
-                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
-                                    <h2>Villiam</h2>
-                                </td>
-                                <td>Richard123@yahoo.com</td>
-                                <td>+1-202-555-0106</td>
-                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-                            </tr>  <tr>
-                                <td>
-                                    <img width="28" height="28" class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" alt=""> 
-                                    <h2>Villiam</h2>
-                                </td>
-                                <td>Richard123@yahoo.com</td>
-                                <td>+1-202-555-0106</td>
-                                <td><button class="btn btn-primary btn-primary-three float-right">Eye</button></td>
-                            </tr>
+                           {% endfor %}
                         </tbody>
                     </table>
                 </div>

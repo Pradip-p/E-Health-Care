@@ -18,16 +18,19 @@ from roleadmin.forms import AddDiseaseForm
 @login_required(login_url="roleadmin_login")
 def admin_dashboard(request):
     doctors=DoctorInfo.objects.all().count()
-    patients=Profile.objects.all().count()
+    users=User.objects.filter(groups__name="PATIENT").count()
+    # patients=Profile.objects.all().count()
     feedbacks=Feedback.objects.all().count()
     doctorinfo=DoctorInfo.objects.all().order_by('-id')
     predictions=WhoPredictDisease.objects.all().count()
+    patient_list=WhoPredictDisease.objects.all().order_by('-id')
     context={
         'doctors':doctors,
-        'patients':patients,
+        'patients':users,
         'feedbacks':feedbacks,
         'doctorinfo':doctorinfo,
         'predictions':predictions,
+        'patient_list':patient_list,
     }
     return render(request,'roleadmin/dashboard.html',context)
 

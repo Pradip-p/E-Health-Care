@@ -45,9 +45,9 @@
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img">
                 {% if request.user.profile.profile_pic.url != '' %}
-              <img class="rounded-circle" src="{{request.user.profile.profile_pic.url}}" width="24" height="24" alt="Admin">
+              <img class="rounded-circle" src="{{request.user.profile.profile_pic.url}}" width="24" height="24" alt="">
                 {% else %}
-            <img class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" width="40" alt="Admin">
+            <img class="rounded-circle" src="{% static 'assets/img/user.png' %}" width="40" alt="">
               
 
 

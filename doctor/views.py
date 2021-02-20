@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login as dj_login
+from django.contrib.auth import authenticate, login,logout
 from doctor.models import DoctorInfo
 from django.contrib import messages
 from doctor.forms import UserForm
@@ -7,24 +7,25 @@ from doctor.forms import UserForm
 
 def doctor_login(request):
     if request.method=="POST":
-        username=request.POST.get('username')
-        password=request.POST.get('password')
-        doctor=DoctorInfo.objects.filter(username=username,password=password).first()
-        if doctor:
-            request.session['username']=username
-            context={
-            'logged_in':True
-            }
-            return render(request,'doctor/dashboard.html',context)
+        username = request.POST.get('username')       
+        password = request.POST.get('password') 
+        user =authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('dashboard_doctor')
         else:
-            context={
-            'logged_in':False,
-            'messages':'Invalid username or password'
-            }
-            return render(request,'doctor/login.html',context)
-
+            messages.info(request, "Please enter valid credentials")
+            
+            return render(request, 'doctor/login.html')
     else:
-        return render(request,'doctor/login.html')
+        return render(request, 'doctor/login.html')
+
+   
+
+def doctor_logout(request):
+    print("logout user")
+    logout(request)
+    return redirect("/")
 
 
 # def doctor_register(request):
@@ -48,28 +49,28 @@ def doctor_login(request):
 #         return render(request, 'doctor/register.html', contex)
 
 
-def logout(request):
-    del request.session['username']
-    return redirect('/doctor')
+# def logout(request):
+#     del request.session['username']
+#     return redirect('/doctor')
 
+
+
+
+
+def dashboard_doctor(request):
+    contex={}
+    # name = request.session.get('username')
+    # user_id = request.session.get('user_id')
+    # if user_id:
+    #     contex={
+    #         'username':name
+    #     }
+    return render(request,'doctor/dashboard_doctor.html', contex)
+    # return render(request,'doctor/dashboard_doctor.html', contex)
 
 
 
 """
-
-def dashboard(request):
-    contex={}
-    name = request.session.get('username')
-    user_id = request.session.get('user_id')
-    if user_id:
-        contex={
-            'username':name
-        }
-        return render(request,'doctor/dashboard.html', contex)
-    return render(request,'doctor/dashboard.html', contex)
-
-
-
 
 
 def doctor_login(request):

@@ -45,7 +45,7 @@
     <div class="col-12 col-md-6 col-lg-8 col-xl-8">
         <div class="card">
             <div class="card-header">
-                <h4 class="card-title d-inline-block">New Patients </h4> <a href="" class="btn btn-primary float-right">View all</a>
+                <h4 class="card-title d-inline-block">New Patients </h4> <a href="{% url 'patients_list' %}" class="btn btn-primary float-right">View all</a>
             </div>
             <div class="card-block">
                 <div class="table-responsive" style="max-height: 312px; overflow-y: auto; overflow-x: auto;">
@@ -54,11 +54,11 @@
                             {% for patient in patient_list %}
                             <tr>
                                 <td>
-                                   <!--  {% if patient.predict_by.profile_pic.url != '' %}
-                                    <img src="{{patient.predict_by.profile_pic.url}}" alt="" class="w-40 rounded-circle" style="max-height: fit-content;">
+                                    {% if patient.predict_by.profile_pic.url != '' %}
+                                    <img src="{{patient.predict_by.profile_pic.url}}" alt="" class="w-40 rounded-circle">
                                     {% else %}
-                                    <img src="{% static 'assets/img/user.jpg' %}" alt="" class="w-40 rounded-circle">
-                                    {% endif %} -->
+                                    <img src="{% static 'assets/img/user.png' %}" alt="" class="w-40 rounded-circle">
+                                    {% endif %}
                                     <h2>{{patient.predict_by.name}}</h2>
                                 </td>
                                 <td>{{patient.predict_by.user.email}}</td>
@@ -87,7 +87,7 @@
                                     {% if doctor.picture.url != '' %}
                                     <img src="{{doctor.picture.url}}" alt="" class="w-40 rounded-circle" style="max-height: fit-content;">
                                     {% else %}
-                                    <img src="{% static 'assets/img/user.jpg' %}" alt="" class="w-40 rounded-circle">
+                                    <img src="{% static 'assets/img/user.png' %}" alt="alt" class="w-40 rounded-circle">
                                     {% endif %}
                                     <span class="status online">                     
                                     </span></a>

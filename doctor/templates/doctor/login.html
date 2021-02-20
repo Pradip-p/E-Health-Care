@@ -81,6 +81,14 @@
 	<div class="container h-100">
 		<div class="d-flex justify-content-center h-100">
 			<div class="user_card">
+				{% for message in messages %}
+				<div class="alert alert-warning alert-dismissible fade show" role="alert">
+				{{message}}	
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					  <span aria-hidden="true">&times;</span>
+					</button>
+				  </div>
+				  {% endfor %}
 				<!-- {% for message in messages %}
 				<div class="alert alert-warning alert-dismissible fade show" role="alert">
 				{{message}}	
@@ -120,14 +128,7 @@
 
      
 				<div class="mt-4">
-				{% if messages %}
-				<div class="alert alert-warning alert-dismissible fade show" role="alert">
-					{{messages}}	
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
-					  </div>
-				{% endif %}
+			
 				<div class="d-flex justify-content-center links">
 					Don't have an account? <a href="/doctor/doctor_register" class="ml-2">Sign Up</a>
 				</div>

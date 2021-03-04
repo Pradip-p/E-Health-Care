@@ -54,8 +54,6 @@ So to cope up with all of those problems this app is designed which would prove 
 The Code is written in Python 3.7.0. If you don't have Python installed you can find it [here](https://www.python.org/downloads/). If you are using a lower version of Python you can upgrade using the pip package, ensuring you have the latest version of pip. To install the required packages and libraries, run this command in the project directory after cloning the repository:
 Use the  [docker](https://docs.docker.com/docker-for-windows/install/) to install requirements file.
 
-
-```bash
 <ul>
 <li><p><b>docker-compose run web python manage.py migrate</b></p></li>
 <li><p><b>docker-compose run web python manage.py makemigrations</b></p></li>
@@ -64,7 +62,7 @@ Use the  [docker](https://docs.docker.com/docker-for-windows/install/) to instal
 <li><p><b>docker-compose up</b></p></li>
 <li><p><b>python manage.py runserver</b></p></li>
 </ul>
-```
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 

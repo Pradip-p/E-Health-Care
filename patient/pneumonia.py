@@ -75,7 +75,7 @@ def training():
 def pred1(ob): 
       name = ob.file.name
       fullpath = os.path.abspath(name)
-      print(fullpath)
+      # print(fullpath)
 
       test_image = image.load_img(fullpath, target_size = (64, 64 ))
       # test_image = image.load_img(os.path.join(os.path.abspath( (__file__)), lastimage), target_size = (64, 64))
@@ -93,11 +93,11 @@ def pred1(ob):
 
       # load weights into new model
       loaded_model.load_weights("datasets/model.h5")
-      print("Loaded model from disk")
+      # print("Loaded model from disk")
 
 
       result = loaded_model.predict(test_image)
-      print(result)
+      # print(result)
       print(result[0][0])
       # training_set.class_indices
       if result[0][0] == 1:

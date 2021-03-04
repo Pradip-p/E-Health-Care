@@ -31,9 +31,11 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 @login_required(login_url='patient_login')
 #for Pnemonia check
 def showimage(request):  
-	
-	lastimage= Image.objects.last()
-	imagefile= lastimage.imagefile
+	# lastimage= Image.objects.last()
+	# if lastimage == None:
+	# 	lastimage = ''
+	# else:
+	# imagefile= lastimage.imagefile
 	form= ImageForm(request.POST or None, request.FILES or None)
 	contex={'form': form}
 	if form.is_valid():
@@ -49,6 +51,7 @@ def showimage(request):
 			}
 		return render(request, 'patient/image.html', context)
 	sur = ' '
+	imagefile = ''
 	context= {
 		'imagefile':imagefile,
 		'form': form,

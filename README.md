@@ -52,20 +52,18 @@ So to cope up with all of those problems this app is designed which would prove 
 
 ## Installation
 The Code is written in Python 3.7.0. If you don't have Python installed you can find it [here](https://www.python.org/downloads/). If you are using a lower version of Python you can upgrade using the pip package, ensuring you have the latest version of pip. To install the required packages and libraries, run this command in the project directory after cloning the repository:
-Use the package manager [pip](https://pip.pypa.io/en/stable/) to install requirements file.
+Use the  [docker](https://docs.docker.com/docker-for-windows/install/) to install requirements file.
 
 
 ```bash
-* pip install -r requirements.txt
-
-* python manage.py makemigrations
-
-* python manage.py migrate
-
-* python manage.py createsuperuser
-
-* python manage.py runserver
-
+<ul>
+<li><p><b>docker-compose run web python manage.py migrate</b></p></li>
+<li><p><b>docker-compose run web python manage.py makemigrations</b></p></li>
+<li><p><b>docker-compose run web python manage.py migrate</b></p></li>
+<li><p><b>docker-compose run web python manage.py createsuperuser</b></p></li>
+<li><p><b>docker-compose up</b></p></li>
+<li><p><b>python manage.py runserver</b></p></li>
+</ul>
 ```
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.

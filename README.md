@@ -60,7 +60,6 @@ Use the  [docker](https://docs.docker.com/docker-for-windows/install/) to instal
 <li><p><b>docker-compose run web python manage.py migrate</b></p></li>
 <li><p><b>docker-compose run web python manage.py createsuperuser</b></p></li>
 <li><p><b>docker-compose up</b></p></li>
-<li><p><b>python manage.py runserver</b></p></li>
 </ul>
 
 ## Contributing

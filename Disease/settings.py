@@ -25,7 +25,7 @@ SECRET_KEY = '6=lw8ok^dacjf*$i-3mldpziz06s70i!p(m3$=!l^avkw7^d4i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 # AUTH_USER_MODEL = 'core.User'
 
 # Application definition
@@ -34,7 +34,9 @@ INSTALLED_APPS = [
     'patient',
     'doctor',
     'Health',
+    'roleadmin',
     'rest_framework',
+    'crispy_forms',
     'api',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

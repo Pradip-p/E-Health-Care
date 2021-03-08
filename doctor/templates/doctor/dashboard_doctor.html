@@ -1,0 +1,63 @@
+{% extends "base_doctor.html" %}
+{% load static %}
+
+{% block body_content %}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title">Patients</h4>
+            </div>
+            <div class="col-sm-8 col-9 text-right m-b-20">
+                <form class="form-inline my-2 my-lg-0 float-right" method="GET" action="" style="text-align: right;">
+                    <!-- {% csrf_token %} -->
+                    <input  type="text" class="form-control mr-sm-2" value="{{ request.GET.term }}" name="term" placeholder="Name,email,disease">
+                    <!-- <input value={{request.POST.term}} name="term" class="form-control mr-sm-2" type="text" placeholder="Search by speciality" aria-label="Search"> -->
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="submit">Search</button>
+                  </form>
+                </div>
+            <!-- <div class="col-sm-8 col-9 text-right m-b-20">
+                <a href="add-patient.html" class="btn btn btn-primary btn-rounded float-right"><i class="fa fa-plus"></i> Add Patient</a>
+            </div> -->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive" style="max-height: 1000px; overflow-x: auto; overflow-y: auto;">
+                    <table class="table table-border table-striped custom-table datatable mb-0">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <!-- <th>Age</th> -->
+                                <th>Address</th>
+                                <th>Phone</th>
+                                <th>Email</th>
+                                <th>Disease</th>
+                                <!-- <th class="text-right">Action</th> -->
+                            </tr>
+                        </thead>
+                        <tbody>                
+                             {% for patient in predictions %}
+                            <tr>
+                                <td>
+                                    {{patient.predict_by.name}}
+                                </td>
+                                <!-- <td>{{patient.age}}</td> -->
+                                <td>{{patient.predict_by.address}}</td>
+                                <td>{{patient.predict_by.phone_number}}</td>
+                                <td>{{patient.predict_by.user.email}}</td>
+                                <td>
+                                 {{patient.predicted_disease}}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

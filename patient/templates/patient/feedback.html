@@ -10,7 +10,7 @@
                 <h4 class="page-title">Feedback</h4>
             </div>
             <div class="col-sm-4 col-8 text-right m-b-30">
-                <a class="btn btn-primary btn-rounded float-right" href=""><i class="fa fa-plus"></i> Add Feedback</a>
+                <a class="btn btn-primary btn-rounded float-right" href="add_feedback"><i class="fa fa-plus"></i> Add Feedback</a>
             </div>
         </div>
         <div class="row">
@@ -32,26 +32,58 @@
                                 </ul>
                             </div>
                             <div class="post-right">
-                                <button type="button" data-toggle="modal" data-target="#delete_department" class="btn btn-secondary">Delete</button>
+                                <a class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" href="delete/{{feedback.id}}" onclick="return confirm('Are you sure want to delete Feedback : {{feedback.title}}')">
+                                    <!-- <i class="fas fa-trash"></i> -->
+                                Delete
+                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             {% endfor %}
-            <div id="delete_department" class="modal fade delete-modal" role="dialog">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-body text-center">
-                            <img src="{% static 'assets/img/sent.png' %}" alt="" width="50" height="46">
-                            <h3>Are you sure want to delete this Feedback?</h3>
-                            <div class="m-t-20"> <a href="#" class="btn btn-white" data-dismiss="modal">Close</a>
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {% if feedbacks.has_other_pages %}
+            <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center"">
+   
+            {% if feedbacks.has_previous %}
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            </a>
+            </li>
+   
+            {% else %}
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
+   
+            {% endif %}
+   
+            {% for i in feedbacks.paginator.page_range %}
+            {% if feedbacks.number == i %}
+                 <li class="page-item active" aria-current="page">
+                    <a class="page-link" href="#">{{i}} <span class="sr-only">(current)</span></a>
+                </li>
+            {% else %}
+              <li class="page-item"><a class="page-link" href="?page={{ i }}">{{i}}</a></li>
+            {% endif %}
+            {% endfor %}
+   
+            {% if feedbacks.has_next %}
+            <li class="page-item">
+            <a class="page-link" href="#" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+            </li>
+            {% endif %}
+            </ul>
+            </nav>
+            {% endif %}
 </div>
 
 {% endblock %}

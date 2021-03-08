@@ -1,6 +1,7 @@
 absl-py==0.9.0
 asgiref==3.2.7
 astor==0.8.1
+astroid==2.4.2
 astunparse==1.6.3
 attrs==19.3.0
 backcall==0.1.0
@@ -14,6 +15,7 @@ cycler==0.10.0
 decorator==4.4.2
 defusedxml==0.6.0
 Django==2.1.5
+django-crispy-forms==1.9.2
 djangorestframework==3.11.0
 djangorestframework-jwt==1.11.0
 entrypoints==0.3
@@ -31,6 +33,7 @@ inflection==0.5.0
 ipykernel==5.3.0
 ipython==7.14.0
 ipython-genutils==0.2.0
+isort==5.6.4
 itsdangerous==1.1.0
 jedi==0.17.0
 Jinja2==2.11.2
@@ -45,9 +48,11 @@ Keras==2.4.3
 Keras-Applications==1.0.8
 Keras-Preprocessing==1.1.2
 kiwisolver==1.2.0
+lazy-object-proxy==1.4.3
 Markdown==3.2.2
 MarkupSafe==1.1.1
 matplotlib==3.2.1
+mccabe==0.6.1
 mistune==0.8.4
 more-itertools==8.3.0
 mysqlclient==1.4.6
@@ -59,19 +64,22 @@ numpy==1.18.4
 oauthlib==3.1.0
 opt-einsum==3.2.1
 packaging==20.4
-pandas==1.0.3
+pandas==1.0.1
 pandocfilters==1.4.2
 parso==0.7.0
+pexpect==4.8.0
 pickle-mixin==1.0.2
 pickleshare==0.7.5
 Pillow==7.1.2
 prometheus-client==0.7.1
 prompt-toolkit==3.0.5
 protobuf==3.12.2
+ptyprocess==0.7.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 Pygments==2.6.1
 PyJWT==1.7.1
+pylint==2.6.0
 pyparsing==2.4.7
 pyrsistent==0.16.0
 python-dateutil==2.8.1
@@ -99,6 +107,7 @@ termcolor==1.1.0
 terminado==0.8.3
 testpath==0.4.4
 threadpoolctl==2.0.0
+toml==0.10.1
 tornado==6.0.4
 tqdm==4.46.1
 traitlets==4.3.3

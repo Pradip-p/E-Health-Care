@@ -1,0 +1,49 @@
+{% extends 'base_admin.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block body_content %}
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h4 class="page-title">Disease and Doctor</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <form method="POST" action="" enctype="multipart/form-data">
+                  {% csrf_token %}
+                  <div class="row">
+                    <div class="col-sm-6">
+                        <div class="form-group">
+                            <label for="id_name">Disease</label> 
+                                <input value="{{disease.name}}" class="form-control" type="text" name="name" maxlength="200" required id="id_name">  
+                                <br />
+                                <!-- {% if assign_disease_form.name.errors %} -->
+                                <!-- <div class="alert alert-danger" role="alert" style="list-style-type: none;"> -->
+                                <div class="alert alert-danger" role="alert">{{assign_disease_form.name.errors}}</div>
+                                <!-- {% endif %} -->
+                                <!-- {{ assign_disease_form.name|as_crispy_field }} -->
+                        </div>
+                        <!-- {{assign_disease_form.errors}} -->
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                              {{ assign_disease_form.doctor|as_crispy_field}}
+                              <!-- <div class="alert alert-danger" role="alert" style="list-style-type: none;">
+                                {{assign_disease_form.doctor.errors}}
+                                </div> -->
+                            </div>
+                        </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary btn-lg btn-block">Edit Disease</button>
+                  <br/>
+                          <a href="{% url 'disease' %}" class="btn btn-secondary btn-lg btn-block">Cancel</a>
+                    <!-- <label for="id_name">Name</label> 
+                    <input type="text" name="name" required id="id_name" class="form-control"> -->
+                  </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

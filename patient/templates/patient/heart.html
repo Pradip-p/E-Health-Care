@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 {% block body_content %}
 
-<div class="page-wrapper">
-    <div class="content">
+<div class="page-wrapper" >
+    <div class="content" style="background-color: skyblue;">
         <div class="row">
             <div class="col-sm-12">
                 <h4 class="page-title">Heart check up</h4>
@@ -15,28 +15,33 @@
     
         <button type="Check" class="btn btn-primary btn-user "> Check</button>
         </form>
+            <br><hr>
+        <div>
+            <h3>Attribute Information:</h3>
+        <h6>
+        0. age
+        </h6>
+        <h6>1.sex</h6>
+        <h6>2.chest pain type (4 values)</h6>
+        <h6>3.resting blood pressure</h6>
+        <h6>4.serum cholestoral in mg/dl</h6>
+        <h6>5.fasting blood sugar > 120 mg/dl</h6>
+        <h6>electrocardiographic results (values 0,1,2)</h6> 
+        <h6>7.maximum heart rate achieved</h6>
+        <h6>8.exercise induced angina</h6>
+        <h6>9.oldpeak = ST depression induced by exercise relative to rest</h6>
+        <h6>10.the slope of the peak exercise ST segment</h6>
+        <h6>11.number of major vessels (0-3) colored by flourosopy</h6>
+        <h6>12.thal: 0 = normal; 1 = fixed defect; 2 = reversable defect</h6>
+        <h6>13. The names and social security numbers of the patients were recently removed from the database, replaced with dummy values.</h6>
+        </div>
+        </div>
+
+
+
     </div>
     {{sur}}
     
-<div>
-    <h3>Attribute Information:</h3>
-<h6>
-0. age
-</h6>
-<h6>1.sex</h6>
-<h6>2.chest pain type (4 values)</h6>
-<h6>3.resting blood pressure</h6>
-<h6>4.serum cholestoral in mg/dl</h6>
-<h6>5.fasting blood sugar > 120 mg/dl</h6>
-<h6>electrocardiographic results (values 0,1,2)</h6> 
-<h6>7.maximum heart rate achieved</h6>
-<h6>8.exercise induced angina</h6>
-<h6>9.oldpeak = ST depression induced by exercise relative to rest</h6>
-<h6>10.the slope of the peak exercise ST segment</h6>
-<h6>11.number of major vessels (0-3) colored by flourosopy</h6>
-<h6>12.thal: 0 = normal; 1 = fixed defect; 2 = reversable defect</h6>
-<h6>13. The names and social security numbers of the patients were recently removed from the database, replaced with dummy values.</h6>
-</div>
-</div>
+
 
 {% endblock %}

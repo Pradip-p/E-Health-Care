@@ -1,0 +1,94 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+{% block body_content %}
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-4 col-3">
+                <!-- <h4 class="page-title">Specialist -->
+                        <a href="add" class="btn btn-primary btn-rounded float-left"><i class="fa fa-plus"></i> Add Doctor</a>
+                    <!-- </div> -->
+                <!-- </h4> -->
+            </div>
+            <div class="col-sm-8 col-9 text-right m-b-20">
+            <form class="form-inline my-2 my-lg-0 float-right" method="GET" action="" style="text-align: right;">
+                <!-- {% csrf_token %} -->
+                <input  type="text" class="form-control mr-sm-2" value="{{ request.GET.term }}" name="term" placeholder="Name,address,speciality">
+                <!-- <input value={{request.POST.term}} name="term" class="form-control mr-sm-2" type="text" placeholder="Search by speciality" aria-label="Search"> -->
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="submit">Search</button>
+              </form>
+            </div>
+           
+        </div>
+        <div class="row doctor-grid">
+            {% for doctor in doctors %}
+            <div class="col-md-4 col-sm-4  col-lg-3">
+                <div class="profile-widget">
+                    <div class="doctor-img">
+                        {% if doctor.picture.url != '' %}
+                        <a class="avatar" href="doctor_profile/{{doctor.id}}"><img alt="" src="{{doctor.picture.url}}" style="width: 100%; height: 100%;"></a>
+                        {% else %}
+                        <img class="avatar" src="{% static 'assets/img/user.png' %}" alt="upload profile" style="width: 100%; height: 100%;" >
+                        {% endif %}
+                    </div>
+                     <div class="dropdown profile-action">
+                        <a href="" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="edit/{{doctor.id}}"><i class="fa fa-pencil m-r-5"></i> Edit</a>
+                            <a class="dropdown-item" data-toggle="tooltip" data-placement="top" title="Delete" href="delete/{{doctor.id}}" onclick="return confirm('Are you sure want to delete Doctor : {{doctor.user.first_name}} {{doctor.user.last_name}}')">
+                                <i class="fa fa-trash-o m-r-5"></i> Delete</a>
+                        </div>
+                    </div>
+                    <h4 class="doctor-name text-ellipsis"><a href="">{{doctor.user.first_name}}&nbsp;{{doctor.user.last_name}}</a></h4>
+                    <div class="doc-prof">{{doctor.department}}</div>
+                    <div class="user-country">
+                        <i class="fa fa-map-marker"></i> {{doctor.address}}
+                    </div>
+                </div>
+            </div>
+         {% endfor %}
+         
+         {% if doctors.has_other_pages %}
+         <nav aria-label="Page navigation example">
+         <ul class="pagination justify-content-center"">
+
+         {% if doctors.has_previous %}
+         <li class="page-item">
+         <a class="page-link" href="#" aria-label="Previous">
+         <span aria-hidden="true">&laquo;</span>
+         </a>
+         </li>
+
+         {% else %}
+         <li class="page-item disabled">
+         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+         </li>
+
+         {% endif %}
+
+         {% for i in doctors.paginator.page_range %}
+         {% if doctors.number == i %}
+              <li class="page-item active" aria-current="page">
+                 <a class="page-link" href="#">{{i}} <span class="sr-only">(current)</span></a>
+             </li>
+         {% else %}
+           <li class="page-item"><a class="page-link" href="?page={{ i }}">{{i}}</a></li>
+         {% endif %}
+         {% endfor %}
+
+         {% if doctors.has_next %}
+         <li class="page-item">
+         <a class="page-link" href="#" aria-label="Next">
+         <span aria-hidden="true">&raquo;</span>
+         </a>
+         </li>
+         {% else %}
+         <li class="page-item disabled">
+         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+         </li>
+         {% endif %}
+         </ul>
+         </nav>
+         {% endif %}
+    </div>
+{% endblock %}

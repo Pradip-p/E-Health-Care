@@ -1,0 +1,126 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+{% block body_content %}
+<div class="page-wrapper">
+<div class="content">
+<div class="row">
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+            <span class="dash-widget-bg1"><i class="fa fa-stethoscope" aria-hidden="true"></i></span>
+            <div class="dash-widget-info text-right">
+                <h3>{{predictions}}</h3>
+                <span class="widget-title1">Predictions <i class="fa fa-check" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+            <span class="dash-widget-bg2"><i class="fa fa-user-o"></i></span>
+            <div class="dash-widget-info text-right">
+                <h3>{{patients}}</h3>
+                <span class="widget-title2">Patients <i class="fa fa-check" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+            <span class="dash-widget-bg3"><i class="fa fa-user-md" aria-hidden="true"></i></span>
+            <div class="dash-widget-info text-right">
+                <h3>{{doctors}}</h3>
+                <span class="widget-title3">Doctors <i class="fa fa-check" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 col-sm-6 col-lg-6 col-xl-3">
+        <div class="dash-widget">
+            <span class="dash-widget-bg4"><i class="fa fa-heartbeat" aria-hidden="true"></i></span>
+            <div class="dash-widget-info text-right">
+                <h3>{{feedbacks}}</h3>
+                <span class="widget-title4">Feedbacks <i class="fa fa-check" aria-hidden="true"></i></span>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12 col-md-6 col-lg-8 col-xl-8">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title d-inline-block">New Patients </h4> <a href="{% url 'patients_list' %}" class="btn btn-primary float-right">View all</a>
+            </div>
+            <div class="card-block">
+                <div class="table-responsive" style="max-height: 312px; overflow-y: auto; overflow-x: auto;">
+                    <table class="table mb-0 new-patient-table">
+                        <tbody>
+                            {% for patient in patient_list %}
+                            <tr>
+                                <td>
+                                    {% if patient.predict_by.profile_pic.url != '' %}
+                                    <img src="{{patient.predict_by.profile_pic.url}}" alt="" class="w-40 rounded-circle">
+                                    {% else %}
+                                    <img src="{% static 'assets/img/user.png' %}" alt="" class="w-40 rounded-circle">
+                                    {% endif %}
+                                    <h2>{{patient.predict_by.name}}</h2>
+                                </td>
+                                <td>{{patient.predict_by.user.email}}</td>
+                                <td>{{pateint.predict_by.phone_number}}</td>
+                                <td>{{patient.predicted_disease}}</td>
+                            </tr>
+                           {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-4 col-xl-4" >
+        <div class="card member-panel">
+            <div class="card-header bg-white">
+                <h4 class="card-title mb-0">Doctors</h4>
+            </div>
+            <div class="card-body">
+                <ul class="contact-list">
+                    {% for doctor in doctorinfo %}
+                    <li>
+                        <div class="contact-cont">
+                            <div class="float-left user-img m-r-10">
+                                <a href="profile.html" title="John Doe">
+                                    {% if doctor.picture.url != '' %}
+                                    <img src="{{doctor.picture.url}}" alt="" class="w-40 rounded-circle" style="max-height: fit-content;">
+                                    {% else %}
+                                    <img src="{% static 'assets/img/user.png' %}" alt="alt" class="w-40 rounded-circle">
+                                    {% endif %}
+                                    <span class="status online">                     
+                                    </span></a>
+                            </div>
+                            <div class="contact-info">
+                                <span class="contact-name text-ellipsis">{{doctor.user.first_name}}&nbsp;{{doctor.user.last_name}}</span>
+                                <span class="contact-date">{{doctor.department}}</span>
+                            </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                   
+                </ul>
+            </div>
+            <div class="card-footer text-center bg-white">
+                <a href="{% url 'doctors_list' %}" class="text-muted">View all Doctors</a>
+            </div>
+        </div>
+    </div>
+<div>
+</div>
+</div>
+
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+

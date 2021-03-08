@@ -10,11 +10,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
-    <title>Preclinic - Medical & Hospital - Bootstrap 4 Admin Template</title>
+    <title>E-Health Care</title>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}"s>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+    <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+    
+    <!-- Bootstrap Date-Picker Plugin -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
     <!--[if lt IE 9]>
 		<script src="assets/js/html5shiv.min.js"></script>
 		<script src="assets/js/respond.min.js"></script>
@@ -29,11 +37,11 @@
 					<img src="{% static 'assets/img/logo.png' %}" width="35" height="35" alt=""> <span>E-Health Care</span>
 				</a>
 			</div>
-			<a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
-            <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
+			<!-- <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a> -->
+            <!-- <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a> -->
             <ul class="nav user-menu float-right">
                 <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown"><i class="fa fa-bell-o"></i> <span class="badge badge-pill bg-danger float-right">3</span></a>
+                    
                     <div class="dropdown-menu notifications">
                         <div class="topnav-dropdown-header">
                             <span>Notifications</span>
@@ -64,17 +72,7 @@
                                         </div>
                                     </a>
                                 </li>
-                                <li class="notification-message">
-                                    <a href="">
-                                        <div class="media">
-											<span class="avatar">L</span>
-											<div class="media-body">
-												<p class="noti-details"><span class="noti-title">Misty Tison</span> added <span class="noti-title">Domenic Houston</span> and <span class="noti-title">Claire Mapes</span> to project <span class="noti-title">Doctor available module</span></p>
-												<p class="noti-time"><span class="notification-time">8 mins ago</span></p>
-											</div>
-                                        </div>
-                                    </a>
-                                </li>
+                         
                                 <li class="notification-message">
                                     <a href="">
                                         <div class="media">
@@ -100,36 +98,34 @@
                             </ul>
                         </div>
                         <div class="topnav-dropdown-footer">
-                            <a href="">View all Notifications</a>
+                            <a href="">View all Notificati  ons</a>
                         </div>
                     </div>
                 </li>
-                <li class="nav-item dropdown d-none d-sm-block">
-                    <a href="javascript:void(0);" id="open_msg_box" class="hasnotifications nav-link"><i class="fa fa-comment-o"></i> <span class="badge badge-pill bg-danger float-right">8</span></a>
-                </li>
+               
                 <li class="nav-item dropdown has-arrow">
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
                         <span class="user-img">
-							<img class="rounded-circle" src="{% static 'assets/img/user.jpg' %}" width="24" alt="Admin">
+							<img class="rounded-circle" src="{% static 'assets/img/user.png' %}" width="24" alt="Admin">
 							<span class="status online"></span>
 						</span>
-						<span>Admin</span>
+						<span>Welcome Doctor</span>
                     </a>
 					<div class="dropdown-menu">
-						<a class="dropdown-item" href="">My Profile</a>
-						<a class="dropdown-item" href="">Edit Profile</a>
-						<a class="dropdown-item" href="">Settings</a>
-						<a class="dropdown-item" href="/">Logout</a>
+						<!-- <a class="dropdown-item" href="">My Profile</a> -->
+						<!-- <a class="dropdown-item" href="">Edit Profile</a> -->
+						<!-- <a class="dropdown-item" href="">Settings</a> -->
+                        <a class="dropdown-item" href="{% url 'doctor_logout' %}" data-toggle="modal" data-target="#logoutModal">Logout</a>
 					</div>
                 </li>
             </ul>
             <div class="dropdown mobile-user-menu float-right">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                    <a class="dropdown-item" href="">My Profile</a>
-                    <a class="dropdown-item" href="">Edit Profile</a>
-                    <a class="dropdown-item" href="">Settings</a>
-                    <a class="dropdown-item" href="/">Logout</a>
+                    <!-- <a class="dropdown-item" href="">My Profile</a> -->
+                    <!-- <a class="dropdown-item" href="">Edit Profile</a> -->
+                    <!-- <a class="dropdown-item" href="">Settings</a> -->
+                    <a class="dropdown-item" href="{% url 'doctor_logout' %}" data-toggle="modal" data-target="#logoutModal">Logout</a>
                 </div>
             </div>
         </div>
@@ -139,9 +135,9 @@
                     <ul>
                         <li class="menu-title">Main</li>
                         <li class="active">
-                            <a href=""><i class="fa fa-dashboard"></i> <span>Dashboard</span></a>
+                            <a href=""><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
                         </li>
-						<li>
+						<!-- <li>
                             <a href=""><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                         </li>
                         <li>
@@ -254,8 +250,8 @@
                         <li>
                             <a href="calendar.html"><i class="fa fa-calendar"></i> <span>Calendar</span></a>
                         </li>
-                        <li class="menu-title">Extras</li>
-                        <li class="submenu">
+                        <li class="menu-title">Extras</li> -->
+                        <!-- <li class="submenu">
                             <a href="#"><i class="fa fa-columns"></i> <span>Pages</span> <span class="menu-arrow"></span></a>
                             <ul style="display: none;">
                                 <li><a href="login.html"> Login </a></li>
@@ -275,23 +271,13 @@
                             <ul style="display: none;">
                                 <li class="submenu">
                                     <a href="javascript:void(0);"><span>Level 1</span> <span class="menu-arrow"></span></a>
-                                    <ul style="display: none;">
-                                        <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
-                                        <li class="submenu">
-                                            <a href="javascript:void(0);"> <span> Level 2</span> <span class="menu-arrow"></span></a>
-                                            <ul style="display: none;">
-                                                <li><a href="javascript:void(0);">Level 3</a></li>
-                                                <li><a href="javascript:void(0);">Level 3</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="javascript:void(0);"><span>Level 2</span></a></li>
-                                    </ul>
+                                 
                                 </li>
                                 <li>
                                     <a href="javascript:void(0);"><span>Level 1</span></a>
                                 </li>
                             </ul>
-                        </li>
+                        </li> -->
                     </ul>
                 </div>
             </div>
@@ -303,6 +289,23 @@
 
     </div>
     <div class="sidebar-overlay" data-reff=""></div>
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+              <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">×</span>
+              </button>
+            </div>
+            <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+            <div class="modal-footer">
+              <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+              <a class="btn btn-primary" href="{% url 'doctor_logout' %}">Logout</a>
+            </div>
+          </div>
+        </div>
+    </div>
     <script src="{% static 'assets/js/jquery-3.2.1.min.js' %}"></script>
 	<script src="{% static 'assets/js/popper.min.js' %}"></script>
     <script src="{% static 'assets/js/bootstrap.min.js' %}"></script>
@@ -310,6 +313,16 @@
     <script src="{% static 'assets/js/Chart.bundle.js' %}"></script>
     <script src="{% static 'assets/js/chart.js' %}"></script>
     <script src="{% static 'assets/js/app.js' %}"></script>
+
+    <script type="text/javaScript">
+        $(function () {
+             $('[data-toggle="tooltip"]').tooltip();
+             tinymce.init({
+             selector: 'textarea#editor',
+             menubar: false
+           });
+           })
+     </script>
 
 </body>
 

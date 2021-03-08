@@ -1,0 +1,89 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+
+{% block body_content %}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-8 col-4">
+                <h4 class="page-title">Feedback</h4>
+            </div>
+            <!-- <div class="col-sm-4 col-8 text-right m-b-30">
+                <a class="btn btn-primary btn-rounded float-right" href="add_feedback"><i class="fa fa-plus"></i> Add Feedback</a>
+            </div> -->
+        </div>
+        <div class="row">
+            {% for feedback in feedbacks %}
+            <div class="col-sm-6 col-md-6 col-lg-4">
+                <div class="blog grid-blog">
+                    <div class="blog-image">
+                        <a href=""><img style="width:fit-content; height:200px;" class="img-fluid" src="{{feedback.picture.url}}" alt="No picture found"></a>
+                    </div>
+                    <div class="blog-content">
+                        <h3 class="blog-title"><a href="detail/{{feedback.id}}">{{feedback.title}}</a></h3>
+                        <!-- <p>Lorem ipsum dolor sit amet, consectetur em adipiscing elit, sed do eiusmod tempor incididunt ut labore etmis dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco sit laboris.</p> -->
+                        <a href="detail/{{feedback.id}}" class="read-more"><i class="fa fa-long-arrow-right"></i> Read More</a>
+                        <!-- <a type="button" class="btn btn-light float-right" href="edit/{{feedback.id}}">Edit</a> -->
+                        <div class="blog-info clearfix">
+                            <div class="post-left">
+                                <ul>
+                                    <li style="font-weight: bold;"><i class="fa fa-calendar"></i> <span>Uploaded Date:{{feedback.date | date:"d/m/y"}}</span></li>
+                                </ul>
+                            </div>
+                            <div class="post-right">
+                                <!-- <a class="btn btn-danger" data-toggle="tooltip" data-placement="top" title="Delete" href="delete/{{feedback.id}}" onclick="return confirm('Are you sure want to delete Feedback : {{feedback.title}}')"> -->
+                                    <!-- <i class="fas fa-trash"></i> -->
+                                <!-- Delete -->
+                                <!-- </a> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% if feedbacks.has_other_pages %}
+         <nav aria-label="Page navigation example">
+         <ul class="pagination justify-content-center"">
+
+         {% if feedbacks.has_previous %}
+         <li class="page-item">
+         <a class="page-link" href="#" aria-label="Previous">
+         <span aria-hidden="true">&laquo;</span>
+         </a>
+         </li>
+
+         {% else %}
+         <li class="page-item disabled">
+         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+         </li>
+
+         {% endif %}
+
+         {% for i in feedbacks.paginator.page_range %}
+         {% if feedbacks.number == i %}
+              <li class="page-item active" aria-current="page">
+                 <a class="page-link" href="#">{{i}} <span class="sr-only">(current)</span></a>
+             </li>
+         {% else %}
+           <li class="page-item"><a class="page-link" href="?page={{ i }}">{{i}}</a></li>
+         {% endif %}
+         {% endfor %}
+
+         {% if feedbacks.has_next %}
+         <li class="page-item">
+         <a class="page-link" href="#" aria-label="Next">
+         <span aria-hidden="true">&raquo;</span>
+         </a>
+         </li>
+         {% else %}
+         <li class="page-item disabled">
+         <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+         </li>
+         {% endif %}
+         </ul>
+         </nav>
+         {% endif %}
+</div>
+
+{% endblock %}

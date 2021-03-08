@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block body_content %}
+
+<div class="page-wrapper">
+    <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title" style="color: black;"></h4>
+                    </div>
+                </div>
+            <div class="card-box" style="background-color: skyblue;">
+                <div> 
+                    <h4 class="page-title" style="color: black;">You are suffering from <strong>{{Predicted_disease}} </strong></h4>
+                </div>
+                
+                <h4>You Enter following symptoms:</h4><br>
+
+                <p>1.{{value1}}</p>
+                <p>2.{{value2}}</p>
+                <p>3.{{value3}}</p>
+                <p>4.{{value4}}</p>
+                <p>5.{{value5}}</p>
+                <p>6.{{value6}}</p>
+            </div>
+            <div class="card-box">
+                {% if disease_doctor_list.all %}
+                  <h5>Suggested Doctor Information</h5>
+                  <div class="container">
+                    <div class="row">
+                      <div class=" col md-12">
+                       
+                          <table class="table table-border table-striped custom-table datatable mb-0" style="max-height: 500px; overflow-x: auto; overflow-y: auto;">
+                            <thead>
+                              <tr>
+                                <th scope="col">DoctorID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Department</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone Number</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {% for doctor in disease_doctor_list %}
+                              <tr>
+                                <th> {{doctor.doctorID}}</th>
+                                <th> {{doctor.user.first_name}}&nbsp;{{doctor.user.last_name}}</th>
+                                <th>{{doctor.department}}</th>
+                                <td>{{doctor.user.email}}</td>
+                                <td>{{doctor.phone_number}}</td>
+                              </tr>
+                              {% endfor %}
+                       
+                            </tbody>
+                              </table>
+                              {% else %}
+                              <h5>No Doctor Available </h5>
+                        {% endif %}
+            </div>
+    </div>
+</div>
+{% endblock %}

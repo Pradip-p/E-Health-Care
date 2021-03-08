@@ -1,0 +1,40 @@
+{% extends 'base_admin.html' %}
+{% load static %}
+{% block body_content %}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4 class="page-title">Feedback Detail</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <div class="blog-view">
+                    <article class="blog blog-single-post">
+                        <h3 class="blog-title">{{feedback.title}}</h3>
+                        <div class="blog-info clearfix">
+                            <div class="post-left">
+                                <ul>
+                                    <li><a href="#."><i class="fa fa-calendar"></i> <span>{{feedback.date}}</span></a></li>
+                                    <li><a href="#."><i class="fa fa-user-o"></i> <span>By {{feedback.uploaded_by.name}}</span></a></li>
+                                </ul>
+                            </div>
+                            <div class="post-right"><a href="{% url 'our_feedback' %}" class="btn btn-light">
+                                <!-- <i class="fa fa-comment-o"></i> -->
+                                Go back</a>
+                            </div>
+                        </div>
+                        <div class="blog-image">
+                            <a href="#."><img style="width:fit-content; height:auto; display: block; position: relative;" alt="No blog picture" src="{{feedback.picture.url}}" class="img-fluid"></a>
+                        </div>
+                        <div class="blog-content">
+                            <p>{{feedback.text}}</p>
+                        </div>
+                    </article>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

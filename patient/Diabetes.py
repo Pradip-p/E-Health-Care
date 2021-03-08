@@ -14,7 +14,7 @@ def pre_processing(X):
     # return X
 
 def training():
-    df = pd.read_csv("Diabetes.csv")
+    df = pd.read_csv("datasets/Diabetes.csv")
     y=df[["Outcome"]]
     df.drop("Outcome", axis="columns", inplace=True)
     X=df
@@ -24,7 +24,7 @@ def training():
 
 
     dummyRow_diabetes=pd.DataFrame(np.zeros(len(X.columns)).reshape(1,len(X.columns)), columns=X.columns)
-    dummyRow_diabetes.to_csv('dummyRow_diabetes.csv', index=False)
+    dummyRow_diabetes.to_csv('datasets/dummyRow_diabetes.csv', index=False)
 
     # from sklearn.neighbors import KNeighborsClassifier
     # classifier = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
@@ -40,7 +40,7 @@ def training():
 
     
 
-    pkl_filename="pickle_model_diabetes.pkl"
+    pkl_filename="datasets/pickle_model_diabetes.pkl"
     with open(pkl_filename,'wb') as file:
         pickle.dump(classifier,file)
     y_pred = classifier.predict(X_test)
@@ -53,12 +53,12 @@ def pred(ob):
     df=pd.DataFrame(d1,index=[0])
     # df=pre_processing(df)
     # df.drop("Disease", axis="columns", inplace=True)
-    dummyRow_filename="dummyRow_diabetes.csv"
+    dummyRow_filename="datasets/dummyRow_diabetes.csv"
     df2=pd.read_csv(dummyRow_filename)
     for c1 in df.columns:
         df2[c1]=df[c1]
         print(df2[c1])
-    pkl_filename='pickle_model_diabetes.pkl'
+    pkl_filename='datasets/pickle_model_diabetes.pkl'
     with open(pkl_filename,'rb') as file:
         classifier=pickle.load(file)
     pred=classifier.predict(df2)

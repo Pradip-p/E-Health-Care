@@ -22,7 +22,7 @@
                                         {% if request.user.profile.profile_pic.url != '' %}
 <img class="avatar" src="{{request.user.profile.profile_pic.url}}" alt="Please upload Profile Picture" > 
 {% else %}
-<img class="avatar" src="{% static 'assets/img/doctor-03.png' %}" alt="upload profile" width=50 height=50>
+<img class="avatar" src="{% static 'assets/img/user.png' %}" alt="upload profile" width=50 height=50>
 {% endif %}
 </a>
                                     </div>

@@ -12,7 +12,7 @@
             <div class="card-box">
               <form class="form-inline my-2 my-lg-0" method="POST" action="">
                 {% csrf_token %}
-                <input style="width: 50%;" type="text" class="form-control mr-sm-2" value="{{ request.POST.term }}" name="term" placeholder="Search by doctor name or disease name">
+                <input style="width: 50%;" type="text" class="form-control mr-sm-2" value="{{ request.POST.term }}" name="term" placeholder="Search by doctor name or department or disease">
                 <!-- <input value={{request.POST.term}} name="term" class="form-control mr-sm-2" type="text" placeholder="Search by speciality" aria-label="Search"> -->
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="submit">Search</button>
               </form>
@@ -47,10 +47,10 @@
                       <tbody>
                         {% for doctor in doctors %}
                       <tr class="table-secondary">
-                        <th>{{doctor.doc_id}}</th>
+                        <th>{{doctor.doctorID}}</th>
                         <td>{{doctor.department}}</td>
-                        <th>Dr.{{doctor.name}}</th>
-                        <td>{{doctor.email}}</td>
+                        <th>Dr.{{doctor.user.first_name}}&nbsp;{{doctor.user.last_name}}</th>
+                        <td>{{doctor.user.email}}</td>
                         <td>{{doctor.phone_number}}</td>
                         <td><a href="doctor_profile/{{doctor.id}}" type="button" class="btn btn-primary">View Profile</a></td>
                       </tr>

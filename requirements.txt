@@ -67,12 +67,14 @@ packaging==20.4
 pandas==1.0.1
 pandocfilters==1.4.2
 parso==0.7.0
+pexpect==4.8.0
 pickle-mixin==1.0.2
 pickleshare==0.7.5
 Pillow==7.1.2
 prometheus-client==0.7.1
 prompt-toolkit==3.0.5
 protobuf==3.12.2
+ptyprocess==0.7.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
 Pygments==2.6.1
@@ -82,7 +84,6 @@ pyparsing==2.4.7
 pyrsistent==0.16.0
 python-dateutil==2.8.1
 pytz==2019.3
-# pywin32==228
 pywinpty==0.5.7
 PyYAML==5.3.1
 pyzmq==19.0.1
@@ -100,7 +101,7 @@ sklearn==0.0
 sqlparse==0.3.1
 tensorboard==2.2.2
 tensorboard-plugin-wit==1.6.0.post3
-tensorflow==2.2.1
+tensorflow==2.2.0
 tensorflow-estimator==2.2.0
 termcolor==1.1.0
 terminado==0.8.3

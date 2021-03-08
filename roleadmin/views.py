@@ -15,7 +15,12 @@ from doctor.forms import DoctorForm,DoctorUserForm
 
 from roleadmin.forms import AddDiseaseForm
 # Create your views here.
+
+# import decoratos
+from roleadmin.decoratos import allowed_users,unauthenticated_admin
+
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def admin_dashboard(request):
     doctors=DoctorInfo.objects.all().count()
     users=User.objects.filter(groups__name="PATIENT").count()
@@ -35,6 +40,7 @@ def admin_dashboard(request):
     return render(request,'roleadmin/dashboard.html',context)
 
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def disease(request):
     # page=request.GET.get('page',1)
     search_term=request.GET.get('term')
@@ -58,6 +64,7 @@ def disease(request):
     return render(request,'roleadmin/disease.html',context)
 
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def assign_disease(request):
     if request.method=="POST":
         assign_disease_form=AddDiseaseForm(request.POST or None)
@@ -77,6 +84,7 @@ def assign_disease(request):
         return render(request,'roleadmin/assign_disease_form.html',context)
 
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def edit_disease(request,pk):
     try:
         disease=Disease1.objects.get(id=pk)
@@ -92,6 +100,7 @@ def edit_disease(request,pk):
     return render(request,'roleadmin/assign_disease_edit_form.html',context=mydict)
 
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def delete_disease(request,pk):
     try:
         disease=Disease1.objects.get(id=pk)
@@ -100,7 +109,9 @@ def delete_disease(request,pk):
     disease.delete()
     return redirect('disease')
     # disease=Disease1.objects.filter()
+
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def doctors_list(request):
     page=request.GET.get('page',1)
     search_term=request.GET.get('term')
@@ -142,6 +153,7 @@ def doctors_list(request):
 #         }
 #         return render(request,'roleadmin/doctor_add_form.html',context)
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def add_doctor(request):
     userForm=DoctorUserForm()
     doctor_add_form=DoctorForm()
@@ -164,6 +176,7 @@ def add_doctor(request):
 
 
 @login_required(login_url='roleadminlogin')
+@allowed_users(allowed_roles=['ADMIN'])
 def edit_doctor(request,pk):
     try:
         doctor=DoctorInfo.objects.get(id=pk)
@@ -185,6 +198,7 @@ def edit_doctor(request,pk):
     return render(request,'roleadmin/doctor_edit_form.html',context=mydict)
 
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def delete_doctor(request,pk):
     try:
         doctor=DoctorInfo.objects.get(id=pk)
@@ -196,6 +210,7 @@ def delete_doctor(request,pk):
     return redirect('doctors_list')
 
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def patients_list(request):
     search_term=request.GET.get('term')
     users=User.objects.filter(groups__name="PATIENT")
@@ -208,6 +223,7 @@ def patients_list(request):
     return render(request,'roleadmin/patient_list.html',context)
 
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def patient_profile(request,pk):
     try:
         users=User.objects.filter(groups__name="PATIENT")
@@ -221,6 +237,7 @@ def patient_profile(request,pk):
     return render(request,'roleadmin/patient_profile.html',context)
 
 @login_required(login_url="roleadmin_login")
+@allowed_users(allowed_roles=['ADMIN'])
 def patient_delete(request,pk):
     try:
         users=User.objects.filter(groups__name="PATIENT")
@@ -233,6 +250,7 @@ def patient_delete(request,pk):
     return redirect('patients_list')    
 
 @login_required(login_url='roleadmin_login')
+@allowed_users(allowed_roles=['ADMIN'])
 def our_feedback(request):
     page=request.GET.get('page',1)
     feedbacks=Feedback.objects.all().order_by('-id')
@@ -249,6 +267,7 @@ def our_feedback(request):
     return render(request,'roleadmin/feedback.html',context)
 
 @login_required(login_url='roleadmin_login')
+@allowed_users(allowed_roles=['ADMIN'])
 def our_feedback_detail(request,pk):
     try:
         feedback=Feedback.objects.get(id=pk)
@@ -260,21 +279,27 @@ def our_feedback_detail(request,pk):
     }
     return render(request,'roleadmin/feedback_detail.html',context)
 
+
+@unauthenticated_admin
 def roleadmin_login(request):
     if request.method=='POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
-        superuser=User.objects.filter(username=username,is_superuser=True)
-        if superuser:
-            user=authenticate(request,username=username,password=password)
-            if user is not None:
-                login(request,user)
-                return redirect('admin_dashboard')
-            else:
-                messages.info(request,'Please enter valid credentials')
-                return render(request,'roleadmin/login.html')
+        # superuser=User.objects.filter(username=username,is_superuser=True)
+        # if superuser:
+        #     user=authenticate(request,username=username,password=password)
+        #     if user is not None:
+        #         login(request,user)
+        #         return redirect('admin_dashboard')
+        #     else:
+        #         messages.info(request,'Please enter valid credentials')
+        #         return render(request,'roleadmin/login.html')
+        user=authenticate(request,username=username,password=password)
+        if user is not None:
+            login(request,user)
+            return redirect('admin_dashboard')
         else:
-            messages.info(request,'You are not authorized user')
+            messages.info(request,'Please enter valid credentials')
             return render(request,'roleadmin/login.html')
     else:
         return render(request,'roleadmin/login.html')

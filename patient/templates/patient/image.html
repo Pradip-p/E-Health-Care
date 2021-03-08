@@ -8,8 +8,12 @@
             <div class="col-sm-12">
                 <h4 class="page-title"> <strong>Please upload Your X-ray Image</strong></h4>
             </div>
-        </div>
+        </div>   
+    </div>
+        
 
+
+<div>
 <div class="card-box" style="background-color: skyblue;">
       <h4 class="mb-5"></h4>
       <div class="container">
@@ -27,6 +31,45 @@
             <br><br>
             <h4 class="mb-5"> <strong>{{sur}}</strong> </h4>
             <br><br>
+            
+        </div>
+
+    </div> 
 </div>
-</div>
+
+
+<div class="card-box">
+    {% if disease_doctor_list.all %}
+      <h5>Suggested Doctor Information</h5>
+      <div class="container">
+        <div class="row">
+          <div class=" col md-12">
+           
+              <table class="table table-border table-striped custom-table datatable mb-0" style="max-height: 500px; overflow-x: auto; overflow-y: auto;">
+                <thead>
+                  <tr>
+                    <th scope="col">DoctorID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Department</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Phone Number</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {% for doctor in disease_doctor_list %}
+                  <tr>
+                    <th> {{doctor.doctorID}}</th>
+                    <th> {{doctor.user.first_name}}&nbsp;{{doctor.user.last_name}}</th>
+                    <th>{{doctor.department}}</th>
+                    <td>{{doctor.user.email}}</td>
+                    <td>{{doctor.phone_number}}</td>
+                  </tr>
+                  {% endfor %}
+           
+                </tbody>
+                  </table>
+                  {% else %}
+                  <h5>No Doctor Available </h5>
+            {% endif %}
+</div> 
 {% endblock %}

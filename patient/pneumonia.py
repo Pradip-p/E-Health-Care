@@ -97,15 +97,10 @@ def pred1(ob):
 
 
       result = loaded_model.predict(test_image)
+      return  result
+
       # print(result)
-      print(result[0][0])
-      # training_set.class_indices
-      if result[0][0] == 1:
-            prediction = 'You are suffering from pneumonia'
-      else:
-            prediction = "Your health is Normal"
-      print(prediction)
-      return prediction
+     
      
 
 if __name__=="__main__":

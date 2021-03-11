@@ -29,7 +29,7 @@ path('feedback/delete/<int:pk>',views.feedback_delete),
 path('logoutpatient/', views.logoutpatient, name="logoutpatient"),
 
 path('heart/', views.heart, name="heart"),
-path('Diabetes/', views.Diabetes, name="Diabetes"),
+path('diabetes/', views.diabetes, name="diabetes"),
 
 path('showimage/', views.showimage, name="showimage"),
 

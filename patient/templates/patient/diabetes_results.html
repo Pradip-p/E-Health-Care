@@ -5,8 +5,10 @@
     <div class="content">
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="page-title">{{sur}}</h4>
+
+                <h4 class="page-title"><strong>{{sur}}  </strong></h4>
             </div>
+
             <div class="card-box">
                 {% if disease_doctor_list.all %}
                   <h5>Suggested Doctor Information</h5>
@@ -24,6 +26,7 @@
                                 <th scope="col">Phone Number</th>
                               </tr>
                             </thead>
+
                             <tbody>
                               {% for doctor in disease_doctor_list %}
                               <tr>
@@ -41,7 +44,7 @@
                               <h5>No Doctor Available </h5>
                         {% endif %}
       
-            </div>
+            
         </div>
     </div>
 </div>

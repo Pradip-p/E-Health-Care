@@ -40,6 +40,7 @@ def training():
 
     
 
+
     pkl_filename="datasets/pickle_model_diabetes.pkl"
     with open(pkl_filename,'wb') as file:
         pickle.dump(classifier,file)
@@ -48,9 +49,11 @@ def training():
     print(cm)
     print(accuracy_score(y_test, y_pred))
 
-def pred(ob):
+def pred_diabetes(ob):
     d1=ob.to_dict()
     df=pd.DataFrame(d1,index=[0])
+    print("*"*8)
+    print(df)
     # df=pre_processing(df)
     # df.drop("Disease", axis="columns", inplace=True)
     dummyRow_filename="datasets/dummyRow_diabetes.csv"

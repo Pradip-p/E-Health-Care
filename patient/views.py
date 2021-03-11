@@ -7,6 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from patient.models import Profile
 from django.db import transaction
 from patient.models import *
+# from patient.models import Diabetes
 # Create your views here.
 
 # decorators
@@ -21,7 +22,7 @@ from api.models import Disease
 from api import diseaseml
 # from . import heart
 from patient.heart import pred_heart
-from patient.Diabetes import pred
+from patient.Diabetes import pred_diabetes
 from patient.pneumonia import pred1
 from api.diseaseml import pred
 from .models import Image
@@ -90,26 +91,34 @@ def showimage(request):
     
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
-def Diabetes(request):
-    if request.method=="GET":
+def diabetes(request):
+
+    if request.method == "GET":
         diabetes_form=DiabetesForm()
         contex={
             'diabetes_form':diabetes_form
         }
         return render(request,'patient/diabetes.html', contex)
+
+
     elif  request.method=="POST":
+        
         diabetes_form=DiabetesForm(request.POST)
         if diabetes_form.is_valid:
             diabetes_form.save()
             from patient.models import Diabetes
-            ob=Diabetes.objects.latest('id')
-            # print(ob)
-            sur=pred(ob)
-            print('*'*8,sur)
+            ob = Diabetes.objects.latest('id')
+
+            sur=pred_diabetes(ob)
+            
+            # print('*'*8,sur)
+
             sur=", ".join( repr(e) for e in sur).strip("''")
-            context={}
+            print("***********", sur)
+            
             if sur== '1':
-                name= "Yes, You are suffering  from Diabetes problems"
+                context = {}
+                result= "Yes, You are suffering  from Diabetes problems"
                 disease_name="Diabetes"
                 # saving  user information who predict disease and suggesting doctors
                 predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=disease_name)
@@ -119,16 +128,17 @@ def Diabetes(request):
                 for d in disease:
                     listDoctorID.append(d.doctor.id)
                 disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
+                
                 context={
-                    'sur':'You are suffering from diabetes problem',
+                    'sur': result,
                     'disease_doctor_list':disease_doctor_list,
                 }
+                return render(request,'patient/diabetes_results.html', context)
+
             elif sur=='0':
-                 context={
-                    'sur':'You are not suffering from diabetes problem',
-                    # 'disease_doctor_list':disease_doctor_list
-                }
-            return render(request,'patient/diabetes_results.html', contex)
+                context = {}
+                context={'sur':'You are not suffering from diabetes problem',}
+                return render(request,'patient/diabetes_results.html', context)
 
 
 
@@ -151,7 +161,7 @@ def heart(request):
             sur=", ".join( repr(e) for e in sur).strip("''")
             context={}
             if sur== '1':
-                print(sur)
+                
                 name= "Yes, You are suffuring from heart problem"
                 predicted_disease_name="Heart"
                 predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=predicted_disease_name)

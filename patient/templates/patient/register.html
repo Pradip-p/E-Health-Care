@@ -82,26 +82,40 @@
 								<span class="input-group-text"><i class="fas fa-user"></i></span>
 							</div>
 							{{patient_register.username}}
+							<!-- <span class="text-danger" >
+								{{patient_register.username.errors}}
+						</span> -->
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-envelope-square"></i></span>
 							</div>
 							{{patient_register.email}}
+							<!-- <span class="text-danger" >
+								{{patient_register.email.errors}}
+						</span> -->
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
 							{{patient_register.password1}}
+							<!-- <span class="text-danger" >
+								{{patient_register.password1.errors}}
+						</span> -->
 						</div>
 						<div class="input-group mb-2">
 							<div class="input-group-append">
 								<span class="input-group-text"><i class="fas fa-key"></i></span>
 							</div>
 							{{patient_register.password2}}
+							<!-- <span class="text-danger" >
+								{{patient_register.password2.errors}}
+						</span> -->
 						</div>
+						<span class="text-danger" >
 							{{patient_register.errors}}
+							</span>
 				   		<div class="d-flex justify-content-center mt-3 login_container">
 				 			<input class="btn login_btn" type="submit" value="Register Account">
 				   		</div>

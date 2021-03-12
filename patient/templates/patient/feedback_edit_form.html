@@ -11,19 +11,28 @@
             {% csrf_token %}
             <div class="form-group">
                 <label for="id_title">Title:</label>
-                 <input class="form-control" type="text" name="title" value="{{feedback.title}}" maxlength="50" required id="id_title">
+                 <input class="form-control" type="text" name="title" value="{{feedback.title}}" maxlength="50">
+                 <span class="text-danger" >
+                    {{feedback_edit_form.title.errors}}
+            </span>
                 </div>
             <div class="form-group">
                 <label for="id_text">Description</label> 
-                <textarea class="form-control" name="text" cols="40" rows="10" maxlength="200" required id="id_text">
+                <textarea class="form-control" name="text" cols="40" rows="10" maxlength="200">
                     {{feedback.text}}
                 </textarea>
-                </div>
+                <span class="text-danger" >
+                    {{feedback_edit_form.text.errors}}
+            </span>   
+            </div>
            
         <div class="form-group">
              <label for="id_picture">Picture Currently:</label> <a href="feedback.picture.url">{{feedback.picture}}</a><br>
                 <input value="feedback.picture.url" class="form-control" type="file" name="picture" accept="image/*" id="id_picture">
-        </div> 
+                <span class="text-danger" >
+                    {{feedback_edit_form.picture.errors}}
+            </span>
+            </div> 
         <button type="submit" class="btn btn-info btn-user ">Update Feedback</button>         
         
         <a href="{% url 'feedback' %}" class="btn btn-secondary">Cancel</a>

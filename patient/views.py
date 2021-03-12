@@ -426,9 +426,6 @@ def patient_register(request):
         return render(request, 'patient/register.html', contex)
 
 
-
-
-
 @login_required(login_url='patient_login') 
 @allowed_users(allowed_roles=['PATIENT'])
 @transaction.atomic   

@@ -1,8 +1,9 @@
 {% extends "base.html" %}
+
 {% block body_content %}
 
 <div class="page-wrapper">
-    <div class="content">
+    <div class="content" style="background-color: skyblue;">
         <div class="row">
             <div class="col-sm-12">
                 <h4 class="page-title">Diabetes check up</h4>
@@ -11,14 +12,13 @@
             <form method="POST" action="" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{diabetes_form.as_p }}
-                <button type="Check" class="btn btn-primary btn-user "> Check</button>
+                <button type="Check" class="btn btn-primary btn-user "> Submit</button>
             </form>
     
-        </div><br><br>
+        <!-- </div><br><br>
         <div class="col-sm-12">
             <h4 class="page-title">Diabetes parameters information</h4>
            
-        </div>
         <h5>Pregnancies : Number of times pregnant </h5>
         <h5>Glucose : Plasma glucose concentration a 2 hours in an oral glucose tolerance test</h5>
         <h5>BloodPressure : Diastolic blood pressure (mm Hg)</h5>
@@ -27,6 +27,8 @@
         <h5> BMI : Body mass index (weight in kg/(height in m)^2) </h5>
         <h5>DiabetesPedigreeFunction : Diabetes pedigree function </h5>
         <h5>Age : Age (years)</h5>
+    </div> -->
     </div>
-</div>
+</div> 
+
 {% endblock %}

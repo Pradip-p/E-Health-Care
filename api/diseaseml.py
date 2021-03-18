@@ -30,7 +30,7 @@ def pre_processing(df):
     #6th value
     df6 = df['value_6']
     df6 = df6.values.tolist()
-    print(df1,df2,df3,df4,df5,df6)
+    # print(df1,df2,df3,df4,df5,df6)
 
     #value_1 assign zero or one
     if 'receiving_blood_transfusion' in df1:
@@ -320,7 +320,7 @@ def pre_processing(df):
     data_dict['yellowing_of_eyes'] = yellowing_of_eyes
     data_dict['joint_pain'] = joint_pain
     data_dict['muscle_pain'] = muscle_pain
-    print(data_dict)
+    # print(data_dict)
 
     df=pd.DataFrame(data_dict,index=[0])
     return df
@@ -438,7 +438,7 @@ def training():
     pkl_filename="datasets/pickle_model_disease.pkl"
     with open(pkl_filename,'wb') as file:
         pickle.dump(clf2,file)
-        print(pkl_filename)
+        # print(pkl_filename)
     # yp=model.predict(x_test)
     # print("Survived", sum(yp!=0)) 
     # print("not Survived ", sum(yp==0))
@@ -453,12 +453,11 @@ def pred(ob):
     d1=ob.to_dict()
     df=pd.DataFrame(d1,index=[0])
     df=pre_processing(df)
-    print("*"*80)
+    # print("*"*80)
     df_dict = df.to_dict()
     symptoms = [] 
     for disease_name, value in df_dict.items(): 
-        # print(disease_name)
-        # print(value[0])
+        
         if value[0]==1:
             symptoms.append(disease_name)
 

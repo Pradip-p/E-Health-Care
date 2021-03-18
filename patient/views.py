@@ -33,25 +33,21 @@ from django.db.models import Q
 # from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
+
+#For Pnemonia check
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
-#for Pnemonia check
 def showimage(request):  
-    # lastimage= Image.objects.last()
-    # if lastimage == None:
-    # 	lastimage = ''
-    # else:
-    # imagefile= lastimage.imagefile
-    form= ImageForm(request.POST or None, request.FILES or None)
-    # contex={'form': form}
+
+    form= ImageForm(request.POST, request.FILES)
+
     if form.is_valid():
         form.save()
         lastimage= Image.objects.last()
         imagefile= lastimage.imagefile
         
         result=pred1(imagefile)
-    
-
+        
         context={}
         if result[0][0] == 1:
             prediction = 'You are suffering from pneumonia'
@@ -70,6 +66,7 @@ def showimage(request):
             'sur':prediction,
             'disease_doctor_list':disease_doctor_list,
             }
+            return render(request, 'patient/image.html', context)
         else:
             prediction = "Your health is Normal"
             context= {
@@ -77,7 +74,7 @@ def showimage(request):
             'form': form,
             'sur':prediction,
             }        
-        return render(request, 'patient/image.html', context)
+            return render(request, 'patient/image.html', context)
     
 
     sur = ' '
@@ -151,18 +148,111 @@ def heart(request):
             'heart_form':heart_form
         }
         return render(request,'patient/heart.html', contex)
-    elif  request.method=="POST":
-        heart_form=HeartForm(request.POST)
+    if request.method =="POST":
+        contex = {}
+        if request.POST.get('age'):
+            heart = Heart()
 
-        if heart_form.is_valid:
-            heart_form.save()
+            age = request.POST.get('age')
+        
+            
+            sex = request.POST.get('sex')
+            sex = sex.lower()
+            if sex == 'male':
+                sex = 1
+            elif sex == 'female':
+                sex = 0
+            elif sex == 'other':
+                sex = 0.5
+            
+            cp = request.POST.get('cp')
+            cp = cp.lower()
+            if cp == "typical angina":
+                cp = 0
+            elif cp == "atypical angina":
+                cp = 1
+            elif cp == "non-anginal pain":
+                cp = 2
+            elif cp == 'asymptomatic':
+                cp == 3
+
+            
+            trestbps = request.POST.get('trestbps')
+            
+            chol = request.POST.get('chol')
+            
+            fbs = request.POST.get('fbs')
+            fbs = fbs.lower()
+            if fbs == 'true':
+                fbs = 1
+            elif fbs == 'false':
+                fbs = 0
+
+            restecg = request.POST.get('restecg')
+            restecg = restecg.lower()
+            if restecg == "normal":
+                restecg = 0
+            elif restecg == "having st-t":
+                restecg = 1
+            elif restecg == 'hypertrophy':
+                restecg = 2
+
+            thalach = request.POST.get('thalach')
+        
+
+            exang = request.POST.get('exang')
+            exang = exang.lower()
+
+            if exang== 'yes':
+                exang = 1
+            elif exang == 'no':
+                exang = 0
+            oldpeak = request.POST.get('oldpeak')
+            slope = request.POST.get('slope')
+            slope = slope.lower()
+            if slope =='upsloping':
+                slope = 0
+            elif slope == 'flat':
+                slope = 1
+            elif slope=='downsloping':
+                slope =2
+
+            ca = request.POST.get('ca')
+
+            thal = request.POST.get('thal')
+            thal = thal.lower()
+
+            if thal =="normal":
+                thal = 0
+            elif thal == 'fixed defect':
+                thal = 1
+            elif thal =="reversable defect":
+                thal = 2
+
+
+            heart.age = age
+            heart.sex = sex
+            heart.cp = cp
+            heart.chol = chol
+            heart.trestbps = trestbps
+            heart.fbs = fbs
+            heart.restecg = restecg
+            heart.thalach = thalach
+            heart.exang = exang
+            heart.oldpeak = oldpeak
+            heart.slope = slope
+            heart.ca = ca
+            heart.thal = thal
+            # print(age,sex,cp,chol,trestbps,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal)
+            heart.save()
+
             ob=Heart.objects.latest('id')
             sur=pred_heart(ob)
             sur=", ".join( repr(e) for e in sur).strip("''")
             context={}
             if sur== '1':
                 
-                name= "Yes, You are suffuring from heart problem"
+                name= "Yes, You are suffuring from heart problems"
                 predicted_disease_name="Heart"
                 predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=predicted_disease_name)
                 predict.save()
@@ -176,13 +266,13 @@ def heart(request):
                     'disease_doctor_list':disease_doctor_list
                 }
             elif sur=='0':
-                name="You are not suffuring from heart problmem"
+                name="You are not suffuring from heart problems"
                 context={
                     'sur':name,
                 }
             
             return render(request,'patient/heart_results.html', context)
-
+            
 
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
@@ -242,8 +332,7 @@ def dashboard(request):
 
 @login_required(login_url='patient_login')
 
-def form(request):
-    pass
+
 
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])

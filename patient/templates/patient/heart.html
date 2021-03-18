@@ -1,47 +1,171 @@
 {% extends "base.html" %}
 {% block body_content %}
 
+
+
+
 <div class="page-wrapper" >
-    <div class="content" style="background-color: skyblue;">
-        <div class="row">
-            <div class="col-sm-12">
-                <h4 class="page-title">Heart check up</h4>
-                <h4 class="page-title">Enter the following parameters:</h4>
+    <div class="content">
+                <div class="row">
+                    <div class="col-sm-12">
+                        <h4 class="page-title"><strong>Please, choose and enter following parameters.</strong></h4>
+                    </div>
+                </div>
+            <div class="card-box" style="background-color: skyblue;">
+       
+           
+      <form method="POST" action="/patient/heart/" enctype="multipart/form-data">
+        {% csrf_token %}
+         
+        <h3 class="card-title"></h3>
+          
+        <form>
+            <div class="form-group row">
+              <label for="inputAge" class="col-sm-2 col-form-label">Age</label>
+              <div class="col-sm-3">
+                <input type="password" name="age" class="form-control" id="age" placeholder="Age in year">
+              </div>
             </div>
-        </div>
-        <form method="POST" action="" enctype="multipart/form-data">
-            {% csrf_token %}
-        {{heart_form.as_ul}}
-    
-        <button type="Check" class="btn btn-primary btn-user "> Check</button>
-        </form>
-            <br><hr>
-        <div>
-            <h3>Attribute Information:</h3>
-        <h6>
-        0. age
-        </h6>
-        <h6>1.sex</h6>
-        <h6>2.chest pain type (4 values)</h6>
-        <h6>3.resting blood pressure</h6>
-        <h6>4.serum cholestoral in mg/dl</h6>
-        <h6>5.fasting blood sugar > 120 mg/dl</h6>
-        <h6>electrocardiographic results (values 0,1,2)</h6> 
-        <h6>7.maximum heart rate achieved</h6>
-        <h6>8.exercise induced angina</h6>
-        <h6>9.oldpeak = ST depression induced by exercise relative to rest</h6>
-        <h6>10.the slope of the peak exercise ST segment</h6>
-        <h6>11.number of major vessels (0-3) colored by flourosopy</h6>
-        <h6>12.thal: 0 = normal; 1 = fixed defect; 2 = reversable defect</h6>
-        <h6>13. The names and social security numbers of the patients were recently removed from the database, replaced with dummy values.</h6>
-        </div>
-        </div>
 
 
+            <class class="form-group row" >
+                <label for="inputPassword" class="col-sm-2 col-form-label">Sex</label>
+                <div class="col-sm-3">
 
-    </div>
-    {{sur}}
-    
+                    <select class="form-control" name="sex">
+                        <option>Male</option>
+                        <option>Female</option>
+                        <option>Other</option>
+                      </select>
+                </div>
+            </class>
+                
+
+            <class class="form-group row" >
+                <label for="inputPassword" class="col-sm-2 col-form-label">chest pain type(Cp)</label>
+                <div class="col-sm-3">
+
+                    <select class="form-control" name="cp">
+                        <option>typical angina</option>
+                        <option>atypical angina</option>
+                        <option> non-anginal pain</option>
+                        <option> asymptomatic</option>
+                      </select>
+                </div>
+            </class>
+
+            <div class="form-group row">
+                <label for="inputAge" class="col-sm-2 col-form-label">resting blood pressure(Trestbps)</label>
+                <div class="col-sm-3">
+                  <input type="password" name = "trestbps" class="form-control" id="trestbps" placeholder="Trestbps in number">
+                </div>
+              </div>
+
+              <div class="form-group row">
+                <label for="inputAge" class="col-sm-2 col-form-label">serum cholestoral in mg/dl(chol)</label>
+                <div class="col-sm-3">
+                  <input type="password" class="form-control" name="chol" id="chol" placeholder="chol in number">
+                </div>
+              </div>
+
+              <class class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">fasting blood sugar > 120 mg/dl(fbs)</label>
+                <div class="col-sm-3">
+
+                    <select class="form-control" name="fbs">
+                        <option>true</option>
+                        <option>false</option>
+                      </select>
+                </div>
+            </class>
+
+            <class class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">resting electrocardiographic results (restecg)</label>
+                <div class="col-sm-3">
+
+                    <select class="form-control" name="restecg">
+                        <option>Normal</option>
+                        <option>having ST-T</option>
+                        <option>hypertrophy</option>
+                      </select>
+                </div>
+            </class>
 
 
+            <div class="form-group row">
+                <label for="inputAge" class="col-sm-2 col-form-label">maximum heart rate achieved(thalach)</label>
+                <div class="col-sm-3">
+                  <input type="password" class="form-control"  name="thalach" id="thalach" placeholder="thalach in number">
+                </div>
+              </div>
+            
+              <class class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">exercise induced angina(exang)</label>
+                <div class="col-sm-3">
+
+                    <select class="form-control" name="exang">
+                        <option>yes</option>
+                        <option>no</option>
+                        
+                      </select>
+                </div>
+            </class>
+            
+            <div class="form-group row">
+                <label for="inputAge" class="col-sm-2 col-form-label">ST depression induced by exercise relative to rest(oldpeak)</label>
+                <div class="col-sm-3">
+                  <input type="password" class="form-control" name="oldpeak" id="oldpeak" placeholder="oldpeak in number">
+                </div>
+              </div>
+            
+
+              <class class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">the slope of the peak exercise ST segment(slope)</label>
+                <div class="col-sm-3">
+
+                    <select class="form-control" name="slope">
+                        <option>upsloping</option>
+                        <option>flat</option>
+                        <option>downsloping</option>
+                        
+                      </select>
+                </div>
+            </class>
+
+
+            <class class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">number of major vessels (0-3) colored by flourosopy(ca)</label>
+                <div class="col-sm-3">
+
+                    <select class="form-control" name="ca">
+                        <option>0</option>
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        
+                      </select>
+                </div>
+            </class>
+
+
+            <class class="form-group row">
+                <label for="inputPassword" class="col-sm-2 col-form-label">thal</label>
+                <div class="col-sm-3">
+
+                    <select class="form-control" name="thal">
+                        <option>normal</option>
+                        <option>fixed defect</option>
+                        <option>reversable defect</option>
+                      </select>
+                </div>
+            </class>
+           
+            <button type="Check" class="btn btn-primary btn-user ">Submit</button>
+
+            </form>     
+      </div>
+      </div>
+      </div>
+ 
 {% endblock %}

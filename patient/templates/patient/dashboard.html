@@ -4,7 +4,7 @@
 
 {% block body_content %}
 
-<div class="page-wrapper">
+<div class="page-wrapper" >
   <div class="content">
               <div class="row">
                   <div class="col-sm-12">
@@ -18,7 +18,7 @@
       {% csrf_token %}
        
          <h3 class="card-title"></h3>
-         <!-- $('select').selectpicker(); -->
+         
         
         <h4>symptoms 1</h4>
         <select class="selectpicker" name = 'value1' >
@@ -89,7 +89,7 @@
         </select>
         <br>
         <br>
-        <h5>symptoms 6</h5>
+        <h4>symptoms 6</h4>
         <select class="selectpicker" name = 'value6'>
           <option>vomiting</option>
           <option>mild_fever</option>
@@ -106,9 +106,9 @@
         <br>
         <br>
 
-          <!-- {{disease_form.as_p}} -->
          
-          <button type="Check" class="btn btn-primary btn-user "> Check</button>
+         
+          <button type="Check" class="btn btn-primary btn-user "> Submit</button>
 
 
           </form>

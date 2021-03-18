@@ -10,7 +10,7 @@ path('patient_register/', views.patient_register,name='patient_register'),
 path('patient_profile/',views.patient_profile,name='patient_profile'),
 path('my_profile/',views.my_profile,name="my_profile"),
 
-path('form/', views.form, name="form"),
+# path('form/', views.form, name="form"),
 
 path('search_doctor/', views.search_doctor,name="search_doctor"),
 path('search_doctor/doctor_profile/<int:pk>',views.doctor_profile),

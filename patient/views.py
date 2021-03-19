@@ -54,7 +54,7 @@ def showimage(request):
         result=pred1(imagefile)
         
         context={}
-        if result[0][0] == 1:
+        if result[0][0] >= 0.5:
             prediction = 'You are suffering from pneumonia'
             disease_name="Pneumonia"
             # saving  user information who predict pneumonia and suggesting doctors
@@ -72,7 +72,7 @@ def showimage(request):
             'disease_doctor_list':disease_doctor_list,
             }
             return render(request, 'patient/image.html', context)
-        else:
+        elif result[0][0] <= 0.5:
             prediction = "Your health is Normal"
             context= {
             'imagefile':imagefile,
@@ -116,9 +116,9 @@ def diabetes(request):
             # print('*'*8,sur)
 
             sur=", ".join( repr(e) for e in sur).strip("''")
-            print("***********", sur)
+            # print("***********", sur)
             
-            if sur== '0':
+            if sur== '1':
                 context = {}
                 result= "Yes, You are suffering  from Diabetes problems"
                 predicted_disease_name="Diabetes"
@@ -136,7 +136,7 @@ def diabetes(request):
                 }
                 return render(request,'patient/diabetes_results.html', context)
 
-            elif sur=='1':
+            elif sur=='0':
                 context = {}
                 context={'sur':'You are not suffering from diabetes problem',}
                 return render(request,'patient/diabetes_results.html', context)

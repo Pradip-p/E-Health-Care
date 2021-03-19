@@ -113,14 +113,13 @@ def diabetes(request):
             sur=", ".join( repr(e) for e in sur).strip("''")
             print("***********", sur)
             
-            if sur== '1':
+            if sur== '0':
                 context = {}
                 result= "Yes, You are suffering  from Diabetes problems"
-                disease_name="Diabetes"
-                # saving  user information who predict disease and suggesting doctors
-                predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=disease_name)
+                predicted_disease_name="Diabetes"
+                predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=predicted_disease_name)
                 predict.save()
-                disease=Disease1.objects.filter(name__icontains=disease_name)
+                disease=Disease1.objects.filter(name__icontains=predicted_disease_name)
                 listDoctorID=[]
                 for d in disease:
                     listDoctorID.append(d.doctor.id)
@@ -132,7 +131,7 @@ def diabetes(request):
                 }
                 return render(request,'patient/diabetes_results.html', context)
 
-            elif sur=='0':
+            elif sur=='1':
                 context = {}
                 context={'sur':'You are not suffering from diabetes problem',}
                 return render(request,'patient/diabetes_results.html', context)
@@ -243,7 +242,7 @@ def heart(request):
             heart.slope = slope
             heart.ca = ca
             heart.thal = thal
-            # print(age,sex,cp,chol,trestbps,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal)
+            print(age,sex,cp,chol,trestbps,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal)
             heart.save()
 
             ob=Heart.objects.latest('id')

@@ -17,36 +17,66 @@
     <label for="id_email">Email address</label>&nbsp &nbsp
     <input class="form-control" value="{{request.user.email}}"  name="email"
       maxlength="254" id="id_email">
+      <span class="text-danger" >
+        {{user_form.email.errors}}
+</span>
   </div>
   <br />
   <div class="form-group"><label for="id_name">Name</label>&nbsp &nbsp <input type="text" value="{{request.user.profile.name}}" name="name"
-      maxlength="20" required id="id_name" class="form-control"></div>
+      maxlength="20"  class="form-control">
+      <span class="text-danger" >
+        {{patient_profile.name.errors}}
+</span>
+    </div>
 
   <br />
   <div class="form-group"><label for="id_phone_number">Phone number</label> &nbsp &nbsp<input type="text"
-      class="form-control" value="{{request.user.profile.phone_number}}" name="phone_number" maxlength="17"
-      id="id_phone_number"></div>
+      class="form-control" value="{{request.user.profile.phone_number}}" name="phone_number" maxlength="17">
+      <span class="text-danger" >
+        {{patient_profile.phone_number.errors}}
+</span>  
+  </div>
   <br />
   <div class="form-group"><label for="id_address">Address</label>&nbsp &nbsp <input
-      value="{{request.user.profile.address}}" type="text" class="form-control" name="address" maxlength="40" required
-      id="id_address"></div>
+      value="{{request.user.profile.address}}" type="text" class="form-control" name="address" maxlength="40">
+      <span class="text-danger" >
+        {{patient_profile.address.errors}}
+</span>  
+  </div>
   <br />
   <div class="form-group"><label for="id_gender">Gender</label> &nbsp &nbsp<select class="form-control form-control-lg"
       value="{{request.user.profile.gender}}" name="gender" id="id_gender">\n <option readonly value="Female">Female
       </option>\n\n <option readonly value="Male" selected>Male</option>\n\n <option readonly value="Other">Other
-      </option>\n\n</select></div>
+      </option>\n\n</select>
+      <span class="text-danger" >
+        {{patient_profile.gender.errors}}
+</span>
+    </div>
   <br />
   <div class="form-group"><label for="id_age">Age</label> &nbsp &nbsp<input class="form-control" type="text" name="age"
-      value="{{request.user.profile.age}}" maxlength="20" required id="id_age"></div>
+      value="{{request.user.profile.age}}" maxlength="20">
+      <span class="text-danger" >
+        {{patient_profile.age.errors}}
+</span> 
+    </div>
   <br />
   <div class="form-group"><label for="id_status">Status</label> &nbsp &nbsp<select name="status" id="id_status"
       class="form-control form-control-lg">\n <option value="Single" selected>Single</option>\n\n <option
-        value="Married">Married</option>\n\n</select></div><br />
+        value="Married">Married</option>\n\n</select>
+      
+        <span class="text-danger" >
+          {{patient_profile.status.errors}}
+  </span>
+      </div><br />
 
   <div class="form-group"><label for="id_profile_pic">Profile Picture</label>
     <br />
     <br />
-    <input class="form-control-file" type="file" name="profile_pic" accept="image/*" id="id_profile_pic" value="{{request.user.profile.profile_pic}}"></div>
+    <input class="form-control-file" type="file" name="profile_pic" accept="image/*"  value="{{request.user.profile.profile_pic}}">
+    <span class="text-danger" >
+      {{patient_profile.profile_pic.errors}}
+</span>
+  </div>
   <br />
 
 

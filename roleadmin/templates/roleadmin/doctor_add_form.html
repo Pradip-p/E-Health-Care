@@ -19,6 +19,9 @@
                                 {{ userForm.first_name|as_crispy_field }}
                                 <!-- <label for="id_name">Doctor Name</label>  -->
                                 <!-- <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name"> -->
+                                <span class="text-danger" >
+                                    {{userForm.first_name.errors}}
+                            </span>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -26,6 +29,9 @@
                                 {{ userForm.last_name|as_crispy_field }}
                                 <!-- <label for="id_name">Doctor Name</label>  -->
                                 <!-- <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name"> -->
+                                <span class="text-danger" >
+                                    {{userForm.last_name.errors}}
+                            </span>
                             </div>
                         </div>
                         <div class="col-sm-6">
@@ -33,29 +39,43 @@
                             {{ userForm.email|as_crispy_field }}
                                 <!-- <label for="id_email">Email:</label>     -->
                                 <!-- <input value="" class="form-control" type="email" name="email" maxlength="254" required id="id_email"> -->
+                                <span class="text-danger" >
+                                    {{userForm.email.errors}}
+                            </span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 {{ userForm.username|as_crispy_field }}
+                                <span class="text-danger" >
+                                    {{userForm.username.errors}}
+                            </span>
                                
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 {{ userForm.password|as_crispy_field }}
-
+                                <span class="text-danger" >
+                                    {{userForm.password.errors}}
+                            </span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 {{doctor_add_form.address|as_crispy_field}}
+                                <span class="text-danger" >
+                                    {{doctor_add_form.address.errors}}
+                            </span>
 
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 {{doctor_add_form.phone_number|as_crispy_field}}
+                                <span class="text-danger" >
+                                    {{doctor_add_form.phone_number.errors}}
+                            </span>
                                 <!-- <label for="id_phone_number">Phone Number</label>  -->
                                 <!-- <input class="form-control" type="text" name="phone_number" maxlength="17" id="id_phone_number">  -->
                             </div>
@@ -71,43 +91,62 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 {{doctor_add_form.picture|as_crispy_field}}
+                                <span class="text-danger" >
+                                    {{doctor_add_form.picture.errors}}
+                            </span>
                                
                             </div>
                         </div>
                         <div class="col-sm-6">
                         <div class="form-group">
                             {{doctor_add_form.gender|as_crispy_field}}
+                            <span class="text-danger" >
+                                {{doctor_add_form.gender.errors}}
+                        </span>
 
                         </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 {{doctor_add_form.doctorID|as_crispy_field}}
-
+                                <span class="text-danger" >
+                                    {{doctor_add_form.doctorID.errors}}
+                            </span>
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 {{doctor_add_form.department|as_crispy_field}}
 
+                                <span class="text-danger" >
+                                    {{doctor_add_form.department.errors}}
+                            </span>
+
                             </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
                                 {{doctor_add_form.education_degree|as_crispy_field}}
-
+                                <span class="text-danger" >
+                                    {{doctor_add_form.education_degree.errors}}
+                            </span>
                             </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {{doctor_add_form.education_college|as_crispy_field}}
+                                    <span class="text-danger" >
+                                        {{doctor_add_form.education_college.errors}}
+                                </span>
 
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     {{doctor_add_form.education_year|as_crispy_field}}
-
+                                    <span class="text-danger" >
+                                        {{doctor_add_form.education_year.errors}}
+                                </span>
                             </div>
                             </div>
                             <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/> -->

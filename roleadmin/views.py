@@ -47,20 +47,10 @@ def disease(request):
     if search_term==None:
         search_term=""
     diseases=Disease1.objects.filter(Q(name__icontains=search_term)|Q(doctor__user__first_name__icontains=search_term)|Q(doctor__user__last_name__icontains=search_term)).order_by('-id')
-    # doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term)| Q(department__icontains=search_term))
-    # doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
-    # doctors=DoctorInfo.objects.all()
-    # paginator=Paginator(diseases,8)
-    # try:
-        # diseases=paginator.page(page)
-    # except PageNotAnInteger:
-        # diseases=paginator.page(1)
-    # except EmptyPage:
-        # diseases=paginator.page(paginator.num_pages)
+    
     context={
         'diseases':diseases,
     } 
-    # return render(request,'roleadmin/doctor_list.html',context)   
     return render(request,'roleadmin/disease.html',context)
 
 @login_required(login_url="roleadmin_login")
@@ -117,9 +107,7 @@ def doctors_list(request):
     search_term=request.GET.get('term')
     if search_term==None:
         search_term=""
-    # doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term)| Q(department__icontains=search_term))
     doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
-    # doctors=DoctorInfo.objects.all()
     paginator=Paginator(doctors,8)
     try:
         doctors=paginator.page(page)
@@ -132,26 +120,6 @@ def doctors_list(request):
     } 
     return render(request,'roleadmin/doctor_list.html',context)
 
-# @login_required(login_url="roleadmin_login")
-# def add_doctor(request):
-#     if request.method=='POST':
-#         doctor_add_form=DoctorForm(request.POST or None,request.FILES or None)
-#         if doctor_add_form.is_valid():
-#             add_doctor=doctor_add_form.save(commit=False)
-#             # add_feedback.uploaded_by=request.user.profile
-#             add_doctor.save()
-#             return redirect('doctors_list')
-#         else:
-#             context={
-#                 'doctor_add_form':doctor_add_form
-#             }
-#             return render(request,'roleadmin/doctor_add_form.html',context)
-#     else:
-#         doctor_add_form=DoctorForm()
-#         context={
-#             'doctor_add_form':doctor_add_form
-#         }
-#         return render(request,'roleadmin/doctor_add_form.html',context)
 @login_required(login_url="roleadmin_login")
 @allowed_users(allowed_roles=['ADMIN'])
 def add_doctor(request):
@@ -170,7 +138,10 @@ def add_doctor(request):
             doctor.save()
             my_doctor_group=Group.objects.get_or_create(name='DOCTOR')
             my_doctor_group[0].user_set.add(user)
-        return redirect('doctors_list')
+            return redirect('doctors_list')
+        else:
+            mydict={'userForm':userForm,'doctor_add_form':doctor_add_form}
+            return render(request,'roleadmin/doctor_add_form.html',context=mydict)
     return render(request,'roleadmin/doctor_add_form.html',context=mydict)
 
 
@@ -195,6 +166,9 @@ def edit_doctor(request,pk):
             user.save()
             doctor_add_form.save()
             return redirect('doctors_list')
+        else:
+            mydict={'userForm':userForm,'doctor_add_form':doctor_add_form}
+            return render(request,'roleadmin/doctor_add_form.html',context=mydict)
     return render(request,'roleadmin/doctor_edit_form.html',context=mydict)
 
 @login_required(login_url="roleadmin_login")
@@ -244,8 +218,7 @@ def patient_delete(request,pk):
         patient=Profile.objects.filter(user_id__in=users).get(id=pk)
     except:
         return redirect('patients_list')        
-    # user=User.objects.get(id=doctor.user_id)
-    # user.delete()
+    
     patient.delete()
     return redirect('patients_list')    
 

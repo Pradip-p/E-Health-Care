@@ -83,14 +83,15 @@
                     <li>
                         <div class="contact-cont">
                             <div class="float-left user-img m-r-10">
-                                <a href="profile.html" title="John Doe">
+                                <!-- <a href="profile.html" title="John Doe"> -->
                                     {% if doctor.picture.url != '' %}
                                     <img src="{{doctor.picture.url}}" alt="" class="w-40 rounded-circle" style="max-height: fit-content;">
                                     {% else %}
                                     <img src="{% static 'assets/img/user.png' %}" alt="alt" class="w-40 rounded-circle">
                                     {% endif %}
                                     <span class="status online">                     
-                                    </span></a>
+                                    </span>
+                                <!-- </a> -->
                             </div>
                             <div class="contact-info">
                                 <span class="contact-name text-ellipsis">{{doctor.user.first_name}}&nbsp;{{doctor.user.last_name}}</span>

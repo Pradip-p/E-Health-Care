@@ -43,8 +43,24 @@ def dashboard_doctor(request):
     search_term = request.GET.get('term')
     # users=User.objects.filter(groups__name="PATIENT")
     contex = {}
-    disease1 = Disease1.objects.filter(doctor__id=request.user.id)
+    from doctor.models import DoctorInfo
+    doctor=DoctorInfo.objects.filter(user__id=request.user.id)
+    doctorID=[]
+    for i in doctor:
+        doctorID.append(i.id)
+    # print(request.user.id)
+    # hello=Disease1.objects.all()
+    # print(hello)
+    # for d in hello:
+        # print(d)
+
+    # for d in hello:
+        # print(d)
+    # print(request.user.id)
+    disease1 = Disease1.objects.filter(doctor__id__in=doctorID)
+    print(disease1)
     disease = []
+    # print(disease1)
     for d in disease1:
         # print(d.name)
         disease.append(d.name)

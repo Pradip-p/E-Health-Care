@@ -36,11 +36,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 @allowed_users(allowed_roles=['PATIENT'])
 #for Pnemonia check
 def showimage(request):  
-    # lastimage= Image.objects.last()
-    # if lastimage == None:
-    # 	lastimage = ''
-    # else:
-    # imagefile= lastimage.imagefile
+    
     form= ImageForm(request.POST or None, request.FILES or None)
     # contex={'form': form}
     if form.is_valid():
@@ -176,7 +172,6 @@ def heart(request):
 
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
-#Disease prediction as well dashboard !!
 def dashboard(request):
     if request.method =="POST":
         contex = {}
@@ -334,20 +329,15 @@ def search_doctor(request):
         doctorID=[]
         for d in disease:
             doctorID.append(d.doctor.id)
-        # print(doctor_name)
-        # doctors=DoctorInfo.objects.filter(Q())
         doctors=DoctorInfo.objects.filter(id__in=doctorID) or DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term)|Q(department__icontains=search_term))
         context={
             'doctors':doctors,
-            # 'count':count
         }
         return render(request,'patient/search_doctor.html',context)
-    # else:
     else:
         doctors=[]
         context={
             "doctors":doctors,
-            # "count":count
         }
         return render(request,'patient/search_doctor.html',context)
 
@@ -372,13 +362,11 @@ def my_profile(request):
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
 def home(request):
-    # if request.method=='GET':
     page=request.GET.get('page',1)
     search_term=request.GET.get('term')
     if search_term==None:
         search_term=""
     doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
-    # doctors=DoctorInfo.objects.all()
     paginator=Paginator(doctors,8)
     try:
         doctors=paginator.page(page)
@@ -389,16 +377,7 @@ def home(request):
     context={
         'doctors':doctors,
     } 
-    return render(request,'patient/home.html',context)
-    # elif request.method=='POST':
-    #     search_term=request.POST.get('term')
-    #     if search_term==None:
-    #         search_term=""
-    #     doctors=DoctorInfo.objects.filter(Q(name__icontains=search_term) | Q(address__icontains=search_term))
-    #     context={
-    #         'doctors':doctors
-    #     }
-    #     return render(request,'patient/home.html',context)
+    return render(request,'patient/home.html',context) 
 
 
 

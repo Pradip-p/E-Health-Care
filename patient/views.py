@@ -39,7 +39,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
 def showimage(request): 
-    form= BlockImageForm(request.POST or None, request.FILES or None)
+    form= BlockImageForm(request.POST, request.FILES)
 
 
     if form.is_valid():

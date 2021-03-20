@@ -133,6 +133,9 @@ class Diabetes(models.Model):
 class Image(models.Model):
     
     imagefile= models.FileField(upload_to='images/')
+
+class ImageBlock(models.Model):
+    imageblock = models.FileField(upload_to='images/')
   
     
 

@@ -1,13 +1,18 @@
 from django import forms
 from api.models import Disease
-from patient.models import Heart, Diabetes, Image
+from patient.models import Heart, Diabetes, Image, ImageBlock
+from patient.models import Heart, Diabetes
+
 
 class ImageForm(forms.ModelForm):
     class Meta:
         model= Image
         fields= ["imagefile"]
-from patient.models import Heart, Diabetes
 
+class BlockImageForm(forms.ModelForm):
+    class Meta:
+        model = ImageBlock
+        fields = ["imageblock"]
 
 
 class DiabetesForm(forms.ModelForm):

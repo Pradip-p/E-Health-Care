@@ -20,8 +20,9 @@ import requests
 from Health.forms import *
 from api.models import Disease
 from api import diseaseml
-# from . import heart
+
 from patient.heart import pred_heart
+from patient.image_block import predImageBlock
 from patient.Diabetes import pred_diabetes
 from patient.pneumonia import pred1
 from api.diseaseml import pred
@@ -37,59 +38,112 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 #For Pnemonia check
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
-def showimage(request):  
+def showimage(request): 
+    form= BlockImageForm(request.POST or None, request.FILES or None)
 
-
-    form= ImageForm(request.POST, request.FILES)
-
-    
-    # form= ImageForm(request.POST or None, request.FILES or None)
-    # contex={'form': form}
 
     if form.is_valid():
         form.save()
-        lastimage= Image.objects.last()
-        imagefile= lastimage.imagefile
-        
-        result=pred1(imagefile)
-        
-        context={}
+        lastimage = ImageBlock.objects.latest('id')
+        imagefile = lastimage.imageblock
+        result = predImageBlock(imagefile)
+
+
         if result[0][0] >= 0.5:
-            prediction = 'You are suffering from pneumonia'
-            disease_name="Pneumonia"
-            # saving  user information who predict pneumonia and suggesting doctors
-            predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=disease_name)
-            predict.save()
-            disease=Disease1.objects.filter(name__icontains=disease_name)
-            listDoctorID=[]
-            for d in disease:
-                listDoctorID.append(d.doctor.id)
-            disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
-            context= {
+
+            #For pnenumonia prediction
+
+            result=pred1(imagefile)
+        
+            context={}
+            if result[0][0] == 1:
+                prediction = 'You are suffering from pneumonia'
+                disease_name="Pneumonia"
+                # saving  user information who predict pneumonia and suggesting doctors
+                predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=disease_name)
+                predict.save()
+                disease=Disease1.objects.filter(name__icontains=disease_name)
+                listDoctorID=[]
+                for d in disease:
+                    listDoctorID.append(d.doctor.id)
+                disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
+                context= {
+                'imagefile':imagefile,
+                'form': form,
+                'sur':prediction,
+                'disease_doctor_list':disease_doctor_list,
+                }
+                return render(request, 'patient/image.html', context)
+            else:
+                prediction = "Your health is Normal"
+                context= {
+                'imagefile':imagefile,
+                'form': form,
+                'sur':prediction,
+                }        
+                return render(request, 'patient/image.html', context)
+        #     prediction = 'Your image is verified'
+
+        #     context= {
+        #     'imagefile':imagefile,
+        #     'form': form,
+        #     'sur':prediction,
+        #     # 'disease_doctor_list':disease_doctor_list,
+        #     }
+        #     return render(request, 'patient/image.html', context)
+        else:   
+            prediction = "You can not upload this image"
+            contex = {'sur': prediction}
+            return render(request, 'patient/image.html', contex)
+    if request.method == "GET":
+        sur = ' '
+        imagefile = ''
+        context= {
             'imagefile':imagefile,
             'form': form,
-            'sur':prediction,
-            'disease_doctor_list':disease_doctor_list,
+            'sur':sur,
             }
-            return render(request, 'patient/image.html', context)
-        elif result[0][0] <= 0.5:
-            prediction = "Your health is Normal"
-            context= {
-            'imagefile':imagefile,
-            'form': form,
-            'sur':prediction,
-            }        
-            return render(request, 'patient/image.html', context)
+        return render(request, 'patient/image.html', context)
     
 
-    sur = ' '
-    imagefile = ''
-    context= {
-        'imagefile':imagefile,
-        'form': form,
-        'sur':sur,
-        }
-    return render(request, 'patient/image.html', context)
+
+    # if form.is_valid():
+    #     form.save()
+    #     lastimage= Image.objects.last()
+    #     imagefile= lastimage.imagefile
+        
+        # result=pred1(imagefile)
+        
+        # context={}
+        # if result[0][0] >= 0.5:
+        #     prediction = 'You are suffering from pneumonia'
+        #     disease_name="Pneumonia"
+        #     # saving  user information who predict pneumonia and suggesting doctors
+        #     predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=disease_name)
+        #     predict.save()
+        #     disease=Disease1.objects.filter(name__icontains=disease_name)
+        #     listDoctorID=[]
+        #     for d in disease:
+        #         listDoctorID.append(d.doctor.id)
+        #     disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
+        #     context= {
+        #     'imagefile':imagefile,
+        #     'form': form,
+        #     'sur':prediction,
+        #     'disease_doctor_list':disease_doctor_list,
+        #     }
+        #     return render(request, 'patient/image.html', context)
+        # elif result[0][0] <= 0.5:
+        #     prediction = "Your health is Normal"
+        #     context= {
+        #     'imagefile':imagefile,
+        #     'form': form,
+        #     'sur':prediction,
+        #     }        
+        #     return render(request, 'patient/image.html', context)
+    
+
+
     
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])

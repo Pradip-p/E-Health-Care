@@ -15,14 +15,7 @@ class UserForm(UserCreationForm):
         model=User
         fields=['username','email','password1','password2']
 
-# class UserForm(UserCreationForm):
-#     class Meta:
-#         model=User
-#         fields=['username','email','password1','password2']
-	# def __init__(self,*args,**kwargs):
-	# 	super(UserForm,self).__init__(*args,**kwargs)
-	# 	self.fields['email'].error_messages.update({'required':'Please enter a valid email addresss'})
-	
+
 	
 class ProfileForm(forms.ModelForm):
 
@@ -77,8 +70,3 @@ class FeedbackForm(forms.ModelForm):
 		self.fields['title'].error_messages.update({'required':'Title can hold atmost 50 characters'})
 		self.fields['picture'].error_messages.update({'required':'Please upload a picture'})
 		self.fields['text'].error_messages.update({'required':'Description should only be 200 characters long'})
-		# error_messages={
-		# 	'title':'Title can hold atmost 50 characters',
-		# 	'text':'Description should only be 200 characters long',
-		# 	'picture':'Please upload a picture'
-		# }

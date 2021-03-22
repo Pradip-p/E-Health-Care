@@ -82,15 +82,7 @@ def showimage(request):
                 'sur':prediction,
                 }        
                 return render(request, 'patient/image.html', context)
-        #     prediction = 'Your image is verified'
 
-        #     context= {
-        #     'imagefile':imagefile,
-        #     'form': form,
-        #     'sur':prediction,
-        #     # 'disease_doctor_list':disease_doctor_list,
-        #     }
-        #     return render(request, 'patient/image.html', context)
         else:   
             prediction = "You can not upload this image"
             contex = {'sur': prediction}

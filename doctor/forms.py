@@ -2,11 +2,18 @@ from django import forms
 from doctor.models import DoctorInfo
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.forms.widgets import DateInput
 
 class DoctorForm(forms.ModelForm):
     class Meta:
         model=DoctorInfo
         exclude=('user',)
+        widgets = {
+			# 'appoin': DateInput(attrs={'type': 'date'}),
+			'education_year' :  DateInput(attrs={'type': 'date'}),
+			# 'appointment_end_time' :  DateInput(attrs={'type': 'time'}),
+
+		}
     def __init__(self,*args,**kwargs):
         super(DoctorForm,self).__init__(*args,**kwargs)
         self.fields['phone_number'].error_messages.update({'required':'Phone number must be entered in the format +999999999 Up to 15 digits allowed.'})
@@ -17,7 +24,7 @@ class DoctorForm(forms.ModelForm):
         self.fields['doctorID'].error_messages.update({'required':'Doctor ID field must be unique'})
         self.fields['education_college'].error_messages.update({'required':' Can hold max length of 100 characters'})
         self.fields['education_degree'].error_messages.update({'required':' Can hold max length of 100 characters'})
-        self.fields['education_year'].error_messages.update({'required':'This must be an integer'})
+        self.fields['education_year'].error_messages.update({'required':'Enter a year'})
 
 class UserForm(UserCreationForm):
     class Meta:

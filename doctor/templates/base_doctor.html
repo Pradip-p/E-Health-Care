@@ -11,12 +11,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0">
     <link rel="shortcut icon" type="image/x-icon" href="{% static 'assets/img/favicon.ico' %}">
     <title>E-Health Care</title>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/bootstrap.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}"s>
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js" integrity="sha512-GDey37RZAxFkpFeJorEUwNoIbkTwsyC736KNSYucu1WJWFK9qTdzYub8ATxktr6Dwke7nbFaioypzbDOQykoRg==" crossorigin="anonymous"></script> -->
     <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
     <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
     
@@ -33,7 +34,7 @@
     <div class="main-wrapper">
         <div class="header">
 			<div class="header-left">
-				<a href="index-2.html" class="logo">
+				<a href="" class="logo">
 					<img src="{% static 'assets/img/logo.png' %}" width="35" height="35" alt=""> <span>E-Health Care</span>
 				</a>
 			</div>
@@ -136,6 +137,9 @@
                         <li class="menu-title">Main</li>
                         <li class="active">
                             <a href=""><i class="fa fa-wheelchair"></i> <span>Patients</span></a>
+                        </li>
+                        <li>
+                            <a href="{% url 'appointment' %}"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                         </li>
 						<!-- <li>
                             <a href=""><i class="fa fa-user-md"></i> <span>Doctors</span></a>
@@ -323,6 +327,7 @@
            });
            })
      </script>
+
 
 </body>
 

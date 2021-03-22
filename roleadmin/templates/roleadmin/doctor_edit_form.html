@@ -137,11 +137,10 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                            <label for="id_education_year">Education year</label>
-                             <input value="{{doctor.education_year}}" class="form-control" type="text" name="education_year" maxlength="50" required id="id_education_year">
-                             <span class="text-danger" >
-                                {{doctor_add_form.education_year.errors}}
-                        </span>
+                                    {{doctor_add_form.education_year|as_crispy_field}}
+                                    <span class="text-danger" >
+                                        {{doctor_add_form.education_year.errors}}
+                                </span>
                             </div>
                             </div>
                             <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/> -->

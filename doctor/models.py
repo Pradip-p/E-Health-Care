@@ -15,8 +15,10 @@ class DoctorInfo(models.Model):
     doctorID=models.CharField(max_length=50,unique=True)
     education_college=models.CharField(max_length=100)
     education_degree=models.CharField(max_length=100)
-    education_year=models.IntegerField()
+    education_year=models.DateTimeField()
 
+    def __str__(self):
+        return self.user.first_name+" "+self.user.last_name
 
     @property
     def get_name(self):
@@ -26,7 +28,6 @@ class DoctorInfo(models.Model):
     def get_instance(self):
         return self
 
-    def __str__(self):
-        return self.user.first_name+" "+self.user.last_name
+    
 
-   
+

@@ -1,0 +1,83 @@
+{% extends 'base_doctor.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block body_content %}
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <h4 class="page-title">Edit Appointment</h4>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8 offset-lg-2">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ appointment_edit_form.appointment_day|as_crispy_field }}
+                                <!-- <label for="id_name">Doctor Name</label>  -->
+                                <!-- <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name"> -->
+                                <span class="text-danger" >
+                                    {{appointment_edit_form.appointment_day.errors}}
+                            </span>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ appointment_edit_form.appointment_date|as_crispy_field }}
+                                <!-- <label for="id_name">Doctor Name</label>  -->
+                                <!-- <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name"> -->
+                                <span class="text-danger" >
+                                    {{appointment_edit_form.appointment_date.errors}}
+                            </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ appointment_edit_form.appointment_start_time|as_crispy_field }}
+                                <!-- <label for="id_name">Doctor Name</label>  -->
+                                <!-- <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name"> -->
+                                <span class="text-danger" >
+                                    {{appointment_edit_form.appointment_start_time.errors}}
+                            </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                {{ appointment_edit_form.appointment_end_time|as_crispy_field }}
+                                <!-- <label for="id_name">Doctor Name</label>  -->
+                                <!-- <input value="" class="form-control" type="text" name="name" maxlength="40" required id="id_name"> -->
+                                <span class="text-danger" >
+                                    {{appointment_edit_form.appointment_end_time.errors}}
+                            </span>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                            {{ appointment_edit_form.appointment_status|as_crispy_field }}
+                                <!-- <label for="id_email">Email:</label>     -->
+                                <!-- <input value="" class="form-control" type="email" name="email" maxlength="254" required id="id_email"> -->
+                                <span class="text-danger" >
+                                    {{appointment_edit_form.appointment_status.errors}}
+                            </span>
+                            </div>
+                        </div>
+                            <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/> -->
+
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg btn-block">Edit Appointment</button>
+                <br/>
+                        <a href="{% url 'appointment' %}" class="btn btn-secondary btn-lg btn-block">Cancel</a>
+                </form>
+                
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+
+{% endblock %}

@@ -44,51 +44,28 @@ def doctor_logout(request):
 def dashboard_doctor(request):
 
     search_term = request.GET.get('term')
-    # users=User.objects.filter(groups__name="PATIENT")
     contex = {}
     from doctor.models import DoctorInfo
     doctor=DoctorInfo.objects.filter(user__id=request.user.id)
     doctorID=[]
     for i in doctor:
         doctorID.append(i.id)
-    # print(request.user.id)
-    # hello=Disease1.objects.all()
-    # print(hello)
-    # for d in hello:
-        # print(d)
-
-    # for d in hello:
-        # print(d)
-    # print(request.user.id)
+  
     disease1 = Disease1.objects.filter(doctor__id__in=doctorID)
     print(disease1)
     disease = []
-    # print(disease1)
     for d in disease1:
-        # print(d.name)
         disease.append(d.name)
     if search_term == None:
         search_term = ""
     new_predictions = WhoPredictDisease.objects.filter(
         predicted_disease__in=disease).filter(Q(predicted_disease__icontains=search_term) | Q(predict_by__name__icontains=search_term) | Q(predict_by__name__icontains=search_term))
-    # print(new_predictions)
-    # for p in new_predictions:
-    #     print(p.predict_by.address)
+   
     contex = {
         'predictions': new_predictions
     }
     return render(request, 'doctor/dashboard_doctor.html', contex)
-    # return render(request,'doctor/dashboard_doctor.html', contex)
 
-    # contex={}
-    # # name = request.session.get('username')
-    # # user_id = request.session.get('user_id')
-    # # if user_id:
-    # #     contex={
-    # #         'username':name
-    # #     }
-    # return render(request,'doctor/dashboard_doctor.html', contex)
-    # # return render(request,'doctor/dashboard_doctor.html', contex)
 
 @login_required(login_url='doctor_login')
 @allowed_users(allowed_roles=['DOCTOR'])
@@ -101,10 +78,9 @@ def appointment(request):
     }
     return render(request,'doctor/appointments.html',context)
 
-# def add_appointment(request):
-#     return render(request,'doctor/appointments.html')
 
-
+@login_required(login_url='doctor_login')
+@allowed_users(allowed_roles=['DOCTOR'])
 def add_appointment(request):
     if request.method=='POST':
         appointment_add_form=AddAppointmentForm(request.POST or None,request.FILES or None)

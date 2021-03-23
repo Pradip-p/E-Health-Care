@@ -1,0 +1,70 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block body_content %}
+
+<div class="page-wrapper">
+    <div class="content">
+        <div class="row">
+            <div class="col-sm-8 col-4">
+                <h4 class="page-title">Appointments</h4>
+            </div>
+        
+            <!-- <div class="col-sm-4 col-8 text-right m-b-30">
+                <form class="form-inline my-2 my-lg-0 float-right" method="GET" action="" style="text-align: right;">
+                    <input  type="text" class="form-control mr-sm-2" value="{{ request.GET.term }}" name="term" placeholder="Doctor name,speciality">
+                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="submit">Search</button>
+                  </form>
+            </div> -->
+        </div>         
+        <div class="row">
+            <div class="col-md-12">
+                <div class="table-responsive" style="max-height: 1000px; overflow-x: auto; overflow-y: auto;">
+                    <table class="table table-border table-striped custom-table datatable mb-0">
+                        <thead>
+                            <tr>
+                                <th>Appointment ID</th>
+                                <th>Doctor Name</th>
+                                <th>Appointment Date</th>
+                                <th>Appointment Time</th>
+                                <th>Appointment Day</th>
+                                <th class="text-right">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>                
+                            {% for appointment in appointments %}
+                            <tr>
+                                <td>
+                                    {{appointment.appointment_id.id}}
+                                </td>
+                                <td>{{appointment.appointment_id.create_by.user.first_name}} {{appointment.appointment_id.create_by.user.last_name}}</td>
+                                <td>{{appointment.appointment_id.appointment_date|date:"M d, Y"}}</td>
+                                <td>{{appointment.appointment_id.appointment_start_time}}-{{appointment.appointment_id.appointment_end_time}}</td>
+                                <td>{{appointment.appointment_id.appointment_day}}</td>
+                                <td class="text-right">
+                                    <!-- {% if appointment.appointment_status == 0 %}
+                                    <a class="btn btn-primary" href="take/{{appointment.id}}">Take Appoinment</a>
+                                    {% else %}
+                                    <button class="btn btn-danger">Already Booked</button>
+                                    {% endif %} -->
+                                    <div class="dropdown dropdown-action">
+                                        <a href="#" class="action-icon dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-ellipsis-v"></i></a>
+                                        <div class="dropdown-menu dropdown-menu-right">
+                                            <a class="dropdown-item" href="details/{{appointment.id}}"><i class="fa fa-pencil m-r-5"></i>View Details</a>
+                                            <a class="dropdown-item" data-toggle="tooltip" data-placement="top" title="Delete" href="cancel/{{appointment.id}}" onclick="return confirm('Are you sure want to cancel this appointment')">
+                                                <i class="fa fa-trash-o m-r-5"></i>Cancel Appointment</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

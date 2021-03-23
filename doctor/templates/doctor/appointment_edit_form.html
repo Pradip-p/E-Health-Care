@@ -13,6 +13,7 @@
             <div class="col-lg-8 offset-lg-2">
                 <form method="POST" action="" enctype="multipart/form-data">
                     {% csrf_token %}
+                    <!-- {{appointment_edit_form.as_p}} -->
                     <div class="row">
                         <div class="col-sm-6">
                             <div class="form-group">
@@ -55,16 +56,7 @@
                             </span>
                             </div>
                         </div>
-                        <div class="col-sm-6">
-                            <div class="form-group">
-                            {{ appointment_edit_form.appointment_status|as_crispy_field }}
-                                <!-- <label for="id_email">Email:</label>     -->
-                                <!-- <input value="" class="form-control" type="email" name="email" maxlength="254" required id="id_email"> -->
-                                <span class="text-danger" >
-                                    {{appointment_edit_form.appointment_status.errors}}
-                            </span>
-                            </div>
-                        </div>
+                       
                             <!-- <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text"/> -->
 
                         </div>

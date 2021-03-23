@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path,include
 from patient import views
 from django.views.generic.base import RedirectView
-
+1
 urlpatterns = [        
 path('patient/',RedirectView.as_view(url='patient_login/')),
 path('patient_login/', views.patient_login,name='patient_login'),
@@ -24,6 +24,11 @@ path('feedback/detail/<int:pk>',views.feedback_detail),
 path('feedback/edit/<int:pk>',views.feedback_edit),
 path('feedback/add_feedback',views.feedback_add),
 path('feedback/delete/<int:pk>',views.feedback_delete),
+path('view_appointment/',views.view_appointment,name="view_appointment"),
+path('patient_appointment/',views.patient_appointment,name="patient_appointment"),
+path('view_appointment/take/<int:pk>',views.take_appointment),
+path('patient_appointment/cancel/<int:pk>',views.cancel_appointment),
+path('patient_appointment/details/<int:pk>',views.details_appointment),
 
 # path('check/', views.check, name="check"),
 path('logoutpatient/', views.logoutpatient, name="logoutpatient"),

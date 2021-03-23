@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block body_content %}
+<div class="page-wrapper">
+<div class="content"> 
+    <div class="row">
+            <h4 class="page-title" style="text-align: center;">E HEALTH CARE</h4>
+    </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="project-info-box mt-0">
+                    <h5>APPOINTMENT DETAILS</h5>
+                    <hr/>
+                    <p><b>Appointment ID:</b><b>{{appointment.id}}</b></p>
+                    <p><b>PATIENT NAME:</b>{{request.user.profile.name}}</p>
+                    <p><b>CONTACT NUMBER:</b>{{request.user.phone_number}}</p>
+                    <p><b>EMAIL:</b>{{request.user.email}}</p>
+                    <p class="mb-0"><b>ADDRESS:</b>{{request.user.profile.address}}</p>
+                </div>
+                <hr/>
+                <div class="project-info-box">
+                    <p><b>DOCTOR NAME:</b>{{appointment.create_by.user.first_name}} {{appointment.create_by.user.last_name}}</p>
+                    <p><b>APPOINTMENT DATE:</b>{{appointment.appointment_date|date:"M d, Y"}}</p>
+                    <p><b>APPOINTMENT DAY:</b>{{appointment.appointment_day}}</p>
+                    <p><b>AVAILABLE TIME:</b>{{appointment.appointment_start_time}}-{{appointment.appointment_end_time}}</p>
+      
+                </div><!-- / project-info-box -->
+
+            </br>
+            <form method="POST" action="" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+             {{ appointment_form.reason|as_crispy_field }}                
+                <span class="text-danger" >
+                        {{appointment_form.reason.errors}}
+                </span>
+             </div>
+           
+         
+        <button type="submit" class="btn btn-info btn-user ">Take Appointment</button>         
+        
+        <a href="{% url 'view_appointment' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+    </div>
+    </div>
+</div>
+</div>
+
+
+
+
+
+{% endblock %}

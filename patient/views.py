@@ -35,6 +35,10 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 
+from appointment.models import AppointmentDetails,BookedAppointment
+from appointment.forms import BookedAppointmentForm
+
+
 #For Pnemonia check
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
@@ -379,8 +383,122 @@ def dashboard(request):
         return render(request, 'patient/dashboard.html')
     
 
-@login_required(login_url='patient_login')
 
+# Appointment section.........................
+@login_required(login_url='patient_login')
+@allowed_users(allowed_roles=['PATIENT'])
+def view_appointment(request):
+    page=request.GET.get('page',1)
+    search_term=request.GET.get('term')
+    context={}
+    if search_term==None:
+        search_term=""
+        appointments=AppointmentDetails.objects.all()
+        print(appointments)
+        context={
+            'appointments':appointments,
+        }
+        # doctors=DoctorInfo.objects.all()
+    elif search_term is not None:
+        disease=Disease1.objects.filter(Q(name__icontains=search_term))
+        doctor_id=[]
+        for d in disease:
+            doctor_id.append(d.doctor.id)
+        # for fetching appointment data with respect to doctor name
+        doctor=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term))
+        print(doctor)
+        name=[]
+        for n in doctor:
+            name.append(n.id)
+        appoinments=AppointmentDetails.objects.filter(Q(create_by__in=doctor_id)) or AppointmentDetails.objects.filter(Q(create_by__in=name))
+        print(appoinments)
+        context={
+            'appointments':appoinments,
+        } 
+    return render(request,'patient/appointment_list.html',context) 
+
+@login_required(login_url='patient_login')
+@allowed_users(allowed_roles=['PATIENT'])
+def take_appointment(request,pk):
+    # print(appointment.appointment_status)
+    if request.method=='POST':
+        try:
+            appointment=AppointmentDetails.objects.get(id=pk)
+        except:
+            return redirect('view_appointment')
+        if appointment.appointment_status==1:
+            return redirect('view-appointment')
+        appointment_form=BookedAppointmentForm(request.POST or None,request.FILES or None)
+        if appointment_form.is_valid():
+            appointment_form=appointment_form.save(commit=False)
+            appointment_form.booked_by=request.user.profile
+            appointment_form.appointment_id=appointment
+            appointment_form.save()
+            # changing appoinment status
+            appointment.appointment_status=1
+            appointment.save()
+            return redirect('view_appointment')
+        else:
+            appointment=AppointmentDetails.objects.get(id=pk)
+            context={
+                'appointment_form':appointment_form,
+                'appointment':appointment,
+            }
+            return render(request,'patient/take_appointment_form.html',context)
+    else:
+        appointment_form=BookedAppointmentForm()
+        appointment=AppointmentDetails.objects.get(id=pk)
+        context={
+            'appointment_form':appointment_form,
+            'appointment':appointment,
+        }
+        return render(request,'patient/take_appointment_form.html',context)
+
+@login_required(login_url='patient_login')
+@allowed_users(allowed_roles=['PATIENT'])
+def cancel_appointment(request,pk):
+    try:
+        appointment=BookedAppointment.objects.get(id=pk,booked_by=request.user.profile).prefetch_related('appointment_id')
+    except:
+        return redirect('patient_appointment')   
+    try:
+        app=AppointmentDetails.objects.filter(id=appointment[0].appointment_id.id)
+        print(app.apppointment_status)
+        app.appointment_status=0
+        app.save()
+        appointment.delete()
+    except:
+        return redirect('patient_appointment')
+    return redirect('patient_appointment')
+
+@login_required(login_url='patient_login')
+@allowed_users(allowed_roles=['PATIENT'])
+def details_appointment(request,pk):
+    print(pk)
+    try:
+        appointment=BookedAppointment.objects.get(id=pk,booked_by=request.user.profile).prefetch_related('appointment_id').prefetch_related('booked_by').prefetch_related('create_by')
+        # print(appointment)
+        # for a in appointment:
+        #     print(a.booked_by.user.email)
+    except:
+        return redirect('patient_appointment')
+    context={
+        'appointment':appointment,
+    }
+    return render(request,'patient/appointment_detail.html',context)
+
+
+
+@login_required(login_url='patient_login')
+@allowed_users(allowed_roles=['PATIENT'])
+def patient_appointment(request):
+    book=BookedAppointment.objects.filter(booked_by=request.user.profile).prefetch_related('appointment_id').prefetch_related('booked_by')
+    print(book)
+    context={
+        'appointments':book,
+    }
+    return render(request,'patient/booked_appointments.html',context)
+    # booked_appointments=BookedAppointment.objects.    
 
 
 @login_required(login_url='patient_login')

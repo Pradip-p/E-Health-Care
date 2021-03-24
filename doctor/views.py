@@ -53,10 +53,11 @@ def prescription(request):
         context = {'email': email, "prescription":prescription}
         html_message = render_to_string('doctor/mail_message.html',context)
         send_mail("Thank you for using E-Health Care services!!", "Get Well soon!!", EMAIL_HOST_USER, [email],html_message=html_message,fail_silently=False)
-        return render(request,'doctor/prescription_form.html',{'recepient':email})
+        prescription = "prescription has been sent successfully to "+" "+email
+        return render(request,'doctor/prescription_form.html',{'recepient':prescription})
 
 def doctor_logout(request):
-    print("logout user")
+   
     logout(request)
     return redirect("/")
 
@@ -73,7 +74,7 @@ def dashboard_doctor(request):
         doctorID.append(i.id)
   
     disease1 = Disease1.objects.filter(doctor__id__in=doctorID)
-    print(disease1)
+    
     disease = []
     for d in disease1:
         disease.append(d.name)
@@ -154,12 +155,12 @@ def edit_appointment(request,pk):
 @login_required(login_url='doctor_login')
 @allowed_users(allowed_roles=['DOCTOR'])
 def delete_appointment(request,pk):
-    print(pk)
+    
     try:
         appointment=AppointmentDetails.objects.get(id=pk,create_by=request.user.doctorinfo)
         appointment.delete()
     except:
-        # pass
+      
         return redirect('appointment')
     return redirect('appointment')
 
@@ -167,45 +168,15 @@ def delete_appointment(request,pk):
 @allowed_users(allowed_roles=['DOCTOR'])
 def book_appointment(request):
     appointment=AppointmentDetails.objects.filter(create_by=request.user.doctorinfo)
-    print(appointment)
+
     ID=[]
     for a in appointment:
         ID.append(a.id)
-        print(a.id)
+     
     booked_appointments=BookedAppointment.objects.filter(appointment_id__in=ID)
     context={
         'appointments':booked_appointments
     }
     return render(request,'doctor/booked_appointments.html',context)
-    print(booked_appointments)
-    # booked_appointments=BookedAppointment.objects.filter(appointment_id.create_by=request.user.doctorinfo)
-    # print(booked_appointments)
-
-"""
-
-
-def doctor_login(request):
-    contex={}
-    if request.method == 'POST':
-        username = request.POST.get('username')       
-        password = request.POST.get('password') 
-        user = DoctorInfo.objects.filter(username=username,password=password).first()
-        if user:
-            request.session['username']=user.username
-            request.session['user_id']=user.id
-            # return render(request,'doctor/dashboard.html')
-            return redirect('dashboard')
-        else:
-            messages.info(request, "Invalid Username or password")
-            doctor_form=DoctorInfoForm()
-            contex={}
-            return render(request,'doctor/login.html', contex)
-    return render(request,'doctor/login.html', contex)
-
-def logout(request):
-    user = request.session.get('user_id')
-    del user
-    return redirect('/')
-
-
-"""    
+    
+ 

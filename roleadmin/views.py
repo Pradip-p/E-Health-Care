@@ -202,7 +202,7 @@ def patient_profile(request,pk):
     try:
         users=User.objects.filter(groups__name="PATIENT")
         patient=Profile.objects.filter(user_id__in=users).get(id=pk)
-        print(patient)
+       
     except:
         return redirect('patients_list')
     context={
@@ -246,7 +246,7 @@ def our_feedback_detail(request,pk):
         feedback=Feedback.objects.get(id=pk)
     except:
         return redirect('our_feedback')
-    print(feedback)
+   
     context={
         "feedback":feedback
     }
@@ -258,15 +258,7 @@ def roleadmin_login(request):
     if request.method=='POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
-        # superuser=User.objects.filter(username=username,is_superuser=True)
-        # if superuser:
-        #     user=authenticate(request,username=username,password=password)
-        #     if user is not None:
-        #         login(request,user)
-        #         return redirect('admin_dashboard')
-        #     else:
-        #         messages.info(request,'Please enter valid credentials')
-        #         return render(request,'roleadmin/login.html')
+      
         user=authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)

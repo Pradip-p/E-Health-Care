@@ -173,10 +173,10 @@ def diabetes(request):
 
             sur=pred_diabetes(ob)
             
-            # print('*'*8,sur)
+           
 
             sur=", ".join( repr(e) for e in sur).strip("''")
-            # print("***********", sur)
+          
             
             if sur== '1':
                 context = {}
@@ -307,7 +307,7 @@ def heart(request):
             heart.slope = slope
             heart.ca = ca
             heart.thal = thal
-            print(age,sex,cp,chol,trestbps,fbs,restecg,thalach,exang,oldpeak,slope,ca,thal)
+    
             heart.save()
 
             ob=Heart.objects.latest('id')
@@ -404,7 +404,7 @@ def view_appointment(request):
     if search_term==None:
         search_term=""
         appointments=AppointmentDetails.objects.all()
-        print(appointments)
+       
         context={
             'appointments':appointments,
         }
@@ -416,12 +416,12 @@ def view_appointment(request):
             doctor_id.append(d.doctor.id)
         # for fetching appointment data with respect to doctor name
         doctor=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term))
-        print(doctor)
+       
         name=[]
         for n in doctor:
             name.append(n.id)
         appoinments=AppointmentDetails.objects.filter(Q(create_by__in=doctor_id)) or AppointmentDetails.objects.filter(Q(create_by__in=name))
-        print(appoinments)
+  
         context={
             'appointments':appoinments,
         } 
@@ -430,8 +430,7 @@ def view_appointment(request):
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
 def take_appointment(request,pk):
-    # print(pk)
-    # print(appointment.appointment_status)
+
     if request.method=='POST':
         try:
             appointment=AppointmentDetails.objects.get(id=pk)
@@ -469,14 +468,11 @@ def take_appointment(request,pk):
 @allowed_users(allowed_roles=['PATIENT'])
 def cancel_appointment(request,pk):
     try:
-        # print(pk)
-        # appointment=BookedAppointment.objects.filter(booked_by=request.user.profile).prefetch_related('appointment_id')
-        # print(appointment)
         ap=BookedAppointment.objects.get(id=pk)
-        # print(ap.appointment_id.id)
+      
         if ap.booked_by==request.user.profile:
             ad=AppointmentDetails.objects.get(id=ap.appointment_id.id)
-            # print(ad.appointment_status)
+      
             ad.appointment_status=0
             ad.save()
             ap.delete()
@@ -489,7 +485,7 @@ def cancel_appointment(request,pk):
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
 def details_appointment(request,pk):
-    # print(pk)
+    
     try:
         appointment=BookedAppointment.objects.get(id=pk)
         if appointment.booked_by !=request.user.profile:
@@ -498,11 +494,8 @@ def details_appointment(request,pk):
             context={
                 'a':appointment
             }
-        print(appointment.appointment_id.create_by.department)
-        # appointment=BookedAppointment.objects.get(id=pk,booked_by=request.user.profile).prefetch_related('appointment_id').prefetch_related('booked_by').prefetch_related('create_by')
-        # print(appointment)
-        # for a in appointment:
-        #     print(a.booked_by.user.email)
+      
+    
     except:
         return redirect('patient_appointment')
     
@@ -519,11 +512,7 @@ def export_pdf(request,pk):
             context={
                 'a':appointment
             }
-        print(appointment.appointment_id.create_by.department)
-        # appointment=BookedAppointment.objects.get(id=pk,booked_by=request.user.profile).prefetch_related('appointment_id').prefetch_related('booked_by').prefetch_related('create_by')
-        # print(appointment)
-        # for a in appointment:
-        #     print(a.booked_by.user.email)
+  
     except:
         return redirect('patient_appointment')
     response=HttpResponse(content_type='application/pdf')
@@ -547,9 +536,7 @@ def export_pdf(request,pk):
 @allowed_users(allowed_roles=['PATIENT'])
 def patient_appointment(request):
     book=BookedAppointment.objects.filter(booked_by=request.user.profile).prefetch_related('appointment_id').prefetch_related('booked_by')
-    print(book)
-    for b in book:
-        print(b.id)
+   
     context={
         'appointments':book,
     }
@@ -578,7 +565,7 @@ def feedback(request):
 @allowed_users(allowed_roles=['PATIENT'])
 def feedback_detail(request,pk):
     feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
-    print(feedback)
+   
     context={
         "feedback":feedback
     }
@@ -672,7 +659,7 @@ def search_doctor(request):
 @allowed_users(allowed_roles=['PATIENT'])
 def doctor_profile(request,pk):
     doctor=DoctorInfo.objects.get(id=pk)
-    # print(doctor.__dict__)
+
     context={
         'doctor':doctor,
     }
@@ -722,7 +709,7 @@ def patient_register(request):
             contex={
                 'patient_register':patient_register
             }
-            print("in valid inputs")
+            
             return render(request, 'patient/register.html', contex)
     else:     
         patient_register=UserForm()
@@ -748,7 +735,7 @@ def patient_profile(request):
                 'user_form':user_form,
                 'patient_profile':patient_profile
             }
-            print('invalid inputs')
+           
             return render(request,'patient/profile.html',context)
 
     else:
@@ -777,6 +764,5 @@ def patient_login(request):
         return render(request, 'patient/login.html')
 
 def logoutpatient(request):
-    print("logout user")
     logout(request)
     return redirect("/")

@@ -15,6 +15,11 @@ from django.contrib.auth.decorators import login_required
 
 from appointment.models import AppointmentDetails,BookedAppointment
 
+##Email Send
+from django.core.mail import send_mail
+from Disease.settings import EMAIL_HOST_USER
+from django.template.loader import render_to_string
+
 
 @unauthenticated_doctor
 def doctor_login(request):
@@ -32,7 +37,23 @@ def doctor_login(request):
     else:
         return render(request, 'doctor/login.html')
 
-   
+
+
+
+@login_required(login_url='doctor_login')
+@allowed_users(allowed_roles=['DOCTOR'])
+def prescription(request):
+    if request.method=="GET":
+        return render(request, "doctor/prescription_form.html")
+    else:
+        email = request.POST.get("email")
+        prescription = request.POST.get('prescription')
+        
+
+        context = {'email': email, "prescription":prescription}
+        html_message = render_to_string('doctor/mail_message.html',context)
+        send_mail("Thank you for using E-Health Care services!!", "Get Well soon!!", EMAIL_HOST_USER, [email],html_message=html_message,fail_silently=False)
+        return render(request,'doctor/prescription_form.html',{'recepient':email})
 
 def doctor_logout(request):
     print("logout user")

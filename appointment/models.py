@@ -23,7 +23,6 @@ class AppointmentDetails(models.Model):
     appointment_end_time=models.TimeField(auto_now=False,auto_now_add=False)
     appointment_date=models.DateTimeField()
     appointment_status=models.IntegerField(default=0)
-    # appointment_status=models.CharField(max_length=20,choices=appointment_status)
     create_by=models.ForeignKey(DoctorInfo,on_delete=models.CASCADE,null=True)
 
     def __str__(self):

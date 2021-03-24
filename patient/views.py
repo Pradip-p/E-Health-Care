@@ -17,8 +17,6 @@ import tempfile
 
 #..............................
 
-# from patient.models import Diabetes
-# Create your views here.
 
 # decorators
 
@@ -40,11 +38,7 @@ from .models import Image
 from django.contrib.auth.models import Group
 
 from django.db.models import Q
-# Pagination import 
-# from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-
-
 from appointment.models import AppointmentDetails,BookedAppointment
 from appointment.forms import BookedAppointmentForm
 
@@ -111,45 +105,6 @@ def showimage(request):
             }
         return render(request, 'patient/image.html', context)
     
-
-
-    # if form.is_valid():
-    #     form.save()
-    #     lastimage= Image.objects.last()
-    #     imagefile= lastimage.imagefile
-        
-        # result=pred1(imagefile)
-        
-        # context={}
-        # if result[0][0] >= 0.5:
-        #     prediction = 'You are suffering from pneumonia'
-        #     disease_name="Pneumonia"
-        #     # saving  user information who predict pneumonia and suggesting doctors
-        #     predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=disease_name)
-        #     predict.save()
-        #     disease=Disease1.objects.filter(name__icontains=disease_name)
-        #     listDoctorID=[]
-        #     for d in disease:
-        #         listDoctorID.append(d.doctor.id)
-        #     disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
-        #     context= {
-        #     'imagefile':imagefile,
-        #     'form': form,
-        #     'sur':prediction,
-        #     'disease_doctor_list':disease_doctor_list,
-        #     }
-        #     return render(request, 'patient/image.html', context)
-        # elif result[0][0] <= 0.5:
-        #     prediction = "Your health is Normal"
-        #     context= {
-        #     'imagefile':imagefile,
-        #     'form': form,
-        #     'sur':prediction,
-        #     }        
-        #     return render(request, 'patient/image.html', context)
-    
-
-
     
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
@@ -408,13 +363,13 @@ def view_appointment(request):
         context={
             'appointments':appointments,
         }
-        # doctors=DoctorInfo.objects.all()
+    
     elif search_term is not None:
         disease=Disease1.objects.filter(Q(name__icontains=search_term))
         doctor_id=[]
         for d in disease:
             doctor_id.append(d.doctor.id)
-        # for fetching appointment data with respect to doctor name
+    
         doctor=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term))
        
         name=[]
@@ -444,7 +399,6 @@ def take_appointment(request,pk):
             appointment_form.booked_by=request.user.profile
             appointment_form.appointment_id=appointment
             appointment_form.save()
-            # changing appoinment status
             appointment.appointment_status=1
             appointment.save()
             return redirect('view_appointment')
@@ -541,7 +495,7 @@ def patient_appointment(request):
         'appointments':book,
     }
     return render(request,'patient/booked_appointments.html',context)
-    # booked_appointments=BookedAppointment.objects.    
+ 
 
 
 @login_required(login_url='patient_login')

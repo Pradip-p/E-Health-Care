@@ -24,7 +24,6 @@ from roleadmin.decoratos import allowed_users,unauthenticated_admin
 def admin_dashboard(request):
     doctors=DoctorInfo.objects.all().count()
     users=User.objects.filter(groups__name="PATIENT").count()
-    # patients=Profile.objects.all().count()
     feedbacks=Feedback.objects.all().count()
     doctorinfo=DoctorInfo.objects.all().order_by('-id')
     predictions=WhoPredictDisease.objects.all().count()
@@ -42,7 +41,6 @@ def admin_dashboard(request):
 @login_required(login_url="roleadmin_login")
 @allowed_users(allowed_roles=['ADMIN'])
 def disease(request):
-    # page=request.GET.get('page',1)
     search_term=request.GET.get('term')
     if search_term==None:
         search_term=""
@@ -98,7 +96,7 @@ def delete_disease(request,pk):
         return redirect('disease')
     disease.delete()
     return redirect('disease')
-    # disease=Disease1.objects.filter()
+    
 
 @login_required(login_url="roleadmin_login")
 @allowed_users(allowed_roles=['ADMIN'])

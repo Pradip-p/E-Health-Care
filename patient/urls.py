@@ -29,7 +29,9 @@ path('patient_appointment/',views.patient_appointment,name="patient_appointment"
 path('view_appointment/take/<int:pk>',views.take_appointment),
 path('patient_appointment/cancel/<int:pk>',views.cancel_appointment),
 path('patient_appointment/details/<int:pk>',views.details_appointment),
+path('patient_appointment/details/<int:pk>/export_pdf',views.export_pdf),
 
+# details/{{appointment.id}}
 # path('check/', views.check, name="check"),
 path('logoutpatient/', views.logoutpatient, name="logoutpatient"),
 

@@ -141,6 +141,10 @@
                         <li>
                             <a href="{% url 'appointment' %}"><i class="fa fa-calendar"></i> <span>Appointments</span></a>
                         </li>
+
+                        <li>
+                            <a href="{% url 'book_appointment' %}"><i class="fa fa-calendar"></i> <span>Booked  Appointments</span></a>
+                        </li>
 						<!-- <li>
                             <a href=""><i class="fa fa-user-md"></i> <span>Doctors</span></a>
                         </li>
@@ -251,37 +255,11 @@
                                 <li><a href="tables-datatables.html">Data Table</a></li>
                             </ul>
                         </li>
+
                         <li>
-                            <a href="calendar.html"><i class="fa fa-calendar"></i> <span>Calendar</span></a>
+                            <a href="{% url 'prescription'%}"><i class="fa fa-calendar"></i> <span>Send Prescription</span></a>
                         </li>
-                        <li class="menu-title">Extras</li> -->
-                        <!-- <li class="submenu">
-                            <a href="#"><i class="fa fa-columns"></i> <span>Pages</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li><a href="login.html"> Login </a></li>
-                                <li><a href="register.html"> Register </a></li>
-                                <li><a href="forgot-password.html"> Forgot Password </a></li>
-                                <li><a href="change-password2.html"> Change Password </a></li>
-                                <li><a href="lock-screen.html"> Lock Screen </a></li>
-                                <li><a href="profile.html"> Profile </a></li>
-                                <li><a href="gallery.html"> Gallery </a></li>
-                                <li><a href="error-404.html">404 Error </a></li>
-                                <li><a href="error-500.html">500 Error </a></li>
-                                <li><a href="blank-page.html"> Blank Page </a></li>
-                            </ul>
-                        </li>
-                        <li class="submenu">
-                            <a href="javascript:void(0);"><i class="fa fa-share-alt"></i> <span>Multi Level</span> <span class="menu-arrow"></span></a>
-                            <ul style="display: none;">
-                                <li class="submenu">
-                                    <a href="javascript:void(0);"><span>Level 1</span> <span class="menu-arrow"></span></a>
-                                 
-                                </li>
-                                <li>
-                                    <a href="javascript:void(0);"><span>Level 1</span></a>
-                                </li>
-                            </ul>
-                        </li> -->
+						
                     </ul>
                 </div>
             </div>

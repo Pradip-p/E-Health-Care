@@ -13,7 +13,12 @@ from patient.models import Disease1, WhoPredictDisease
 from doctor.doctor_decorators import unauthenticated_doctor,allowed_users
 from django.contrib.auth.decorators import login_required
 
-from appointment.models import AppointmentDetails
+from appointment.models import AppointmentDetails,BookedAppointment
+
+##Email Send
+from django.core.mail import send_mail
+from Disease.settings import EMAIL_HOST_USER
+from django.template.loader import render_to_string
 
 
 @unauthenticated_doctor
@@ -32,7 +37,23 @@ def doctor_login(request):
     else:
         return render(request, 'doctor/login.html')
 
-   
+
+
+
+@login_required(login_url='doctor_login')
+@allowed_users(allowed_roles=['DOCTOR'])
+def prescription(request):
+    if request.method=="GET":
+        return render(request, "doctor/prescription_form.html")
+    else:
+        email = request.POST.get("email")
+        prescription = request.POST.get('prescription')
+        
+
+        context = {'email': email, "prescription":prescription}
+        html_message = render_to_string('doctor/mail_message.html',context)
+        send_mail("Thank you for using E-Health Care services!!", "Get Well soon!!", EMAIL_HOST_USER, [email],html_message=html_message,fail_silently=False)
+        return render(request,'doctor/prescription_form.html',{'recepient':email})
 
 def doctor_logout(request):
     print("logout user")
@@ -66,6 +87,7 @@ def dashboard_doctor(request):
     }
     return render(request, 'doctor/dashboard_doctor.html', contex)
 
+# Apoointement Portion for doctor views..........................
 
 @login_required(login_url='doctor_login')
 @allowed_users(allowed_roles=['DOCTOR'])
@@ -140,6 +162,24 @@ def delete_appointment(request,pk):
         # pass
         return redirect('appointment')
     return redirect('appointment')
+
+@login_required(login_url='doctor_login')
+@allowed_users(allowed_roles=['DOCTOR'])
+def book_appointment(request):
+    appointment=AppointmentDetails.objects.filter(create_by=request.user.doctorinfo)
+    print(appointment)
+    ID=[]
+    for a in appointment:
+        ID.append(a.id)
+        print(a.id)
+    booked_appointments=BookedAppointment.objects.filter(appointment_id__in=ID)
+    context={
+        'appointments':booked_appointments
+    }
+    return render(request,'doctor/booked_appointments.html',context)
+    print(booked_appointments)
+    # booked_appointments=BookedAppointment.objects.filter(appointment_id.create_by=request.user.doctorinfo)
+    # print(booked_appointments)
 
 """
 

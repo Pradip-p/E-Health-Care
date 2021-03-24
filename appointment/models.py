@@ -16,11 +16,7 @@ class AppointmentDetails(models.Model):
         ('Saturday','Saturday'),
     )
 
-    # appointment_status=(
-    #     ('Available','Available'),
-    #     ('Booked','Booked'),
-    #     ('Completed','Completed'),
-    # )
+  
 
     appointment_day=models.CharField(max_length=20,choices=day_choice)
     appointment_start_time=models.TimeField(auto_now=False,auto_now_add=False)

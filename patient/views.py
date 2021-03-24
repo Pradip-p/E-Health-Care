@@ -7,6 +7,16 @@ from django.contrib.auth.forms import UserCreationForm
 from patient.models import Profile
 from django.db import transaction
 from patient.models import *
+
+# output file to pdf
+from django.shortcuts import HttpResponse
+from django.template.loader import render_to_string
+
+from weasyprint import HTML
+import tempfile
+
+#..............................
+
 # from patient.models import Diabetes
 # Create your views here.
 
@@ -420,6 +430,7 @@ def view_appointment(request):
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
 def take_appointment(request,pk):
+    # print(pk)
     # print(appointment.appointment_status)
     if request.method=='POST':
         try:
@@ -458,15 +469,19 @@ def take_appointment(request,pk):
 @allowed_users(allowed_roles=['PATIENT'])
 def cancel_appointment(request,pk):
     try:
-        appointment=BookedAppointment.objects.get(id=pk,booked_by=request.user.profile).prefetch_related('appointment_id')
-    except:
-        return redirect('patient_appointment')   
-    try:
-        app=AppointmentDetails.objects.filter(id=appointment[0].appointment_id.id)
-        print(app.apppointment_status)
-        app.appointment_status=0
-        app.save()
-        appointment.delete()
+        # print(pk)
+        # appointment=BookedAppointment.objects.filter(booked_by=request.user.profile).prefetch_related('appointment_id')
+        # print(appointment)
+        ap=BookedAppointment.objects.get(id=pk)
+        print(ap.appointment_id.id)
+        if ap.booked_by==request.user.profile:
+            ad=AppointmentDetails.objects.get(id=ap.appointment_id.id)
+            print(ad.appointment_status)
+            ad.appointment_status=0
+            ad.save()
+            ap.delete()
+        else:
+            return redirect('patient_appointment')        
     except:
         return redirect('patient_appointment')
     return redirect('patient_appointment')
@@ -474,26 +489,67 @@ def cancel_appointment(request,pk):
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
 def details_appointment(request,pk):
-    print(pk)
+    # print(pk)
     try:
-        appointment=BookedAppointment.objects.get(id=pk,booked_by=request.user.profile).prefetch_related('appointment_id').prefetch_related('booked_by').prefetch_related('create_by')
+        appointment=BookedAppointment.objects.get(id=pk)
+        if appointment.booked_by !=request.user.profile:
+            return redirect('patient_appointment')
+        else:
+            context={
+                'a':appointment
+            }
+        print(appointment.appointment_id.create_by.department)
+        # appointment=BookedAppointment.objects.get(id=pk,booked_by=request.user.profile).prefetch_related('appointment_id').prefetch_related('booked_by').prefetch_related('create_by')
         # print(appointment)
         # for a in appointment:
         #     print(a.booked_by.user.email)
     except:
         return redirect('patient_appointment')
-    context={
-        'appointment':appointment,
-    }
+    
     return render(request,'patient/appointment_detail.html',context)
 
+@login_required(login_url='patient_login')
+@allowed_users(allowed_roles=['PATIENT'])
+def export_pdf(request,pk):
+    try:
+        appointment=BookedAppointment.objects.get(id=pk)
+        if appointment.booked_by !=request.user.profile:
+            return redirect('patient_appointment')
+        else:
+            context={
+                'a':appointment
+            }
+        print(appointment.appointment_id.create_by.department)
+        # appointment=BookedAppointment.objects.get(id=pk,booked_by=request.user.profile).prefetch_related('appointment_id').prefetch_related('booked_by').prefetch_related('create_by')
+        # print(appointment)
+        # for a in appointment:
+        #     print(a.booked_by.user.email)
+    except:
+        return redirect('patient_appointment')
+    response=HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="appointment.pdf"'
+    response['Content-Transfer-Encoding']='binary'
+    # paragraphs={}
+    html_string = render_to_string('patient/pdf_template.html', {'a': appointment})
+    html = HTML(string=html_string)
+    result=html.write_pdf()
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        output.write(result)
+        output.flush()
+        output=open(output.name,'rb')
+        response.write(output.read())
+    return response
 
+
+    
 
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
 def patient_appointment(request):
     book=BookedAppointment.objects.filter(booked_by=request.user.profile).prefetch_related('appointment_id').prefetch_related('booked_by')
     print(book)
+    for b in book:
+        print(b.id)
     context={
         'appointments':book,
     }

@@ -1,7 +1,4 @@
-{% extends 'base.html' %}
-{% load crispy_forms_tags %}
-{% load static %}
-{% block body_content %}
+
 <div class="page-wrapper">
 <div class="content"> 
     <div class="row">
@@ -30,9 +27,6 @@
 
             </br>
              
-        <a href="{{a.id}}/export_pdf" class="btn btn-info btn-user ">Download</a>         
-        
-        <a href="{% url 'patient_appointment' %}" class="btn btn-secondary">View List</a>
     </div>
     </div>
 </div>
@@ -42,4 +36,3 @@
 
 
 
-{% endblock %}

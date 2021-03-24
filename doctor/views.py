@@ -13,7 +13,7 @@ from patient.models import Disease1, WhoPredictDisease
 from doctor.doctor_decorators import unauthenticated_doctor,allowed_users
 from django.contrib.auth.decorators import login_required
 
-from appointment.models import AppointmentDetails
+from appointment.models import AppointmentDetails,BookedAppointment
 
 
 @unauthenticated_doctor
@@ -66,6 +66,7 @@ def dashboard_doctor(request):
     }
     return render(request, 'doctor/dashboard_doctor.html', contex)
 
+# Apoointement Portion for doctor views..........................
 
 @login_required(login_url='doctor_login')
 @allowed_users(allowed_roles=['DOCTOR'])
@@ -140,6 +141,24 @@ def delete_appointment(request,pk):
         # pass
         return redirect('appointment')
     return redirect('appointment')
+
+@login_required(login_url='doctor_login')
+@allowed_users(allowed_roles=['DOCTOR'])
+def book_appointment(request):
+    appointment=AppointmentDetails.objects.filter(create_by=request.user.doctorinfo)
+    print(appointment)
+    ID=[]
+    for a in appointment:
+        ID.append(a.id)
+        print(a.id)
+    booked_appointments=BookedAppointment.objects.filter(appointment_id__in=ID)
+    context={
+        'appointments':booked_appointments
+    }
+    return render(request,'doctor/booked_appointments.html',context)
+    print(booked_appointments)
+    # booked_appointments=BookedAppointment.objects.filter(appointment_id.create_by=request.user.doctorinfo)
+    # print(booked_appointments)
 
 """
 

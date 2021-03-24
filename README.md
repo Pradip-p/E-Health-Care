@@ -63,6 +63,47 @@ Use the  [docker](https://docs.docker.com/docker-for-windows/install/) to instal
 <li><p><b>docker-compose up</b></p></li>
 </ul>
 
+# Features
+
+## Patient
+
+<ul>
+<li><p><b>Sign up/ sign In</b></p></li>
+<li><p><b>Can view list of Specialist doctor</b></p></li>
+<li><p><b>Can search specialist doctor by name, address and speciality<b><p></li>
+<li><p><b>Can search doctor by disease name and doctor</b></p></li>
+<li><p><b>Can predict Disease by entering provided symptoms</b></p></li>
+<li><p><b>Can predict heart problem by entering parameters</b></p></li>
+<li><p><b>Can predict pneumonia by uploading x-ray images</b></p></li>
+<li><p><b>Can predict diabetes problem by entering </b></p></li>
+<li><p><b>Suggest the doctor after predicting any disease if doctor is available</b></p></li>
+<li><p><b>Patient can take appointment</b></p></li>
+<li><p><b>Patient can cancel, view and download appointment details</b><p><li>
+</ul>
+
+## Admin
+<ul>
+<li><p><b>Can view total patients, predictions, Doctors and feedback from patient</b></p><li>
+<li><p><b>Can view new patient who predicts disease</b></p></li>
+<li><p><b>Sign In and logout</b></p></li>
+<li><p><b>Can add, edit and delete and search all doctor</b></p></li>
+<li><p><b>Assign doctor to respective disease </b></p></li>
+</ul>
+
+## Doctor
+
+<ul>
+<li><p><b>Sign up through provided username and password from admin
+</b></p></li>
+<li><p><b>View the list of all patients who predicts disease which he was assign to take charge of it(Disease)</b></p></li>
+<li><p><b>Can add, edit and delete the appointment </b></p></li>
+<li><p><b>Can view booked appointment
+</b></p></li>
+</ul>
+
+
+
+
 ## Contributing
 Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
 

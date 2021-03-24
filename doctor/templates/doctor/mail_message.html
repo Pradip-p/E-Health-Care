@@ -1,0 +1,26 @@
+{% load static %}
+<html>
+    
+    <head>
+        <!--bootstrap4 cdn-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    </head>
+
+    <body>
+        <!-- <img src="{% static 'assets/assets/img/logo.png' %}" height=45 width=130 style="display:block; margin-left:auto; margin-right:auto"> -->
+        <div style="margin:auto;width:50%">
+            <div style="background-color: #1AADA3; padding-top: 30px; padding-bottom: 30px;text-align: center; color:white;"><h1>E-Health Care</h1></div>
+            <br>
+            <p>Hi {{email}},</p>
+            <p>I have mention some of details of prescription you must have to follow for your health.</p>
+            
+            <!-- <strong style="color: #1AAD">[Order #{{ order_id }}]({{ date }})</strong> -->
+            <div class="cart">]
+                {{prescription}}
+            </div>
+            
+            <p>Thanks for using E-Health Care services!!</p>
+            <strong><h2>Get Well Soon!!</h2></strong>
+        </div>
+    </body>
+</html>

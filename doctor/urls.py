@@ -15,5 +15,7 @@ path('book_appointment/',views.book_appointment,name="book_appointment"),
 path('appointment/add_appointment/',views.add_appointment),
 path('appointment/edit/<int:pk>',views.edit_appointment),
 path('appointment/delete/<int:pk>',views.delete_appointment),
+path('book_appointment/delete/<int:pk>',views.delete_booked_appointment),
+
 
 ]

@@ -179,4 +179,21 @@ def book_appointment(request):
     }
     return render(request,'doctor/booked_appointments.html',context)
     
- 
+@login_required(login_url='doctor_login')
+@allowed_users(allowed_roles=['DOCTOR'])
+def delete_booked_appointment(request,pk):
+    try:
+        ap=BookedAppointment.objects.get(id=pk)
+      
+        # if ap.booked_by==request.user.profile:
+        ad=AppointmentDetails.objects.get(id=ap.appointment_id.id)
+        if ad.create_by==request.user.doctorinfo:
+            ad.appointment_status=0
+            ad.save()
+            ap.delete()
+        else:
+            return redirect('book_appointment')        
+    except:
+        return redirect('book_appointment')
+    return redirect('book_appointment')
+

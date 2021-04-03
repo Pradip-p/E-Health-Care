@@ -29,15 +29,15 @@ SECRET_KEY = '6=lw8ok^dacjf*$i-3mldpziz06s70i!p(m3$=!l^avkw7^d4i'
 # SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = True
+# DEBUG = os.getenv("DEBUG", "False") == "True"
 
 ALLOWED_HOSTS = ['127.0.0.1']
 # ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "128.199.29.4,localhost").split(",")
 # AUTH_USER_MODEL = 'core.User'
 
 #Development Mode
-DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True" 
+# DEVELOPMENT_MODE = os.getenv("DEVELOPMENT_MODE", "False") == "True" 
 
 # Application definition
 
@@ -167,16 +167,22 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.1/howto/static-files/
 
+# STATIC_URL = '/static/'
+# # STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# # STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+
+
+# STATICFILES_DIRS =[
+#     os.path.join(BASE_DIR, 'patient/static')
+# ]
+
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
-
-
 STATICFILES_DIRS =[
     os.path.join(BASE_DIR, 'patient/static')
 ]
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

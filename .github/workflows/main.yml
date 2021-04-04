@@ -13,6 +13,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+
+
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   deploy:
@@ -25,10 +28,13 @@ jobs:
           key: ${{secrets.SSH_KEY}} # Private or public key of the server
           username: ${{ secrets.SSH_USERNAME }} # User of the server you want to ssh into
      
+
+
+
           script: |
             mkdir test 
             cd test 
             git clone git@github.com:Pradip-p/E-Health-Care.git 
             echo 'Deployment successful to digital ocean'
 
-        
+      

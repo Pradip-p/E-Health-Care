@@ -17,6 +17,6 @@ jobs:
           script: |
             mkdir test 
             cd test 
-            git clone git@github.com:Pradip-p/E-Health-Care.git
+            git clone git@github.com/Pradip-p/E-Health-Care.git
             echo 'Deployment successful to digital ocean' 
           

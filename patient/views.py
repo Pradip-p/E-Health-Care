@@ -176,7 +176,9 @@ def heart(request):
         
             
             sex = request.POST.get('sex')
+            
             sex = sex.lower()
+
             if sex == 'male':
                 sex = 1
             elif sex == 'female':

@@ -56,11 +56,11 @@ The Code is written in Python 3.7.0. If you don't have Python installed you can 
 Use the  [docker](https://docs.docker.com/docker-for-windows/install/) to install requirements file.
 
 <ul>
-<li><p><b>docker-compose run web python manage.py migrate</b></p></li>
-<li><p><b>docker-compose run web python manage.py makemigrations</b></p></li>
-<li><p><b>docker-compose run web python manage.py migrate</b></p></li>
-<li><p><b>docker-compose run web python manage.py createsuperuser</b></p></li>
-<li><p><b>docker-compose up</b></p></li>
+<li><p><b>python manage.py migrate</b></p></li>
+<li><p><b>python manage.py makemigrations</b></p></li>
+<li><p><b>python manage.py migrate</b></p></li>
+<li><p><b>python manage.py createsuperuser</b></p></li>
+<li><p><b>python manage.py runserver</b></p></li>
 </ul>
 
 # Features

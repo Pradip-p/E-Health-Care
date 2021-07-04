@@ -6,12 +6,14 @@
     <div class="content" style="background-color: skyblue;">
         <div class="row">
             <div class="col-sm-12">
-                <h4 class="page-title">Diabetes check up</h4>
-                <h4 class="page-title">Enter the following parameters:</h4>
+                <h4 class="page-title">Diabetes Check Up</h4>
+                <h4 class="page-title">Please enter the following parameters:</h4>
             </div>
             <form method="POST" action="" enctype="multipart/form-data">
+                <div class="form-group">
                 {% csrf_token %}
                 {{diabetes_form.as_p }}
+                </div>
                 <button type="Check" class="btn btn-primary btn-user "> Submit</button>
             </form>
     

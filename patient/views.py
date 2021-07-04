@@ -7,6 +7,9 @@ from django.contrib.auth.forms import UserCreationForm
 from patient.models import Profile
 from django.db import transaction
 from patient.models import *
+from chat import *
+from chat.models import *
+from chat.views import *
 
 # output file to pdf
 from django.shortcuts import HttpResponse
@@ -720,3 +723,11 @@ def patient_login(request):
 def logoutpatient(request):
     logout(request)
     return redirect("/")
+
+def chat(request):
+    if not request.user.is_authenticated:
+        return redirect('index')
+    if request.method == "GET":
+        return render(request, 'chat/chat.html',
+                      {'users': User.objects.exclude(username=request.user.username)})
+

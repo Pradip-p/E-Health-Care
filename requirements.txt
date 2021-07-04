@@ -20,7 +20,6 @@ cssselect2==0.4.1
 cycler==0.10.0
 decorator==4.4.2
 defusedxml==0.6.0
-dj-database-url==0.5.0
 Django==2.1.5
 django-crispy-forms==1.9.2
 django-jet==1.0.8
@@ -37,7 +36,6 @@ google-auth-oauthlib==0.4.1
 google-pasta==0.2.0
 graphviz==0.16
 grpcio==1.30.0
-gunicorn==20.1.0
 h5py==2.10.0
 html5lib==1.1
 httplib2==0.19.0
@@ -91,7 +89,6 @@ Pillow==7.1.2
 prometheus-client==0.7.1
 prompt-toolkit==3.0.5
 protobuf==3.12.2
-psycopg2-binary==2.8.6
 ptyprocess==0.7.0
 pyasn1==0.4.8
 pyasn1-modules==0.2.8
@@ -105,7 +102,6 @@ pyparsing==2.4.7
 Pyphen==0.10.0
 pyrsistent==0.16.0
 python-dateutil==2.8.1
-python-memcached==1.59
 pytz==2019.3
 pywinpty==0.5.7
 PyYAML==5.3.1

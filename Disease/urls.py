@@ -18,8 +18,11 @@ from django.urls import path, include
 from django.views.generic.base import RedirectView
 from django.conf import settings
 from django.conf.urls.static import static
+from . import *
 
 urlpatterns = [
+    # path('admin/', admin.site.urls),
+    path('', include('chat.urls')),
     path('appointment/', include('appointment.urls')),
     path('jet/', include('jet.urls')),
     path('jet/dashboard/', include('jet.dashboard.urls', 'jet-dashboard')),
@@ -35,6 +38,6 @@ urlpatterns=urlpatterns+static(settings.MEDIA_URL, document_root=settings.MEDIA_
 
 
 
-admin.site.site_header = 'E-Health Health'                    # default: "Django Administration"
+admin.site.site_header = 'Smart Health'                    # default: "Django Administration"
 admin.site.index_title = 'Features area'                 # default: "Site administration"
 admin.site.site_title = 'HTML title from adminsitration' # default: "Django site admin"

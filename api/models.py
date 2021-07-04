@@ -19,6 +19,4 @@ class Disease(models.Model):
             'value_5': self.value_5,
             'value_6': self.value_6
         }
-
-        
   

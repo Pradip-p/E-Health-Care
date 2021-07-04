@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/font-awesome.min.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'assets/css/style.css' %}"s>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-
+    
 
 
 
@@ -33,16 +33,20 @@
         <div class="header">
       <div class="header-left">
         <a href="#" class="logo">
+        
           <img src="{% static 'assets/img/logo.png' %}" width="35" height="35" alt=""> <span>E-Health Care</span>
         </a>
       </div>
       <a id="toggle_btn" href="javascript:void(0);"><i class="fa fa-bars"></i></a>
             <a id="mobile_btn" class="mobile_btn float-left" href="#sidebar"><i class="fa fa-bars"></i></a>
             <ul class="nav user-menu float-right">
-                
-               
+             <!-- chatpart -->
+              <li><a href="{% url 'chat' %}"><i class="fa fa-comments-o" aria-hidden="true"></i> <b><span>Chat</span></b></a></li>
+            
                 <li class="nav-item dropdown has-arrow">
+                  
                     <a href="#" class="dropdown-toggle nav-link user-link" data-toggle="dropdown">
+
                         <span class="user-img">
                 {% if request.user.profile.profile_pic.url != '' %}
               <img class="rounded-circle" src="{{request.user.profile.profile_pic.url}}" width="24" height="24" alt="">
@@ -79,10 +83,10 @@
                     <ul>
                         <li class="menu-title">Main</li>
                         <li>
-                            <a href="{% url 'home' %}"><i class="fa fa-dashboard"></i> <span>Home</span></a>
+                            <a href="{% url 'home' %}"><i class="fa fa-home fa-fw" aria-hidden="true"></i> <span>Home</span></a>
                         </li>
                         <li>
-                            <a href="{% url 'dashboard' %}"><i class="fa fa-dashboard"></i> <span> Disease check</span></a>
+                            <a href="{% url 'dashboard' %}"><i class="fa fa-stethoscope"></i> <span> Disease check</span></a>
                         </li>
                         <li>
 
@@ -90,13 +94,14 @@
 
                         </li>
                         <li>
-                            <a href="{% url 'heart' %}"><i class="fa fa-wheelchair"></i> <span>Heart Check</span></a>
+                            <a href="{% url 'heart' %}"><i class="fa fa-heart" aria-hidden="true"></i>
+                             <span>Heart Check</span></a>
                         </li>
                         <li>
-                            <a href="{% url 'diabetes' %}"><i class="fa fa-calendar"></i> <span>Diabetes check</span></a>
+                            <a href="{% url 'diabetes' %}"><i class="fa fa-stethoscope"></i> <span>Diabetes check</span></a>
                         </li>
                         <li>
-                            <a href="{% url 'showimage' %}"><i class="fa fa-hospital-o"></i> <span>Pneumonia check</span></a>
+                            <a href="{% url 'showimage' %}"><i class="fa fa-stethoscope"></i> <span>Pneumonia check</span></a>
                         </li>
                         <li>
                           <a href="{% url 'view_appointment' %}"><i class="fa fa-hospital-o"></i> <span>Take appointment</span></a>
@@ -104,8 +109,10 @@
                       <li>
                         <a href="{% url 'patient_appointment' %}"><i class="fa fa-hospital-o"></i> <span>My appointment</span></a>
                     </li>
-
-                        <li>
+                    <!-- <li>
+                      <a href="{% url 'chat' %}"><i class="fa fa-hospital-o"></i> <span>Chat</span></a>
+                    </li> -->
+                    <li>
                             <a href="{% url 'feedback' %}"><i class="fa fa-calendar-check-o"></i> <span>Feedback</span></a>
                         </li>
                      
@@ -144,6 +151,9 @@
     <script src="{% static 'assets/js/Chart.bundle.js' %}"></script>
     <script src="{% static 'assets/js/chart.js' %}"></script>
     <script src="{% static 'assets/js/app.js' %}"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="{% static 'js/materialize.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/chat.js' %}"></script>
 
 
 

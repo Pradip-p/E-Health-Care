@@ -40,7 +40,7 @@
               <ul class="nav navbar-nav">
                 <li class="active"><a href="#banner">Home</a></li>
               
-                <li class=""><a href="#contact">Contact</a></li>
+                <!-- <li class=""><a href="#contact">Contact</a></li> -->
               </ul>
             </div>
           </div>
@@ -76,25 +76,41 @@
             <div class="mt-boxy-color"></div>
             <div class="medi-info">
               <h3>Patient</h3>
-              <p>I am text block. Edit this text from Appearance / Customize / Homepage header columns. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+              <div class="banner-logo text-center">
+                <img src="{% static 'health/img/patient.png' %}" class="img-responsive" style="width: 300px; height:300px">
+              </div>
+              <p> </p>
 
-              <a href="/patient/patient_login" class="medi-info-btn">Login</a>
-              <a href="/patient/patient_register" class="medi-info-btn">Sign Up</a>
+              <div class="banner-logo text-center">
+                <a href="/patient/patient_login" class="medi-info-btn">Login</a>
+                <a href="/patient/patient_register" class="medi-info-btn">Sign Up</a>
+              </div>
             </div>
           </div>
-
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <div class="col-md-4 col-sm-4">
             <div class="medi-info">
               <h3>Doctor</h3>
-              <p>I am text block. Edit this text from Appearance / Customize / Homepage header columns. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-              <a href="/doctor/doctor_login" class="medi-info-btn">Login</a>
+              <div class="banner-logo text-center">
+                <img src="{% static 'health/img/doctor.jpg' %}" class="img-responsive" style="width: 300px; height:300px">
+              </div>
+              <p> </p>
+              <div class="banner-logo text-center">
+                <a href="/doctor/doctor_login" class="medi-info-btn">Login</a>
+              </div>
             </div>
           </div>
+          &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <div class="col-md-4 col-sm-4">
             <div class="medi-info">
               <h3>Admin</h3>
-              <p>I am text block. Edit this text from Appearance / Customize / Homepage header columns. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
-              <a href="/doctor/doctor_login" class="medi-info-btn">Login</a>
+              <div class="banner-logo text-center">
+                <img src="{% static 'health/img/admin.png' %}" class="img-responsive" style="width: 300px; height:300px">
+              </div>
+              <p></p>
+              <div class="banner-logo text-center">
+                <a href="/doctor/doctor_login" class="medi-info-btn">Login</a>
+              </div>
             </div>
           </div>
 
@@ -104,11 +120,6 @@
     </div>
   </section>
   <!--cta-->
-
-
-  
-  
-
 
   <!--contact-->
   <section id="contact" class="section-padding">
@@ -127,39 +138,15 @@
           <div class="space"></div>
           <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>9845.....</p>
         </div>
-        <div class="col-md-8 col-sm-8 marb20">
-          <div class="contact-info">
-            <h3 class="cnt-ttl">Having Any Query!</h3>
-            <div class="space"></div>
-            <div id="sendmessage">Your message has been sent. Thank you!</div>
-            <div id="errormessage"></div>
-            <form action="" method="post" role="form" class="contactForm">
-              <div class="form-group">
-                <input type="text" name="name" class="form-control br-radius-zero" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
-                <div class="validation"></div>
-              </div>
-              <div class="form-group">
-                <input type="email" class="form-control br-radius-zero" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
-                <div class="validation"></div>
-              </div>
-              <div class="form-group">
-                <input type="text" class="form-control br-radius-zero" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
-                <div class="validation"></div>
-              </div>
-              <div class="form-group">
-                <textarea class="form-control br-radius-zero" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
-                <div class="validation"></div>
-              </div>
 
-              <div class="form-action">
-                <button type="submit" class="btn btn-form">Send Message</button>
-              </div>
-            </form>
-          </div>
+        <div class="col-md-8 col-sm-8 marb20">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7066.998673454132!2d85.33661487172921!3d27.670957783026054!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x39eb19e58a6d1331%3A0x18ad0afdf12f826f!2sBalkumari%2C%20Lalitpur%2044600!5e0!3m2!1sen!2snp!4v1625394343648!5m2!1sen!2snp" width="600" height="500" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
         </div>
+
       </div>
     </div>
   </section>
+
   <!--/ contact-->
   <!--footer-->
   <footer id="footer">
@@ -189,7 +176,7 @@
   <script src="{% static 'health/js/jquery.easing.min.js' %}"></script>
   <script src="{% static 'health/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'health/js/custom.js' %}"></script>
-  <script src="{% static 'health/contactform/contactform.js' %}"></script>
+  
 
 </body>
 

@@ -262,7 +262,6 @@ def pre_processing(df):
         muscle_pain = 1
     else:
         muscle_pain = 0
-        
     # convert input into dataframe
     #value_1
     data_dict = {}

@@ -3,629 +3,194 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
-    
-    <title>E-health Care</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>E-Health Care</title>
+  <meta name="description" content="Free Bootstrap Theme by BootstrapMade.com">
+  <meta name="keywords" content="free website templates, free bootstrap themes, free template, free bootstrap, free website template">
+  
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans|Raleway|Candal">
+  <link rel="stylesheet" type="text/css" href="{% static 'health/css/font-awesome.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'health/css/bootstrap.min.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'health/css/style.css' %}">
+  <!-- =======================================================
+    Theme Name: Medilab
+    Theme URL: https://bootstrapmade.com/medilab-free-medical-bootstrap-theme/
+    Author: BootstrapMade.com
+    Author URL: https://bootstrapmade.com
+  ======================================================= -->
 </head>
-<body>
-    <!-- component -->
-<!-- This is an example component -->
-<div>
-    <div class="bg-indigo-900 px-4 py-4">
-      <div
-        class="md:max-w-6xl md:mx-auto md:flex md:items-center md:justify-between"
-      >
-        <div class="flex justify-between items-center">
 
-          <span class="logo">
-            <img src="{% static 'assets/img/logo.png' %}" width="50" height="55" alt="">
-          </span> &nbsp; &nbsp; &nbsp;
-          <div> 
-
-         
-          <a href="/" class="inline-block py-2 text-white text-xl font-bold"
-            > <h1> E- Health Care</h1></a
-          >
-        </div>
-        
-
-          <!-- <span   class="logo">
-          <img src="{% static 'assets/img/logo.png' %}" width="45" height="50" alt=""> E-Health care
-          </span> -->
-
-          <div
-            class="inline-block cursor-pointer md:hidden">
-            <div class="bg-gray-400 w-8 mb-2" style="height: 2px;"></div>
-            <div class="bg-gray-400 w-8 mb-2" style="height: 2px;"></div>
-            <div class="bg-gray-400 w-8" style="height: 2px;"></div>
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
+  <!--banner-->
+  <section id="banner" class="banner">
+    <div class="bg-color">
+      <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+          <div class="col-md-12">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				        <span class="icon-bar"></span>
+				      </button>
+              <a class="navbar-brand" href="/" style="color: white;"> E- Heath Care</a>
+            </div>
+            <div class="collapse navbar-collapse navbar-right" id="myNavbar">
+              <ul class="nav navbar-nav">
+                <li class="active"><a href="#banner">Home</a></li>
+              
+                <li class=""><a href="#contact">Contact</a></li>
+              </ul>
+            </div>
           </div>
         </div>
-        
-     
-        <div class="hidden md:block">
-        
-          <a
-            href="/"
-            class="inline-block py-2 px-4 text-gray-700 bg-white hover:bg-gray-100 rounded-lg"
-            >Home</a
-          >
-        </div>
-      </div>
-    </div>
-
-    <div class="bg-indigo-900 md:overflow-hidden">
-      <div class="px-4 py-20 md:py-4">
-        <div class="md:max-w-6xl md:mx-auto">
-          <div class="md:flex md:flex-wrap">
-            <div class="md:w-1/2 text-center md:text-left md:pt-16">
-              <h1
-                class="font-bold text-white text-2xl md:text-5xl leading-tight mb-4"
-              >
-                We provide you best health services
-              </h1>
-
-              <p class="text-indigo-200 md:text-xl md:pr-48">
-                Health is a state of complete mental, social and physical well-being, not merely the absence of disease or infirmity.
-              </p>
-
-              <!-- <a
-                href="#"
-                class="mt-6 mb-12 md:mb-0 md:mt-10 inline-block py-3 px-8 text-white bg-red-500 hover:bg-red-600 rounded-lg shadow"
-                >Get Started</a
-              > -->
+      </nav>
+      <div class="container">
+        <div class="row">
+          <div class="banner-info">
+            <div class="banner-logo text-center">
+              <img src="{% static 'health/img/logo.png' %}" class="img-responsive" style="width: 120px; height:100px">
             </div>
-            <div class="md:w-1/2 relative">
-              <div class="hidden md:block">
-                <div
-                  class="-ml-24 -mb-40 absolute left-0 bottom-0 w-40 bg-white rounded-lg shadow-lg px-6 py-8"
-                  style="transform: rotate(-8deg);"
-                >
-                  <div
-                    class="bg-indigo-800 mx-auto rounded-lg px-2 pb-2 relative mb-8"
-                  >
-                    <div class="mb-1">
-                      <span
-                        class="w-1 h-1 bg-indigo-100 rounded-full inline-block"
-                        style="margin-right: 1px;"
-                      ></span
-                      ><span
-                        class="w-1 h-1 bg-indigo-100 rounded-full inline-block"
-                        style="margin-right: 1px;"
-                      ></span
-                      ><span
-                        class="w-1 h-1 bg-indigo-100 rounded-full inline-block"
-                      ></span>
-                    </div>
-                    <div class="h-1 w-12 bg-indigo-100 rounded mb-1"></div>
-                    <div class="h-1 w-10 bg-indigo-100 rounded mb-2"></div>
-
-                    <div class="flex">
-                      <div class="w-6 h-3 rounded bg-indigo-100 mr-1"></div>
-                      <div class="w-6 h-3 rounded bg-indigo-100"></div>
-                    </div>
-
-                    <div
-                      class="-mr-2 -mb-4 absolute bottom-0 right-0 h-16 w-10 rounded-lg bg-green-700 border-2 border-white"
-                    ></div>
-                    <div
-                      class="w-2 h-2 rounded-full bg-green-800 mx-auto absolute bottom-0 right-0 mr-2 -mb-2 z-10 border-2 border-white"
-                    ></div>
-                  </div>
-
-                  <div class="text-gray-800 text-center">
-                    Pneumonia <br />Prediction
-                  </div>
-                </div>
-
-                <div
-                  class="ml-24 mb-16 absolute left-0 bottom-0 w-40 bg-white rounded-lg shadow-lg px-6 py-8"
-                  style="transform: rotate(-8deg); z-index: 2;"
-                >
-                  <div
-                    class="bg-indigo-800 mx-auto rounded-lg relative mb-8 py-2 w-20 border-2 border-white"
-                  >
-                    <div
-                      class="h-8 bg-green-700 w-8 rounded absolute left-0 top-0 -mt-3 ml-4"
-                      style="transform: rotate(-45deg); z-index: -1;"
-                    ></div>
-                    <div
-                      class="h-8 bg-green-800 w-8 rounded absolute left-0 top-0 -mt-3 ml-8"
-                      style="transform: rotate(-12deg); z-index: -2;"
-                    ></div>
-
-                    <div
-                      class="flex items-center justify-center h-6 bg-indigo-800 w-6 rounded-l-lg ml-auto border-4 border-white -mr-1"
-                    >
-                      <div
-                        class="h-2 w-2 rounded-full bg-indigo-800 border-2 border-white"
-                      ></div>
-                    </div>
-
-                    <div
-                      class="w-8 h-8 bg-green-700 border-4 border-white rounded-full -ml-3 -mb-5"
-                    ></div>
-                  </div>
-
-                  <div class="text-gray-800 text-center">
-                    Heart prediction
-                  </div>
-                </div>
-
-                <div
-                  class="ml-32 absolute left-0 bottom-0 w-48 bg-white rounded-lg shadow-lg px-10 py-8"
-                  style="transform: rotate(-8deg); z-index: 2; margin-bottom: -220px;"
-                >
-                  <div
-                    class="bg-indigo-800 mx-auto rounded-lg pt-4 mb-16 relative"
-                  >
-                    <div class="h-4 bg-white"></div>
-
-                    <div class="text-right my-2 pb-1">
-                      <div
-                        class="inline-flex w-3 h-3 rounded-full bg-white -mr-2"
-                      ></div>
-                      <div
-                        class="inline-flex w-3 h-3 rounded-full bg-indigo-800 border-2 border-white mr-2"
-                      ></div>
-                    </div>
-
-                    <div
-                      class="-ml-4 -mb-6 absolute left-0 bottom-0 w-16 bg-green-700 mx-auto rounded-lg pb-2 pt-3"
-                    >
-                      <div class="h-2 bg-white mb-2"></div>
-                      <div class="h-2 bg-white w-6 ml-auto rounded mr-2"></div>
-                    </div>
-                  </div>
-
-                  <div class="text-gray-800 text-center">
-                    Diabetes <br />Prediction
-                  </div>
-                </div>
-
-                <div
-                  class="mt-10 w-full absolute right-0 top-0 flex rounded-lg bg-white overflow-hidden shadow-lg"
-                  style="transform: rotate(-8deg); margin-right: -250px; z-index: 1;"
-                >
-                  <div class="w-32 bg-gray-200" style="height: 560px;"></div>
-                  <div class="flex-1 p-6">
-                    <h2 class="text-lg text-gray-700 font-bold mb-3">
-                      Disease Prediction
-                    </h2>
-                    <div class="flex mb-5">
-                      <div class="w-16 rounded-full bg-gray-100 py-2 px-4 mr-2">
-                        <div class="p-1 rounded-full bg-gray-300"></div>
-                      </div>
-                      <div class="w-16 rounded-full bg-gray-100 py-2 px-4 mr-2">
-                        <div class="p-1 rounded-full bg-gray-300"></div>
-                      </div>
-                      <div class="w-16 rounded-full bg-gray-100 py-2 px-4 mr-2">
-                        <div class="p-1 rounded-full bg-gray-300"></div>
-                      </div>
-                      <div class="w-16 rounded-full bg-gray-100 py-2 px-4">
-                        <div class="p-1 rounded-full bg-gray-300"></div>
-                      </div>
-                    </div>
-
-                    <div class="flex flex-wrap -mx-4 mb-5">
-                      <div class="w-1/3 px-4">
-                        <div class="h-40 rounded-lg bg-white shadow-lg p-6">
-                          <div
-                            class="w-16 h-16 rounded-full bg-gray-200 mb-6"
-                          ></div>
-                          <div
-                            class="h-2 w-16 bg-gray-200 mb-2 rounded-full"
-                          ></div>
-                          <div class="h-2 w-10 bg-gray-200 rounded-full"></div>
-                        </div>
-                      </div>
-                      <div class="w-1/3 px-4">
-                        <div class="h-40 rounded-lg bg-white shadow-lg p-6">
-                          <div
-                            class="w-16 h-16 rounded-full bg-gray-200 mb-6"
-                          ></div>
-                          <div
-                            class="h-2 w-16 bg-gray-200 mb-2 rounded-full"
-                          ></div>
-                          <div class="h-2 w-10 bg-gray-200 rounded-full"></div>
-                        </div>
-                      </div>
-                      <div class="w-1/3 px-4">
-                        <div class="h-40 rounded-lg bg-white shadow-lg p-6">
-                          <div
-                            class="w-16 h-16 rounded-full bg-gray-200 mb-6"
-                          ></div>
-                          <div
-                            class="h-2 w-16 bg-gray-200 mb-2 rounded-full"
-                          ></div>
-                          <div class="h-2 w-10 bg-gray-200 rounded-full"></div>
-                        </div>
-                      </div>
-                    </div>
-
-                    <h2 class="text-lg text-gray-700 font-bold mb-3">
-                      Best Health Care Online
-                    </h2>
-
-                    <div
-                      class="w-full flex flex-wrap justify-between items-center border-b-2 border-gray-100 py-3"
-                    >
-                      <div class="w-1/3">
-                        <div class="flex">
-                          <div class="h-8 w-8 rounded bg-gray-200 mr-4"></div>
-                          <div>
-                            <div
-                              class="h-2 w-16 bg-gray-200 mb-1 rounded-full"
-                            ></div>
-                            <div
-                              class="h-2 w-10 bg-gray-100 rounded-full"
-                            ></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w-1/3">
-                        <div
-                          class="w-16 rounded-full bg-green-100 py-2 px-4 mx-auto"
-                        >
-                          <div class="p-1 rounded-full bg-green-200"></div>
-                        </div>
-                      </div>
-                      <div class="w-1/3">
-                        <div
-                          class="h-2 w-10 bg-gray-100 rounded-full mx-auto"
-                        ></div>
-                      </div>
-                    </div>
-
-                    <div
-                      class="flex flex-wrap justify-between items-center border-b-2 border-gray-100 py-3"
-                    >
-                      <div class="w-1/3">
-                        <div class="flex">
-                          <div class="h-8 w-8 rounded bg-gray-200 mr-4"></div>
-                          <div>
-                            <div
-                              class="h-2 w-16 bg-gray-200 mb-1 rounded-full"
-                            ></div>
-                            <div
-                              class="h-2 w-10 bg-gray-100 rounded-full"
-                            ></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w-1/3">
-                        <div
-                          class="w-16 rounded-full bg-orange-100 py-2 px-4 mx-auto"
-                        >
-                          <div class="p-1 rounded-full bg-orange-200"></div>
-                        </div>
-                      </div>
-                      <div class="w-1/3">
-                        <div
-                          class="h-2 w-16 bg-gray-100 rounded-full mx-auto"
-                        ></div>
-                      </div>
-                    </div>
-
-                    <div
-                      class="flex flex-wrap justify-between items-center border-b-2 border-gray-100 py-3"
-                    >
-                      <div class="w-1/3">
-                        <div class="flex">
-                          <div class="h-8 w-8 rounded bg-gray-200 mr-4"></div>
-                          <div>
-                            <div
-                              class="h-2 w-16 bg-gray-200 mb-1 rounded-full"
-                            ></div>
-                            <div
-                              class="h-2 w-10 bg-gray-100 rounded-full"
-                            ></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="w-1/3">
-                        <div
-                          class="w-16 rounded-full bg-blue-100 py-2 px-4 mx-auto"
-                        >
-                          <div class="p-1 rounded-full bg-blue-200"></div>
-                        </div>
-                      </div>
-                      <div class="w-1/3">
-                        <div
-                          class="h-2 w-8 bg-gray-100 rounded-full mx-auto"
-                        ></div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div
-                  class="w-full absolute left-0 bottom-0 ml-1"
-                  style="transform: rotate(-8deg); z-index: 1; margin-bottom: -360px;"
-                >
-                  <div class="grid--gray h-48 w-48"></div>
-                </div>
-              </div>
-
-              <div
-                class="md:hidden w-full absolute right-0 top-0 flex rounded-lg bg-white overflow-hidden shadow"
-              >
-                <div
-                  class="h-4 bg-gray-200 absolute top-0 left-0 right-0 rounded-t-lg flex items-center"
-                >
-                  <span
-                    class="h-2 w-2 rounded-full bg-red-500 inline-block mr-1 ml-2"
-                  ></span>
-                  <span
-                    class="h-2 w-2 rounded-full bg-orange-400 inline-block mr-1"
-                  ></span>
-                  <span
-                    class="h-2 w-2 rounded-full bg-green-500 inline-block mr-1"
-                  ></span>
-                </div>
-                <div class="w-32 bg-gray-100 px-2 py-8" style="height: 340px;">
-                  <div class="h-2 w-16 bg-gray-300 rounded-full mb-4"></div>
-                  <div class="flex items-center mb-4">
-                    <div
-                      class="h-5 w-5 rounded-full bg-gray-300 mr-3 flex-shrink-0"
-                    ></div>
-                    <div>
-                      <div class="h-2 w-10 bg-gray-300 rounded-full"></div>
-                    </div>
-                  </div>
-
-                  <div class="h-2 w-16 bg-gray-200 rounded-full mb-2"></div>
-                  <div class="h-2 w-10 bg-gray-200 rounded-full mb-2"></div>
-                  <div class="h-2 w-20 bg-gray-200 rounded-full mb-2"></div>
-                  <div class="h-2 w-6 bg-gray-200 rounded-full mb-2"></div>
-                  <div class="h-2 w-16 bg-gray-200 rounded-full mb-2"></div>
-                  <div class="h-2 w-10 bg-gray-200 rounded-full mb-2"></div>
-                  <div class="h-2 w-20 bg-gray-200 rounded-full mb-2"></div>
-                  <div class="h-2 w-6 bg-gray-200 rounded-full mb-2"></div>
-                </div>
-                <div class="flex-1 px-4 py-8">
-                  <h2 class="text-xs text-gray-700 font-bold mb-1">
-                    Disease Prediction
-                  </h2>
-                  <div class="flex mb-5">
-                    <div class="p-2 w-12 rounded-full bg-gray-100 mr-2"></div>
-                    <div class="p-2 w-12 rounded-full bg-gray-100 mr-2"></div>
-                    <div class="p-2 w-12 rounded-full bg-gray-100 mr-2"></div>
-                    <div class="p-2 w-12 rounded-full bg-gray-100 mr-2"></div>
-                  </div>
-
-                  <div class="flex flex-wrap -mx-2 mb-5">
-                    <div class="w-1/3 px-2">
-                      <div class="p-3 rounded-lg bg-white shadow">
-                        <div
-                          class="w-6 h-6 rounded-full bg-gray-200 mb-2"
-                        ></div>
-                        <div
-                          class="h-2 w-10 bg-gray-200 mb-1 rounded-full"
-                        ></div>
-                        <div class="h-2 w-6 bg-gray-200 rounded-full"></div>
-                      </div>
-                    </div>
-                    <div class="w-1/3 px-2">
-                      <div class="p-3 rounded-lg bg-white shadow">
-                        <div
-                          class="w-6 h-6 rounded-full bg-gray-200 mb-2"
-                        ></div>
-                        <div
-                          class="h-2 w-10 bg-gray-200 mb-1 rounded-full"
-                        ></div>
-                        <div class="h-2 w-6 bg-gray-200 rounded-full"></div>
-                      </div>
-                    </div>
-                    <div class="w-1/3 px-2">
-                      <div class="p-3 rounded-lg bg-white shadow">
-                        <div
-                          class="w-6 h-6 rounded-full bg-gray-200 mb-2"
-                        ></div>
-                        <div
-                          class="h-2 w-10 bg-gray-200 mb-1 rounded-full"
-                        ></div>
-                        <div class="h-2 w-6 bg-gray-200 rounded-full"></div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <h2 class="text-xs text-gray-700 font-bold mb-1">
-                    Disease Prediction
-                  </h2>
-
-                  <div
-                    class="w-full flex flex-wrap justify-between items-center border-b-2 border-gray-100 py-3"
-                  >
-                    <div class="w-1/3">
-                      <div class="flex">
-                        <div
-                          class="h-5 w-5 rounded-full bg-gray-200 mr-3 flex-shrink-0"
-                        ></div>
-                        <div>
-                          <div
-                            class="h-2 w-16 bg-gray-200 mb-1 rounded-full"
-                          ></div>
-                          <div class="h-2 w-10 bg-gray-100 rounded-full"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w-1/3">
-                      <div
-                        class="w-16 rounded-full bg-green-100 py-2 px-4 mx-auto"
-                      >
-                        <div class="p-1 rounded-full bg-green-200"></div>
-                      </div>
-                    </div>
-                    <div class="w-1/3">
-                      <div
-                        class="h-2 w-10 bg-gray-100 rounded-full mx-auto"
-                      ></div>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-wrap justify-between items-center py-3">
-                    <div class="w-1/3">
-                      <div class="flex">
-                        <div
-                          class="h-5 w-5 rounded-full bg-gray-200 mr-3 flex-shrink-0"
-                        ></div>
-                        <div>
-                          <div
-                            class="h-2 w-16 bg-gray-200 mb-1 rounded-full"
-                          ></div>
-                          <div class="h-2 w-10 bg-gray-100 rounded-full"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="w-1/3">
-                      <div
-                        class="w-16 rounded-full bg-orange-100 py-2 px-4 mx-auto"
-                      >
-                        <div class="p-1 rounded-full bg-orange-200"></div>
-                      </div>
-                    </div>
-                    <div class="w-1/3">
-                      <div
-                        class="h-2 w-16 bg-gray-100 rounded-full mx-auto"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div
-                class="mr-3 md:hidden absolute right-0 bottom-0 w-40 bg-white rounded-lg shadow-lg px-10 py-6"
-                style="z-index: 2; margin-bottom: -380px;"
-              >
-                <div
-                  class="bg-indigo-800 mx-auto rounded-lg w-20 pt-3 mb-12 relative"
-                >
-                  <div class="h-3 bg-white"></div>
-
-                  <div class="text-right my-2">
-                    <div
-                      class="inline-flex w-3 h-3 rounded-full bg-white -mr-2"
-                    ></div>
-                    <div
-                      class="inline-flex w-3 h-3 rounded-full bg-indigo-800 border-2 border-white mr-2"
-                    ></div>
-                  </div>
-
-                  <div
-                    class="-ml-4 -mb-6 absolute left-0 bottom-0 w-16 bg-green-700 mx-auto rounded-lg pb-2 pt-3"
-                  >
-                    <div class="h-2 bg-white mb-2"></div>
-                    <div class="h-2 bg-white w-6 ml-auto rounded mr-2"></div>
-                  </div>
-                </div>
-
-                <div class="text-gray-800 text-center text-sm">
-                  Payment for <br />Internet
-                </div>
-              </div>
+            <div class="banner-text text-center">
+              <h1 class="white">E-Health Care at your desk!!</h1>
+              <p>we provide you best health care services.</p>
+              <a href="#contact" class="btn btn-appoint">Contact us.</a>
+            </div>
+            <div class="overlay-detail text-center">
+              <a href="#service"><i class="fa fa-angle-down"></i></a>
             </div>
           </div>
         </div>
       </div>
-      <svg
-        class="fill-current text-white hidden md:block"
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 1440 320"
-      >
-        <path fill-opacity="1" d="M0,224L1440,32L1440,320L0,320Z"></path>
-      </svg>
-    
-
-
-<!-- component -->
-<div id="container" class="w-4/5 mx-auto">
-    <div class="flex flex-col sm:flex-row content-center">
-      <!-- Card 1 -->
-      <div class="sm:w-1/4 p-2">
-        <div class="bg-white px-6 py-8 rounded-lg shadow-lg text-center">
-          <div class="mb-3">
-            <img style="height: 200px;"
-              class="w-auto mx-auto rounded-full"   
-              src="{% static 'patient.png' %}"
-              alt=""
-            />
-          </div>
-          <h2 class="text-xl font-medium text-gray-700">Patient</h2>
-          <span class="text-blue-500 block mb-5"></span>
-
-          <a href="/patient/patient_login" class="px-4 py-2 bg-blue-500 text-white rounded-full"
-            >Login</a
-          >
-          <a href="/patient/patient_register" class="px-4 py-2 bg-blue-500 text-white rounded-full"
-          >Signup</a
-        >
-        </div>
-      </div>
-      &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <!-- Card 2 -->
-      <div class="sm:w-1/4 p-2">
-        <div class="bg-white px-6 py-8 rounded-lg shadow-lg text-center">
-          <div class="mb-3">
-            <img
-              class="w-auto mx-auto rounded-full"
-              src="{% static 'doctor.jpg' %}"
-              alt=""
-              style="height: 200px;"
-            />
-          </div>
-          <h2 class="text-xl font-medium text-gray-700">Doctor</h2>
-          <span class="text-blue-500 block mb-5"></span>
-
-          
-          <a href="/doctor/doctor_login" class="px-4 py-2 bg-blue-500 text-white rounded-full"
-          >Login</a
-        >
-    
-        </div>
-      </div>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-      <!-- Card 3 -->
-      <div class="sm:w-1/4 p-2">
-        <div class="bg-white px-6 py-8 rounded-lg shadow-lg text-center" >
-          <div class="mb-3">
-            <img
-              class="w-auto mx-auto rounded-full"
-              src="{% static 'admin.png' %}"
-              alt=""
-              style="height: 200px;"
-            />
-          </div>
-          <h2 class="text-xl font-medium text-gray-700">Admin</h2>
-          <span class="text-blue-500 block mb-5"></span>
-
-          <a href="/roleadmin/roleadmin_login" class="px-4 py-2 bg-blue-500 text-white rounded-full"
-            >login</a
-          >
-        </div>
-      </div>
-
-      <!-- Card 4 -->
-      
     </div>
-  </div>
-</div>
+  </section>
+  <!--/ banner-->
 
-</div>
+  <!--cta-->
+  <section id="cta-1" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="schedule-tab">
+          <div class="col-md-4 col-sm-4 bor-left">
+            <div class="mt-boxy-color"></div>
+            <div class="medi-info">
+              <h3>Patient</h3>
+              <p>I am text block. Edit this text from Appearance / Customize / Homepage header columns. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+
+              <a href="/patient/patient_login" class="medi-info-btn">Login</a>
+              <a href="/patient/patient_register" class="medi-info-btn">Sign Up</a>
+            </div>
+          </div>
+
+          <div class="col-md-4 col-sm-4">
+            <div class="medi-info">
+              <h3>Doctor</h3>
+              <p>I am text block. Edit this text from Appearance / Customize / Homepage header columns. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+              <a href="/doctor/doctor_login" class="medi-info-btn">Login</a>
+            </div>
+          </div>
+          <div class="col-md-4 col-sm-4">
+            <div class="medi-info">
+              <h3>Admin</h3>
+              <p>I am text block. Edit this text from Appearance / Customize / Homepage header columns. Lorem ipsum dolor sit amet, consectetur adipiscing elit. </p>
+              <a href="/doctor/doctor_login" class="medi-info-btn">Login</a>
+            </div>
+          </div>
 
 
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--cta-->
 
 
-<footer class="bg-light text-center text-lg-start">
-  <!-- Copyright -->
-  <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <p>Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This Web Application is made  <i class="fa fa-heart-o" aria-hidden="true"></i> by <a class="text-dark" href="http://www.pradipthapa.info.np/">Pradip Thapa</a>, Pawan  and Sushil</a></p>
-    <a class="text-dark" href="https://github.com/Pradip-p/E-Health-Care">E-Health Care</a>
-  </div>
-  <!-- Copyright -->
-</footer>
+  
+  
+
+
+  <!--contact-->
+  <section id="contact" class="section-padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2 class="ser-title">Contact us</h2>
+          <hr class="botm-line">
+        </div>
+        <div class="col-md-4 col-sm-4">
+          <h3>Contact Info</h3>
+          <div class="space"></div>
+          <p><i class="fa fa-map-marker fa-fw pull-left fa-2x"></i>Balkumari Street<br>Lalitpur, Nepal</p>
+          <div class="space"></div>
+          <p><i class="fa fa-envelope-o fa-fw pull-left fa-2x"></i>info@ehealth.com</p>
+          <div class="space"></div>
+          <p><i class="fa fa-phone fa-fw pull-left fa-2x"></i>9845.....</p>
+        </div>
+        <div class="col-md-8 col-sm-8 marb20">
+          <div class="contact-info">
+            <h3 class="cnt-ttl">Having Any Query!</h3>
+            <div class="space"></div>
+            <div id="sendmessage">Your message has been sent. Thank you!</div>
+            <div id="errormessage"></div>
+            <form action="" method="post" role="form" class="contactForm">
+              <div class="form-group">
+                <input type="text" name="name" class="form-control br-radius-zero" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <input type="email" class="form-control br-radius-zero" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <input type="text" class="form-control br-radius-zero" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+                <div class="validation"></div>
+              </div>
+              <div class="form-group">
+                <textarea class="form-control br-radius-zero" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                <div class="validation"></div>
+              </div>
+
+              <div class="form-action">
+                <button type="submit" class="btn btn-form">Send Message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <!--/ contact-->
+  <!--footer-->
+  <footer id="footer">
+    <div class="footer-line">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 text-center">
+            © Copyright E-Health Care. All Rights Reserved
+            <div class="credits">
+              <!--
+                All the links in the footer should remain intact.
+                You can delete the links only if you purchased the pro version.
+                Licensing information: https://bootstrapmade.com/license/
+                Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=Medilab
+              -->
+              made by <a href="#">Pradip, Sushil and Pawan</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </footer>
+  <!--/ footer-->
+
+  <script src="{% static 'health/js/jquery.min.js' %}"></script>
+  <script src="{% static 'health/js/jquery.easing.min.js' %}"></script>
+  <script src="{% static 'health/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'health/js/custom.js' %}"></script>
+  <script src="{% static 'health/contactform/contactform.js' %}"></script>
+
 </body>
+
 </html>

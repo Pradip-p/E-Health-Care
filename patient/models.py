@@ -46,7 +46,6 @@ signals.post_delete.connect(delete_user, sender=Profile)
 class Feedback(models.Model):
     text=models.TextField(max_length=200)
     title=models.CharField(max_length=50)
-    picture=models.ImageField()
     date=models.DateTimeField(auto_now_add=True)
     uploaded_by=models.ForeignKey(Profile,on_delete=models.CASCADE)
     def __str__(self):

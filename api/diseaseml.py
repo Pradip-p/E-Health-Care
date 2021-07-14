@@ -8,8 +8,30 @@ from sklearn.model_selection import train_test_split
 from sklearn.metrics import confusion_matrix
 import pickle
 import os
+from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
+
 
 from sklearn import preprocessing 
+def print_score(clf, X_train, y_train, X_test, y_test, train=True):
+    if train:
+        pred = clf.predict(X_train)
+        clf_report = pd.DataFrame(classification_report(y_train, pred, output_dict=True))
+        print("Train Result:\n================================================")
+        print(f"Accuracy Score: {accuracy_score(y_train, pred) * 100:.2f}%")
+        # print("_______________________________________________")
+        # print(f"CLASSIFICATION REPORT:\n{clf_report}")
+        # print("_______________________________________________")
+        # print(f"Confusion Matrix: \n {confusion_matrix(y_train, pred)}\n")
+        
+    elif train==False:
+        pred = clf.predict(X_test)
+        clf_report = pd.DataFrame(classification_report(y_test, pred, output_dict=True))
+        print("Test Result:\n================================================")        
+        print(f"Accuracy Score: {accuracy_score(y_test, pred) * 100:.2f}%")
+        # print("_______________________________________________")
+        # print(f"CLASSIFICATION REPORT:\n{clf_report}")
+        # print("_______________________________________________")
+        # print(f"Confusion Matrix: \n {confusion_matrix(y_test, pred)}\n")
 
 def pre_processing(df):
     
@@ -402,7 +424,10 @@ def training():
        'muscle_pain']], data.iloc[:,-1]
 
     # Split dataset into training set and test set
-    X_train, X_test, y_train, y_test = train_test_split(X_reduced, y, test_size=0.3) # 70% training and 30% test
+    
+
+    X_train, X_test, y_train, y_test = train_test_split(X_reduced, y, test_size=0.3, random_state=42)
+    # X_train, X_test, y_train, y_test = train_test_split(X_reduced, y, test_size=0.3) # 70% training and 30% test
 
     #Create a Gaussian Classifier
 
@@ -414,7 +439,10 @@ def training():
     y_pred=clf2.predict(X_test)
 
     # Model Accuracy, how often is the classifier correct?
-    print("Accuracy:",metrics.accuracy_score(y_test, y_pred))
+    
+    print(print_score(clf2, X_train, y_train, X_test, y_test, train=True))
+    print(print_score(clf2, X_train, y_train, X_test, y_test, train=False))
+
     
 
     # df=pd.read_csv("dataset.csv")

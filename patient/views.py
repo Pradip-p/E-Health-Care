@@ -570,6 +570,7 @@ def feedback_edit(request,pk):
 @allowed_users(allowed_roles=['PATIENT'])
 def feedback_add(request):
     if request.method=='POST':
+        
         feedback_add_form=FeedbackForm(request.POST or None,request.FILES or None)
         if feedback_add_form.is_valid():
             add_feedback=feedback_add_form.save(commit=False)

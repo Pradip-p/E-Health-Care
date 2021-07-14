@@ -26,7 +26,7 @@ SECRET_KEY = '6=lw8ok^dacjf*$i-3mldpziz06s70i!p(m3$=!l^avkw7^d4i'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["127.0.0.1"]
 # AUTH_USER_MODEL = 'core.User'
 
 # Application definition
@@ -90,25 +90,25 @@ WSGI_APPLICATION = 'Disease.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'OPTIONS': {
-#           'autocommit': True,
-#             },
-#         'NAME': 'ehealth',
-#         'USER': 'root',
-#         'PASSWORD': 'Password_1',
-#         'HOST': 'localhost',
-#         'PORT': '3306',
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'OPTIONS': {
+          'autocommit': True,
+            },
+        'NAME': 'ehealth',
+        'USER': 'root',
+        'PASSWORD': 'Password_1',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators

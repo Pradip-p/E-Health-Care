@@ -7,13 +7,14 @@
             <div class="col-sm-4 col-3">
                 <h4 class="page-title">Specialist</h4>
             </div>
+
             <div class="col-sm-8 col-9 text-right m-b-20">
             <form class="form-inline my-2 my-lg-0 float-right" method="GET" action="" style="text-align: right;">
                 <!-- {% csrf_token %} -->
                 <input  type="text" class="form-control mr-sm-2" value="{{ request.GET.term }}" name="term" placeholder="Name,address,speciality">
                 <!-- <input value={{request.POST.term}} name="term" class="form-control mr-sm-2" type="text" placeholder="Search by speciality" aria-label="Search"> -->
                 <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="submit">Search</button>
-              </form>
+            </form>
             </div>
         </div>
         <div class="row doctor-grid">
@@ -34,7 +35,7 @@
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#delete_doctor"><i class="fa fa-trash-o m-r-5"></i> Delete</a>
                         </div>
                     </div> -->
-                    <h4 class="doctor-name text-ellipsis"><a href="">{{doctor.user.first_name}}&nbsp;{{doctor.user.last_name}}</a></h4>
+                    <h6 class="doctor-name text-ellipsis"><span>{{doctor.user.first_name}}&nbsp;{{doctor.user.last_name}}</span></h6>
                     <div class="doc-prof">{{doctor.department}}</div>
                     <div class="user-country">
                         <i class="fa fa-map-marker"></i> {{doctor.address}}
@@ -43,9 +44,10 @@
             </div>
          {% endfor %}
          
+         
          {% if doctors.has_other_pages %}
          <nav aria-label="Page navigation example">
-         <ul class="pagination justify-content-center"">
+         <ul class="pagination justify-content-center">
 
          {% if doctors.has_previous %}
          <li class="page-item">

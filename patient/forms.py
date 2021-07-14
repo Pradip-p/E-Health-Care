@@ -58,15 +58,12 @@ class FeedbackForm(forms.ModelForm):
 
 	class Meta:
 		model=Feedback
-		fields=('title','text','picture')
+		fields=('title','text')
 		label={
 			'title':'Title',
 			'text':'Description',
-			'picture':'Picture'
 		}
 	def __init__(self,*args,**kwargs):
 		super(FeedbackForm,self).__init__(*args,**kwargs)
-
 		self.fields['title'].error_messages.update({'required':'Title can hold atmost 50 characters'})
-		self.fields['picture'].error_messages.update({'required':'Please upload a picture'})
 		self.fields['text'].error_messages.update({'required':'Description should only be 200 characters long'})

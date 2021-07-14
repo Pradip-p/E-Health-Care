@@ -24,22 +24,19 @@
               {% csrf_token %}
               <div class="form-group col-lg-4" >
                 <label for="exampleInputEmail1">Email address</label>
-                <input type="email" name = "email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                <input type="email" name = "email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
                 <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
               </div>
 
 
               <div class="form-outline">
-                  <textarea class="form-control  col-lg-6" name="prescription" id="textAreaExample" rows="4"></textarea>
+                  <textarea class="form-control  col-lg-6" name="prescription" id="textAreaExample" rows="4" required></textarea>
                   <label class="form-label" for="textAreaExample">write prescription</label>
-                </div>
+              </div>
           
-          
-              
               <button type="submit" class="btn btn-primary">Send</button>
             </form> 
-      
           </div>
-    
-  </div></div>
+  </div>
+</div>
 {% endblock %}

@@ -6,19 +6,20 @@
 <div class="page-wrapper">
     <div class="content">
         <div class="row">
-            <div class="col-sm-8 col-4">
-                <h4 class="page-title">Appointments</h4>
+            <div class="col-sm-4 col-3">
+                <h4 class="page-title"> Appointments</h4>
             </div>
-        
-            <div class="col-sm-4 col-8 text-right m-b-30">
-                <form class="form-inline my-2 my-lg-0 float-right" method="GET" action="" style="text-align: right;">
-                    <!-- {% csrf_token %} -->
-                    <input  type="text" class="form-control mr-sm-2" value="{{ request.GET.term }}" name="term" placeholder="Doctor name,speciality">
-                    <!-- <input value={{request.POST.term}} name="term" class="form-control mr-sm-2" type="text" placeholder="Search by speciality" aria-label="Search"> -->
-                    <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="submit">Search</button>
-                  </form>
+
+            <div class="col-sm-8 col-9 text-right m-b-20">
+            <form class="form-inline my-2 my-lg-0 float-right" method="GET" action="" style="text-align: right;">
+                <!-- {% csrf_token %} -->
+                <input  type="text" class="form-control mr-sm-2" value="{{ request.GET.term }}" name="term" placeholder="Doctor name">
+                <!-- <input value={{request.POST.term}} name="term" class="form-control mr-sm-2" type="text" placeholder="Search by speciality" aria-label="Search"> -->
+                <button class="btn btn-outline-primary my-2 my-sm-0" type="submit" value="submit">Search</button>
+            </form>
             </div>
-        </div>         
+        </div>  
+
         <div class="row">
             <div class="col-md-12">
                 <div class="table-responsive" style="max-height: 1000px; overflow-x: auto; overflow-y: auto;">

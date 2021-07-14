@@ -33,7 +33,16 @@ def user_list(request, pk=None):
         if pk:
             users = User.objects.filter(id=pk)
         else:
-            users = User.objects.all()
+            # users = User.objects.all()
+            if request.user.groups.filter(name="PATIENT").exists():
+                users = User.objects.filter(groups__name="DOCTOR")
+                
+                
+                print(users)
+                
+            else:
+                users = User.objects.filter(groups__name="PATIENT")
+                
         serializer = UserSerializer(users, many=True, context={'request': request})
         return JsonResponse(serializer.data, safe=False)
 

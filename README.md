@@ -69,6 +69,7 @@ Use the  [docker](https://docs.docker.com/docker-for-windows/install/) to instal
 
 <ul>
 <li><p><b>Sign up/ sign In</b></p></li>
+<li><p><b>Can update and edit profile</b></p></li>
 <li><p><b>Can view list of Specialist doctor</b></p></li>
 <li><p><b>Can search specialist doctor by name, address and speciality<b><p></li>
 <li><p><b>Can search doctor by disease name and doctor</b></p></li>
@@ -76,14 +77,15 @@ Use the  [docker](https://docs.docker.com/docker-for-windows/install/) to instal
 <li><p><b>Can predict heart problem by entering parameters</b></p></li>
 <li><p><b>Can predict pneumonia by uploading x-ray images</b></p></li>
 <li><p><b>Can predict diabetes problem by entering </b></p></li>
-<li><p><b>Suggest doctor after predicting any disease if doctor is available<b><p><li>
+<li><p><b>Suggest doctor after predicting any disease if doctor is available<b></p></li>
 <li><p><b>Patient can take appointment</b></p></li>
-<li><p><b>Patient can cancel, view and download appointment details</b><p><li>
+<li><p><b>Patient can cancel, view and download appointment details</b></p></li>
+<li><p><b>Patient can give feedback to system</b></p></li>
 </ul>
 
 ## Admin
 <ul>
-<li><p><b>Can view total patients, predictions, Doctors and feedback from patient</b></p><li>
+<li><p><b>Can view total patients, predictions, Doctors and feedback from patient</b></p></li>
 <li><p><b>Can view new patient who predicts disease</b></p></li>
 <li><p><b>Sign In and logout</b></p></li>
 <li><p><b>Can add, edit and delete and search all doctor</b></p></li>
@@ -93,12 +95,11 @@ Use the  [docker](https://docs.docker.com/docker-for-windows/install/) to instal
 ## Doctor
 
 <ul>
-<li><p><b>Sign up through provided username and password from admin
-</b></p></li>
+<li><p><b>Sign up through provided username and password from admin</b></p></li>
 <li><p><b>View the list of all patients who predicts disease which he was assign to take charge of it(Disease)</b></p></li>
 <li><p><b>Can add, edit and delete the appointment </b></p></li>
-<li><p><b>Can view booked appointment
-</b></p></li>
+<li><p><b>Can view booked appointment</b></p></li>
+<li><p><b>Can send disease precaution to patient through email</b></p></li>
 </ul>
 
 

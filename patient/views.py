@@ -18,9 +18,6 @@ from django.template.loader import render_to_string
 from weasyprint import HTML
 import tempfile
 
-#..............................
-
-
 # decorators
 
 from patient.patient_decorators import unauthenticated_patient,allowed_users
@@ -44,6 +41,9 @@ from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from appointment.models import AppointmentDetails,BookedAppointment
 from appointment.forms import BookedAppointmentForm
+
+from django.db.models.functions import Concat
+from django.db.models import Value
 
 
 #For Pnemonia check
@@ -86,7 +86,7 @@ def showimage(request):
                 }
                 return render(request, 'patient/image.html', context)
             else:
-                prediction = "Your health is Normal"
+                prediction = "Your health is Normal."
                 context= {
                 'imagefile':imagefile,
                 'form': form,
@@ -138,7 +138,7 @@ def diabetes(request):
             
             if sur== '1':
                 context = {}
-                result= "Yes, You are suffering  from Diabetes problems"
+                result= "Yes, You are suffering  from Diabetes disease"
                 predicted_disease_name="Diabetes"
                 predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=predicted_disease_name)
                 predict.save()
@@ -156,7 +156,7 @@ def diabetes(request):
 
             elif sur=='0':
                 context = {}
-                context={'sur':'You are not suffering from diabetes problem',}
+                context={'sur':'You are not suffering from diabetes disease',}
                 return render(request,'patient/diabetes_results.html', context)
 
 
@@ -288,7 +288,7 @@ def heart(request):
                     'disease_doctor_list':disease_doctor_list
                 }
             elif sur=='0':
-                name="You are not suffuring from heart problems"
+                name="You are not suffuring from heart disease"
                 context={
                     'sur':name,
                 }
@@ -366,14 +366,16 @@ def view_appointment(request):
         context={
             'appointments':appointments,
         }
-    
+    # if search_term is not None:
+        
     elif search_term is not None:
+        search_term = search_term.lstrip().rstrip()
         disease=Disease1.objects.filter(Q(name__icontains=search_term))
         doctor_id=[]
         for d in disease:
             doctor_id.append(d.doctor.id)
-    
-        doctor=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term))
+        doctor = DoctorInfo.objects.annotate(fullname=Concat('user__first_name', Value(' '), 'user__last_name')).filter(Q(user__first_name__icontains=search_term) | Q(user__last_name__icontains=search_term) | Q(fullname__icontains=search_term))
+        # doctor=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term))
        
         name=[]
         for n in doctor:
@@ -485,10 +487,6 @@ def export_pdf(request,pk):
         output=open(output.name,'rb')
         response.write(output.read())
     return response
-
-
-    
-
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
 def patient_appointment(request):
@@ -591,17 +589,22 @@ def feedback_add(request):
 
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
+
 def search_doctor(request):
     context={}
     if request.method=="POST":
         search_term=request.POST.get('term')
+        if search_term is not None:
+            search_term = search_term.lstrip().rstrip()
         disease=Disease1.objects.filter(name__icontains=search_term)
         if search_term==None:
             search_term=""
         doctorID=[]
         for d in disease:
             doctorID.append(d.doctor.id)
-        doctors=DoctorInfo.objects.filter(id__in=doctorID) or DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term)|Q(department__icontains=search_term))
+        
+        # doctors=DoctorInfo.objects.filter(id__in=doctorID) or DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term)|Q(department__icontains=search_term))
+        doctors = DoctorInfo.objects.filter(id__in=doctorID) or DoctorInfo.objects.annotate(fullname=Concat('user__first_name', Value(' '), 'user__last_name')).filter(Q(user__first_name__icontains=search_term) | Q(user__last_name__icontains=search_term) | Q(address__icontains=search_term) | Q(department__icontains=search_term) | Q(fullname__icontains=search_term))
         context={
             'doctors':doctors,
         }
@@ -636,9 +639,12 @@ def my_profile(request):
 def home(request):
     page=request.GET.get('page',1)
     search_term=request.GET.get('term')
+    if search_term is not None:
+        search_term = search_term.lstrip().rstrip()
     if search_term==None:
         search_term=""
-    doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
+    doctors = DoctorInfo.objects.annotate(fullname=Concat('user__first_name', Value(' '), 'user__last_name')).filter(Q(user__first_name__icontains=search_term) | Q(user__last_name__icontains=search_term) | Q(address__icontains=search_term) | Q(department__icontains=search_term) | Q(fullname__icontains=search_term))
+    # doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
     paginator=Paginator(doctors,8)
     try:
         doctors=paginator.page(page)
@@ -714,6 +720,7 @@ def patient_login(request):
         if user is not None:
             login(request,user)
             return redirect('home')
+        # return redirect('patient_profile')
         else:
             messages.info(request, "Please enter valid credentials")
             # messages.info(request, "Invalid username or password")

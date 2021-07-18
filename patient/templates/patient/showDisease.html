@@ -2,17 +2,19 @@
 
 {% block body_content %}
 
+  
+
 <div class="page-wrapper">
     <div class="content">
-                <div class="row">
-                    <div class="col-sm-12">
-                        <h4 class="page-title" style="color: black;"></h4>
-                    </div>
-                </div>
             <div class="card-box" style="background-color: skyblue;">
-                <div> 
-                    <h4 class="page-title" style="color: black; font-family:cursive; text-align: justify;">You are suffering from <strong>{{Predicted_disease}} </strong></h4>
-                </div>
+              <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <!-- <h4 class="page-title"><strong>{{sur}}</strong></h4> -->
+                <h4 class="page-title" style="color: black; font-family:cursive; text-align: justify;">You are suffering from <strong>{{Predicted_disease}} </strong></h4>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+
                 
                 <h4 style="text-align: justify;">You Enter following symptoms:</h4><br>
                 <h5 style="text-align: justify; ">

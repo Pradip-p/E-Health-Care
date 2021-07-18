@@ -14,6 +14,8 @@ from django.db.models import Q
 from doctor.forms import DoctorForm,DoctorUserForm
 
 from roleadmin.forms import AddDiseaseForm
+from django.db.models.functions import Concat
+from django.db.models import Value
 # Create your views here.
 
 # import decoratos
@@ -42,9 +44,12 @@ def admin_dashboard(request):
 @allowed_users(allowed_roles=['ADMIN'])
 def disease(request):
     search_term=request.GET.get('term')
+    if search_term is not None:
+        search_term = search_term.lstrip().rstrip()
     if search_term==None:
         search_term=""
-    diseases=Disease1.objects.filter(Q(name__icontains=search_term)|Q(doctor__user__first_name__icontains=search_term)|Q(doctor__user__last_name__icontains=search_term)).order_by('-id')
+    diseases = Disease1.objects.annotate(fullname=Concat('doctor__user__first_name', Value(' '), 'doctor__user__last_name')).filter(Q(name__icontains=search_term) | Q(doctor__user__first_name__icontains=search_term) | Q(doctor__user__last_name__icontains=search_term) | Q(fullname__icontains=search_term)).order_by('-id')
+    # diseases=Disease1.objects.filter(Q(name__icontains=search_term)|Q(doctor__user__first_name__icontains=search_term)|Q(doctor__user__last_name__icontains=search_term)).order_by('-id')
     
     context={
         'diseases':diseases,
@@ -103,9 +108,13 @@ def delete_disease(request,pk):
 def doctors_list(request):
     page=request.GET.get('page',1)
     search_term=request.GET.get('term')
+    if search_term is not None:
+        search_term = search_term.lstrip().rstrip()
+        
     if search_term==None:
         search_term=""
-    doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
+    doctors = DoctorInfo.objects.annotate(fullname=Concat('user__first_name', Value(' '), 'user__last_name')).filter(Q(user__first_name__icontains=search_term) | Q(user__last_name__icontains=search_term) | Q(address__icontains=search_term) | Q(department__icontains=search_term) | Q(fullname__icontains=search_term))
+    # doctors=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term) |Q(user__last_name__icontains=search_term)|Q(address__icontains=search_term)| Q(department__icontains=search_term))
     paginator=Paginator(doctors,8)
     try:
         doctors=paginator.page(page)
@@ -185,6 +194,9 @@ def delete_doctor(request,pk):
 @allowed_users(allowed_roles=['ADMIN'])
 def patients_list(request):
     search_term=request.GET.get('term')
+    if search_term is not None:
+        search_term = search_term.lstrip().rstrip()
+        
     users=User.objects.filter(groups__name="PATIENT")
     if search_term==None:
         search_term=""

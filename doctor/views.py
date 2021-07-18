@@ -19,7 +19,7 @@ from appointment.models import AppointmentDetails,BookedAppointment
 from django.core.mail import send_mail
 from Disease.settings import EMAIL_HOST_USER
 from django.template.loader import render_to_string
-
+from doctor.models import DoctorInfo
 
 @unauthenticated_doctor
 def doctor_login(request):
@@ -66,8 +66,10 @@ def doctor_logout(request):
 def dashboard_doctor(request):
 
     search_term = request.GET.get('term')
+    if search_term is not None:
+        search_term = search_term.lstrip().rstrip()
     contex = {}
-    from doctor.models import DoctorInfo
+    
     doctor=DoctorInfo.objects.filter(user__id=request.user.id)
     doctorID=[]
     for i in doctor:

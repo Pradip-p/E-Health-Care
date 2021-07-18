@@ -31,32 +31,32 @@
                                     <div class="row">
                                         <div class="col-md-5">
                                             <div class="profile-info-left">
-                                                <h3 class="user-name m-t-0 mb-0">Welcome admin !</h3>
+                                                <h3 class="user-name m-t-0 mb-0">{{patient.name}} !</h3>
                                                 <br />
                                                 <br />
-                                                <div class="staff-msg"><a href="" class="btn btn-primary">Send Message</a></div>
+                                                <!-- <div class="staff-msg"><a href="" class="btn btn-primary">Send Message</a></div> -->
                                             </div>
                                         </div>
                                         <div class="col-md-7">
                                             <ul class="personal-info">
                                                 <li>
-                                                    <span class="title">Phone:</span>
+                                                    <span class="title">Phone:</span><br>
                                                     <span class="text"><a href="#">{{patient.phone_number}}</a></span>
                                                 </li>
                                                 <li>
-                                                    <span class="title">Email:</span>
+                                                    <span class="title">Email:</span><br>
                                                     <span class="text"><a href="#">{{patient.user.email}}</a></span>
                                                 </li>
-                                                <li>
-                                                    <span class="title">Birthday:</span>
+                                                <!-- <li>
+                                                    <span class="title">Birthday:</span><
                                                     <span class="text">3rd March</span>
-                                                </li>
+                                                </li> -->
                                                 <li>
-                                                    <span class="title">Address:</span>
+                                                    <span class="title">Address:</span><br>
                                                     <span class="text">{{patient.address}}</span>
                                                 </li>
                                                 <li>
-                                                    <span class="title">Gender:</span>
+                                                    <span class="title">Gender:</span><br>
                                                     <span class="text">{{patient.gender}}</span>
                                                 </li>
                                             </ul>

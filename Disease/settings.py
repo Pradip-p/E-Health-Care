@@ -42,8 +42,6 @@ INSTALLED_APPS = [
     'roleadmin',
     'crispy_forms',
     'api',
-    'jet.dashboard',
-    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

@@ -1,14 +1,14 @@
 Django==2.2.28
-django-cors-headers
-django-crispy-forms
-pandas
-scikit-learn
-scipy
+django-cors-headers==3.11.0
+django-crispy-forms==1.14.0
+pandas==2.2.2
+scipy==1.14.0
 matplotlib
-weasyprint
-tensorflow
-# Django==2.2.13
-django-widget-tweaks
-djangorestframework
-pytz
-python-memcached
+weasyprint==62.3
+tensorflow==2.17.0
+django-widget-tweaks==1.5.0
+djangorestframework==3.13.1
+pytz==2024.1
+python-memcached==1.62
+scikit-learn==1.0.2 
+joblib==1.1.0

@@ -4,13 +4,13 @@ Template Name: PreClinic - Medical and Hospital Admin Template
 Version      : 1.0
 */
 $(document).ready(function($) {
-	
+
 	// Variables declarations
 	var $wrapper = $('.main-wrapper');
 	var $pageWrapper = $('.page-wrapper');
 	var $slimScrolls = $('.slimscroll');
 	var $sidebarOverlay = $('.sidebar-overlay');
-	
+
 	// Sidebar
 	var Sidemenu = function() {
 		this.$menuItem = $('#sidebar-menu a');
@@ -36,7 +36,7 @@ $(document).ready(function($) {
 	}
 	// Sidebar Initiate
 	init();
-	
+
 	// Sidebar overlay
 	function sidebar_overlay($target) {
 		if($target.length) {
@@ -46,7 +46,7 @@ $(document).ready(function($) {
 			$sidebarOverlay.attr('data-reff', '#' + $target[0].id);
 		}
 	}
-	
+
 	// Mobile menu sidebar overlay
 	$(document).on('click', '#mobile_btn', function() {
 		var $target = $($(this).attr('href'));
@@ -55,7 +55,7 @@ $(document).ready(function($) {
 		$('#chat_sidebar').removeClass('opened');
 		return false;
 	});
-	
+
 	// Chat sidebar overlay
 	$(document).on('click', '#task_chat', function() {
 		var $target = $($(this).attr('href'));
@@ -63,7 +63,7 @@ $(document).ready(function($) {
 		sidebar_overlay($target);
 		return false;
 	});
-	
+
 	// Sidebar overlay reset
 	$sidebarOverlay.on('click', function() {
 		var $target = $($(this).attr('data-reff'));
@@ -75,7 +75,7 @@ $(document).ready(function($) {
 		}
 		return false;
 	});
-	
+
 	// Select 2
 	if($('.select').length > 0) {
 		$('.select').select2({
@@ -83,14 +83,14 @@ $(document).ready(function($) {
 			width: '100%'
 		});
 	}
-	
+
 	// Floating Label
 	if($('.floating').length > 0) {
 		$('.floating').on('focus blur', function(e) {
 			$(this).parents('.form-focus').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
 		}).trigger('blur');
 	}
-	
+
 	// Right Sidebar Scroll
 	if($('#msg_list').length > 0) {
 		$('#msg_list').slimscroll({
@@ -111,7 +111,7 @@ $(document).ready(function($) {
 			$('.msg-sidebar .slimScrollDiv').height(msgrHeight);
 		});
 	}
-	
+
 	// Left Sidebar Scroll
 	if($slimScrolls.length > 0) {
 		$slimScrolls.slimScroll({
@@ -132,7 +132,7 @@ $(document).ready(function($) {
 			$('.sidebar .slimScrollDiv').height(rHeight);
 		});
 	}
-	
+
 	// Page wrapper height
 	var pHeight = $(window).height();
 	$pageWrapper.css('min-height', pHeight);
@@ -140,32 +140,32 @@ $(document).ready(function($) {
 		var prHeight = $(window).height();
 		$pageWrapper.css('min-height', prHeight);
 	});
-	
+
 	// Datetimepicker
 	if($('.datetimepicker').length > 0) {
 		$('.datetimepicker').datetimepicker({
 			format: 'DD/MM/YYYY'
 		});
 	}
-	
+
 	// Datatable
 	if($('.datatable').length > 0) {
 		$('.datatable').DataTable({
 			"bFilter": false,
 		});
 	}
-	
+
 	// Bootstrap Tooltip
 	if($('[data-toggle="tooltip"]').length > 0) {
 		$('[data-toggle="tooltip"]').tooltip();
 	}
-	
+
 	// Mobile Menu
 	$(document).on('click', '#open_msg_box', function() {
 		$wrapper.toggleClass('open-msg-box');
 		return false;
 	});
-	
+
 	// Lightgallery
 	if($('#lightgallery').length > 0) {
 		$('#lightgallery').lightGallery({
@@ -173,12 +173,12 @@ $(document).ready(function($) {
 			selector: 'a'
 		});
 	}
-	
+
 	// Incoming call popup
 	if($('#incoming_call').length > 0) {
 		$('#incoming_call').modal('show');
 	}
-	
+
 	// Summernote
 	if($('.summernote').length > 0) {
 		$('.summernote').summernote({
@@ -188,7 +188,7 @@ $(document).ready(function($) {
 			focus: false
 		});
 	}
-	
+
 	// Check all email
 	$(document).on('click', '#check_all', function() {
 		$('.checkmail').click();
@@ -205,12 +205,12 @@ $(document).ready(function($) {
 			});
 		});
 	}
-	
+
 	// Mail important
 		$(document).on('click', '.mail-important', function() {
 		$(this).find('i.fa').toggleClass('fa-star').toggleClass('fa-star-o');
 	});
-	
+
 	// Dropfiles
 	if($('#drop-zone').length > 0) {
 		var dropZone = document.getElementById('drop-zone');
@@ -237,7 +237,7 @@ $(document).ready(function($) {
 			return false;
 		};
 	}
-	
+
 	// Small Sidebar
 	if(screen.width >= 992) {
 		$(document).on('click', '#toggle_btn', function() {

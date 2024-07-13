@@ -27,14 +27,14 @@ def training():
     dummyRow_heart.to_csv('datasets/dummyRow_heart.csv', index=False)
 
     classifier = KNeighborsClassifier(n_neighbors = 5, metric = 'minkowski', p = 2)
-    
+
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.25, random_state = 0)
     classifier.fit(X_train, y_train)
     # print(model.score(x_test,y_test))
     pkl_filename="datasets/pickle_model_heart.pkl"
     with open(pkl_filename,'wb') as file:
         pickle.dump(classifier,file)
-    
+
     y_pred = classifier.predict(X_test)
     cm = confusion_matrix(y_test, y_pred)
     print(cm)
@@ -53,7 +53,7 @@ def pred_heart(ob):
     df2=pd.read_csv(dummyRow_filename)
     for c1 in df.columns:
         df2[c1]=df[c1]
-        
+
     pkl_filename='datasets/pickle_model_heart.pkl'
     with open(pkl_filename,'rb') as file:
         classifier=pickle.load(file)
@@ -64,11 +64,3 @@ def pred_heart(ob):
 
 if __name__=="__main__":
     training()#df
-
-
-
-
-
-
-
-

@@ -17,6 +17,3 @@ class DiseaseViewSet(viewsets.ModelViewSet):
           ob=Disease.objects.latest('id')
           sur=diseaseml.pred(ob)
           return Response({"status":"Success","Disease":sur,'tmp':args})
-          
-
-         

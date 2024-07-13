@@ -10,14 +10,14 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-            
+
             <div class="card-box">
                 {% if disease_doctor_list.all %}
                   <h5>Suggested Doctor Information</h5>
                   <div class="container">
                     <div class="row">
                       <div class=" col md-12">
-                       
+
                           <table class="table table-border table-striped custom-table datatable mb-0" style="max-height: 500px; overflow-x: auto; overflow-y: auto;">
                             <thead>
                               <tr>
@@ -38,7 +38,7 @@
                                 <td>{{doctor.phone_number}}</td>
                               </tr>
                               {% endfor %}
-                       
+
                             </tbody>
                               </table>
                               {% else %}

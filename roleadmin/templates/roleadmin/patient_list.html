@@ -33,14 +33,14 @@
                                 <th class="text-right">Action</th>
                             </tr>
                         </thead>
-                        <tbody>                
+                        <tbody>
                             {% for patient in patients %}
                             <tr>
                                 <td>
                                     {% if patient.profile_pic.url != '' %}
-                                    <img width="28" height="28" src="{{patient.profile_pic.url}}" class="rounded-circle m-r-5" alt=""> 
+                                    <img width="28" height="28" src="{{patient.profile_pic.url}}" class="rounded-circle m-r-5" alt="">
                                     {% else %}
-                                    <img width="28" height="28" src="{% static 'assets/img/user.png' %}" class="rounded-circle m-r-5" alt=""> 
+                                    <img width="28" height="28" src="{% static 'assets/img/user.png' %}" class="rounded-circle m-r-5" alt="">
                                     {% endif %}
                                     {{patient.name}}
                                 </td>

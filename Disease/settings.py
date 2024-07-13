@@ -26,7 +26,7 @@ INSTALLED_APPS = [
     'appointment',
     'patient',
     'doctor',
-    'Health',   
+    'Health',
     'roleadmin',
     'crispy_forms',
     'api',
@@ -130,10 +130,6 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'assets')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# STATIC_URL = '/static/'
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CACHES = {
     'default': {

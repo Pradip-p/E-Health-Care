@@ -3,7 +3,7 @@ from patient import views
 from django.views.generic.base import RedirectView
 
 1
-urlpatterns = [   
+urlpatterns = [
 path('chat/',views.chat,name="chat"),
 path('patient/',RedirectView.as_view(url='patient_login/')),
 path('patient_login/', views.patient_login,name='patient_login'),

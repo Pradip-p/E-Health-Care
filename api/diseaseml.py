@@ -3,23 +3,23 @@ import numpy as np
 from sklearn.metrics import accuracy_score
 import pickle
 from sklearn.metrics import accuracy_score, classification_report
-from sklearn import preprocessing 
+from sklearn import preprocessing
 def print_score(clf, X_train, y_train, X_test, y_test, train=True):
     if train:
         pred = clf.predict(X_train)
         clf_report = pd.DataFrame(classification_report(y_train, pred, output_dict=True))
         print("Train Result:\n================================================")
         print(f"Accuracy Score: {accuracy_score(y_train, pred) * 100:.2f}%")
-        
+
     elif train==False:
         pred = clf.predict(X_test)
         clf_report = pd.DataFrame(classification_report(y_test, pred, output_dict=True))
-        print("Test Result:\n================================================")        
+        print("Test Result:\n================================================")
         print(f"Accuracy Score: {accuracy_score(y_test, pred) * 100:.2f}%")
 
 
 def pre_processing(df):
-    
+
     df1 = df['value_1']
     df1 = df1.values.tolist()
     #second value
@@ -45,19 +45,19 @@ def pre_processing(df):
     else:
         receiving_blood_transfusion = 0
 
-    
+
     if 'red_sore_around_nose' in df1:
         red_sore_around_nose = 1
     else:
         red_sore_around_nose = 0
-    
+
     if 'abnormal_menstruation' in df1:
         abnormal_menstruation = 1
     else:
         abnormal_menstruation = 0
-    
+
     if 'continuous_sneezing' in df1:
-        continuous_sneezing = 1 
+        continuous_sneezing = 1
     else:
         continuous_sneezing = 0
 
@@ -80,8 +80,8 @@ def pre_processing(df):
         dizziness = 1
     else:
         dizziness = 0
-    
-    
+
+
     # value_2 assign zero or one
     if 'back_pain' in df2:
         back_pain = 1
@@ -91,7 +91,7 @@ def pre_processing(df):
         unsteadiness = 1
     else:
         unsteadiness = 0
-        
+
     if 'yellow_crust_ooze' in df2:
         yellow_crust_ooze = 1
     else:
@@ -126,11 +126,11 @@ def pre_processing(df):
         coma = 1
     else:
         coma = 0
-        
+
     if 'neck_pain' in df3:
         neck_pain = 1
     else:
-        neck_pain = 0   
+        neck_pain = 0
     if 'weakness_of_one_body_side' in df3:
         weakness_of_one_body_side = 1
     else:
@@ -153,7 +153,7 @@ def pre_processing(df):
     else:
         family_history = 0
 
-    
+
     #value_4 assign zero or one
     if 'fast_heart_rate' in df4:
         fast_heart_rate = 1
@@ -163,7 +163,7 @@ def pre_processing(df):
         pain_behind_the_eyes = 1
     else:
         pain_behind_the_eyes = 0
-        
+
     if 'sweating' in df4:
         sweating = 1
     else:
@@ -189,7 +189,7 @@ def pre_processing(df):
         nausea = 1
     else:
         nausea = 0
-    
+
         #value_5 assign zero or one
     if 'dehydration' in df5:
         dehydration = 1
@@ -199,7 +199,7 @@ def pre_processing(df):
         loss_of_appetite = 1
     else:
         loss_of_appetite = 0
-        
+
     if 'abdominal_pain' in df5:
         abdominal_pain = 1
     else:
@@ -207,7 +207,7 @@ def pre_processing(df):
     if 'stomach_pain' in df5:
         stomach_pain = 1
     else:
-        stomach_pain = 0 
+        stomach_pain = 0
 
     if 'yellowish_skin' in df5:
         yellowish_skin = 1
@@ -225,7 +225,7 @@ def pre_processing(df):
         muscle_wasting = 1
     else:
         muscle_wasting = 0
-    
+
         #value_6 assign zero or one
     if 'vomiting' in df6:
         vomiting = 1
@@ -235,7 +235,7 @@ def pre_processing(df):
         mild_fever = 1
     else:
         mild_fever = 0
-        
+
     if 'high_fever' in df6:
         high_fever = 1
     else:
@@ -247,7 +247,7 @@ def pre_processing(df):
 
     if 'dark_urine' in df6:
         dark_urine = 1
-    else:                       
+    else:
         dark_urine = 0
     if 'itching' in df6:
         itching = 1
@@ -291,7 +291,7 @@ def pre_processing(df):
     data_dict['stomach_bleeding'] = stomach_bleeding
     #value_3
     data_dict['lack_of_concentration'] = lack_of_concentration
-    data_dict['coma'] = coma 
+    data_dict['coma'] = coma
     data_dict['neck_pain'] = neck_pain
     data_dict['weakness_of_one_body_side'] = weakness_of_one_body_side
     data_dict['diarrhoea'] = diarrhoea
@@ -305,7 +305,7 @@ def pre_processing(df):
     data_dict['mucoid_sputum'] = mucoid_sputum
     data_dict['spotting_urination'] = spotting_urination
     data_dict['sunken_eyes'] = sunken_eyes
-    data_dict['dischromic_patches'] = dischromic_patches  
+    data_dict['dischromic_patches'] = dischromic_patches
     data_dict['nausea'] = nausea
     #value_5
     data_dict['dehydration'] = dehydration
@@ -331,7 +331,7 @@ def pre_processing(df):
 
     df=pd.DataFrame(data_dict,index=[0])
     return df
-  
+
 def training():
     data = pd.read_csv("datasets/Training.csv")
     # Import train_test_split function
@@ -361,55 +361,55 @@ def training():
     feature_imp = pd.Series(clf.feature_importances_,index=list(data.columns[:-1])).sort_values(ascending=False).head(50)
 
     X_reduced, y = data[[
-        'receiving_blood_transfusion', 'red_sore_around_nose','abnormal_menstruation', 'continuous_sneezing', 
-       'breathlessness','blackheads', 
-      'shivering', 
-      'dizziness', 
-        'back_pain', 
+        'receiving_blood_transfusion', 'red_sore_around_nose','abnormal_menstruation', 'continuous_sneezing',
+       'breathlessness','blackheads',
+      'shivering',
+      'dizziness',
+        'back_pain',
         'unsteadiness',
-       'yellow_crust_ooze', 
-       'muscle_weakness', 
-       'loss_of_balance', 
+       'yellow_crust_ooze',
+       'muscle_weakness',
+       'loss_of_balance',
        'chills',
-       'ulcers_on_tongue', 
-       'stomach_bleeding', 
-       'lack_of_concentration', 
+       'ulcers_on_tongue',
+       'stomach_bleeding',
+       'lack_of_concentration',
        'coma',
-       'neck_pain', 
-       'weakness_of_one_body_side', 
+       'neck_pain',
+       'weakness_of_one_body_side',
        'diarrhoea',
-       'receiving_unsterile_injections', 
-       'headache', 
+       'receiving_unsterile_injections',
+       'headache',
        'family_history',
-       'fast_heart_rate', 
-       'pain_behind_the_eyes', 
-       'sweating', 
+       'fast_heart_rate',
+       'pain_behind_the_eyes',
+       'sweating',
        'mucoid_sputum',
        'spotting_urination',
-        'sunken_eyes', 
+        'sunken_eyes',
         'dischromic_patches',
         'nausea',
        'dehydration',
-       'loss_of_appetite', 
-       'abdominal_pain', 
+       'loss_of_appetite',
+       'abdominal_pain',
        'stomach_pain',
-       'yellowish_skin', 
-       'altered_sensorium', 
-       'chest_pain', 
+       'yellowish_skin',
+       'altered_sensorium',
+       'chest_pain',
        'muscle_wasting',
-       'vomiting', 
-       'mild_fever', 
-       'high_fever', 
+       'vomiting',
+       'mild_fever',
+       'high_fever',
        'red_spots_over_body',
        'dark_urine',
-        'itching', 
-        'yellowing_of_eyes', 
-        'fatigue', 
+        'itching',
+        'yellowing_of_eyes',
+        'fatigue',
         'joint_pain',
        'muscle_pain']], data.iloc[:,-1]
 
     # Split dataset into training set and test set
-    
+
 
     X_train, X_test, y_train, y_test = train_test_split(X_reduced, y, test_size=0.3, random_state=42)
     # X_train, X_test, y_train, y_test = train_test_split(X_reduced, y, test_size=0.3) # 70% training and 30% test
@@ -440,19 +440,19 @@ def pred(ob):
     df=pre_processing(df)
     # print("*"*80)
     df_dict = df.to_dict()
-    symptoms = [] 
-    for disease_name, value in df_dict.items(): 
-        
+    symptoms = []
+    for disease_name, value in df_dict.items():
+
         if value[0]==1:
             symptoms.append(disease_name)
 
 
-        
+
 
     # df.drop("Disease", axis="columns", inplace=True)
     dummyRow_filename="datasets/dummyRowDisease.csv"
     df2=pd.read_csv(dummyRow_filename)
-    for c1 in df.columns:	
+    for c1 in df.columns:
         # print(c1)
         df2[c1]=df[c1]
         # print(df2[c1])
@@ -464,6 +464,3 @@ def pred(ob):
 
 if __name__=="__main__":
     training()#df
-
-
-

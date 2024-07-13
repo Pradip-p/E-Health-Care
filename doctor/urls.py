@@ -2,7 +2,7 @@ from django.urls import path
 from doctor import views
 from django.views.generic.base import RedirectView
 
-urlpatterns = [        
+urlpatterns = [
 path('doctor/',RedirectView.as_view(url='doctor_login/')),
 path('doctor_login/', views.doctor_login,name='doctor_login'),
 path('prescription/', views.prescription,name='prescription'),

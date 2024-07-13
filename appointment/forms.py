@@ -18,14 +18,14 @@ class AddAppointmentForm(forms.ModelForm):
 			'appointment_day':'Appointment Day',
 			'appointment_start_time':'Start Time',
 			'appointment_start_time':'End Time',
-			
+
 
 		}
 	def __init__(self,*args,**kwargs):
 		super(AddAppointmentForm,self).__init__(*args,**kwargs)
 		self.fields['appointment_day'].error_messages.update({'required':'Please select a day'})
 		self.fields['appointment_start_time'].error_messages.update({'required':'Please mention a start time'})
-		self.fields['appointment_end_time'].error_messages.update({'required':'Please mention a end time'})	
+		self.fields['appointment_end_time'].error_messages.update({'required':'Please mention a end time'})
 		self.fields['appointment_date'].error_messages.update({'required':'Please select a date'})
 
 

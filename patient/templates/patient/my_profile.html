@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
-{% block body_content %}   
+{% block body_content %}
      <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -20,7 +20,7 @@
                                     <div class="profile-img">
                                         <a href="#">
                                         {% if request.user.profile.profile_pic.url != '' %}
-<img class="avatar" src="{{request.user.profile.profile_pic.url}}" alt="Please upload Profile Picture" > 
+<img class="avatar" src="{{request.user.profile.profile_pic.url}}" alt="Please upload Profile Picture" >
 {% else %}
 <img class="avatar" src="{% static 'assets/img/user.png' %}" alt="upload profile" width=50 height=50>
 {% endif %}
@@ -35,7 +35,7 @@
                                                 <br />
                                                 <br />
                                                 <!-- <div class="staff-msg"><a href="" class="btn btn-primary">Send Message</a></div>-->
-                                            </div> 
+                                            </div>
                                         </div>
                                         <div class="col-md-7">
                                             <ul class="personal-info">
@@ -47,7 +47,7 @@
                                                     <span class="title">Email:</span><br>
                                                     <span class="text"><a href="#">{{request.user.email}}</a></span>
                                                 </li>
-                                               
+
                                                 <li>
                                                     <span class="title">Address:</span><br>
                                                     <span class="text">{{request.user.profile.address}}</span>
@@ -60,7 +60,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                        
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -72,6 +72,3 @@
             </div>
         </div>
 {% endblock %}
-
-
-	

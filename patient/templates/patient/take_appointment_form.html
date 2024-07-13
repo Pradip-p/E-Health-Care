@@ -3,7 +3,7 @@
 {% load static %}
 {% block body_content %}
 <div class="page-wrapper">
-<div class="content"> 
+<div class="content">
     <div class="row">
             <h4 class="page-title" style="text-align: center;">E HEALTH CARE</h4>
     </div>
@@ -25,22 +25,22 @@
                     <p><b>APPOINTMENT DATE:</b>{{appointment.appointment_date|date:"M d, Y"}}</p>
                     <p><b>APPOINTMENT DAY:</b>{{appointment.appointment_day}}</p>
                     <p><b>AVAILABLE TIME:</b>{{appointment.appointment_start_time}}-{{appointment.appointment_end_time}}</p>
-      
+
                 </div><!-- / project-info-box -->
 
             </br>
             <form method="POST" action="" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
-             {{ appointment_form.reason|as_crispy_field }}                
+             {{ appointment_form.reason|as_crispy_field }}
                 <span class="text-danger" >
                         {{appointment_form.reason.errors}}
                 </span>
              </div>
-           
-         
-        <button type="submit" class="btn btn-info btn-user ">Take Appointment</button>         
-        
+
+
+        <button type="submit" class="btn btn-info btn-user ">Take Appointment</button>
+
         <a href="{% url 'view_appointment' %}" class="btn btn-secondary">Cancel</a>
     </form>
     </div>

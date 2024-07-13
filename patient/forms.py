@@ -9,14 +9,14 @@ class PatientInfoForm(forms.ModelForm):
         model = User
         # fields='__all__'
         fields = ('username','password')
-		
+
 class UserForm(UserCreationForm):
     class Meta:
         model=User
         fields=['username','email','password1','password2']
 
 
-	
+
 class ProfileForm(forms.ModelForm):
 
 	class Meta:
@@ -24,7 +24,7 @@ class ProfileForm(forms.ModelForm):
 		fields=('name','phone_number','address','gender','age','status','profile_pic')
 		#exclude=['username','password']
 		label={
-			
+
 			'phone_number':'Phone Number',
 			'address':'Address',
 			'gender':'Gender',
@@ -38,7 +38,7 @@ class ProfileForm(forms.ModelForm):
 
 		self.fields['name'].error_messages.update({'required':'Name can hold atmost 20 characters'})
 		self.fields['phone_number'].error_messages.update({'required':'Phone number must be entered in the format +999999999 Up to 15 digits allowed.'})
-		self.fields['address'].error_messages.update({'required':'Address can have maximum 40 characters'})	
+		self.fields['address'].error_messages.update({'required':'Address can have maximum 40 characters'})
 		self.fields['gender'].error_messages.update({'required':'Please select a gender'})
 		self.fields['age'].error_messages.update({'required':'Age must be an integer'})
 		self.fields['status'].error_messages.update({'required':'Please select an status'})
@@ -47,13 +47,13 @@ class ProfileForm(forms.ModelForm):
 class UpdateForm(forms.ModelForm):
 	class Meta:
 		model=User
-		fields=('email',)	
-	
+		fields=('email',)
+
 	def __init__(self,*args,**kwargs):
 		super(UpdateForm,self).__init__(*args,**kwargs)
 
 		self.fields['email'].error_messages.update({'required':'Please enter valid  email'})
-		
+
 class FeedbackForm(forms.ModelForm):
 
 	class Meta:

@@ -3,7 +3,7 @@ from django.urls import path,include
 from appointment import views
 from django.views.generic.base import RedirectView
 
-urlpatterns = [        
+urlpatterns = [
 path('',RedirectView.as_view(url='appointment/')),
 path('appointment/', views.appointment,name='appointment'),
 ]

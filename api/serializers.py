@@ -6,4 +6,3 @@ class DiseaseSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model= Disease
         fields='__all__'
-

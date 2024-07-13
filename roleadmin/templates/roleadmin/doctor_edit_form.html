@@ -38,7 +38,7 @@
                             <div class="form-group">
                             {{ userForm.email|as_crispy_field }}
                                 <!-- <label for="id_email">Email:</label>     -->
-                                
+
                                 <span class="text-danger" >
                                     {{userForm.email.errors}}
                             </span>
@@ -62,8 +62,8 @@
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                                <label for="id_address">Address</label> 
-                                <input value="{{doctor.address}}" class="form-control" type="text" name="address" maxlength="100">  
+                                <label for="id_address">Address</label>
+                                <input value="{{doctor.address}}" class="form-control" type="text" name="address" maxlength="100">
                                 <span class="text-danger" >
                                     {{doctor_add_form.address.errors}}
                             </span>
@@ -79,10 +79,10 @@
                             </span>
                             </div>
                         </div>
-                      
+
                         <div class="col-sm-6">
                             <div class="form-group">
-                                {{doctor_add_form.picture|as_crispy_field}} 
+                                {{doctor_add_form.picture|as_crispy_field}}
                                 <span class="text-danger" >
                                     {{doctor_add_form.picture.errors}}
                             </span>
@@ -100,7 +100,7 @@
                         <div class="col-sm-6">
                             <div class="form-group">
                                 <label for="id_doctorID">Doctor ID</label>
-        
+
                                 <input value="{{doctor.doctorID}}" class="form-control" type="text" name="doctorID" maxlength="50">
                                 <span class="text-danger" >
                                     {{doctor_add_form.doctorID.errors}}
@@ -113,22 +113,22 @@
                             <input value="{{doctor.department}}" class="form-control" type="text" name="department" maxlength="30">
                             <span class="text-danger" >
                                 {{doctor_add_form.department.errors}}
-                        </span>   
+                        </span>
                         </div>
                         </div>
                         <div class="col-sm-6">
                             <div class="form-group">
-                        <label for="id_education_college">Education college</label> 
-                        <input value="{{doctor.education_college}}" class="form-control" type="text" name="education_college" maxlength="100">         
+                        <label for="id_education_college">Education college</label>
+                        <input value="{{doctor.education_college}}" class="form-control" type="text" name="education_college" maxlength="100">
                         <span class="text-danger" >
                             {{doctor_add_form.education_college.errors}}
                     </span>
-                     
+
                     </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <label for="id_education_degree">Education degree</label> 
+                                    <label for="id_education_degree">Education degree</label>
                                     <input value="{{doctor.education_degree}}" class="form-control" type="text" name="education_degree" maxlength="100">
                                     <span class="text-danger" >
                                         {{doctor_add_form.education_degree.errors}}

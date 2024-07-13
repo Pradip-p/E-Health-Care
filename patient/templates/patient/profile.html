@@ -8,7 +8,7 @@
                         <h4 class="page-title">Edit Profile</h4>
                     </div>
                 </div>
-                   
+
 <form method="POST" action="" enctype="multipart/form-data">
   {% csrf_token %}
    <div class="card-box">
@@ -34,14 +34,14 @@
       class="form-control" value="{{request.user.profile.phone_number}}" name="phone_number" maxlength="17">
       <span class="text-danger" >
         {{patient_profile.phone_number.errors}}
-</span>  
+</span>
   </div>
   <br />
   <div class="form-group"><label for="id_address">Address</label>&nbsp &nbsp <input
       value="{{request.user.profile.address}}" type="text" class="form-control" name="address" maxlength="40">
       <span class="text-danger" >
         {{patient_profile.address.errors}}
-</span>  
+</span>
   </div>
   <br />
   <div class="form-group"><label for="id_gender">Gender</label> &nbsp &nbsp<select class="form-control form-control-lg"
@@ -57,13 +57,13 @@
       value="{{request.user.profile.age}}" maxlength="20">
       <span class="text-danger" >
         {{patient_profile.age.errors}}
-</span> 
+</span>
     </div>
   <br />
   <div class="form-group"><label for="id_status">Status</label> &nbsp &nbsp<select name="status" id="id_status"
       class="form-control form-control-lg">\n <option value="Single" selected>Single</option>\n\n <option
         value="Married">Married</option>\n\n</select>
-      
+
         <span class="text-danger" >
           {{patient_profile.status.errors}}
   </span>
@@ -83,10 +83,10 @@
   <button type="submit" class="btn btn-primary btn-user "> Update Profile</button>
 
   <br />
-  
+
   </div>
- 
-      
+
+
 </form>
 </div>
 </div>
@@ -97,7 +97,7 @@
 <div align="center">
    {% if request.user.profile.profile_pic.url != '' %}
   <img src="{{request.user.profile.profile_pic.url}}" alt="Images" height="300px"/>
-  {% else %} 
+  {% else %}
   <i class="fas fa-10x fa-user-circle"></i>
   {% endif %}
 </div>
@@ -165,5 +165,3 @@
 
 
 {% endblock %}
-
-

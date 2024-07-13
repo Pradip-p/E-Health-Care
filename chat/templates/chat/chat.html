@@ -6,7 +6,7 @@
       <a href="#" class="brand-logo">Chat</a>
       <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li><a href="">{{ request.user.username }}</a></li>
-          <!-- <li><a href="{% url 'logout' %}"><i class="material-icons">power_settings_new</i></a></li> -->   
+          <!-- <li><a href="{% url 'logout' %}"><i class="material-icons">power_settings_new</i></a></li> -->
       </ul>
     </div>
 </nav>
@@ -16,8 +16,8 @@
         <div class="card">
             <!-- this is the part where the chat user should be listed -->
             <div id="users" class="collection">
-              
-                
+
+
             </div>
         </div>
         </div>
@@ -69,8 +69,8 @@
                     $('#users').html(list)
                 });
             }, 1000)
-        })        
+        })
 
-        
+
     </script>
 {% endblock %}

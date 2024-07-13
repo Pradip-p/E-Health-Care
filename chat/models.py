@@ -12,10 +12,10 @@ class UserProfile(models.Model):
 
     def __str__(self):
         return self.user.username
-    
+
     def last_seen(self):
         return cache.get('last_seen_%s' % self.user.username)
-    
+
     def online(self):
         if self.last_seen():
             now = datetime.datetime.now()
@@ -23,7 +23,7 @@ class UserProfile(models.Model):
                 return False
             else:
                 return True
-        else: 
+        else:
             return False
 
 class Message(models.Model):
@@ -38,5 +38,3 @@ class Message(models.Model):
 
     class Meta:
         ordering = ('timestamp',)
-
-

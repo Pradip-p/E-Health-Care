@@ -41,7 +41,7 @@ def training():
                   if(logs.get('acc')>DESIRED_ACCURACY):
                       print("\nReached 99.9% accuracy so cancelling training!")
                       self.model.stop_training = True
-                
+
       callbacks = myCallback()
 
       cnn = tf.keras.models.Sequential()
@@ -65,8 +65,8 @@ def training():
       ### Training the CNN on the Training set and evaluating it on the Test set
       cnn.fit(x = training_set, validation_data = test_set, epochs = 15)
 
-     
-      
+
+
       # serialize model to JSON
       model_json = cnn.to_json()
       with open("datasets/model.json", "w") as json_file:
@@ -76,7 +76,7 @@ def training():
       print("Saved model to disk")
 
 
-def pred1(ob): 
+def pred1(ob):
       name = ob.file.name
       fullpath = os.path.abspath(name)
       # print(fullpath)
@@ -104,8 +104,8 @@ def pred1(ob):
       # print("#"*82, result)
       return  result
 
-     
-     
+
+
 
 if __name__=="__main__":
       # pred1()

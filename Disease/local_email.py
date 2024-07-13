@@ -1,4 +1,3 @@
-
 #we are sending emails through Django
 # this is the example.... create a local_settings.py file and copy this
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

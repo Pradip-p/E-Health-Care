@@ -34,7 +34,7 @@ from django.db.models import Value
 #For Pnemonia check
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
-def showimage(request): 
+def showimage(request):
     form= BlockImageForm(request.POST, request.FILES)
 
 
@@ -50,7 +50,7 @@ def showimage(request):
             #For pnenumonia prediction
 
             result=pred1(imagefile)
-        
+
             context={}
             if result[0][0] == 1:
                 prediction = 'You are suffering from pneumonia'
@@ -76,10 +76,10 @@ def showimage(request):
                 'imagefile':imagefile,
                 'form': form,
                 'sur':prediction,
-                }        
+                }
                 return render(request, 'patient/image.html', context)
 
-        else:   
+        else:
             prediction = "You can not upload this image"
             contex = {'sur': prediction}
             return render(request, 'patient/image.html', contex)
@@ -92,8 +92,8 @@ def showimage(request):
             'sur':sur,
             }
         return render(request, 'patient/image.html', context)
-    
-    
+
+
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
 def diabetes(request):
@@ -107,7 +107,7 @@ def diabetes(request):
 
 
     elif  request.method=="POST":
-        
+
         diabetes_form=DiabetesForm(request.POST)
         if diabetes_form.is_valid:
             diabetes_form.save()
@@ -115,12 +115,12 @@ def diabetes(request):
             ob = Diabetes.objects.latest('id')
 
             sur=pred_diabetes(ob)
-            
-           
+
+
 
             sur=", ".join( repr(e) for e in sur).strip("''")
-          
-            
+
+
             if sur== '1':
                 context = {}
                 result= "Yes, You are suffering  from Diabetes disease"
@@ -132,7 +132,7 @@ def diabetes(request):
                 for d in disease:
                     listDoctorID.append(d.doctor.id)
                 disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
-                
+
                 context={
                     'sur': result,
                     'disease_doctor_list':disease_doctor_list,
@@ -161,8 +161,8 @@ def heart(request):
             heart = Heart()
 
             age = request.POST.get('age')
-        
-            
+
+
             sex = request.POST.get('sex')
             sex = sex.lower()
             if sex == 'male':
@@ -171,7 +171,7 @@ def heart(request):
                 sex = 0
             elif sex == 'other':
                 sex = 0.5
-            
+
             cp = request.POST.get('cp')
             cp = cp.lower()
             if cp == "typical angina":
@@ -183,11 +183,11 @@ def heart(request):
             elif cp == 'asymptomatic':
                 cp == 3
 
-            
+
             trestbps = request.POST.get('trestbps')
-            
+
             chol = request.POST.get('chol')
-            
+
             fbs = request.POST.get('fbs')
             fbs = fbs.lower()
             if fbs == 'true':
@@ -205,7 +205,7 @@ def heart(request):
                 restecg = 2
 
             thalach = request.POST.get('thalach')
-        
+
 
             exang = request.POST.get('exang')
             exang = exang.lower()
@@ -250,7 +250,7 @@ def heart(request):
             heart.slope = slope
             heart.ca = ca
             heart.thal = thal
-    
+
             heart.save()
 
             ob=Heart.objects.latest('id')
@@ -258,7 +258,7 @@ def heart(request):
             sur=", ".join( repr(e) for e in sur).strip("''")
             context={}
             if sur== '1':
-                
+
                 name= "Yes, You are suffuring from heart problems"
                 predicted_disease_name="Heart"
                 predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=predicted_disease_name)
@@ -277,9 +277,9 @@ def heart(request):
                 context={
                     'sur':name,
                 }
-            
+
             return render(request,'patient/heart_results.html', context)
-            
+
 
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
@@ -289,15 +289,15 @@ def dashboard(request):
         if request.POST.get('value1'):
             disease = Disease()
             value1 = request.POST.get('value1')
-            
+
             value2 = request.POST.get('value2')
-            
+
             value3 = request.POST.get('value3')
-            
+
             value4 = request.POST.get('value4')
-            
+
             value5 = request.POST.get('value5')
-            
+
             value6 = request.POST.get('value6')
 
             disease.value_1 = value1
@@ -311,14 +311,14 @@ def dashboard(request):
             sur = pred(ob)
             predicted_disease_name = sur[0][0]
             symptoms = sur[1]
-        
+
             value1 = symptoms[0]
             value2 = symptoms[1]
             value3 = symptoms[2]
             value4 = symptoms[3]
             value5 = symptoms[4]
             value6 = symptoms[5]
-            
+
             # patient who predrict disease is save in now database
             predict=WhoPredictDisease(predict_by=request.user.profile,predicted_disease=predicted_disease_name)
             predict.save()
@@ -327,14 +327,14 @@ def dashboard(request):
             for d in disease:
                 listDoctorID.append(d.doctor.id)
             disease_doctor_list=DoctorInfo.objects.filter(Q(id__in=listDoctorID))
-                        
-           
+
+
 
         return render(request, 'patient/showDisease.html', context = {"Predicted_disease":predicted_disease_name,'disease_doctor_list':disease_doctor_list,"value1": value1, 		"value2":value2, "value3":value3, "value4": value4, "value5":value5, "value6": value6})
 
     else:
         return render(request, 'patient/dashboard.html')
-    
+
 
 
 # Appointment section.........................
@@ -347,12 +347,12 @@ def view_appointment(request):
     if search_term==None:
         search_term=""
         appointments=AppointmentDetails.objects.all()
-       
+
         context={
             'appointments':appointments,
         }
     # if search_term is not None:
-        
+
     elif search_term is not None:
         search_term = search_term.lstrip().rstrip()
         disease=Disease1.objects.filter(Q(name__icontains=search_term))
@@ -361,16 +361,16 @@ def view_appointment(request):
             doctor_id.append(d.doctor.id)
         doctor = DoctorInfo.objects.annotate(fullname=Concat('user__first_name', Value(' '), 'user__last_name')).filter(Q(user__first_name__icontains=search_term) | Q(user__last_name__icontains=search_term) | Q(fullname__icontains=search_term))
         # doctor=DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term))
-       
+
         name=[]
         for n in doctor:
             name.append(n.id)
         appoinments=AppointmentDetails.objects.filter(Q(create_by__in=doctor_id)) or AppointmentDetails.objects.filter(Q(create_by__in=name))
-  
+
         context={
             'appointments':appoinments,
-        } 
-    return render(request,'patient/appointment_list.html',context) 
+        }
+    return render(request,'patient/appointment_list.html',context)
 
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
@@ -413,15 +413,15 @@ def take_appointment(request,pk):
 def cancel_appointment(request,pk):
     try:
         ap=BookedAppointment.objects.get(id=pk)
-      
+
         if ap.booked_by==request.user.profile:
             ad=AppointmentDetails.objects.get(id=ap.appointment_id.id)
-      
+
             ad.appointment_status=0
             ad.save()
             ap.delete()
         else:
-            return redirect('patient_appointment')        
+            return redirect('patient_appointment')
     except:
         return redirect('patient_appointment')
     return redirect('patient_appointment')
@@ -429,7 +429,7 @@ def cancel_appointment(request,pk):
 @login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
 def details_appointment(request,pk):
-    
+
     try:
         appointment=BookedAppointment.objects.get(id=pk)
         if appointment.booked_by !=request.user.profile:
@@ -438,11 +438,11 @@ def details_appointment(request,pk):
             context={
                 'a':appointment
             }
-      
-    
+
+
     except:
         return redirect('patient_appointment')
-    
+
     return render(request,'patient/appointment_detail.html',context)
 
 @login_required(login_url='patient_login')
@@ -456,7 +456,7 @@ def export_pdf(request,pk):
             context={
                 'a':appointment
             }
-  
+
     except:
         return redirect('patient_appointment')
     response=HttpResponse(content_type='application/pdf')
@@ -476,12 +476,12 @@ def export_pdf(request,pk):
 @allowed_users(allowed_roles=['PATIENT'])
 def patient_appointment(request):
     book=BookedAppointment.objects.filter(booked_by=request.user.profile).prefetch_related('appointment_id').prefetch_related('booked_by')
-   
+
     context={
         'appointments':book,
     }
     return render(request,'patient/booked_appointments.html',context)
- 
+
 
 
 @login_required(login_url='patient_login')
@@ -505,7 +505,7 @@ def feedback(request):
 @allowed_users(allowed_roles=['PATIENT'])
 def feedback_detail(request,pk):
     feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
-   
+
     context={
         "feedback":feedback
     }
@@ -528,7 +528,7 @@ def feedback_edit(request,pk):
         feedback=Feedback.objects.get(id=pk,uploaded_by=request.user.profile)
     except:
         return redirect('feedback')
-    if request.method=='POST':   
+    if request.method=='POST':
         feedback_edit_form=FeedbackForm(request.POST or None,request.FILES,instance=feedback)
         if feedback_edit_form.is_valid():
             update=feedback_edit_form.save(commit=False)
@@ -553,7 +553,7 @@ def feedback_edit(request,pk):
 @allowed_users(allowed_roles=['PATIENT'])
 def feedback_add(request):
     if request.method=='POST':
-        
+
         feedback_add_form=FeedbackForm(request.POST or None,request.FILES or None)
         if feedback_add_form.is_valid():
             add_feedback=feedback_add_form.save(commit=False)
@@ -587,7 +587,7 @@ def search_doctor(request):
         doctorID=[]
         for d in disease:
             doctorID.append(d.doctor.id)
-        
+
         # doctors=DoctorInfo.objects.filter(id__in=doctorID) or DoctorInfo.objects.filter(Q(user__first_name__icontains=search_term)|Q(user__last_name__icontains=search_term)|Q(department__icontains=search_term))
         doctors = DoctorInfo.objects.filter(id__in=doctorID) or DoctorInfo.objects.annotate(fullname=Concat('user__first_name', Value(' '), 'user__last_name')).filter(Q(user__first_name__icontains=search_term) | Q(user__last_name__icontains=search_term) | Q(address__icontains=search_term) | Q(department__icontains=search_term) | Q(fullname__icontains=search_term))
         context={
@@ -639,8 +639,8 @@ def home(request):
         doctors=paginator.page(paginator.num_pages)
     context={
         'doctors':doctors,
-    } 
-    return render(request,'patient/home.html',context) 
+    }
+    return render(request,'patient/home.html',context)
 
 
 
@@ -658,9 +658,9 @@ def patient_register(request):
             contex={
                 'patient_register':patient_register
             }
-            
+
             return render(request, 'patient/register.html', contex)
-    else:     
+    else:
         patient_register=UserForm()
         contex={
             'patient_register':patient_register,
@@ -668,9 +668,9 @@ def patient_register(request):
         return render(request, 'patient/register.html', contex)
 
 
-@login_required(login_url='patient_login') 
+@login_required(login_url='patient_login')
 @allowed_users(allowed_roles=['PATIENT'])
-@transaction.atomic   
+@transaction.atomic
 def patient_profile(request):
     if request.method=='POST':
         user_form=UpdateForm(request.POST,instance=request.user)
@@ -684,7 +684,7 @@ def patient_profile(request):
                 'user_form':user_form,
                 'patient_profile':patient_profile
             }
-           
+
             return render(request,'patient/profile.html',context)
 
     else:
@@ -699,8 +699,8 @@ def patient_profile(request):
 @unauthenticated_patient
 def patient_login(request):
     if request.method=="POST":
-        username = request.POST.get('username')       
-        password = request.POST.get('password') 
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         user =authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
@@ -723,4 +723,3 @@ def chat(request):
     if request.method == "GET":
         return render(request, 'chat/chat.html',
                       {'users': User.objects.exclude(username=request.user.username)})
-

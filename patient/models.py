@@ -57,13 +57,13 @@ class WhoPredictDisease(models.Model):
 
     def __str__(self):
         return self.predicted_disease
-   
+
 
 class Disease1(models.Model):
     name=models.CharField(max_length=200)
     doctor=models.ForeignKey(DoctorInfo,on_delete=models.CASCADE,null=True)
     def __str__(self):
-        return self.name 
+        return self.name
 
 # Create your models here.
 class Heart(models.Model):
@@ -107,7 +107,7 @@ class Diabetes(models.Model):
     BMI=models.IntegerField()
     DiabetesPedigreeFunction=models.IntegerField()
     Age=models.IntegerField()
-    
+
     def to_dict(self):
         return{
             'Pregnancies':self.Pregnancies,
@@ -121,11 +121,8 @@ class Diabetes(models.Model):
         }
 
 class Image(models.Model):
-    
+
     imagefile= models.FileField(upload_to='images/')
 
 class ImageBlock(models.Model):
     imageblock = models.FileField(upload_to='images/')
-  
-    
-

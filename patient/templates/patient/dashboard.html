@@ -12,14 +12,14 @@
                   </div>
               </div>
           <div class="card-box" style="background-color: skyblue;">
-     
-         
+
+
     <form method="POST" action="/patient/dashboard/" enctype="multipart/form-data">
       {% csrf_token %}
-       
+
          <h3 class="card-title"></h3>
-         
-        
+
+
         <h4>symptoms:</h4>
         <select class="selectpicker" name = 'value1' >
           <option>receiving_blood_transfusion</option>
@@ -30,7 +30,7 @@
           <option>blackheads</option>
           <option>shivering</option>
           <option>dizziness</option>
-          
+
         </select>
 
         <br>
@@ -45,14 +45,14 @@
           <option>chills</option>
           <option>ulcers_on_tongue</option>
           <option>stomach_bleeding</option>
-        
+
         </select>
         <br>
         <br>
         <h4>symptoms:</h4>
         <select class="selectpicker" name = 'value3'>
           <option>lack_of_concentration</option>
-          <option>coma</option> 
+          <option>coma</option>
           <option>neck_pain</option>
           <option>weakness_of_one_body_side</option>
           <option>diarrhoea</option>
@@ -72,7 +72,7 @@
           <option>sunken_eyes</option>
           <option>dischromic_patches</option>
           <option>nausea</option>
-          
+
         </select>
         <br>
         <br>
@@ -106,7 +106,7 @@
         <br>
         <br>
           <button type="Check" class="btn btn-primary btn-user "> Submit</button>
-    </form>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+    </form>
     </div>
     </div>
     </div>
@@ -114,4 +114,3 @@
 
 
   {% endblock %}
-

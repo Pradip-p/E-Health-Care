@@ -1,10 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Group
-
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from doctor.models import DoctorInfo
@@ -12,13 +9,9 @@ from patient.models import Profile,Feedback,Disease1,WhoPredictDisease
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
 from doctor.forms import DoctorForm,DoctorUserForm
-
 from roleadmin.forms import AddDiseaseForm
 from django.db.models.functions import Concat
 from django.db.models import Value
-# Create your views here.
-
-# import decoratos
 from roleadmin.decoratos import allowed_users,unauthenticated_admin
 
 @login_required(login_url="roleadmin_login")
@@ -50,10 +43,10 @@ def disease(request):
         search_term=""
     diseases = Disease1.objects.annotate(fullname=Concat('doctor__user__first_name', Value(' '), 'doctor__user__last_name')).filter(Q(name__icontains=search_term) | Q(doctor__user__first_name__icontains=search_term) | Q(doctor__user__last_name__icontains=search_term) | Q(fullname__icontains=search_term)).order_by('-id')
     # diseases=Disease1.objects.filter(Q(name__icontains=search_term)|Q(doctor__user__first_name__icontains=search_term)|Q(doctor__user__last_name__icontains=search_term)).order_by('-id')
-    
+
     context={
         'diseases':diseases,
-    } 
+    }
     return render(request,'roleadmin/disease.html',context)
 
 @login_required(login_url="roleadmin_login")
@@ -70,7 +63,7 @@ def assign_disease(request):
             }
             return render(request,'roleadmin/assign_disease_form.html',context)
     else:
-        assign_disease_form=AddDiseaseForm()  
+        assign_disease_form=AddDiseaseForm()
         context={
             'assign_disease_form':assign_disease_form
         }
@@ -82,7 +75,7 @@ def edit_disease(request,pk):
     try:
         disease=Disease1.objects.get(id=pk)
     except:
-        return redirect('disease')        
+        return redirect('disease')
     assign_disease_form=AddDiseaseForm(request.POST,instance=disease)
     mydict={'assign_disease_form':assign_disease_form,'disease':disease}
     if request.method=='POST':
@@ -101,7 +94,7 @@ def delete_disease(request,pk):
         return redirect('disease')
     disease.delete()
     return redirect('disease')
-    
+
 
 @login_required(login_url="roleadmin_login")
 @allowed_users(allowed_roles=['ADMIN'])
@@ -110,7 +103,7 @@ def doctors_list(request):
     search_term=request.GET.get('term')
     if search_term is not None:
         search_term = search_term.lstrip().rstrip()
-        
+
     if search_term==None:
         search_term=""
     doctors = DoctorInfo.objects.annotate(fullname=Concat('user__first_name', Value(' '), 'user__last_name')).filter(Q(user__first_name__icontains=search_term) | Q(user__last_name__icontains=search_term) | Q(address__icontains=search_term) | Q(department__icontains=search_term) | Q(fullname__icontains=search_term))
@@ -124,7 +117,7 @@ def doctors_list(request):
         doctors=paginator.page(paginator.num_pages)
     context={
         'doctors':doctors,
-    } 
+    }
     return render(request,'roleadmin/doctor_list.html',context)
 
 @login_required(login_url="roleadmin_login")
@@ -159,7 +152,7 @@ def edit_doctor(request,pk):
     try:
         doctor=DoctorInfo.objects.get(id=pk)
     except:
-        return redirect('doctors_list')        
+        return redirect('doctors_list')
     user=User.objects.get(id=doctor.user_id)
     userForm=DoctorUserForm(instance=user)
     doctor_add_form=DoctorForm(request.FILES,instance=doctor)
@@ -184,7 +177,7 @@ def delete_doctor(request,pk):
     try:
         doctor=DoctorInfo.objects.get(id=pk)
     except:
-        return redirect('doctors_list')        
+        return redirect('doctors_list')
     user=User.objects.get(id=doctor.user_id)
     user.delete()
     doctor.delete()
@@ -196,7 +189,7 @@ def patients_list(request):
     search_term=request.GET.get('term')
     if search_term is not None:
         search_term = search_term.lstrip().rstrip()
-        
+
     users=User.objects.filter(groups__name="PATIENT")
     if search_term==None:
         search_term=""
@@ -212,7 +205,7 @@ def patient_profile(request,pk):
     try:
         users=User.objects.filter(groups__name="PATIENT")
         patient=Profile.objects.filter(user_id__in=users).get(id=pk)
-       
+
     except:
         return redirect('patients_list')
     context={
@@ -227,10 +220,10 @@ def patient_delete(request,pk):
         users=User.objects.filter(groups__name="PATIENT")
         patient=Profile.objects.filter(user_id__in=users).get(id=pk)
     except:
-        return redirect('patients_list')        
-    
+        return redirect('patients_list')
+
     patient.delete()
-    return redirect('patients_list')    
+    return redirect('patients_list')
 
 @login_required(login_url='roleadmin_login')
 @allowed_users(allowed_roles=['ADMIN'])
@@ -256,7 +249,7 @@ def our_feedback_detail(request,pk):
         feedback=Feedback.objects.get(id=pk)
     except:
         return redirect('our_feedback')
-   
+
     context={
         "feedback":feedback
     }
@@ -268,7 +261,7 @@ def roleadmin_login(request):
     if request.method=='POST':
         username=request.POST.get('username')
         password=request.POST.get('password')
-      
+
         user=authenticate(request,username=username,password=password)
         if user is not None:
             login(request,user)
@@ -282,8 +275,3 @@ def roleadmin_login(request):
 def roleadmin_logout(request):
     logout(request)
     return redirect("/")
-
-
-
-
-

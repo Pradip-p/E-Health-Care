@@ -12,13 +12,13 @@
                     </div>
                 </div>
             <div class="card-box" style="background-color: skyblue;">
-       
-           
+
+
       <form method="POST" action="/patient/heart/" enctype="multipart/form-data">
         {% csrf_token %}
-         
+
         <h3 class="card-title"></h3>
-          
+
         <form >
           <div style=text-transform:capitalize;    >
             <div class="form-group row">
@@ -40,7 +40,7 @@
                       </select>
                 </div>
             </class>
-                
+
 
             <class class="form-group row" >
                 <label for="inputCp" class="col-sm-2 col-form-label" >chest pain type(Cp)</label>
@@ -99,7 +99,7 @@
                   <input type="text" class="form-control"  name="thalach" id="thalach" placeholder="Thalach in number" required>
                 </div>
               </div>
-            
+
               <class class="form-group row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">exercise induced angina(exang)</label>
                 <div class="col-sm-3">
@@ -107,18 +107,18 @@
                     <select class="form-control" name="exang">
                         <option>Yes</option>
                         <option>No</option>
-                        
+
                       </select>
                 </div>
             </class>
-            
+
             <div class="form-group row">
                 <label for="inputAge" class="col-sm-2 col-form-label">ST depression induced by exercise relative to rest(oldpeak)</label>
                 <div class="col-sm-3">
                   <input type="text" class="form-control" name="oldpeak" id="oldpeak" placeholder="Oldpeak in number" required>
                 </div>
               </div>
-            
+
 
               <class class="form-group row">
                 <label for="inputPassword" class="col-sm-2 col-form-label">the slope of the peak exercise ST segment(slope)</label>
@@ -128,7 +128,7 @@
                         <option>Upsloping</option>
                         <option>Flat</option>
                         <option>Downsloping</option>
-                        
+
                       </select>
                 </div>
             </class>
@@ -144,7 +144,7 @@
                         <option>2</option>
                         <option>3</option>
                         <option>4</option>
-                        
+
                       </select>
                 </div>
             </class>
@@ -162,12 +162,12 @@
                 </div>
             </class>
             </div>
-           
+
             <button type="Check" class="btn btn-primary btn-user ">Submit</button>
 
-            </form>     
+            </form>
       </div>
       </div>
       </div>
- 
+
 {% endblock %}

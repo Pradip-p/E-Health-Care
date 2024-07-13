@@ -6,4 +6,3 @@ class DoctorConfig(AppConfig):
 
     def ready(self):
         import social.mysignal
-

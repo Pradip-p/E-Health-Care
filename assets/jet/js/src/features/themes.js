@@ -16,7 +16,7 @@ Themes.prototype = {
 
         $links.on('click', function (e) {
             e.preventDefault();
-            
+
             var $link = $(this);
 
             $.cookie('JET_THEME', $link.data('theme'), { expires: 365, path: '/' });

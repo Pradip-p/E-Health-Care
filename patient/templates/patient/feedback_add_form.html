@@ -2,7 +2,7 @@
 {% load static %}
 {% block body_content %}
 <div class="page-wrapper">
-<div class="content"> 
+<div class="content">
     <div class="row">
             <h4 class="page-title">Add Feedback</h4>
     </div>
@@ -17,24 +17,24 @@
                 </span>
                 </div>
             <div class="form-group">
-                <label for="id_text">Description</label> 
+                <label for="id_text">Description</label>
                 <textarea class="form-control" name="text" cols="40" rows="10" maxlength="200" >
                 </textarea>
                 <span class="text-danger">
                 {{feedback_add_form.text.errors}}
                 </span>
             </div>
-           
+
             <!-- <div class="form-group">
-             <label for="id_picture">Picture Currently:</label> 
+             <label for="id_picture">Picture Currently:</label>
                 <a href="feedback.picture.url"></a><br>
                     <input value="feedback.picture.url" class="form-control" type="file" name="picture" accept="image/*" id="id_picture">
                 <span class="text-danger">
                 {{feedback_add_form.picture.errors}}
-                </span> 
+                </span>
             </div>  -->
-        <button type="submit" class="btn btn-info btn-user ">Submit Feedback</button>         
-        
+        <button type="submit" class="btn btn-info btn-user ">Submit Feedback</button>
+
         <a href="{% url 'feedback' %}" class="btn btn-secondary">Cancel</a>
     </form>
     <!-- </div> -->

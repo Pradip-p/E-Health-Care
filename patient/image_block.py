@@ -1,13 +1,11 @@
 import tensorflow as tf
-from keras.preprocessing.image import ImageDataGenerator
+from tensorflow.keras.preprocessing.image import ImageDataGenerator
+# from keras.preprocessing.image import ImageDataGenerator
 import numpy as np
 from keras.preprocessing import image
 import zipfile
 import os
-import pickle
 from keras.models import model_from_json
-from django.conf import settings
-from django.conf import settings
 
 
 def training():
@@ -27,12 +25,12 @@ def training():
     DESIRED_ACCURACY = 0.95
 
     class myCallback(tf.keras.callbacks.Callback):
-        
+
         def on_epoch_end(self, epoch, logs={}):
             if(logs.get('acc')>DESIRED_ACCURACY):
                 print("\nReached 99.9% accuracy so cancelling training!")
                 self.model.stop_training = True
-                
+
     callbacks = myCallback()
 
     cnn = tf.keras.models.Sequential()
@@ -53,29 +51,29 @@ def training():
 
       # Compiling the CNN
     cnn.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
-    
+
 
         # Training the CNN on the Training set and evaluating it on the Test set
     cnn.fit(x = training_set, validation_data = test_set, epochs = 1)
 
- 
+
     # serialize model to JSON
     model_json = cnn.to_json()
     with open("datasets/model_check.json", "w") as json_file:
-        
+
         json_file.write(model_json)
       # serialize weights to HDF5
     cnn.save_weights("datasets/model_check.h5")
     print("Saved model to disk")
 
 
-def predImageBlock(ob): 
-    
+def predImageBlock(ob):
+
     name = ob.file.name
     fullpath = os.path.abspath(name)
 
     test_image = image.load_img(fullpath, target_size = (64, 64 ))
-   
+
     test_image = image.img_to_array(test_image)
     test_image = np.expand_dims(test_image, axis = 0)
 
@@ -97,9 +95,8 @@ def predImageBlock(ob):
 
 
 
-     
+
 if __name__=="__main__":
     training()
-    
+
       # pred1()
-    

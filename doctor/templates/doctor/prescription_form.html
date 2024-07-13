@@ -10,16 +10,16 @@
             </div>
             {% if recepient %}
             <div class="alert alert-warning alert-dismissible fade show" role="alert">
-              <strong>{{recepient}}</strong> 
+              <strong>{{recepient}}</strong>
               <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             {% endif %}
-            
+
          </div>
          <div class="container">
-          
+
             <form method="POST" action="" enctype="multipart/form-data">
               {% csrf_token %}
               <div class="form-group col-lg-4" >
@@ -33,9 +33,9 @@
                   <textarea class="form-control  col-lg-6" name="prescription" id="textAreaExample" rows="4" required></textarea>
                   <label class="form-label" for="textAreaExample">write prescription</label>
               </div>
-          
+
               <button type="submit" class="btn btn-primary">Send</button>
-            </form> 
+            </form>
           </div>
   </div>
 </div>

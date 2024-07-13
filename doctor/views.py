@@ -2,17 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from doctor.models import DoctorInfo
 from django.contrib import messages
-from doctor.forms import UserForm
 from appointment.forms import AddAppointmentForm
 from django.db.models import Q
-
-from django.contrib.auth.decorators import user_passes_test, login_required
-
+from django.contrib.auth.decorators import  login_required
 from patient.models import Disease1, WhoPredictDisease
 # Create your views here.
 from doctor.doctor_decorators import unauthenticated_doctor,allowed_users
 from django.contrib.auth.decorators import login_required
-
 from appointment.models import AppointmentDetails,BookedAppointment
 
 ##Email Send
@@ -24,20 +20,18 @@ from doctor.models import DoctorInfo
 @unauthenticated_doctor
 def doctor_login(request):
     if request.method=="POST":
-        username = request.POST.get('username')       
-        password = request.POST.get('password') 
+        username = request.POST.get('username')
+        password = request.POST.get('password')
         user =authenticate(request, username=username, password=password)
         if user is not None:
             login(request,user)
             return redirect('dashboard_doctor')
         else:
             messages.info(request, "Please enter valid credentials")
-            
+
             return render(request, 'doctor/login.html')
     else:
         return render(request, 'doctor/login.html')
-
-
 
 
 @login_required(login_url='doctor_login')
@@ -48,7 +42,7 @@ def prescription(request):
     else:
         email = request.POST.get("email")
         prescription = request.POST.get('prescription')
-        
+
 
         context = {'email': email, "prescription":prescription}
         html_message = render_to_string('doctor/mail_message.html',context)
@@ -57,7 +51,7 @@ def prescription(request):
         return render(request,'doctor/prescription_form.html',{'recepient':prescription})
 
 def doctor_logout(request):
-   
+
     logout(request)
     return redirect("/")
 
@@ -69,14 +63,14 @@ def dashboard_doctor(request):
     if search_term is not None:
         search_term = search_term.lstrip().rstrip()
     contex = {}
-    
+
     doctor=DoctorInfo.objects.filter(user__id=request.user.id)
     doctorID=[]
     for i in doctor:
         doctorID.append(i.id)
-  
+
     disease1 = Disease1.objects.filter(doctor__id__in=doctorID)
-    
+
     disease = []
     for d in disease1:
         disease.append(d.name)
@@ -84,7 +78,7 @@ def dashboard_doctor(request):
         search_term = ""
     new_predictions = WhoPredictDisease.objects.filter(
         predicted_disease__in=disease).filter(Q(predicted_disease__icontains=search_term) | Q(predict_by__name__icontains=search_term) | Q(predict_by__name__icontains=search_term))
-   
+
     contex = {
         'predictions': new_predictions
     }
@@ -133,7 +127,7 @@ def edit_appointment(request,pk):
         appointment=AppointmentDetails.objects.get(id=pk,create_by=request.user.doctorinfo)
     except:
         return redirect('appointment')
-    if request.method=='POST':   
+    if request.method=='POST':
         appointment_edit_form=AddAppointmentForm(request.POST or None,request.FILES,instance=appointment)
         if appointment_edit_form.is_valid():
             update=appointment_edit_form.save(commit=False)
@@ -157,12 +151,12 @@ def edit_appointment(request,pk):
 @login_required(login_url='doctor_login')
 @allowed_users(allowed_roles=['DOCTOR'])
 def delete_appointment(request,pk):
-    
+
     try:
         appointment=AppointmentDetails.objects.get(id=pk,create_by=request.user.doctorinfo)
         appointment.delete()
     except:
-      
+
         return redirect('appointment')
     return redirect('appointment')
 
@@ -174,19 +168,19 @@ def book_appointment(request):
     ID=[]
     for a in appointment:
         ID.append(a.id)
-     
+
     booked_appointments=BookedAppointment.objects.filter(appointment_id__in=ID)
     context={
         'appointments':booked_appointments
     }
     return render(request,'doctor/booked_appointments.html',context)
-    
+
 @login_required(login_url='doctor_login')
 @allowed_users(allowed_roles=['DOCTOR'])
 def delete_booked_appointment(request,pk):
     try:
         ap=BookedAppointment.objects.get(id=pk)
-      
+
         # if ap.booked_by==request.user.profile:
         ad=AppointmentDetails.objects.get(id=ap.appointment_id.id)
         if ad.create_by==request.user.doctorinfo:
@@ -194,8 +188,7 @@ def delete_booked_appointment(request,pk):
             ad.save()
             ap.delete()
         else:
-            return redirect('book_appointment')        
+            return redirect('book_appointment')
     except:
         return redirect('book_appointment')
     return redirect('book_appointment')
-

@@ -19,7 +19,7 @@ class DiabetesForm(forms.ModelForm):
     class Meta():
         model = Diabetes
         fields='__all__'
-      
+
 
 class DiseaseForm(forms.ModelForm):
     class Meta():
@@ -42,4 +42,3 @@ class HeartForm(forms.ModelForm):
         #     'oldpeak': (" oldpeak : ST depression induced by exercise relative to rest"),
         #     'thal': ("thal: 0 = normal; 1 = fixed defect; 2 = reversable defect")
         # }
-    

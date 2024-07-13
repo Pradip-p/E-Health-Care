@@ -1,6 +1,6 @@
 {% extends 'base_admin.html' %}
 {% load static %}
-{% block body_content %}   
+{% block body_content %}
      <div class="page-wrapper">
             <div class="content">
                 <div class="row">
@@ -20,7 +20,7 @@
                                     <div class="profile-img">
                                         <a href="#">
                                         {% if patient.profile_pic.url != '' %}
-<img class="avatar" src="{{patient.profile_pic.url}}" alt="Please upload Profile Picture" > 
+<img class="avatar" src="{{patient.profile_pic.url}}" alt="Please upload Profile Picture" >
 {% else %}
 <img class="avatar" src="{% static 'assets/img/doctor-03.png' %}" alt="upload profile" width=50 height=50>
 {% endif %}
@@ -63,7 +63,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>                        
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -75,6 +75,3 @@
             </div>
         </div>
 {% endblock %}
-
-
-	

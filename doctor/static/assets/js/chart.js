@@ -1,5 +1,5 @@
 $(document).ready(function() {
-	
+
 	// Bar Chart
 
 	var barChartData = {
@@ -46,7 +46,7 @@ $(document).ready(function() {
 		data: [28, 48, 40, 19, 86, 27, 20, 90, 50, 20, 90, 20]
 		}]
 	};
-	
+
 	var linectx = document.getElementById('linegraph').getContext('2d');
 	window.myLine = new Chart(linectx, {
 		type: 'line',
@@ -62,15 +62,15 @@ $(document).ready(function() {
 			}
 		}
 	});
-	
+
 	// Bar Chart 2
-	
+
     barChart();
-    
+
     $(window).resize(function(){
         barChart();
     });
-    
+
     function barChart(){
         $('.bar-chart').find('.item-progress').each(function(){
             var itemProgress = $(this),

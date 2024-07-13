@@ -1,16 +1,8 @@
 import pandas as pd
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
-# from sklearn.model_selection import train_test_split
-# from xgboost import XGBClassifier
 from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
 import pickle
-import os
-from sklearn.metrics import accuracy_score, confusion_matrix, classification_report
-
-
+from sklearn.metrics import accuracy_score, classification_report
 from sklearn import preprocessing 
 def print_score(clf, X_train, y_train, X_test, y_test, train=True):
     if train:
@@ -18,20 +10,13 @@ def print_score(clf, X_train, y_train, X_test, y_test, train=True):
         clf_report = pd.DataFrame(classification_report(y_train, pred, output_dict=True))
         print("Train Result:\n================================================")
         print(f"Accuracy Score: {accuracy_score(y_train, pred) * 100:.2f}%")
-        # print("_______________________________________________")
-        # print(f"CLASSIFICATION REPORT:\n{clf_report}")
-        # print("_______________________________________________")
-        # print(f"Confusion Matrix: \n {confusion_matrix(y_train, pred)}\n")
         
     elif train==False:
         pred = clf.predict(X_test)
         clf_report = pd.DataFrame(classification_report(y_test, pred, output_dict=True))
         print("Test Result:\n================================================")        
         print(f"Accuracy Score: {accuracy_score(y_test, pred) * 100:.2f}%")
-        # print("_______________________________________________")
-        # print(f"CLASSIFICATION REPORT:\n{clf_report}")
-        # print("_______________________________________________")
-        # print(f"Confusion Matrix: \n {confusion_matrix(y_test, pred)}\n")
+
 
 def pre_processing(df):
     
@@ -439,42 +424,14 @@ def training():
     y_pred=clf2.predict(X_test)
 
     # Model Accuracy, how often is the classifier correct?
-    
     print(print_score(clf2, X_train, y_train, X_test, y_test, train=True))
     print(print_score(clf2, X_train, y_train, X_test, y_test, train=False))
 
-    
-
-    # df=pd.read_csv("dataset.csv")
-    # df=pre_processing(df)
-    # y=df[["Disease"]]
-    # df.drop("Disease", axis="columns", inplace=True)
-    # x=df
-    # # print("#"*50)
-    # # print(x)
-
     dummyRow=pd.DataFrame(np.zeros(len(X_reduced.columns)).reshape(1,len(X_reduced.columns)), columns=X_reduced.columns)
     dummyRow.to_csv('datasets/dummyRowDisease.csv', index=False)
-    # model=RandomForestClassifier(random_state=2)
-    # # model=XGBClassifier(max_depth=2,min_child_weight=3, gamma=0,subsample=0.86, reg_alpha=0, n_estimators=125)
-    # x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=0.2, random_state=5)
-    # model.fit(x,y)
-    # print("#"*50)
-    # print(model)
-    # print("#"*50)
-    # print(model.score(x_test,y_test))
     pkl_filename="datasets/pickle_model_disease.pkl"
     with open(pkl_filename,'wb') as file:
         pickle.dump(clf2,file)
-        # print(pkl_filename)
-    # yp=model.predict(x_test)
-    # print("Survived", sum(yp!=0)) 
-    # print("not Survived ", sum(yp==0))
-    # accuracy_score(y_test,yp)
-    # cm=confusion_matrix(y_test, yp)
-    # #import seaborn as sn
-    # #sn.heatmap(cm,annot=True)
-    # print(cm)
 
 
 def pred(ob):

@@ -18,22 +18,16 @@ class AddAppointmentForm(forms.ModelForm):
 			'appointment_day':'Appointment Day',
 			'appointment_start_time':'Start Time',
 			'appointment_start_time':'End Time',
-			# 'status':'Status',
 			
 
 		}
 	def __init__(self,*args,**kwargs):
 		super(AddAppointmentForm,self).__init__(*args,**kwargs)
-		# self.fields['appointment_date'].error_messages.update({'required':'Please select a date'})
 		self.fields['appointment_day'].error_messages.update({'required':'Please select a day'})
 		self.fields['appointment_start_time'].error_messages.update({'required':'Please mention a start time'})
 		self.fields['appointment_end_time'].error_messages.update({'required':'Please mention a end time'})	
 		self.fields['appointment_date'].error_messages.update({'required':'Please select a date'})
-		# self.fields['appointment'].widget.attrs['class']='datepicker'
 
-		# self.fields['appointment_date'].widget.attrs['class']='datepicker'
-		# self.fields['status'].error_messages.update({'required':'Please select ans status'})
-		# self.fields['profile_pic'].error_messages.update({'required':'Please upload a profile picture'})
 
 class BookedAppointmentForm(forms.ModelForm):
 
@@ -42,13 +36,4 @@ class BookedAppointmentForm(forms.ModelForm):
 		fields=('reason',)
 	def __init__(self,*args,**kwargs):
 		super(BookedAppointmentForm,self).__init__(*args,**kwargs)
-		# self.fields['appointment_date'].error_messages.update({'required':'Please select a date'})
 		self.fields['reason'].error_messages.update({'required':'Please mention a reason for appoinment,at most 100 characters'})
-		# self.fields['appointment_start_time'].error_messages.update({'required':'Please mention a start time'})
-		# self.fields['appointment_end_time'].error_messages.update({'required':'Please mention a end time'})	
-		# self.fields['appointment_date'].error_messages.update({'required':'Please select a date'})
-		# self.fields['appointment'].widget.attrs['class']='datepicker'
-
-		# self.fields['appointment_date'].widget.attrs['class']='datepicker'
-		# self.fields['status'].error_messages.update({'required':'Please select ans status'})
-		# self.fields['profile_pic'].error_messages.update({'required':'Please upload a profile picture'})

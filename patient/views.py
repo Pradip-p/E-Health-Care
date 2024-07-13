@@ -3,45 +3,30 @@ from patient.forms import *
 from django.contrib.auth import authenticate, logout,login
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
-from patient.models import Profile
 from django.db import transaction
 from patient.models import *
 from chat import *
 from chat.models import *
 from chat.views import *
-
 # output file to pdf
 from django.shortcuts import HttpResponse
 from django.template.loader import render_to_string
-
 from weasyprint import HTML
 import tempfile
-
-# decorators
-
 from patient.patient_decorators import unauthenticated_patient,allowed_users
-
 from django.shortcuts import render, HttpResponse
-import requests
-
 from Health.forms import *
 from api.models import Disease
-from api import diseaseml
-
 from patient.heart import pred_heart
 from patient.image_block import predImageBlock
 from patient.Diabetes import pred_diabetes
 from patient.pneumonia import pred1
 from api.diseaseml import pred
-from .models import Image
 from django.contrib.auth.models import Group
-
 from django.db.models import Q
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from appointment.models import AppointmentDetails,BookedAppointment
 from appointment.forms import BookedAppointmentForm
-
 from django.db.models.functions import Concat
 from django.db.models import Value
 

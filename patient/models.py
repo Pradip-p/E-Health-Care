@@ -1,5 +1,5 @@
 from django.db import models
-from django.core.validators import MinLengthValidator, RegexValidator
+from django.core.validators import  RegexValidator
 from django.db.models import CASCADE
 from django.contrib.auth.models import User
 #from patient.models import PatientInfo

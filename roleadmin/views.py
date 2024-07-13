@@ -1,10 +1,7 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate,login,logout
 from django.contrib import messages
-from django.http import HttpResponseRedirect
 from django.contrib.auth.models import Group
-
-
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from doctor.models import DoctorInfo
@@ -12,13 +9,9 @@ from patient.models import Profile,Feedback,Disease1,WhoPredictDisease
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 from django.db.models import Q
 from doctor.forms import DoctorForm,DoctorUserForm
-
 from roleadmin.forms import AddDiseaseForm
 from django.db.models.functions import Concat
 from django.db.models import Value
-# Create your views here.
-
-# import decoratos
 from roleadmin.decoratos import allowed_users,unauthenticated_admin
 
 @login_required(login_url="roleadmin_login")

@@ -4,10 +4,7 @@ import numpy as np
 from keras.preprocessing import image
 import zipfile
 import os
-import pickle
 from keras.models import model_from_json
-from django.conf import settings
-from django.conf import settings
 
 
 def training():

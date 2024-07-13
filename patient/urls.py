@@ -1,5 +1,4 @@
-from django.contrib import admin
-from django.urls import path,include
+from django.urls import path
 from patient import views
 from django.views.generic.base import RedirectView
 
@@ -11,14 +10,9 @@ path('patient_login/', views.patient_login,name='patient_login'),
 path('patient_register/', views.patient_register,name='patient_register'),
 path('patient_profile/',views.patient_profile,name='patient_profile'),
 path('my_profile/',views.my_profile,name="my_profile"),
-
-# path('form/', views.form, name="form"),
-
 path('search_doctor/', views.search_doctor,name="search_doctor"),
 path('search_doctor/doctor_profile/<int:pk>',views.doctor_profile),
-#path('update_profile/',views.patient_update,name='update_profile'),
 path('dashboard/', views.dashboard, name="dashboard"),
-
 path('home/',views.home,name="home"),
 path('home/doctor_profile/<int:pk>',views.doctor_profile),
 path('feedback/',views.feedback,name="feedback"),
@@ -32,14 +26,8 @@ path('view_appointment/take/<int:pk>',views.take_appointment),
 path('patient_appointment/cancel/<int:pk>',views.cancel_appointment),
 path('patient_appointment/details/<int:pk>',views.details_appointment),
 path('patient_appointment/details/<int:pk>/export_pdf',views.export_pdf),
-
-# details/{{appointment.id}}
-# path('check/', views.check, name="check"),
 path('logoutpatient/', views.logoutpatient, name="logoutpatient"),
-
 path('heart/', views.heart, name="heart"),
 path('diabetes/', views.diabetes, name="diabetes"),
-
 path('showimage/', views.showimage, name="showimage"),
-
 ]

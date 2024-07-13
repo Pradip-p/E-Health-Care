@@ -1,6 +1,5 @@
-from django.urls import path,include
+from django.urls import path
 from roleadmin import views
-from django.views.generic.base import RedirectView
 
 urlpatterns=[
     path('admin_dashboard/',views.admin_dashboard,name="admin_dashboard"),

@@ -2,17 +2,13 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from doctor.models import DoctorInfo
 from django.contrib import messages
-from doctor.forms import UserForm
 from appointment.forms import AddAppointmentForm
 from django.db.models import Q
-
-from django.contrib.auth.decorators import user_passes_test, login_required
-
+from django.contrib.auth.decorators import  login_required
 from patient.models import Disease1, WhoPredictDisease
 # Create your views here.
 from doctor.doctor_decorators import unauthenticated_doctor,allowed_users
 from django.contrib.auth.decorators import login_required
-
 from appointment.models import AppointmentDetails,BookedAppointment
 
 ##Email Send
@@ -36,8 +32,6 @@ def doctor_login(request):
             return render(request, 'doctor/login.html')
     else:
         return render(request, 'doctor/login.html')
-
-
 
 
 @login_required(login_url='doctor_login')

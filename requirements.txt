@@ -3,7 +3,7 @@ django-cors-headers==3.11.0
 django-crispy-forms==1.14.0
 pandas==2.2.2
 scipy==1.14.0
-matplotlib
+matplotlib==3.9.1
 weasyprint==62.3
 tensorflow==2.17.0
 django-widget-tweaks==1.5.0

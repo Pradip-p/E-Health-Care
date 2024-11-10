@@ -1,10 +1,10 @@
 # E-Health-Care
 
-The web app is designed to reduce dependence on doctors, assist poor and helpless individuals with basic medical checkups, and help people avoid unnecessary medical expenses. This project is built with Django, machine learning algorithms, and deep learning (ANN and CNN).
+The web app is designed to reduce dependence on doctors, assist underserved individuals with basic medical checkups, and help people avoid unnecessary medical expenses. This project is built with Django, machine learning algorithms, and deep learning (ANN and CNN).
 
 ## Overview
 
-In today's world, there is a significant shortage of doctors, especially in Nepal. Many people suffer without proper medical checkups, and numerous cases lead to death due to the lack of timely medical intervention. This app aims to address these issues by providing an accessible solution for medical checkups, thus offering substantial benefits.
+In many regions, particularly in Nepal, there is a significant shortage of doctors. Many people lack access to proper medical checkups, and numerous cases lead to severe outcomes due to a lack of timely medical intervention. This app addresses these issues by providing an accessible solution for basic medical checkups.
 
 ## Demo
 
@@ -13,14 +13,14 @@ In today's world, there is a significant shortage of doctors, especially in Nepa
 
 ## Application
 
-- Remove dependence on doctors.
-- Assist poor and helpless individuals with basic medical checkups.
-- Help people avoid unnecessary medical expenses.
-- Extend the role of technology in the medical field.
+- Reduce dependence on doctors.
+- Assist underserved individuals with essential medical checkups.
+- Minimize unnecessary medical expenses.
+- Promote technology’s role in healthcare.
 
 ## Models
 
-Various models used in the project:
+The project includes several models for disease prediction:
 
 - **Pneumonia model**: `pickle_model_pneumonia.pkl`
 - **Diabetes model**: `pickle_model_diabetes.pkl`
@@ -41,7 +41,7 @@ Various models used in the project:
 
 ## Tools Used for Project Development
 
-- **Python (3.7 version)**
+- **Python (3.7 or higher)**
 - **Django**
 - **JavaScript**
 - **Pandas**
@@ -49,67 +49,68 @@ Various models used in the project:
 - **HTML**
 - **CSS**
 
-
 ## Installation
 
-This project is written in Python 3.7.0. If Python is not yet installed, you can download it [here](https://www.python.org/downloads/). To ensure compatibility, upgrade to Python 3.7 or later if you are using an older version, and make sure you have the latest `pip` version.
+This project requires Python 3.7 or higher. If Python is not installed, download it [here](https://www.python.org/downloads/).
 
-1. Run initial database migrations:
+### Step 1: Install Dependencies with UV
+
+The project uses UV for Python dependency management, which allows for quick and efficient package resolution. Install UV by following instructions on their [official site](https://astral.sh/blog/uv).
+
+1. Install dependencies using UV:
+   Linux:-
    ```bash
-   python manage.py migrate
+   curl -LsSf https://astral.sh/uv/install.sh | sh
    ```
-2. Create a superuser to access the admin interface:
+   Windows:-
    ```bash
-   python manage.py createsuperuser
+   powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
    ```
-3. Start the development server:
+
+2. Run initial database migrations:
    ```bash
-   python manage.py runserver
+   uv run python manage.py migrate
+   ```
+
+3. Create a superuser for accessing the admin interface:
+   ```bash
+   uv run python manage.py createsuperuser
+   ```
+
+4. Start the development server:
+   ```bash
+   un run python manage.py runserver
    ```
 
 ## User Setup
 
 1. After creating the superuser, log in to the admin panel at [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin).
 2. Create a user group named `ADMIN`.
-3. Add new users, setting their `is_active` & `is_staff` to `True`, and assign them to the `ADMIN` group to grant admin privileges.
-4. You can now log in with these users from the main dashboard with admin login.
+3. Add new users, setting their `is_active` and `is_staff` to `True`, and assign them to the `ADMIN` group for admin privileges.
+4. These users can now log in from the main dashboard with admin access.
 
 ## Features
 
 ### Patient
 
-- Sign up/Sign In
+- Register and sign in
 - Update and edit profile
-- View list of specialist doctors
-- Search specialist doctors by name, address, and specialty
-- Search doctor by disease name and doctor
-- Predict disease by entering provided symptoms
-- Predict heart problem by entering parameters
-- Predict pneumonia by uploading x-ray images
-- Predict diabetes problem by entering parameters
-- Suggest doctor after predicting any disease if a doctor is available
-- Take appointments
-- Cancel, view, and download appointment details
-- Give feedback to the system
+- View and search specialist doctors
+- Predict diseases based on symptoms or x-ray images
+- Book, cancel, view, and download appointments
+- Provide feedback to the system
 
 ### Admin
 
-- View total patients, predictions, doctors, and feedback from patients
-- View new patients who predict disease
-- Sign In and logout
-- Add, edit, delete, and search all doctors
-- Assign doctor to respective disease
+- View and manage total patients, predictions, doctors, and feedback
+- Add, edit, delete, and assign doctors to respective diseases
 
 ### Doctor
 
-- Sign up through provided username and password from admin
-- View the list of all patients who predict diseases which they are assigned to take charge of
-- Add, edit, and delete appointments
-- View booked appointments
-- Send disease precautions to patients through email
+- Register via provided username and password from the admin
+- Manage appointments and view patient records
+- Send disease precautions to patients via email
 
 ## Contributing
 
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-
-Please make sure to update tests as appropriate.
+Pull requests are welcome. For major changes, please open an issue first to discuss proposed changes.

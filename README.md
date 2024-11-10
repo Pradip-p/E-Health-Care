@@ -49,15 +49,30 @@ Various models used in the project:
 - **HTML**
 - **CSS**
 
+
 ## Installation
 
-The code is written in Python 3.7.0. If you don't have Python installed, you can find it [here](https://www.python.org/downloads/). If you are using a lower version of Python, you can upgrade using the pip package, ensuring you have the latest version of pip.
+This project is written in Python 3.7.0. If Python is not yet installed, you can download it [here](https://www.python.org/downloads/). To ensure compatibility, upgrade to Python 3.7 or later if you are using an older version, and make sure you have the latest `pip` version.
 
-1. `python manage.py migrate`
-2. `python manage.py makemigrations`
-3. `python manage.py migrate`
-4. `python manage.py createsuperuser`
-5. `python manage.py runserver`
+1. Run initial database migrations:
+   ```bash
+   python manage.py migrate
+   ```
+2. Create a superuser to access the admin interface:
+   ```bash
+   python manage.py createsuperuser
+   ```
+3. Start the development server:
+   ```bash
+   python manage.py runserver
+   ```
+
+## User Setup
+
+1. After creating the superuser, log in to the admin panel at [http://127.0.0.1:8000/admin](http://127.0.0.1:8000/admin).
+2. Create a user group named `ADMIN`.
+3. Add new users, setting their `is_active` & `is_staff` to `True`, and assign them to the `ADMIN` group to grant admin privileges.
+4. You can now log in with these users from the main dashboard with admin login.
 
 ## Features
 

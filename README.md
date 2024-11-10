@@ -79,7 +79,7 @@ The project uses UV for Python dependency management, which allows for quick and
 
 4. Start the development server:
    ```bash
-   un run python manage.py runserver
+   uv run python manage.py runserver
    ```
 
 ## User Setup
